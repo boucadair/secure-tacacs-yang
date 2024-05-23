@@ -240,8 +240,8 @@ Table of Contents
                          + '(public-key-format, "ct:subject-public-key-'
                          + 'info-format")';
                     }
-                    refine "inline-or-keystore/central-keystore/"
-                         + "central-keystore-reference/asymmetric-key" {
+                    refine "inline-or-keystore/keystore/"
+                         + "keystore-reference/asymmetric-key" {
                       must 'not(deref(.)/../ks:public-key-format) or '
                          + 'derived-from-or-self(deref(.)/../ks:public-'
                          + 'key-format, "ct:subject-public-key-info-'
@@ -264,8 +264,8 @@ Table of Contents
                          + '(public-key-format, "ct:subject-public-key-'
                          + 'info-format")';
                     }
-                    refine "inline-or-keystore/central-keystore/"
-                         + "central-keystore-reference" {
+                    refine "inline-or-keystore/keystore/"
+                         + "keystore-reference" {
                       must 'not(deref(.)/../ks:public-key-format) or '
                          + 'derived-from-or-self(deref(.)/../ks:public-'
                          + 'key-format, "ct:subject-public-key-info-'

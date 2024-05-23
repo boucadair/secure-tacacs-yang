@@ -1333,8 +1333,8 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
                       + '(public-key-format, "ct:subject-public-key-'
                       + 'info-format")';
                  }
-                 refine "inline-or-keystore/central-keystore/"
-                      + "central-keystore-reference/asymmetric-key" {
+                 refine "inline-or-keystore/keystore/"
+                      + "keystore-reference/asymmetric-key" {
                    must 'not(deref(.)/../ks:public-key-format) or '
                       + 'derived-from-or-self(deref(.)/../ks:public-'
                       + 'key-format, "ct:subject-public-key-info-'
@@ -1357,8 +1357,8 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
                       + '(public-key-format, "ct:subject-public-key-'
                       + 'info-format")';
                  }
-                 refine "inline-or-keystore/central-keystore/"
-                      + "central-keystore-reference" {
+                 refine "inline-or-keystore/keystore/"
+                      + "keystore-reference" {
                    must 'not(deref(.)/../ks:public-key-format) or '
                       + 'derived-from-or-self(deref(.)/../ks:public-'
                       + 'key-format, "ct:subject-public-key-info-'
