@@ -220,7 +220,7 @@ Table of Contents
                                                                     must
                  be enabled and selected.";
               case certificate {
-                if-feature "tls:client-ident-x509-cert";
+                if-feature "tlsc:client-ident-x509-cert";
                 container certificate {
                   description
                     "Specifies the client identity using a certificate.\
@@ -228,16 +228,16 @@ Table of Contents
                   uses
                     "ks:inline-or-keystore-end-entity-cert-with-key-"
                     + "grouping" {
-                    refine "tls:inline-or-keystore/tls:inline/tls:\
+                    refine "tlsc:inline-or-keystore/tlsc:inline/tlsc:\
                                                     inline-definition" {
                       must 'not(public-key-format) or derived-from-or-\
                                                                    self'
                          + '(public-key-format, "ct:subject-public-key-'
                          + 'info-format")';
                     }
-                    refine "tls:inline-or-keystore/tls:central-keystore\
-                                                                      /"
-                         + "tls:central-keystore-reference/tls:\
+                    refine "tlsc:inline-or-keystore/tlsc:central-\
+                                                              keystore/"
+                         + "tlsc:central-keystore-reference/tlsc:\
                                                        asymmetric-key" {
                       must 'not(deref(.)/../ks:public-key-format) or '
                          + 'derived-from-or-self(deref(.)/../ks:public-'
@@ -248,22 +248,22 @@ Table of Contents
                 }
               }
               case raw-public-key {
-                if-feature "tls:client-ident-raw-public-key";
+                if-feature "tlsc:client-ident-raw-public-key";
                 container raw-private-key {
                   description
                     "Specifies the client identity using a raw
                      private key.";
                   uses ks:inline-or-keystore-asymmetric-key-grouping {
-                    refine "tls:inline-or-keystore/tls:inline/tls:\
+                    refine "tlsc:inline-or-keystore/tlsc:inline/tlsc:\
                                                     inline-definition" {
                       must 'not(public-key-format) or derived-from-or-\
                                                                    self'
                          + '(public-key-format, "ct:subject-public-key-'
                          + 'info-format")';
                     }
-                    refine "tls:inline-or-keystore/tls:central-keystore\
-                                                                      /"
-                         + "tls:central-keystore-reference" {
+                    refine "tlsc:inline-or-keystore/tlsc:central-\
+                                                              keystore/"
+                         + "tlsc:central-keystore-reference" {
                       must 'not(deref(.)/../ks:public-key-format) or '
                          + 'derived-from-or-self(deref(.)/../ks:public-'
                          + 'key-format, "ct:subject-public-key-info-'
@@ -273,7 +273,7 @@ Table of Contents
                 }
               }
               case tls13-epsk {
-                if-feature "tls:client-ident-tls13-epsk";
+                if-feature "tlsc:client-ident-tls13-epsk";
                 container tls13-epsk {
                   description
                     "An External Pre-Shared Key (EPSK) is established
