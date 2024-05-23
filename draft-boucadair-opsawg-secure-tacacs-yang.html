@@ -1194,7 +1194,136 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
 <section id="section-3">
       <h2 id="name-module-tree-structure">
 <a href="#section-3" class="section-number selfRef">3. </a><a href="#name-module-tree-structure" class="section-name selfRef">Module Tree Structure</a>
-    </h2>
+      </h2>
+<p id="section-3-1">The full tree structure is shown below:<a href="#section-3-1" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="section-3-2">
+<pre>
+=============== NOTE: '\' line wrapping per RFC 8792 ================
+
+module: ietf-system-secure-tacacs
+  augment /sys:system/sys-tcs-plus:tacacs-plus/sys-tcs-plus:server
+            /sys-tcs-plus:security:
+    +--:(tls)
+       +--rw client-identity!
+          +--rw (auth-type)
+             +--:(certificate) {tlsc:client-ident-x509-cert}?
+             |  +--rw certificate
+             |     +--rw (inline-or-keystore)
+             |        +--:(inline) {inline-definitions-supported}?
+             |        |  +--rw inline-definition
+             |        |     +--rw public-key-format
+             |        |     |       identityref
+             |        |     +--rw public-key
+             |        |     |       binary
+             |        |     +--rw private-key-format?
+             |        |     |       identityref
+             |        |     +--rw (private-key-type)
+             |        |     |  +--:(cleartext-private-key)
+             |        |     |  |        {cleartext-private-keys}?
+             |        |     |  |  +--rw cleartext-private-key?
+             |        |     |  |          binary
+             |        |     |  +--:(hidden-private-key)
+             |        |     |  |        {hidden-private-keys}?
+             |        |     |  |  +--rw hidden-private-key?      \
+                                                                empty
+             |        |     |  +--:(encrypted-private-key)
+             |        |     |           {encrypted-private-keys}?
+             |        |     |     +--rw encrypted-private-key
+             |        |     |        +--rw encrypted-by
+             |        |     |        +--rw encrypted-value-format
+             |        |     |        |       identityref
+             |        |     |        +--rw encrypted-value
+             |        |     |                binary
+             |        |     +--rw cert-data?
+             |        |     |       end-entity-cert-cms
+             |        |     +---n certificate-expiration
+             |        |     |       {certificate-expiration-\
+                                                       notification}?
+             |        |     |  +-- expiration-date
+             |        |     |          yang:date-and-time
+             |        |     +---x generate-csr {csr-generation}?
+             |        |        +---w input
+             |        |        |  +---w csr-format    identityref
+             |        |        |  +---w csr-info      csr-info
+             |        |        +--ro output
+             |        |           +--ro (csr-type)
+             |        |              +--:(p10-csr)
+             |        |                 +--ro p10-csr?   p10-csr
+             |        +--:(keystore)
+             |                 {central-keystore-supported,\
+                                                    asymmetric-keys}?
+             |           +--rw keystore-reference
+             |              +--rw asymmetric-key?
+             |              |       ks:asymmetric-key-ref
+             |              |       {central-keystore-supported,\
+                                                    asymmetric-keys}?
+             |              +--rw certificate?      leafref
+             +--:(raw-public-key) {tlsc:client-ident-raw-public-key}?
+             |  +--rw raw-private-key
+             |     +--rw (inline-or-keystore)
+             |        +--:(inline) {inline-definitions-supported}?
+             |        |  +--rw inline-definition
+             |        |     +--rw public-key-format
+             |        |     |       identityref
+             |        |     +--rw public-key
+             |        |     |       binary
+             |        |     +--rw private-key-format?
+             |        |     |       identityref
+             |        |     +--rw (private-key-type)
+             |        |        +--:(cleartext-private-key)
+             |        |        |        {cleartext-private-keys}?
+             |        |        |  +--rw cleartext-private-key?
+             |        |        |          binary
+             |        |        +--:(hidden-private-key)
+             |        |        |        {hidden-private-keys}?
+             |        |        |  +--rw hidden-private-key?      \
+                                                                empty
+             |        |        +--:(encrypted-private-key)
+             |        |                 {encrypted-private-keys}?
+             |        |           +--rw encrypted-private-key
+             |        |              +--rw encrypted-by
+             |        |              +--rw encrypted-value-format
+             |        |              |       identityref
+             |        |              +--rw encrypted-value
+             |        |                      binary
+             |        +--:(keystore)
+             |                 {central-keystore-supported,\
+                                                    asymmetric-keys}?
+             |           +--rw keystore-reference?
+             |                   ks:asymmetric-key-ref
+             +--:(tls13-epsk) {tlsc:client-ident-tls13-epsk}?
+                +--rw tls13-epsk
+                   +--rw (inline-or-keystore)
+                   |  +--:(inline) {inline-definitions-supported}?
+                   |  |  +--rw inline-definition
+                   |  |     +--rw key-format?            identityref
+                   |  |     +--rw (key-type)
+                   |  |        +--:(cleartext-key)
+                   |  |        |  +--rw cleartext-key?   binary
+                   |  |        |          {cleartext-symmetric-keys}?
+                   |  |        +--:(hidden-key)
+                   |  |        |        {hidden-symmetric-keys}?
+                   |  |        |  +--rw hidden-key?      empty
+                   |  |        +--:(encrypted-key)
+                   |  |                 {encrypted-symmetric-keys}?
+                   |  |           +--rw encrypted-key
+                   |  |              +--rw encrypted-by
+                   |  |              +--rw encrypted-value-format
+                   |  |              |       identityref
+                   |  |              +--rw encrypted-value
+                   |  |                      binary
+                   |  +--:(keystore)
+                   |           {central-keystore-supported,symmetric\
+                                                              -keys}?
+                   |     +--rw keystore-reference?
+                   |             ks:symmetric-key-ref
+                   +--rw external-identity           string
+                   +--rw hash?
+                   |       tlscmn:epsk-supported-hash
+                   +--rw context?                    string
+                   +--rw target-kdf?                 uint16
+</pre><a href="#section-3-2" class="pilcrow">¶</a>
+</div>
 </section>
 </div>
 <div id="yang-module">
