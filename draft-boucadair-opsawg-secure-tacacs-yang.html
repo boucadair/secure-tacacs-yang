@@ -1239,6 +1239,11 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
        reference
          "RFC FFFF: YANG Groupings for TLS Clients and TLS Servers";
      }
+     import ietf-system {
+       prefix sys;
+       reference
+         "RFC 7317: A YANG Data Model for System Management";
+     }
      import ietf-system-tacacs-plus {
        prefix sys-tcs-plus;
        reference
@@ -1439,9 +1444,20 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
                               (PSKs) for TLS 1.3, Section 3";
                }
              }
-           }
-         }
-       } // container client-identity
+      }
+    }
+  } // container client-identity
+}
+
+augment "/sys:system/sys-tcs-plus:tacacs-plus/sys-tcs-plus:server"
+      + "/sys-tcs-plus:security"
+  description
+    "Adds TLS case.";
+  case tls {
+    description
+      "TLS is used.";
+    uses tls-client-grouping;
+  }
 }
 }
 
