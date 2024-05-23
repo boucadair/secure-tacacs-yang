@@ -1326,17 +1326,15 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
                uses
                  "ks:inline-or-keystore-end-entity-cert-with-key-"
                  + "grouping" {
-                 refine "tlsc:inline-or-keystore/tlsc:inline/tlsc:\
-                                                 inline-definition" {
+                 refine "inline-or-keystore/inline/inline-definition\
+                                                                  " {
                    must 'not(public-key-format) or derived-from-or-\
                                                                 self'
                       + '(public-key-format, "ct:subject-public-key-'
                       + 'info-format")';
                  }
-                 refine "tlsc:inline-or-keystore/tlsc:central-\
-                                                           keystore/"
-                      + "tlsc:central-keystore-reference/tlsc:\
-                                                    asymmetric-key" {
+                 refine "inline-or-keystore/central-keystore/"
+                      + "central-keystore-reference/asymmetric-key" {
                    must 'not(deref(.)/../ks:public-key-format) or '
                       + 'derived-from-or-self(deref(.)/../ks:public-'
                       + 'key-format, "ct:subject-public-key-info-'
@@ -1352,16 +1350,15 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
                  "Specifies the client identity using a raw
                   private key.";
                uses ks:inline-or-keystore-asymmetric-key-grouping {
-                 refine "tlsc:inline-or-keystore/tlsc:inline/tlsc:\
-                                                 inline-definition" {
+                 refine "inline-or-keystore/inline/inline-definition\
+                                                                  " {
                    must 'not(public-key-format) or derived-from-or-\
                                                                 self'
                       + '(public-key-format, "ct:subject-public-key-'
                       + 'info-format")';
                  }
-                 refine "tlsc:inline-or-keystore/tlsc:central-\
-                                                           keystore/"
-                      + "tlsc:central-keystore-reference" {
+                 refine "inline-or-keystore/central-keystore/"
+                      + "central-keystore-reference" {
                    must 'not(deref(.)/../ks:public-key-format) or '
                       + 'derived-from-or-self(deref(.)/../ks:public-'
                       + 'key-format, "ct:subject-public-key-info-'
