@@ -126,8 +126,8 @@ Table of Contents
           reference
             "RFC CCCC: A YANG Data Model for a Keystore";
         }
-        import ietf-tls-server {
-          prefix tls;
+        import ietf-tls-client {
+          prefix tlsc;
           reference
             "RFC FFFF: YANG Groupings for TLS Clients and TLS Servers";
         }
