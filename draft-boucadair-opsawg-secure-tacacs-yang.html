@@ -1573,6 +1573,154 @@ module: ietf-system-secure-tacacs
       }
     }
   }
+
+       container server-authentication {
+         nacm:default-deny-write;
+         must 'ca-certs or ee-certs or raw-public-keys or tls13-\
+                                                              epsks';
+         description
+           "Specifies how the TLS client can authenticate TLS \
+                                                             servers.
+            Any combination of credentials is additive and unordered.
+
+            Note that no configuration is required for PSK (pre-\
+                                                               shared
+            or pairwise-symmetric key) based authentication as the \
+                                                                  key
+            is necessarily the same as configured in the '../client-
+            identity' node.";
+         container ca-certs {
+           if-feature "server-auth-x509-cert";
+           presence
+             "Indicates that CA certificates have been configured.
+              This statement is present so the mandatory descendant
+              nodes do not imply that this node must be configured.";
+           description
+             "A set of CA certificates used by the TLS client to
+              authenticate TLS server certificates.
+              A server certificate is authenticated if it has a valid
+              chain of trust to a configured CA certificate.";
+           reference
+             "RFC BBBB: A YANG Data Model for a Truststore";
+           uses ts:inline-or-truststore-certs-grouping;
+         }
+         container ee-certs {
+           if-feature "server-auth-x509-cert";
+           presence
+             "Indicates that EE certificates have been configured.
+              This statement is present so the mandatory descendant
+              nodes do not imply that this node must be configured.";
+           description
+             "A set of server certificates (i.e., end entity
+              certificates) used by the TLS client to authenticate
+              certificates presented by TLS servers.  A server
+              certificate is authenticated if it is an exact
+              match to a configured server certificate.";
+           reference
+             "RFC BBBB: A YANG Data Model for a Truststore";
+           uses ts:inline-or-truststore-certs-grouping;
+         }
+         container raw-public-keys {
+           if-feature "server-auth-raw-public-key";
+           presence
+             "Indicates that raw public keys have been configured.
+              This statement is present so the mandatory descendant
+              nodes do not imply that this node must be configured.";
+           description
+             "A set of raw public keys used by the TLS client to
+              authenticate raw public keys presented by the TLS
+              server.  A raw public key is authenticated if it
+              is an exact match to a configured raw public key.";
+           reference
+             "RFC BBBB: A YANG Data Model for a Truststore";
+           uses ts:inline-or-truststore-public-keys-grouping {
+             refine "inline-or-truststore/inline/inline-definition/"
+                  + "public-key" {
+               must 'derived-from-or-self(public-key-format,'
+                  + ' "ct:subject-public-key-info-format")';
+             }
+             refine "inline-or-truststore/central-truststore/"
+                  + "central-truststore-reference" {
+               must 'not(deref(.)/../ts:public-key/ts:public-key-'
+                  + 'format[not(derived-from-or-self(., "ct:subject-'
+                  + 'public-key-info-format"))])';
+             }
+           }
+         }
+         leaf tls13-epsks {
+           if-feature "server-auth-tls13-epsk";
+           type empty;
+           description
+             "Indicates that the TLS client can authenticate TLS \
+                                                              servers
+              using configured external PSKs (pre-shared keys).
+
+              No configuration is required since the PSK value is the
+              same as PSK value configured in the 'client-identity'
+              node.";
+         }
+       } // container server-authentication
+
+       container hello-params {
+         nacm:default-deny-write;
+         if-feature "tlscmn:hello-params";
+         uses tlscmn:hello-params-grouping;
+         description
+           "Configurable parameters for the TLS hello message.";
+       } // container hello-params
+
+       container keepalives {
+         nacm:default-deny-write;
+         if-feature "tls-client-keepalives";
+         description
+           "Configures the keepalive policy for the TLS client.";
+         leaf peer-allowed-to-send {
+           type empty;
+           description
+             "Indicates that the remote TLS server is allowed to send
+              HeartbeatRequest messages to this TLS client.";
+           reference
+             "RFC 6520: Transport Layer Security (TLS) and Datagram
+                        Transport Layer Security (DTLS) Heartbeat
+                        Extension";
+         }
+         container test-peer-aliveness {
+           presence
+             "Indicates that the TLS client proactively tests the
+              aliveness of the remote TLS server.";
+           description
+             "Configures the keep-alive policy to proactively test
+              the aliveness of the TLS server.  An unresponsive
+              TLS server is dropped after approximately max-wait
+              * max-attempts seconds.";
+           reference
+             "RFC 6520: Transport Layer Security (TLS) and Datagram
+                        Transport Layer Security (DTLS) Heartbeat
+                        Extension";
+           leaf max-wait {
+             type uint16 {
+               range "1..max";
+             }
+             units "seconds";
+             default "30";
+             description
+               "Sets the amount of time in seconds after which if
+                no data has been received from the TLS server, a
+                TLS-level message will be sent to test the
+                aliveness of the TLS server.";
+           }
+           leaf max-attempts {
+             type uint8;
+             default "3";
+             description
+               "Sets the maximum number of sequential keep-alive
+                messages that can fail to obtain a response from
+                the TLS server before assuming the TLS server is
+                no longer alive.";
+           }
+         }
+       }
+     } // grouping tls-client-grouping
 }
 
 augment "/sys:system/sys-tcs-plus:tacacs-plus/sys-tcs-plus:server"
