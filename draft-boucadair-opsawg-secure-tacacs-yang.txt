@@ -253,6 +253,11 @@ Table of Contents
           reference
             "RFC CCCC: A YANG Data Model for a Keystore";
         }
+        import ietf-truststore {
+          prefix ts;
+          reference
+            "RFC BBBB: A YANG Data Model for a Truststore";
+        }
         import ietf-tls-client {
           prefix tlsc;
           reference
@@ -495,7 +500,7 @@ Table of Contents
                is necessarily the same as configured in the '../client-
                identity' node.";
             container ca-certs {
-              if-feature "server-auth-x509-cert";
+              if-feature "tlsc:server-auth-x509-cert";
               presence
                 "Indicates that CA certificates have been configured.
                  This statement is present so the mandatory descendant
@@ -510,7 +515,7 @@ Table of Contents
               uses ts:inline-or-truststore-certs-grouping;
             }
             container ee-certs {
-              if-feature "server-auth-x509-cert";
+              if-feature "tlsc:server-auth-x509-cert";
               presence
                 "Indicates that EE certificates have been configured.
                  This statement is present so the mandatory descendant
@@ -526,7 +531,7 @@ Table of Contents
               uses ts:inline-or-truststore-certs-grouping;
             }
             container raw-public-keys {
-              if-feature "server-auth-raw-public-key";
+              if-feature "tlsc:server-auth-raw-public-key";
               presence
                 "Indicates that raw public keys have been configured.
                  This statement is present so the mandatory descendant
@@ -553,7 +558,7 @@ Table of Contents
               }
             }
             leaf tls13-epsks {
-              if-feature "server-auth-tls13-epsk";
+              if-feature "tlsc:server-auth-tls13-epsk";
               type empty;
               description
                 "Indicates that the TLS client can authenticate TLS \
