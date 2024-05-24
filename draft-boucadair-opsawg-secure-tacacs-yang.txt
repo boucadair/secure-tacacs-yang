@@ -113,127 +113,186 @@ Table of Contents
    =============== NOTE: '\' line wrapping per RFC 8792 ================
 
    module: ietf-system-secure-tacacs
+
      augment /sys:system/sys-tcs-plus:tacacs-plus/sys-tcs-plus:server
                /sys-tcs-plus:security:
        +--:(tls)
           +--rw client-identity!
-             +--rw (auth-type)
-                +--:(certificate) {tlsc:client-ident-x509-cert}?
-                |  +--rw certificate
-                |     +--rw (inline-or-keystore)
-                |        +--:(inline) {inline-definitions-supported}?
-                |        |  +--rw inline-definition
-                |        |     +--rw public-key-format
-                |        |     |       identityref
-                |        |     +--rw public-key
-                |        |     |       binary
-                |        |     +--rw private-key-format?
-                |        |     |       identityref
-                |        |     +--rw (private-key-type)
-                |        |     |  +--:(cleartext-private-key)
-                |        |     |  |        {cleartext-private-keys}?
-                |        |     |  |  +--rw cleartext-private-key?
-                |        |     |  |          binary
-                |        |     |  +--:(hidden-private-key)
-                |        |     |  |        {hidden-private-keys}?
-                |        |     |  |  +--rw hidden-private-key?      \
+          |  +--rw (auth-type)
+          |     +--:(certificate)
+          |     |  +--rw certificate
+          |     |     +--rw (inline-or-keystore)
+          |     |        +--:(inline) {inline-definitions-supported}?
+          |     |        |  +--rw inline-definition
+          |     |        |     +--rw public-key-format
+          |     |        |     |       identityref
+          |     |        |     +--rw public-key
+          |     |        |     |       binary
+          |     |        |     +--rw private-key-format?
+          |     |        |     |       identityref
+          |     |        |     +--rw (private-key-type)
+          |     |        |     |  +--:(cleartext-private-key)
+          |     |        |     |  |        {cleartext-private-keys}?
+          |     |        |     |  |  +--rw cleartext-private-key?
+          |     |        |     |  |          binary
+          |     |        |     |  +--:(hidden-private-key)
+          |     |        |     |  |        {hidden-private-keys}?
+          |     |        |     |  |  +--rw hidden-private-key?      \
                                                                    empty
-                |        |     |  +--:(encrypted-private-key)
-                |        |     |           {encrypted-private-keys}?
-                |        |     |     +--rw encrypted-private-key
-                |        |     |        +--rw encrypted-by
-                |        |     |        +--rw encrypted-value-format
-                |        |     |        |       identityref
-                |        |     |        +--rw encrypted-value
-                |        |     |                binary
-                |        |     +--rw cert-data?
-                |        |     |       end-entity-cert-cms
-                |        |     +---n certificate-expiration
-                |        |     |       {certificate-expiration-\
+          |     |        |     |  +--:(encrypted-private-key)
+          |     |        |     |           {encrypted-private-keys}?
+          |     |        |     |     +--rw encrypted-private-key
+          |     |        |     |        +--rw encrypted-by
+          |     |        |     |        +--rw encrypted-value-format
+          |     |        |     |        |       identityref
+          |     |        |     |        +--rw encrypted-value
+          |     |        |     |                binary
+          |     |        |     +--rw cert-data?
+          |     |        |     |       end-entity-cert-cms
+          |     |        |     +---n certificate-expiration
+          |     |        |     |       {certificate-expiration-\
                                                           notification}?
-                |        |     |  +-- expiration-date
-                |        |     |          yang:date-and-time
-                |        |     +---x generate-csr {csr-generation}?
-                |        |        +---w input
-                |        |        |  +---w csr-format    identityref
-                |        |        |  +---w csr-info      csr-info
-                |        |        +--ro output
-                |        |           +--ro (csr-type)
-                |        |              +--:(p10-csr)
-                |        |                 +--ro p10-csr?   p10-csr
-                |        +--:(keystore)
-                |                 {central-keystore-supported,\
+          |     |        |     |  +-- expiration-date
+          |     |        |     |          yang:date-and-time
+          |     |        |     +---x generate-csr {csr-generation}?
+          |     |        |        +---w input
+          |     |        |        |  +---w csr-format    identityref
+          |     |        |        |  +---w csr-info      csr-info
+          |     |        |        +--ro output
+          |     |        |           +--ro (csr-type)
+          |     |        |              +--:(p10-csr)
+          |     |        |                 +--ro p10-csr?   p10-csr
+          |     |        +--:(keystore)
+          |     |                 {central-keystore-supported,\
                                                        asymmetric-keys}?
-                |           +--rw keystore-reference
-                |              +--rw asymmetric-key?
-                |              |       ks:asymmetric-key-ref
-                |              |       {central-keystore-supported,\
+          |     |           +--rw keystore-reference
+          |     |              +--rw asymmetric-key?
+          |     |              |       ks:asymmetric-key-ref
+          |     |              |       {central-keystore-supported,\
                                                        asymmetric-keys}?
-                |              +--rw certificate?      leafref
-                +--:(raw-public-key) {tlsc:client-ident-raw-public-key}?
-                |  +--rw raw-private-key
-                |     +--rw (inline-or-keystore)
-                |        +--:(inline) {inline-definitions-supported}?
-                |        |  +--rw inline-definition
-                |        |     +--rw public-key-format
-                |        |     |       identityref
-                |        |     +--rw public-key
-                |        |     |       binary
-                |        |     +--rw private-key-format?
-                |        |     |       identityref
-                |        |     +--rw (private-key-type)
-                |        |        +--:(cleartext-private-key)
-                |        |        |        {cleartext-private-keys}?
-                |        |        |  +--rw cleartext-private-key?
-                |        |        |          binary
-                |        |        +--:(hidden-private-key)
-                |        |        |        {hidden-private-keys}?
-                |        |        |  +--rw hidden-private-key?      \
+          |     |              +--rw certificate?      leafref
+          |     +--:(raw-public-key) {tlsc:client-ident-raw-public-key}?
+          |     |  +--rw raw-private-key
+          |     |     +--rw (inline-or-keystore)
+          |     |        +--:(inline) {inline-definitions-supported}?
+          |     |        |  +--rw inline-definition
+          |     |        |     +--rw public-key-format
+          |     |        |     |       identityref
+          |     |        |     +--rw public-key
+          |     |        |     |       binary
+          |     |        |     +--rw private-key-format?
+          |     |        |     |       identityref
+          |     |        |     +--rw (private-key-type)
+          |     |        |        +--:(cleartext-private-key)
+          |     |        |        |        {cleartext-private-keys}?
+          |     |        |        |  +--rw cleartext-private-key?
+          |     |        |        |          binary
+          |     |        |        +--:(hidden-private-key)
+          |     |        |        |        {hidden-private-keys}?
+          |     |        |        |  +--rw hidden-private-key?      \
                                                                    empty
-                |        |        +--:(encrypted-private-key)
-                |        |                 {encrypted-private-keys}?
-                |        |           +--rw encrypted-private-key
-                |        |              +--rw encrypted-by
-                |        |              +--rw encrypted-value-format
-                |        |              |       identityref
-                |        |              +--rw encrypted-value
-                |        |                      binary
-                |        +--:(keystore)
-                |                 {central-keystore-supported,\
+          |     |        |        +--:(encrypted-private-key)
+          |     |        |                 {encrypted-private-keys}?
+          |     |        |           +--rw encrypted-private-key
+          |     |        |              +--rw encrypted-by
+          |     |        |              +--rw encrypted-value-format
+          |     |        |              |       identityref
+          |     |        |              +--rw encrypted-value
+          |     |        |                      binary
+          |     |        +--:(keystore)
+          |     |                 {central-keystore-supported,\
                                                        asymmetric-keys}?
-                |           +--rw keystore-reference?
-                |                   ks:asymmetric-key-ref
-                +--:(tls13-epsk) {tlsc:client-ident-tls13-epsk}?
-                   +--rw tls13-epsk
-                      +--rw (inline-or-keystore)
-                      |  +--:(inline) {inline-definitions-supported}?
-                      |  |  +--rw inline-definition
-                      |  |     +--rw key-format?            identityref
-                      |  |     +--rw (key-type)
-                      |  |        +--:(cleartext-key)
-                      |  |        |  +--rw cleartext-key?   binary
-                      |  |        |          {cleartext-symmetric-keys}?
-                      |  |        +--:(hidden-key)
-                      |  |        |        {hidden-symmetric-keys}?
-                      |  |        |  +--rw hidden-key?      empty
-                      |  |        +--:(encrypted-key)
-                      |  |                 {encrypted-symmetric-keys}?
-                      |  |           +--rw encrypted-key
-                      |  |              +--rw encrypted-by
-                      |  |              +--rw encrypted-value-format
-                      |  |              |       identityref
-                      |  |              +--rw encrypted-value
-                      |  |                      binary
-                      |  +--:(keystore)
-                      |           {central-keystore-supported,symmetric\
+          |     |           +--rw keystore-reference?
+          |     |                   ks:asymmetric-key-ref
+          |     +--:(tls13-epsk) {tlsc:client-ident-tls13-epsk}?
+          |        +--rw tls13-epsk
+          |           +--rw (inline-or-keystore)
+          |           |  +--:(inline) {inline-definitions-supported}?
+          |           |  |  +--rw inline-definition
+          |           |  |     +--rw key-format?            identityref
+          |           |  |     +--rw (key-type)
+          |           |  |        +--:(cleartext-key)
+          |           |  |        |  +--rw cleartext-key?   binary
+          |           |  |        |          {cleartext-symmetric-keys}?
+          |           |  |        +--:(hidden-key)
+          |           |  |        |        {hidden-symmetric-keys}?
+          |           |  |        |  +--rw hidden-key?      empty
+          |           |  |        +--:(encrypted-key)
+          |           |  |                 {encrypted-symmetric-keys}?
+          |           |  |           +--rw encrypted-key
+          |           |  |              +--rw encrypted-by
+          |           |  |              +--rw encrypted-value-format
+          |           |  |              |       identityref
+          |           |  |              +--rw encrypted-value
+          |           |  |                      binary
+          |           |  +--:(keystore)
+          |           |           {central-keystore-supported,symmetric\
                                                                  -keys}?
-                      |     +--rw keystore-reference?
-                      |             ks:symmetric-key-ref
-                      +--rw external-identity           string
-                      +--rw hash?
-                      |       tlscmn:epsk-supported-hash
-                      +--rw context?                    string
-                      +--rw target-kdf?                 uint16
+          |           |     +--rw keystore-reference?
+          |           |             ks:symmetric-key-ref
+          |           +--rw external-identity           string
+          |           +--rw hash?
+          |           |       tlscmn:epsk-supported-hash
+          |           +--rw context?                    string
+          |           +--rw target-protocol?            uint16
+          |           +--rw target-kdf?                 uint16
+          +--rw server-authentication
+          |  +--rw ca-certs!
+          |  |  +--rw (inline-or-truststore)
+          |  |     +--:(inline) {inline-definitions-supported}?
+          |  |     |  +--rw inline-definition
+          |  |     |     +--rw certificate* [name]
+          |  |     |        +--rw name                      string
+          |  |     |        +--rw cert-data
+          |  |     |        |       trust-anchor-cert-cms
+          |  |     |        +---n certificate-expiration
+          |  |     |                {certificate-expiration-\
+                                                          notification}?
+          |  |     |           +-- expiration-date    yang:date-and-time
+          |  |     +--:(truststore)
+          |  |              {central-truststore-supported,certificates}?
+          |  |        +--rw truststore-reference?
+          |  |                ts:certificate-bag-ref
+          |  +--rw ee-certs!
+          |  |  +--rw (inline-or-truststore)
+          |  |     +--:(inline) {inline-definitions-supported}?
+          |  |     |  +--rw inline-definition
+          |  |     |     +--rw certificate* [name]
+          |  |     |        +--rw name                      string
+          |  |     |        +--rw cert-data
+          |  |     |        |       trust-anchor-cert-cms
+          |  |     |        +---n certificate-expiration
+          |  |     |                {certificate-expiration-\
+                                                          notification}?
+          |  |     |           +-- expiration-date    yang:date-and-time
+          |  |     +--:(truststore)
+          |  |              {central-truststore-supported,certificates}?
+          |  |        +--rw truststore-reference?
+          |  |                ts:certificate-bag-ref
+          |  +--rw raw-public-keys! {tlsc:server-auth-raw-public-key}?
+          |  |  +--rw (inline-or-truststore)
+          |  |     +--:(inline) {inline-definitions-supported}?
+          |  |     |  +--rw inline-definition
+          |  |     |     +--rw public-key* [name]
+          |  |     |        +--rw name                 string
+          |  |     |        +--rw public-key-format    identityref
+          |  |     |        +--rw public-key           binary
+          |  |     +--:(truststore)
+          |  |              {central-truststore-supported,public-keys}?
+          |  |        +--rw truststore-reference?   ts:public-key-bag-\
+                                                                     ref
+          |  +--rw tls13-epsks?       empty
+          |          {tlsc:server-auth-tls13-epsk}?
+          +--rw hello-params {tlscmn:hello-params}?
+          |  +--rw tls-versions
+          |  |  +--rw tls-version*   identityref
+          |  +--rw cipher-suites
+          |     +--rw cipher-suite*   identityref
+          +--rw keepalives {tlsc:tls-client-keepalives}?
+             +--rw peer-allowed-to-send?   empty
+             +--rw test-peer-aliveness!
+                +--rw max-wait?       uint16
+                +--rw max-attempts?   uint8
 
 4.  YANG Module
 
