@@ -1671,7 +1671,7 @@ module: ietf-system-secure-tacacs
 
        container keepalives {
          nacm:default-deny-write;
-         if-feature "tls-client-keepalives";
+         if-feature "tlsc:tls-client-keepalives";
          description
            "Configures the keepalive policy for the TLS client.";
          leaf peer-allowed-to-send {
