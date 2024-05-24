@@ -4,8 +4,8 @@
 
 Operations and Management Area Working Group           M. Boucadair, Ed.
 Internet-Draft                                                    Orange
-Intended status: Informational                               23 May 2024
-Expires: 24 November 2024
+Intended status: Informational                               24 May 2024
+Expires: 25 November 2024
 
 
  A YANG Model for Terminal Access Controller Access-Control System Plus
@@ -51,7 +51,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 24 November 2024.
+   This Internet-Draft will expire on 25 November 2024.
 
 Copyright Notice
 
@@ -457,7 +457,7 @@ Table of Contents
                       "RFC 9258: Importing External Pre-Shared Keys
                                  (PSKs) for TLS 1.3, Section 5.1 ";
                   }
-                 /*leaf target-protocol {
+                  leaf target-protocol {
                     type uint16;
                     description
                       "Specifies the protocol for which a PSK is
@@ -465,7 +465,7 @@ Table of Contents
                     reference
                       "RFC 9258: Importing External Pre-Shared Keys
                                  (PSKs) for TLS 1.3, Section 3 ";
-                  }*/
+                  }
                   leaf target-kdf {
                     type uint16;
                     description
@@ -477,7 +477,7 @@ Table of Contents
                 }
          }
        }
-     } // container client-identity
+     }
    }
 
    augment "/sys:system/sys-tcs-plus:tacacs-plus/sys-tcs-plus:server"
