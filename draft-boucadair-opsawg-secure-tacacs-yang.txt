@@ -544,8 +544,8 @@ Table of Contents
                   must 'derived-from-or-self(public-key-format,'
                      + ' "ct:subject-public-key-info-format")';
                 }
-                refine "inline-or-truststore/central-truststore/"
-                     + "central-truststore-reference" {
+                refine "inline-or-truststore/truststore/"
+                     + "truststore-reference" {
                   must 'not(deref(.)/../ts:public-key/ts:public-key-'
                      + 'format[not(derived-from-or-self(., "ct:subject-'
                      + 'public-key-info-format"))])';
