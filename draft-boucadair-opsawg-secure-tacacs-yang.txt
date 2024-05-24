@@ -357,7 +357,7 @@ Table of Contents
                                                                     must
                  be enabled and selected.";
               case certificate {
-                if-feature "tlsc:client-ident-x509-cert";
+                //if-feature "tlsc:client-ident-x509-cert";
                 container certificate {
                   description
                     "Specifies the client identity using a certificate.\
@@ -500,7 +500,7 @@ Table of Contents
                is necessarily the same as configured in the '../client-
                identity' node.";
             container ca-certs {
-              if-feature "tlsc:server-auth-x509-cert";
+              //if-feature "tlsc:server-auth-x509-cert";
               presence
                 "Indicates that CA certificates have been configured.
                  This statement is present so the mandatory descendant
@@ -515,7 +515,7 @@ Table of Contents
               uses ts:inline-or-truststore-certs-grouping;
             }
             container ee-certs {
-              if-feature "tlsc:server-auth-x509-cert";
+              //if-feature "tlsc:server-auth-x509-cert";
               presence
                 "Indicates that EE certificates have been configured.
                  This statement is present so the mandatory descendant
