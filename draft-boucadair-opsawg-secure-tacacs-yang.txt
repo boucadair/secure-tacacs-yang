@@ -679,6 +679,13 @@ Table of Contents
 
    'xxx':  xxxx.
 
+   This YANG module uses groupings from other YANG modules that define
+   nodes that may be considered sensitive or vulnerable in network
+   environments.  Refer to Section 5.3 of
+   [I-D.ietf-netconf-tls-client-server] for information as to which
+   nodes may be considered sensitive or vulnerable in network
+   environments.
+
 6.  IANA Considerations
 
    IANA is requested to register the following URI in the "ns"
