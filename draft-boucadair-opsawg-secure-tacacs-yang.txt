@@ -89,7 +89,7 @@ Table of Contents
    augmentation to the "ietf-system-tacacs-plus" module specified in
    [RFC9105].
 
-   The module uses the TLS grouping defined in
+   The module leverages the TLS structures defined in
    [I-D.ietf-netconf-tls-client-server].
 
 2.  Conventions and Definitions
