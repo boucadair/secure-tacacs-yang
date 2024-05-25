@@ -59,6 +59,8 @@ The meanings of the symbols in the YANG tree diagrams are defined in {{?RFC8340}
 
 The document uses the terms defined in {{Section 2 of !I-D.ietf-opsawg-tacacs-tls13}} and {{Section 3 of ?RFC8907}}.
 
+'client' refers to TLS TACACS+ client, while 'server' refers to TLS TACACS+ server.
+
 > Note to the RFC Editor: Please update the following:
 >
 >  *  AAAA --> the assigned RFC number for {{!I-D.ietf-netconf-crypto-types}}
@@ -69,18 +71,46 @@ The document uses the terms defined in {{Section 2 of !I-D.ietf-opsawg-tacacs-tl
 
 # Module Tree Structure
 
+The module is designed to cover the following key requirements specified in {{!I-D.ietf-opsawg-tacacs-tls13}}:
+
+* TLS 1.3 {{!RFC8446}} MUST be used for transport.
+* Earlier TLS versions TLS MUST NOT be used.
+* The cipher suites offered or accepted SHOULD be configurable.
+* Implementations MAY support Raw Public Keys and PSK.
+* Implementations MUST support the ability to configure the server's domain name
+
 The full tree structure is shown below:
 
 ~~~~~~~~~~
 {::include-fold ./trees/full-tree.txt}
 ~~~~~~~~~~
 
+The following data nodes are supported:
+
+'domain-name':
+: Provides a domain name of the server per {{Section 3.3 of !I-D.ietf-opsawg-tacacs-tls13}}.
+
+'client-identity':
+: Specifies the identity credentials that the client may present when
+  establishing a connection to a server.
+
+'server-authentication':
+: Specifies how a client authenticate servers.
+
+'hello-params':
+: Controls TLS versions and cipher suites.
+
+'keepalives':
+: Providers a set of parameters for testing the aliveness of the server.
+
 # YANG Module
 
 This module uses types and groupings defined in {{!RFC6991}}, {{!RFC8341}}, {{!I-D.ietf-netconf-crypto-types}}, {{!I-D.ietf-netconf-trust-anchors}},
 {{!I-D.ietf-netconf-keystore}}, and {{!I-D.ietf-netconf-tls-client-server}}.
 
-The modules also cites {{!RFC9257}}, {{!RFC9258}}, {{!RFC9258}}, and {{!RFC6520}}.
+The module augments {{!RFC9105}}, which is also an augment of {{!RFC7317}}.
+
+The module also cites {{!RFC9257}}, {{!RFC9258}}, {{!RFC9258}}, and {{!RFC6520}}.
 
 ~~~~~~~~~~
 <CODE BEGINS> file "ietf-system-secure-tacacs@2024-05-23.yang"
@@ -114,8 +144,8 @@ The modules also cites {{!RFC9257}}, {{!RFC9258}}, {{!RFC9258}}, and {{!RFC6520}
    Specifically, the following subtrees and data nodes have particular
    sensitivities/vulnerabilities:
 
-   'xxx':
-   :  xxxx.
+     'xxx':
+     :  xxxx.
 
    Some of the readable data nodes in this YANG module may be considered
    sensitive or vulnerable in some network environments.  It is thus
@@ -123,8 +153,8 @@ The modules also cites {{!RFC9257}}, {{!RFC9258}}, {{!RFC9258}}, and {{!RFC6520}
    notification) to these data nodes.  Specifically, the following
 subtrees and data nodes have particular sensitivities/vulnerabilities:
 
-   'xxx':
-   :  xxxx.
+     'xxx':
+     :  xxxx.
 
    This YANG module uses groupings from other YANG modules that
    define nodes that may be considered sensitive or vulnerable
@@ -159,4 +189,4 @@ subtrees and data nodes have particular sensitivities/vulnerabilities:
 # Acknowledgments
 {:numbered="false"}
 
-TODO acknowledge.
+The document leverages data structures defined in {{!I-D.ietf-netconf-tls-client-server}}.
