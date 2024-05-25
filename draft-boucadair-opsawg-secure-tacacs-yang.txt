@@ -115,6 +115,22 @@ Table of Contents
    The document uses the terms defined in Section 2 of
    [I-D.ietf-opsawg-tacacs-tls13] and Section 3 of [RFC8907].
 
+      Note to the RFC Editor: Please update the following:
+
+      -  AAAA --> the assigned RFC number for
+         [I-D.ietf-netconf-crypto-types]
+
+      -  BBBB --> the assigned RFC number for
+         [I-D.ietf-netconf-trust-anchors]
+
+      -  CCCC --> the assigned RFC number for
+         [I-D.ietf-netconf-keystore]
+
+      -  FFFF --> the assigned RFC number for
+         [I-D.ietf-netconf-tls-client-server]
+
+      -  XXXX --> the assigned RFC number for this document.
+
 3.  Module Tree Structure
 
    The full tree structure is shown below:
@@ -307,11 +323,15 @@ Table of Contents
 
 4.  YANG Module
 
-   This module uses references defined in XXXX.
+   This module uses types and groupings defined in [RFC6991], [RFC8341],
+   [I-D.ietf-netconf-crypto-types], [I-D.ietf-netconf-trust-anchors],
+   [I-D.ietf-netconf-keystore], and
+   [I-D.ietf-netconf-tls-client-server].
+
+   The modules also cites [RFC9257], [RFC9258], [RFC9258], and
+   [RFC6520].
 
    <CODE BEGINS> file "ietf-system-secure-tacacs@2024-05-23.yang"
-   =============== NOTE: '\' line wrapping per RFC 8792 ================
-
    module ietf-system-secure-tacacs {
      yang-version 1.1;
      namespace "urn:ietf:params:xml:ns:yang:ietf-system-secure-tacacs";
@@ -396,9 +416,8 @@ Table of Contents
      }
 
      // to be further tweaked to align with the scope of tacacs+TLS spec
-     // can't reuse the groupings in TLS as they are because TLS1.2 is \
-                                                                     not
-     // supported
+     // can't reuse the groupings in TLS as they are because TLS1.2
+     // is not supported
      // can't set a default because of must in a choice
      // Key requirements
      // - TLS 1.3 [RFC8446] MUST be used for transport
@@ -568,8 +587,8 @@ Table of Contents
        container ca-certs {
          presence "Indicates that CA certificates have been configured.
                    This statement is present so the mandatory descendant
-                   nodes do not imply that this node must be configured\
-                                                                     .";
+                   nodes do not imply that this node must be
+                   configured.";
          description
            "A set of CA certificates used by the TLS client to
             authenticate TLS server certificates.
@@ -582,8 +601,8 @@ Table of Contents
        container ee-certs {
          presence "Indicates that EE certificates have been configured.
                    This statement is present so the mandatory descendant
-                   nodes do not imply that this node must be configured\
-                                                                     .";
+                   nodes do not imply that this node must be
+                   configured.";
          description
            "A set of server certificates (i.e., end entity
             certificates) used by the TLS client to authenticate
@@ -598,8 +617,8 @@ Table of Contents
          if-feature "tlsc:server-auth-raw-public-key";
          presence "Indicates that raw public keys have been configured.
                    This statement is present so the mandatory descendant
-                   nodes do not imply that this node must be configured\
-                                                                     .";
+                   nodes do not imply that this node must be
+                   configured.";
          description
            "A set of raw public keys used by the TLS client to
             authenticate raw public keys presented by the TLS
@@ -669,8 +688,8 @@ Table of Contents
        nacm:default-deny-write;
        uses tlscmn:hello-params-grouping {
          refine "tls-versions" {
-           must "not(derived-from-or-self(tls-version, 'tlscmn:tls12'))\
-                                                                     " {
+           must "not(derived-from-or-self(tls-version, "
+              + " 'tlscmn:tls12'))" {
              error-message "TLS 1.2 is not supported.";
            }
          }
@@ -831,12 +850,33 @@ Table of Contents
 
 7.1.  Normative References
 
+   [I-D.ietf-netconf-crypto-types]
+              Watsen, K., "YANG Data Types and Groupings for
+              Cryptography", Work in Progress, Internet-Draft, draft-
+              ietf-netconf-crypto-types-34, 16 March 2024,
+              <https://datatracker.ietf.org/doc/html/draft-ietf-netconf-
+              crypto-types-34>.
+
+   [I-D.ietf-netconf-keystore]
+              Watsen, K., "A YANG Data Model for a Keystore and Keystore
+              Operations", Work in Progress, Internet-Draft, draft-ietf-
+              netconf-keystore-35, 16 March 2024,
+              <https://datatracker.ietf.org/doc/html/draft-ietf-netconf-
+              keystore-35>.
+
    [I-D.ietf-netconf-tls-client-server]
               Watsen, K., "YANG Groupings for TLS Clients and TLS
               Servers", Work in Progress, Internet-Draft, draft-ietf-
               netconf-tls-client-server-41, 16 March 2024,
               <https://datatracker.ietf.org/doc/html/draft-ietf-netconf-
               tls-client-server-41>.
+
+   [I-D.ietf-netconf-trust-anchors]
+              Watsen, K., "A YANG Data Model for a Truststore", Work in
+              Progress, Internet-Draft, draft-ietf-netconf-trust-
+              anchors-28, 16 March 2024,
+              <https://datatracker.ietf.org/doc/html/draft-ietf-netconf-
+              trust-anchors-28>.
 
    [I-D.ietf-opsawg-tacacs-tls13]
               Dahm, T., Heasley, J., dcmgash@cisco.com, and A. Ota,
@@ -869,6 +909,16 @@ Table of Contents
               Shell (SSH)", RFC 6242, DOI 10.17487/RFC6242, June 2011,
               <https://www.rfc-editor.org/rfc/rfc6242>.
 
+   [RFC6520]  Seggelmann, R., Tuexen, M., and M. Williams, "Transport
+              Layer Security (TLS) and Datagram Transport Layer Security
+              (DTLS) Heartbeat Extension", RFC 6520,
+              DOI 10.17487/RFC6520, February 2012,
+              <https://www.rfc-editor.org/rfc/rfc6520>.
+
+   [RFC6991]  Schoenwaelder, J., Ed., "Common YANG Data Types",
+              RFC 6991, DOI 10.17487/RFC6991, July 2013,
+              <https://www.rfc-editor.org/rfc/rfc6991>.
+
    [RFC8040]  Bierman, A., Bjorklund, M., and K. Watsen, "RESTCONF
               Protocol", RFC 8040, DOI 10.17487/RFC8040, January 2017,
               <https://www.rfc-editor.org/rfc/rfc8040>.
@@ -890,6 +940,16 @@ Table of Contents
               Model for Terminal Access Controller Access-Control System
               Plus (TACACS+)", RFC 9105, DOI 10.17487/RFC9105, August
               2021, <https://www.rfc-editor.org/rfc/rfc9105>.
+
+   [RFC9257]  Housley, R., Hoyland, J., Sethi, M., and C. A. Wood,
+              "Guidance for External Pre-Shared Key (PSK) Usage in TLS",
+              RFC 9257, DOI 10.17487/RFC9257, July 2022,
+              <https://www.rfc-editor.org/rfc/rfc9257>.
+
+   [RFC9258]  Benjamin, D. and C. A. Wood, "Importing External Pre-
+              Shared Keys (PSKs) for TLS 1.3", RFC 9258,
+              DOI 10.17487/RFC9258, July 2022,
+              <https://www.rfc-editor.org/rfc/rfc9258>.
 
 7.2.  Informative References
 
