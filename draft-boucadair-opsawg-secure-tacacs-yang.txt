@@ -453,12 +453,6 @@ Table of Contents
      // can't reuse the groupings in TLS as they are because TLS1.2
      // is not supported
      // can't set a default because of must in a choice
-     // Key requirements
-     // - TLS 1.3 [RFC8446] MUST be used for transport
-     // - Earlier versions of TLS MUST NOT be used.
-     // - The cipher suites offered or accepted SHOULD be configurable
-     // - implementations MAY support: Raw Public Keys / PSK
-     // - MUST support the ability to configure the server's domain name
 
      grouping certificate {
        description
