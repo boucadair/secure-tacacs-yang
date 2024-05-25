@@ -659,13 +659,9 @@ Table of Contents
          "Configurable parameters for the TLS hello message.";
        nacm:default-deny-write;
        uses tlscmn:hello-params-grouping {
-         refine "tls-versions/min" {
-           must "not(derived-from-or-self(current(), 'tlscmn:tls12'))" {
-             error-message "TLS 1.2 is not supported.";
-           }
-         }
-         refine "tls-versions/max" {
-           must "not(derived-from-or-self(current(), 'tlscmn:tls12'))" {
+         refine "tls-versions" {
+           must "not(derived-from-or-self(tls-version, 'tlscmn:tls12'))\
+                                                                     " {
              error-message "TLS 1.2 is not supported.";
            }
          }
