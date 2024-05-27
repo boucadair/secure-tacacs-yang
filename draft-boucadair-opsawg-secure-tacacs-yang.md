@@ -45,7 +45,7 @@ This document defines a YANG module for Terminal Access Controller Access-Contro
 
 {{!RFC9105}} defines a YANG module ("ietf-system-tacacs-plus") that augments the System Management data model defined in {{!RFC7317}} for the management of Terminal Access Controller Access-Control System Plus (TACACS+) clients. Typically, the "ietf-system-tacacs-plus" module is used to configure a TACACS+ client on a device to support deployment scenarios with centralized authentication, authorization, and accounting servers.
 
-This document defines a YANG module for managing TACACS+ over TLS 1.3 clients {{!I-D.ietf-opsawg-tacacs-tls13}}. The module is designed as an augmentation to the "ietf-system-tacacs-plus" module specified in {{!RFC9105}}. 
+This document defines a YANG module for managing TACACS+ over TLS 1.3 clients {{!I-D.ietf-opsawg-tacacs-tls13}}. The module is designed as an augmentation to the "ietf-system-tacacs-plus" module specified in {{!RFC9105}}.
 
 > Discussion Note: RFC 9105bis or keep the current augment design.
 
