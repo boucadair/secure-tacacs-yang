@@ -99,14 +99,12 @@ Table of Contents
    augmentation to the "ietf-system-tacacs-plus" module specified in
    [RFC9105].
 
-   The module leverages the TLS structures defined in
-   [I-D.ietf-netconf-tls-client-server].
-
-   This first version of the specification uses a pruning approach
-   rather that a reuse of the groupings defined in
-   [I-D.ietf-netconf-tls-client-server].
-
       Discussion Note: RFC 9105bis or keep the current augment design.
+
+   The module leverages the TLS structures defined in
+   [I-D.ietf-netconf-tls-client-server].  Concretely, this first version
+   of the specification uses a pruning approach rather that a reuse of
+   the groupings defined in [I-D.ietf-netconf-tls-client-server].
 
 2.  Conventions and Definitions
 
@@ -349,6 +347,20 @@ Table of Contents
                 +--rw max-attempts?   uint8
 
    The following data nodes are supported:
+
+   'remote-address':  Specifies a list of IP address/port numbers that
+      can be used to reach a server instance.
+
+      A server instance may be identified by an IPv4 address, IPv6
+      address, or both.
+
+      One or multiple addresses of the same address family may be
+      provided.
+
+      The same or distinct port numbers may be used per address family.
+
+      This container takes precedence over "address" and "port" data
+      nodes defined in [RFC9105].
 
    'domain-name':  Provides a domain name of the server per Section 3.3
       of [I-D.ietf-opsawg-tacacs-tls13].
