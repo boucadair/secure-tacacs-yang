@@ -422,20 +422,44 @@ module ietf-system-secure-tacacs {
     }
   }
 
+  grouping tcp-server-info {
+    description
+      "A grouping for configuring the information to contact
+       a TCP server.";
+    list remote-address {
+      key "remote-address";
+      min-elements 1;
+      description
+        "A server instance may be reachable using multiple
+         IP address and port numbers. For example, use the same port
+         number in different address families or different port numbers
+         in the same address family.";
+      leaf address {
+        type inet:ip-address;
+        description
+          "The remote IP address to reach a server.";
+      }
+      leaf port-number {
+        type inet:port-number;
+        description
+          "The remote port number of the server.";
+      }
+    }
+  }
+
   augment "/sys:system/sys-tcs-plus:tacacs-plus"
         + "/sys-tcs-plus:server" {
     description
       "Adds server's domain name.";
-    uses tcpc:tcp-server-grouping {
-      refine "local-bind/local-bind" {
+    uses tcp-server-grouping {
+      refine "remote-address/address" {
         must 'not(../sys-tcs-plus:address)' {
           error-message
             "Either use the list of bind points or RFC 9105 address
              data node, not both.";
         }
-        default "TACACS-TLS-PORT";
       }
-      refine "local-bind/local-port" {
+      refine "remote-address/port-number" {
         must 'not(../sys-tcs-plus:port)' {
           error-message
             "Either use the list of bind points or RFC 9105
