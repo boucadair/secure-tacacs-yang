@@ -164,8 +164,8 @@ Table of Contents
    module: ietf-system-secure-tacacs
 
      augment /sys:system/sys-tcs-plus:tacacs-plus/sys-tcs-plus:server:
-       +--rw remote-address* [remote-address]
-       |  +--rw address?       inet:ip-address
+       +--rw remote-address* [address]
+       |  +--rw address        inet:ip-address
        |  +--rw port-number?   inet:port-number
        +--rw domain-name?      inet:domain-name
      augment /sys:system/sys-tcs-plus:tacacs-plus/sys-tcs-plus:server
