@@ -843,7 +843,7 @@ Table of Contents
                "Either use the list of bind points or RFC 9105
                 port data node, not both.";
            }
-           default "TACACS-TLS-PORT";
+           default "1234"; // to be replaced by TACACS-TLS-PORT
          }
        }
        leaf domain-name {
