@@ -45,13 +45,11 @@ This document defines a YANG module for Terminal Access Controller Access-Contro
 
 {{!RFC9105}} defines a YANG module ("ietf-system-tacacs-plus") that augments the System Management data model defined in {{!RFC7317}} for the management of Terminal Access Controller Access-Control System Plus (TACACS+) clients. Typically, the "ietf-system-tacacs-plus" module is used to configure a TACACS+ client on a device to support deployment scenarios with centralized authentication, authorization, and accounting servers.
 
-This document defines a YANG module for managing TACACS+ over TLS 1.3 clients {{!I-D.ietf-opsawg-tacacs-tls13}}. The module is designed as an augmentation to the "ietf-system-tacacs-plus" module specified in {{!RFC9105}}.
-
-The module leverages the TLS structures defined in {{!I-D.ietf-netconf-tls-client-server}}.
-
-This first version of the specification uses a pruning approach rather that a reuse of the groupings defined in {{!I-D.ietf-netconf-tls-client-server}}.
+This document defines a YANG module for managing TACACS+ over TLS 1.3 clients {{!I-D.ietf-opsawg-tacacs-tls13}}. The module is designed as an augmentation to the "ietf-system-tacacs-plus" module specified in {{!RFC9105}}. 
 
 > Discussion Note: RFC 9105bis or keep the current augment design.
+
+The module leverages the TLS structures defined in {{!I-D.ietf-netconf-tls-client-server}}. Concretely, this first version of the specification uses a pruning approach rather that a reuse of the groupings defined in {{!I-D.ietf-netconf-tls-client-server}}.
 
 # Conventions and Definitions
 
@@ -88,6 +86,13 @@ The full tree structure is shown below:
 ~~~~~~~~~~
 
 The following data nodes are supported:
+
+'remote-address':
+: Specifies a list of IP address/port numbers that can be used to reach a server instance.
+: A server instance may be identified by an IPv4 address, IPv6 address, or both.
+: One or multiple addresses of the same address family may be provided.
+: The same or distinct port numbers may be used per address family.
+: This container takes precedence over "address" and "port" data nodes defined in {{!RFC9105}}.
 
 'domain-name':
 : Provides a domain name of the server per {{Section 3.3 of !I-D.ietf-opsawg-tacacs-tls13}}.
