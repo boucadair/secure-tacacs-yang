@@ -1932,7 +1932,7 @@ module ietf-system-secure-tacacs {
         + "/sys-tcs-plus:server" {
     description
       "Adds server's domain name.";
-    uses tcp-server-grouping {
+    uses tcp-server-info {
       refine "remote-address/address" {
         must 'not(../sys-tcs-plus:address)' {
           error-message
