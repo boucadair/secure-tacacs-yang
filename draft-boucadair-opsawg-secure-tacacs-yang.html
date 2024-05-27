@@ -1496,6 +1496,11 @@ module ietf-system-secure-tacacs {
     reference
       "RFC BBBB: A YANG Data Model for a Truststore";
   }
+  import ietf-tcp-client {
+    prefix tcpc;
+    reference
+      "RFC DDDD: YANG Groupings for TCP Clients and TCP Servers";
+  }
   import ietf-tls-client {
     prefix tlsc;
     reference
@@ -1899,6 +1904,24 @@ module ietf-system-secure-tacacs {
         + "/sys-tcs-plus:server" {
     description
       "Adds server's domain name.";
+    uses tcpc:tcp-server-grouping {
+      refine "local-bind/local-bind" {
+        must 'not(../sys-tcs-plus:address)' {
+          error-message
+            "Either use the list of bind points or RFC 9105 address
+             data node, not both.";
+        }
+        default "TACACS-TLS-PORT";
+      }
+      refine "local-bind/local-port" {
+        must 'not(../sys-tcs-plus:port)' {
+          error-message
+            "Either use the list of bind points or RFC 9105
+             port data node, not both.";
+        }
+        default "TACACS-TLS-PORT";
+      }
+    }
     leaf domain-name {
       type inet:domain-name;
       description
