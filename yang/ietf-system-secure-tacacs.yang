@@ -253,7 +253,7 @@ module ietf-system-secure-tacacs {
                 nodes do not imply that this node must be
                 configured.";
       description
-        "A set of CA certificates used by the TLS client to                                                         
+        "A set of CA certificates used by the TLS client to 
          authenticate TLS server certificates.
          A server certificate is authenticated if it has a valid
          chain of trust to a configured CA certificate.";
@@ -315,11 +315,11 @@ module ietf-system-secure-tacacs {
   grouping test-peer-aliveness {
     description
       "Configures the keep-alive policy to proactively test
-       the aliveness of the TLS server.  An unresponsive
-       TLS server is dropped after approximately max-wait
+       the aliveness of the TLS server.  An unresponsive TLS
+       server is dropped after approximately max-wait
        * max-attempts seconds.";
     reference
-      "RFC 6520: Transport Layer Security (TLS) and Datagram                                                            
+      "RFC 6520: Transport Layer Security (TLS) and Datagram
                  Transport Layer Security (DTLS) Heartbeat
                  Extension";
     leaf max-wait {
