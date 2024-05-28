@@ -343,12 +343,16 @@ module ietf-system-secure-tacacs {
       "Configurable parameters for the TLS hello message.";
     nacm:default-deny-write;
     uses tlscmn:hello-params-grouping {
-      refine "tls-versions" {
-        must "not(derived-from-or-self(min, "
-           + "'tlscmn:tls12')) or "
-           + "not(derived-from-or-self(max, "
+      refine "tls-versions/min" {
+        must "not(derived-from-or-self(current(), "
            + "'tlscmn:tls12'))" {
-          error-message "TLS 1.2 is not supported.";
+          error-message "TLS 1.2 is not supported as min TLS version.";
+        }
+      }
+      refine "tls-versions/max" {
+        must "not(derived-from-or-self(current(), "
+           + "'tlscmn:tls12'))" {
+          error-message "TLS 1.2 is not supported as max TLS version.";
         }
       }
     }
