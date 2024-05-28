@@ -116,7 +116,7 @@ module ietf-system-secure-tacacs {
     description
       "Specifies the client identity using a raw private
        key.";
-    uses ks:inline-or-keystore-asymmetric-key {
+    uses ks:inline-or-keystore-asymmetric-key-grouping {
       refine "inline-or-keystore/inline/inline-definition" {
         must 'not(public-key-format) or derived-from-or-self'
            + '(public-key-format, "ct:subject-public-key-'
@@ -146,7 +146,7 @@ module ietf-system-secure-tacacs {
                  in TLS, Section 6
        RFC 9258: Importing External Pre-Shared Keys (PSKs) for
                  TLS 1.3, Section 5.1";
-    uses ks:inline-or-keystore-symmetric-key;
+    uses ks:inline-or-keystore-symmetric-key-grouping;
     leaf external-identity {
       type string;
       mandatory true;
@@ -259,7 +259,7 @@ module ietf-system-secure-tacacs {
          chain of trust to a configured CA certificate.";
       reference
         "RFC BBBB: A YANG Data Model for a Truststore";
-      uses ts:inline-or-truststore-certs;
+      uses ts:inline-or-truststore-certs-grouping;
     }
     container ee-certs {
       presence "Indicates that EE certificates have been configured.
@@ -274,7 +274,7 @@ module ietf-system-secure-tacacs {
          certificate.";
       reference
         "RFC BBBB: A YANG Data Model for a Truststore";
-      uses ts:inline-or-truststore-certs;
+      uses ts:inline-or-truststore-certs-grouping;
     }
     container raw-public-keys {
       if-feature "tlsc:server-auth-raw-public-key";
@@ -289,7 +289,7 @@ module ietf-system-secure-tacacs {
          to a configured raw public key.";
       reference
         "RFC BBBB: A YANG Data Model for a Truststore";
-      uses ts:inline-or-truststore-public-keys {
+      uses ts:inline-or-truststore-public-keys-grouping {
         refine "inline-or-truststore/inline/inline-definition/"
              + "public-key" {
           must 'derived-from-or-self(public-key-format,'
@@ -347,7 +347,7 @@ module ietf-system-secure-tacacs {
     description
       "Configurable parameters for the TLS hello message.";
     nacm:default-deny-write;
-    uses tlscmn:hello-params {
+    uses tlscmn:hello-params-grouping {
       refine "tls-versions" {
         must "not(derived-from-or-self(tls-version, "
            + " 'tlscmn:tls12'))" {
