@@ -506,7 +506,7 @@ Table of Contents
        description
          "Specifies the client identity using a raw private
           key.";
-       uses ks:inline-or-keystore-asymmetric-key-grouping {
+       uses ks:inline-or-keystore-asymmetric-key {
          refine "inline-or-keystore/inline/inline-definition" {
            must 'not(public-key-format) or derived-from-or-self'
               + '(public-key-format, "ct:subject-public-key-'
@@ -536,7 +536,7 @@ Table of Contents
                     in TLS, Section 6
           RFC 9258: Importing External Pre-Shared Keys (PSKs) for
                     TLS 1.3, Section 5.1";
-       uses ks:inline-or-keystore-symmetric-key-grouping;
+       uses ks:inline-or-keystore-symmetric-key;
        leaf external-identity {
          type string;
          mandatory true;
@@ -649,7 +649,7 @@ Table of Contents
             chain of trust to a configured CA certificate.";
          reference
            "RFC BBBB: A YANG Data Model for a Truststore";
-         uses ts:inline-or-truststore-certs-grouping;
+         uses ts:inline-or-truststore-certs;
        }
        container ee-certs {
          presence "Indicates that EE certificates have been configured.
@@ -664,7 +664,7 @@ Table of Contents
             certificate.";
          reference
            "RFC BBBB: A YANG Data Model for a Truststore";
-         uses ts:inline-or-truststore-certs-grouping;
+         uses ts:inline-or-truststore-certs;
        }
        container raw-public-keys {
          if-feature "tlsc:server-auth-raw-public-key";
@@ -679,7 +679,7 @@ Table of Contents
             to a configured raw public key.";
          reference
            "RFC BBBB: A YANG Data Model for a Truststore";
-         uses ts:inline-or-truststore-public-keys-grouping {
+         uses ts:inline-or-truststore-public-keys {
            refine "inline-or-truststore/inline/inline-definition/"
                 + "public-key" {
              must 'derived-from-or-self(public-key-format,'
@@ -737,7 +737,7 @@ Table of Contents
        description
          "Configurable parameters for the TLS hello message.";
        nacm:default-deny-write;
-       uses tlscmn:hello-params-grouping {
+       uses tlscmn:hello-params {
          refine "tls-versions" {
            must "not(derived-from-or-self(tls-version, "
               + " 'tlscmn:tls12'))" {
@@ -773,7 +773,7 @@ Table of Contents
        }
      }
 
-     grouping tls-client-grouping {
+     grouping tls-client {
        description
          "A grouping for configuring a TLS client without any
           consideration for how an underlying TCP session is
@@ -869,7 +869,7 @@ Table of Contents
        case tls {
          description
            "TLS is used.";
-         uses tls-client-grouping;
+         uses tls-client;
        }
      }
    }
