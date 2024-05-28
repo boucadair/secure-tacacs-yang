@@ -1690,8 +1690,8 @@ module ietf-system-secure-tacacs {
     leaf target-protocol {
       type uint16;
       description
-        "Specifies the protocol for which a PSK is imported for use.\
-                                                                   ";
+        "Specifies the protocol for which a PSK is imported for
+         use.";
       reference
         "RFC 9258: Importing External Pre-Shared Keys (PSKs) for
                    TLS 1.3, Section 3 ";
@@ -1757,12 +1757,12 @@ module ietf-system-secure-tacacs {
     container ca-certs {
       presence "Indicates that CA certificates have been configured.
                 This statement is present so the mandatory descendant
-                nodes do not imply that this node must be configured\
-                                                                  .";
+                nodes do not imply that this node must be
+                configured.";
       description
-        "A set of CA certificates used by the TLS client to \
-                                                         authenticate
-         TLS server certificates.
+        "A set of CA certificates used by the TLS client \
+          to
+         authenticate TLS server certificates.
          A server certificate is authenticated if it has a valid
          chain of trust to a configured CA certificate.";
       reference
@@ -1776,11 +1776,10 @@ module ietf-system-secure-tacacs {
                 configured.";
       description
         "A set of server certificates (i.e., end entity certificates)
-         used by the TLS client to authenticate certificates \
-                                                            presented
-         by TLS servers. A server certificate is authenticated if \
-                                                                it is
-         an exact match to a configured server certificate.";
+         used by the TLS client to authenticate certificates
+         presented by TLS servers. A server certificate is
+         authenticated if it is an exact match to a configured server
+         certificate.";
       reference
         "RFC BBBB: A YANG Data Model for a Truststore";
       uses ts:inline-or-truststore-certs-grouping;
@@ -1789,15 +1788,13 @@ module ietf-system-secure-tacacs {
       if-feature "tlsc:server-auth-raw-public-key";
       presence "Indicates that raw public keys have been configured.
                 This statement is present so the mandatory descendant
-                nodes do not imply that this node must be configured\
-                                                                  .";
+                nodes do not imply that this node must be
+                configured.";
       description
-        "A set of raw public keys used by the TLS client to \
-                                                         authenticate
-         raw public keys presented by the TLS server. A raw public \
-                                                                  key
-         is authenticated if it is an exact match to a configured raw
-         public key.";
+        "A set of raw public keys used by the TLS client to
+         authenticate raw public keys presented by the TLS server.
+         A raw public key is authenticated if it is an exact match
+         to a configured raw public key.";
       reference
         "RFC BBBB: A YANG Data Model for a Truststore";
       uses ts:inline-or-truststore-public-keys-grouping {
@@ -1830,9 +1827,10 @@ module ietf-system-secure-tacacs {
        TLS server is dropped after approximately max-wait
        * max-attempts seconds.";
     reference
-      "RFC 6520: Transport Layer Security (TLS) and Datagram \
-                                                            Transport
-                  Layer Security (DTLS) Heartbeat Extension";
+      "RFC 6520: Transport Layer Security (TLS) and \
+ Datagram
+                 Transport Layer Security (DTLS) Heartbeat
+                 Extension";
     leaf max-wait {
       type uint16 {
         range "1..max";
@@ -1879,8 +1877,8 @@ module ietf-system-secure-tacacs {
          HeartbeatRequest messages to this TLS client.";
       reference
         "RFC 6520: Transport Layer Security (TLS) and Datagram
-                   Transport Layer Security (DTLS) Heartbeat \
-                                                          Extension";
+                   Transport Layer Security (DTLS) Heartbeat
+                   Extension";
     }
     container test-peer-aliveness {
       presence "Indicates that the TLS client proactively tests the
@@ -1888,27 +1886,26 @@ module ietf-system-secure-tacacs {
       description
         "Configures the keep-alive policy to proactively test the
          aliveness of the TLS server.  An unresponsive TLS server is
-         dropped after approximately max-wait * max-attempts seconds\
-                                                                  .";
+         dropped after approximately max-wait * max-attempts
+         seconds.";
       uses test-peer-aliveness;
     }
   }
 
   grouping tls-client-grouping {
     description
-      "A grouping for configuring a TLS client without any \
-                                                        consideration
-       for how an underlying TCP session is established.";
+      "A grouping for configuring a TLS client without any
+       consideration for how an underlying TCP session is
+       established.";
     container client-identity {
       presence
-        "Indicates that a TLS-level client identity has been \
-                                                          configured.
+        "Indicates that a TLS-level client identity has been
+         configured.
          This statement is present so the mandatory descendant do not
          imply that this node must be configured.";
       description
-        "Identity credentials the TLS client may present when \
-                                                         establishing
-         a connection to a TLS server.";
+        "Identity credentials the TLS client may present when
+         establishing a connection to a TLS server.";
       uses client-identity;
     }
     container server-authentication {
