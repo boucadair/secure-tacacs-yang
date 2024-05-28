@@ -290,8 +290,8 @@ module ietf-system-secure-tacacs {
           must 'derived-from-or-self(public-key-format,'
              + ' "ct:subject-public-key-info-format")';
         }
-        refine "inline-or-truststore/truststore/"
-             + "truststore-reference" {
+        refine "inline-or-truststore/central-truststore/"
+             + "central-truststore-reference" {
           must 'not(deref(.)/../ts:public-key/ts:public-key-'
              + 'format[not(derived-from-or-self(., "ct:subject-'
              + 'public-key-info-format"))])';
@@ -344,8 +344,10 @@ module ietf-system-secure-tacacs {
     nacm:default-deny-write;
     uses tlscmn:hello-params-grouping {
       refine "tls-versions" {
-        must "not(derived-from-or-self(tls-version, "
-           + " 'tlscmn:tls12'))" {
+        must "not(derived-from-or-self(min, "
+           + "'tlscmn:tls12')) or "
+           + "not(derived-from-or-self(max, "
+           + "'tlscmn:tls12')) {
           error-message "TLS 1.2 is not supported.";
         }
       }
