@@ -18,11 +18,6 @@ module ietf-system-secure-tacacs {
     reference
       "RFC BBBB: A YANG Data Model for a Truststore";
   }
-  import ietf-tcp-client {
-    prefix tcpc;
-    reference
-      "RFC DDDD: YANG Groupings for TCP Clients and TCP Servers";
-  }
   import ietf-tls-client {
     prefix tlsc;
     reference
@@ -449,14 +444,14 @@ module ietf-system-secure-tacacs {
       "Adds server's domain name.";
     uses tcp-server-info {
       refine "remote-address/address" {
-        must 'not(../sys-tcs-plus:address)' {
+        must 'not(../../sys-tcs-plus:address)' {
           error-message
             "Either use the list of bind points or RFC 9105 address
              data node, not both.";
         }
       }
       refine "remote-address/port-number" {
-        must 'not(../sys-tcs-plus:port)' {
+        must 'not(../../sys-tcs-plus:port)' {
           error-message
             "Either use the list of bind points or RFC 9105 port
              data node, not both.";
