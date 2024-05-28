@@ -1852,7 +1852,7 @@ module ietf-system-secure-tacacs {
         must "not(derived-from-or-self(min, "
            + "'tlscmn:tls12')) or "
            + "not(derived-from-or-self(max, "
-           + "'tlscmn:tls12')) {
+           + "'tlscmn:tls12'))" {
           error-message "TLS 1.2 is not supported.";
         }
       }
