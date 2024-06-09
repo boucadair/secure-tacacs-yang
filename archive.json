@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-06-06T00:37:56.114238+00:00",
+  "timestamp": "2024-06-09T00:42:40.965086+00:00",
   "repo": "boucadair/secure-tacacs-yang",
   "labels": [
     {
@@ -49,6 +49,87 @@
       "color": "ffffff"
     }
   ],
-  "issues": [],
+  "issues": [
+    {
+      "number": 1,
+      "id": "I_kwDOL_fxvc6Lcjob",
+      "title": "General questions on the model",
+      "url": "https://github.com/boucadair/secure-tacacs-yang/issues/1",
+      "state": "OPEN",
+      "author": "lana-wu",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "1. \"server\":\"domain-name\" is useful to add. While \"remote-address\" seems redundant with the existing \"address\" and \"port\u201d of the tacacs server. Could you explain why the remote-address list is needed?\r\n2. \"security\": Not sure why \"keepalive\" defined.",
+      "createdAt": "2024-06-07T03:44:28Z",
+      "updatedAt": "2024-06-07T07:30:52Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "boucadair",
+          "authorAssociation": "OWNER",
+          "body": "> 1. \"server\":\"domain-name\" is useful to add. While \"remote-address\" seems redundant with the existing \"address\" and \"port\u201d of the tacacs server. Could you explain why the remote-address list is needed?\r\n\r\nThis is to cover the case of dual-stack server or servers that have the same name but are reachable with distinct IP addresses (redundancy).\r\n\r\n> 2\\. \"security\": Not sure why \"keepalive\" defined.\r\n\r\nThis one I'm not sure we will keep it. I sent a message on the list raising this point. I added it in -00 to be consistent with the scope of TLS client grouping (defined in netconf), but if we don't need it we will remove it.",
+          "createdAt": "2024-06-07T05:40:54Z",
+          "updatedAt": "2024-06-07T05:40:54Z"
+        },
+        {
+          "author": "lana-wu",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> > 1. \"server\":\"domain-name\" is useful to add. While \"remote-address\" seems redundant with the existing \"address\" and \"port\u201d of the tacacs server. Could you explain why the remote-address list is needed?\r\n> \r\n> This is to cover the case of dual-stack server or servers that have the same name but are reachable with distinct IP addresses (redundancy).\r\n>\r\nFor the TACACS+ client, either IPv4 or IPv6 can be used. TACACS+ server may support dual stack configuration. But here we are configuring TACACS+ client, not server. \r\n",
+          "createdAt": "2024-06-07T06:39:43Z",
+          "updatedAt": "2024-06-07T06:39:43Z"
+        },
+        {
+          "author": "boucadair",
+          "authorAssociation": "OWNER",
+          "body": "Sure. But, the list is about the addresses of the remote server:\r\n\r\n    +--rw remote-address* [address]\r\n    |  +--rw address        inet:ip-address\r\n    |  +--rw port-number?   inet:port-number",
+          "createdAt": "2024-06-07T06:44:09Z",
+          "updatedAt": "2024-06-07T06:44:09Z"
+        },
+        {
+          "author": "lana-wu",
+          "authorAssociation": "COLLABORATOR",
+          "body": "From the device (router, switch) configuration point of view, tacacs+server is the remote server.  The existing \"address\" refers to the address of the remote server.\r\n",
+          "createdAt": "2024-06-07T06:58:09Z",
+          "updatedAt": "2024-06-07T06:58:09Z"
+        },
+        {
+          "author": "boucadair",
+          "authorAssociation": "OWNER",
+          "body": "Yes, but only one address can be configured for the same server identifier by a name.  Here is what we have currently in the draft:\r\n\r\n`'remote-address':\r\nSpecifies a list of IP address/port numbers that can be used to reach a server instance.\r\n\r\nA server instance may be identified by an IPv4 address, IPv6 address, or both.\r\n\r\nOne or multiple addresses of the same address family may be provided.\r\n\r\nThe same or distinct port numbers may be used per address family.\r\n\r\nThis container takes precedence over \"address\" and \"port\" data nodes defined in [[RFC9105](https://boucadair.github.io/secure-tacacs-yang/draft-boucadair-opsawg-secure-tacacs-yang.html#RFC9105)].`\r\n\r\nDo you think we need to make this clearer?\r\n\r\n\r\n\r\n\r\n\r\n",
+          "createdAt": "2024-06-07T07:03:08Z",
+          "updatedAt": "2024-06-07T07:03:08Z"
+        },
+        {
+          "author": "lana-wu",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Is dual-stack remote address configuration a corner case?\r\nI was thinking that dual-stack servers make sense to support both IPv4 and IPv6 devices. However, for a dual stack device, you can select one address family, not need to configure two addresses at the same time.",
+          "createdAt": "2024-06-07T07:10:44Z",
+          "updatedAt": "2024-06-07T07:10:44Z"
+        },
+        {
+          "author": "boucadair",
+          "authorAssociation": "OWNER",
+          "body": "The intent here is to cover not only dual stack but when there are more addresses to reach the same server identifier by the same domain-name for redundancy and so on. We could configure two sever entries, but then all the credentials will need to be repeated for each member of the group. Also, if there is a proceed to fall back when an instance is not responsive, that will be difficult to control with the separate entries. That's not optimal. ",
+          "createdAt": "2024-06-07T07:15:36Z",
+          "updatedAt": "2024-06-07T07:17:16Z"
+        },
+        {
+          "author": "lana-wu",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Current non-tls model defines the server list for redundancy. If one server fails to be connected, try next one.  I agree the credentials configuration of TLS 1.3 is complex, and I see the current syslog YANG is also designed like this: https://datatracker.ietf.org/doc/html/draft-ietf-netmod-syslog-model-32#section-5.1.\r\nHow about defining templates to reuse the credentials configuration of the client?",
+          "createdAt": "2024-06-07T07:24:49Z",
+          "updatedAt": "2024-06-07T07:24:49Z"
+        },
+        {
+          "author": "boucadair",
+          "authorAssociation": "OWNER",
+          "body": "> Current non-tls model defines the server list for redundancy. If one server fails to be connected, try next one.\r\n\r\nThis is not optimal if we want to enable HE (RFC 8305).\r\n\r\n> I agree the credentials configuration of TLS 1.3 is complex, and I see the current syslog YANG is also designed like this: https://datatracker.ietf.org/doc/html/draft-ietf-netmod-syslog-model-32#section-5.1.\r\n> How about defining templates to reuse the credentials configuration of the client?\r\n\r\nCan you please take this one to the list?  We need to have more opinions on this. Thanks.",
+          "createdAt": "2024-06-07T07:30:51Z",
+          "updatedAt": "2024-06-07T07:30:51Z"
+        }
+      ]
+    }
+  ],
   "pulls": []
 }
