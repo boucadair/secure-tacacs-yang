@@ -1113,7 +1113,8 @@ Table of Contents
      augment "/sys:system/sys-tcs-plus:tacacs-plus" {
        description
          "A list of client credentials to be referenced.";
-       container client-credentials {
+       list client-credentials {
+         key "id";
          description
            "Identity credentials the TLS client may present when
             establishing a connection to a TLS server.";
@@ -1125,7 +1126,8 @@ Table of Contents
          }
          uses client-identity;
        }
-       container server-credentials {
+       list server-credentials {
+         key "id";
          description
            "Identity credentials the TLS client may present when
             establishing a connection to a TLS server.";
