@@ -16,17 +16,17 @@
 <meta content="draft-boucadair-opsawg-secure-tacacs-yang-latest" name="ietf.draft">
 <!-- Generator version information:
   xml2rfc 3.21.0
-    Python 3.11.9
+    Python 3.12.3
     ConfigArgParse 1.7
     google-i18n-address 3.1.0
     intervaltree 3.1.0
-    Jinja2 3.1.2
-    lxml 4.9.3
-    platformdirs 4.2.1
+    Jinja2 3.1.4
+    lxml 4.9.4
+    platformdirs 4.2.2
     pycountry 22.3.5
     PyYAML 6.0.1
     requests 2.31.0
-    setuptools 68.2.2
+    setuptools 69.5.1
     six 1.16.0
     wcwidth 0.2.13
 -->
@@ -1027,11 +1027,11 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <thead><tr>
 <td class="left">Internet-Draft</td>
 <td class="center">YANG for TACACS+ over TLS</td>
-<td class="right">May 2024</td>
+<td class="right">June 2024</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">Boucadair</td>
-<td class="center">Expires 29 November 2024</td>
+<td class="center">Expires 23 December 2024</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1044,12 +1044,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-boucadair-opsawg-secure-tacacs-yang-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2024-05-28" class="published">28 May 2024</time>
+<time datetime="2024-06-21" class="published">21 June 2024</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Informational</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2024-11-29">29 November 2024</time></dd>
+<dd class="expires"><time datetime="2024-12-23">23 December 2024</time></dd>
 <dt class="label-authors">Author:</dt>
 <dd class="authors">
 <div class="author">
@@ -1100,7 +1100,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 29 November 2024.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 23 December 2024.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1590,13 +1590,28 @@ module ietf-system-secure-tacacs {
     description
       "Initial revision.";
     reference
-      "RFC XXXX: XXXX";
+      "RFC XXXX: A YANG Model for Terminal Access Controller
+                 Access-Control System Plus (TACACS+) over TLS 1.3";
   }
 
-  // to be further tweaked to align with the scope of tacacs+TLS spec
-  // can't reuse the groupings in TLS as they are because TLS1.2
-  // is not supported
-  // can't set a default because of must in a choice
+  typedef client-credentials-ref {
+    type leafref {
+      path "/sys:system/sys-tcs-plus:tacacs-plus"
+         + "/secure-tacacs:client-credentials/secure-tacacs:id";
+    }
+    description
+      "Defines a type to reference client credentials.";
+  }
+
+  typedef server-credentials-ref {
+    type leafref {
+      path "/sys:system/sys-tcs-plus:tacacs-plus"
+         + "/secure-tacacs:server-credentials/secure-tacacs:id";
+    }
+    description
+      "Defines a type to reference server credentials.";
+  }
+
 
   grouping certificate {
     description
@@ -1748,6 +1763,34 @@ module ietf-system-secure-tacacs {
     }
   }
 
+  grouping client-identity-with-ref {
+    description
+      "Identity credentials that the TLS client may present when
+       establishing a connection to a TLS server. When configured,
+       and requested by the TLS server when establishing a TLS
+       session, these credentials are passed in the Certificate
+       message.";
+     choice ref-or-explicit {
+      description
+        "A choice between a reference of explicit configuration.";
+      case ref {
+        description
+          "Provides a reference.";
+        leaf credentials-reference {
+          type secure-tacacs:client-credentials-ref;
+          description
+            "Specifies the client credentials reference.";
+        }
+      }
+      case explicit {
+        description
+          "Explicit configuration.";
+        uses client-identity;
+      }
+    }
+  }
+
+
   grouping server-authentication {
     description
       "Specifies how the TLS client can authenticate TLS servers.
@@ -1815,6 +1858,29 @@ module ietf-system-secure-tacacs {
       description
         "Indicates that the TLS client can authenticate TLS servers
          using configured external PSKs.";
+    }
+  }
+
+  grouping server-authentication-with-ref {
+    description
+      "Specifies how the TLS client can authenticate TLS servers.";
+     choice ref-or-explicit {
+      description
+        "A choice between a reference of explicit configuration.";
+      case ref {
+        description
+          "Provides a reference.";
+        leaf credentials-reference {
+          type secure-tacacs:server-credentials-ref;
+          description
+            "Specifies the server credentials reference.";
+        }
+      }
+      case explicit {
+        description
+          "Explicit configuration.";
+        uses server-authentication;
+      }
     }
   }
 
@@ -1911,13 +1977,15 @@ module ietf-system-secure-tacacs {
       description
         "Identity credentials the TLS client may present when
          establishing a connection to a TLS server.";
-      uses client-identity;
+      //uses client-identity;
+      uses client-identity-with-ref;
     }
     container server-authentication {
       must 'ca-certs or ee-certs or raw-public-keys or tls13-epsks';
       description
         "Specifies how the TLS client can authenticate TLS servers.";
-      uses server-authentication;
+      //uses server-authentication;
+      uses server-authentication-with-ref;
     }
     container hello-params {
       if-feature "tlscmn:hello-params";
@@ -1954,6 +2022,35 @@ module ietf-system-secure-tacacs {
         description
           "The remote port number of the server.";
       }
+    }
+  }
+
+  augment "/sys:system/sys-tcs-plus:tacacs-plus" {
+    description
+      "A list of client credentials to be referenced.";
+    container client-credentials {
+      description
+        "Identity credentials the TLS client may present when
+         establishing a connection to a TLS server.";
+      nacm:default-deny-write;
+      leaf id {
+        type string;
+        description
+          "A credential identifier.";
+      }
+      uses client-identity;
+    }
+    container server-credentials {
+      description
+        "Identity credentials the TLS client may present when
+         establishing a connection to a TLS server.";
+      nacm:default-deny-write;
+      leaf id {
+        type string;
+        description
+          "A credential identifier.";
+      }
+      uses server-authentication;
     }
   }
 
@@ -1994,6 +2091,7 @@ module ietf-system-secure-tacacs {
       description
         "TLS is used.";
       uses tls-client;
+      //uses client-identity-with-ref;
     }
   }
 }

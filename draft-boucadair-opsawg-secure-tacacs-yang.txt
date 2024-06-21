@@ -4,8 +4,8 @@
 
 Operations and Management Area Working Group           M. Boucadair, Ed.
 Internet-Draft                                                    Orange
-Intended status: Informational                               28 May 2024
-Expires: 29 November 2024
+Intended status: Informational                              21 June 2024
+Expires: 23 December 2024
 
 
  A YANG Model for Terminal Access Controller Access-Control System Plus
@@ -54,7 +54,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 29 November 2024.
+   This Internet-Draft will expire on 23 December 2024.
 
 Copyright Notice
 
@@ -475,13 +475,28 @@ Table of Contents
        description
          "Initial revision.";
        reference
-         "RFC XXXX: XXXX";
+         "RFC XXXX: A YANG Model for Terminal Access Controller
+                    Access-Control System Plus (TACACS+) over TLS 1.3";
      }
 
-     // to be further tweaked to align with the scope of tacacs+TLS spec
-     // can't reuse the groupings in TLS as they are because TLS1.2
-     // is not supported
-     // can't set a default because of must in a choice
+     typedef client-credentials-ref {
+       type leafref {
+         path "/sys:system/sys-tcs-plus:tacacs-plus"
+            + "/secure-tacacs:client-credentials/secure-tacacs:id";
+       }
+       description
+         "Defines a type to reference client credentials.";
+     }
+
+     typedef server-credentials-ref {
+       type leafref {
+         path "/sys:system/sys-tcs-plus:tacacs-plus"
+            + "/secure-tacacs:server-credentials/secure-tacacs:id";
+       }
+       description
+         "Defines a type to reference server credentials.";
+     }
+
 
      grouping certificate {
        description
@@ -633,6 +648,34 @@ Table of Contents
        }
      }
 
+     grouping client-identity-with-ref {
+       description
+         "Identity credentials that the TLS client may present when
+          establishing a connection to a TLS server. When configured,
+          and requested by the TLS server when establishing a TLS
+          session, these credentials are passed in the Certificate
+          message.";
+        choice ref-or-explicit {
+         description
+           "A choice between a reference of explicit configuration.";
+         case ref {
+           description
+             "Provides a reference.";
+           leaf credentials-reference {
+             type secure-tacacs:client-credentials-ref;
+             description
+               "Specifies the client credentials reference.";
+           }
+         }
+         case explicit {
+           description
+             "Explicit configuration.";
+           uses client-identity;
+         }
+       }
+     }
+
+
      grouping server-authentication {
        description
          "Specifies how the TLS client can authenticate TLS servers.
@@ -700,6 +743,29 @@ Table of Contents
          description
            "Indicates that the TLS client can authenticate TLS servers
             using configured external PSKs.";
+       }
+     }
+
+     grouping server-authentication-with-ref {
+       description
+         "Specifies how the TLS client can authenticate TLS servers.";
+        choice ref-or-explicit {
+         description
+           "A choice between a reference of explicit configuration.";
+         case ref {
+           description
+             "Provides a reference.";
+           leaf credentials-reference {
+             type secure-tacacs:server-credentials-ref;
+             description
+               "Specifies the server credentials reference.";
+           }
+         }
+         case explicit {
+           description
+             "Explicit configuration.";
+           uses server-authentication;
+         }
        }
      }
 
@@ -796,13 +862,15 @@ Table of Contents
          description
            "Identity credentials the TLS client may present when
             establishing a connection to a TLS server.";
-         uses client-identity;
+         //uses client-identity;
+         uses client-identity-with-ref;
        }
        container server-authentication {
          must 'ca-certs or ee-certs or raw-public-keys or tls13-epsks';
          description
            "Specifies how the TLS client can authenticate TLS servers.";
-         uses server-authentication;
+         //uses server-authentication;
+         uses server-authentication-with-ref;
        }
        container hello-params {
          if-feature "tlscmn:hello-params";
@@ -839,6 +907,35 @@ Table of Contents
            description
              "The remote port number of the server.";
          }
+       }
+     }
+
+     augment "/sys:system/sys-tcs-plus:tacacs-plus" {
+       description
+         "A list of client credentials to be referenced.";
+       container client-credentials {
+         description
+           "Identity credentials the TLS client may present when
+            establishing a connection to a TLS server.";
+         nacm:default-deny-write;
+         leaf id {
+           type string;
+           description
+             "A credential identifier.";
+         }
+         uses client-identity;
+       }
+       container server-credentials {
+         description
+           "Identity credentials the TLS client may present when
+            establishing a connection to a TLS server.";
+         nacm:default-deny-write;
+         leaf id {
+           type string;
+           description
+             "A credential identifier.";
+         }
+         uses server-authentication;
        }
      }
 
@@ -879,6 +976,7 @@ Table of Contents
          description
            "TLS is used.";
          uses tls-client;
+         //uses client-identity-with-ref;
        }
      }
    }
