@@ -1,32 +1,68 @@
 module: ietf-system-secure-tacacs
 
+  augment /sys:system/sys-tcs-plus:tacacs-plus:
+    +--rw client-credentials* [id]
+    |  +--rw id                       string
+    |  +--rw (auth-type)?
+    |     +--:(certificate)
+    |     |  ...
+    |     +--:(raw-public-key) {tlsc:client-ident-raw-public-key}?
+    |     |  ...
+    |     +--:(tls13-epsk) {tlsc:client-ident-tls13-epsk}?
+    |        ...
+    +--rw server-credentials* [id]
+       +--rw id                 string
+       +--rw ca-certs!
+       |  ...
+       +--rw ee-certs!
+       |  ...
+       +--rw raw-public-keys! {tlsc:server-auth-raw-public-key}?
+       |  ...
+       +--rw tls13-epsks?       empty {tlsc:server-auth-tls13-epsk}?
   augment /sys:system/sys-tcs-plus:tacacs-plus/sys-tcs-plus:server:
-    +--rw domain-name?   inet:domain-name
+    +--rw remote-address* [address]
+    |  +--rw address        inet:ip-address
+    |  +--rw port-number?   inet:port-number
+    +--rw domain-name?      inet:domain-name
   augment /sys:system/sys-tcs-plus:tacacs-plus/sys-tcs-plus:server
             /sys-tcs-plus:security:
     +--:(tls)
        +--rw client-identity!
-       |  +--rw (auth-type)?
-       |     +--:(certificate)
-       |     |  ...
-       |     +--:(raw-public-key) {tlsc:client-ident-raw-public-key}?
-       |     |  ...
-       |     +--:(tls13-epsk) {tlsc:client-ident-tls13-epsk}?
-       |        ...
+       |  +--rw (ref-or-explicit)?
+       |     +--:(ref)
+       |     |  +--rw credentials-reference?
+       |     |          secure-tacacs:client-credentials-ref
+       |     +--:(explicit)
+       |        +--rw (auth-type)?
+       |           +--:(certificate)
+       |           |  +--rw certificate
+       |           |     ...
+       |           +--:(raw-public-key)
+       |           |        {tlsc:client-ident-raw-public-key}?
+       |           |  ...
+       |           +--:(tls13-epsk) {tlsc:client-ident-tls13-epsk}?
+       |              ...
        +--rw server-authentication
-       |  +--rw ca-certs!
-       |  |  ...
-       |  +--rw ee-certs!
-       |  |  ...
-       |  +--rw raw-public-keys! {tlsc:server-auth-raw-public-key}?
-       |  |  ...
-       |  +--rw tls13-epsks?       empty
-       |          {tlsc:server-auth-tls13-epsk}?
+       |  +--rw (ref-or-explicit)?
+       |     +--:(ref)
+       |     |  +--rw credentials-reference?
+       |     |          secure-tacacs:server-credentials-ref
+       |     +--:(explicit)
+       |        +--rw ca-certs!
+       |        |  ...
+       |        +--rw ee-certs!
+       |        |  ...
+       |        +--rw raw-public-keys!
+       |        |       {tlsc:server-auth-raw-public-key}?
+       |        |  ...
+       |        +--rw tls13-epsks?             empty
+       |                {tlsc:server-auth-tls13-epsk}?
        +--rw hello-params {tlscmn:hello-params}?
        |  +--rw tls-versions
-       |  |  +--rw tls-version*   identityref
+       |  |  +--rw min?   identityref
+       |  |  +--rw max?   identityref
        |  +--rw cipher-suites
-       |     +--rw cipher-suite*   identityref
+       |     +--rw cipher-suite*   tlscsa:tls-cipher-suite-algorithm
        +--rw keepalives {tlsc:tls-client-keepalives}?
           +--rw peer-allowed-to-send?   empty
           +--rw test-peer-aliveness!
