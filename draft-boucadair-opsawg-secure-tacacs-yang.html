@@ -1393,8 +1393,6 @@ establishing a connection to a server. Both explicit and reference are supported
 <div class="breakable sourcecode" id="section-4-4">
 <pre>&lt;CODE BEGINS&gt; file "ietf-system-secure-tacacs@2024-05-23.yang"
 
-=============== NOTE: '\' line wrapping per RFC 8792 ================
-
 module ietf-system-secure-tacacs {
   yang-version 1.1;
   namespace "urn:ietf:params:xml:ns:yang:ietf-system-secure-tacacs";
@@ -1809,15 +1807,15 @@ module ietf-system-secure-tacacs {
       refine "tls-versions/min" {
         must "not(derived-from-or-self(current(), "
            + "'tlscmn:tls12'))" {
-          error-message "TLS 1.2 is not supported as min TLS version\
-                                                                   ";
+          error-message
+                "TLS 1.2 is not supported as min TLS version";
         }
       }
       refine "tls-versions/max" {
         must "not(derived-from-or-self(current(), "
            + "'tlscmn:tls12'))" {
-          error-message "TLS 1.2 is not supported as max TLS version\
-                                                                   ";
+          error-message
+                "TLS 1.2 is not supported as max TLS version";
         }
       }
     }

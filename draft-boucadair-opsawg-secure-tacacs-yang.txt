@@ -276,8 +276,6 @@ Table of Contents
    The module also cites [RFC9257], [RFC9258], [RFC9258], and [RFC6520].
 
    <CODE BEGINS> file "ietf-system-secure-tacacs@2024-05-23.yang"
-   =============== NOTE: '\' line wrapping per RFC 8792 ================
-
    module ietf-system-secure-tacacs {
      yang-version 1.1;
      namespace "urn:ietf:params:xml:ns:yang:ietf-system-secure-tacacs";
@@ -692,15 +690,15 @@ Table of Contents
          refine "tls-versions/min" {
            must "not(derived-from-or-self(current(), "
               + "'tlscmn:tls12'))" {
-             error-message "TLS 1.2 is not supported as min TLS version\
-                                                                      ";
+             error-message
+                   "TLS 1.2 is not supported as min TLS version";
            }
          }
          refine "tls-versions/max" {
            must "not(derived-from-or-self(current(), "
               + "'tlscmn:tls12'))" {
-             error-message "TLS 1.2 is not supported as max TLS version\
-                                                                      ";
+             error-message
+                   "TLS 1.2 is not supported as max TLS version";
            }
          }
        }
