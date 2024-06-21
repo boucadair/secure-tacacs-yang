@@ -79,13 +79,16 @@ The module is designed to cover the following key requirements specified in {{!I
 * Implementations MAY support Raw Public Keys and PSK.
 * Implementations MUST support the ability to configure the server's domain name
 
-The full tree structure is shown below:
+The abstract tree structure is shown below:
 
 ~~~~~~~~~~
-{::include-fold ./trees/full-tree.txt}
+{::include-fold ./trees/tree-overview.txt}
 ~~~~~~~~~~
 
 The following data nodes are supported:
+
+'client-credentials' and 'server-credentials':
+: Defines a set credentials that can be globally provisioned and then referenced under specific servers.
 
 'remote-address':
 : Specifies a list of IP address/port numbers that can be used to reach a server instance.
@@ -99,10 +102,10 @@ The following data nodes are supported:
 
 'client-identity':
 : Specifies the identity credentials that the client may present when
-  establishing a connection to a server.
+  establishing a connection to a server. Both explicit and reference are supported.
 
 'server-authentication':
-: Specifies how a client authenticate servers.
+: Specifies how a client authenticates servers. Both explicit and reference are supported.
 
 'hello-params':
 : Controls TLS versions and cipher suites.
@@ -193,7 +196,17 @@ subtrees and data nodes have particular sensitivities/vulnerabilities:
 
 --- back
 
+# Full Tree
+
+The full tree structure is shown below:
+
+~~~~~~~~~~
+{::include-fold ./trees/full-tree.txt}
+~~~~~~~~~~
+
 # Acknowledgments
 {:numbered="false"}
 
 The document leverages data structures defined in {{!I-D.ietf-netconf-tls-client-server}}.
+
+Thanks to Bo Wu for the review and comments.
