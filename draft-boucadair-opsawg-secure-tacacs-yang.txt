@@ -4,8 +4,8 @@
 
 Operations and Management Area Working Group           M. Boucadair, Ed.
 Internet-Draft                                                    Orange
-Intended status: Informational                              21 June 2024
-Expires: 23 December 2024
+Intended status: Informational                              28 June 2024
+Expires: 30 December 2024
 
 
  A YANG Model for Terminal Access Controller Access-Control System Plus
@@ -54,7 +54,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 23 December 2024.
+   This Internet-Draft will expire on 30 December 2024.
 
 Copyright Notice
 
@@ -276,6 +276,8 @@ Table of Contents
    The module also cites [RFC9257], [RFC9258], [RFC9258], and [RFC6520].
 
    <CODE BEGINS> file "ietf-system-secure-tacacs@2024-05-23.yang"
+   =============== NOTE: '\' line wrapping per RFC 8792 ================
+
    module ietf-system-secure-tacacs {
      yang-version 1.1;
      namespace "urn:ietf:params:xml:ns:yang:ietf-system-secure-tacacs";
@@ -378,7 +380,6 @@ Table of Contents
        description
          "Defines a type to reference server credentials.";
      }
-
 
      grouping certificate {
        description
@@ -537,7 +538,7 @@ Table of Contents
           and requested by the TLS server when establishing a TLS
           session, these credentials are passed in the Certificate
           message.";
-        choice ref-or-explicit {
+       choice ref-or-explicit {
          description
            "A choice between a reference of explicit configuration.";
          case ref {
@@ -556,7 +557,6 @@ Table of Contents
          }
        }
      }
-
 
      grouping server-authentication {
        description
@@ -631,7 +631,7 @@ Table of Contents
      grouping server-authentication-with-ref {
        description
          "Specifies how the TLS client can authenticate TLS servers.";
-        choice ref-or-explicit {
+       choice ref-or-explicit {
          description
            "A choice between a reference of explicit configuration.";
          case ref {
@@ -690,15 +690,15 @@ Table of Contents
          refine "tls-versions/min" {
            must "not(derived-from-or-self(current(), "
               + "'tlscmn:tls12'))" {
-             error-message
-                   "TLS 1.2 is not supported as min TLS version";
+             error-message "TLS 1.2 is not supported as min TLS version\
+                                                                      ";
            }
          }
          refine "tls-versions/max" {
            must "not(derived-from-or-self(current(), "
               + "'tlscmn:tls12'))" {
-             error-message
-                   "TLS 1.2 is not supported as max TLS version";
+             error-message "TLS 1.2 is not supported as max TLS version\
+                                                                      ";
            }
          }
        }
@@ -736,11 +736,11 @@ Table of Contents
           consideration for how an underlying TCP session is
           established.";
        container client-identity {
-         presence
-           "Indicates that a TLS-level client identity has been
-            configured.
-            This statement is present so the mandatory descendant do not
-            imply that this node must be configured.";
+         presence "Indicates that a TLS-level client identity has been
+                   configured.
+                   This statement is present so the mandatory \
+                                                       descendant do not
+                   imply that this node must be configured.";
          description
            "Identity credentials the TLS client may present when
             establishing a connection to a TLS server.";
@@ -788,6 +788,35 @@ Table of Contents
            type inet:port-number;
            description
              "The remote port number of the server.";
+         }
+       }
+     }
+
+     // currently not used
+
+     grouping tls-grouping-reuse {
+       description
+         "A grouping for TLS with TLS1.2 removed.";
+       uses tlsc:tls-client-grouping {
+         refine "client-identity/auth-type/tls12-psk" {
+           if-feature "not tlsc:client-ident-tls12-psk";
+         }
+         refine "server-authentication/tls12-psks" {
+           if-feature "not tlsc:server-auth-tls12-psk";
+         }
+         refine "hello-params/tls-versions/min" {
+           must "not(derived-from-or-self(current(), "
+              + "'tlscmn:tls12'))" {
+             error-message "TLS 1.2 is not supported as min TLS version\
+                                                                      ";
+           }
+         }
+         refine "hello-params/tls-versions/max" {
+           must "not(derived-from-or-self(current(), "
+              + "'tlscmn:tls12'))" {
+             error-message "TLS 1.2 is not supported as max TLS version\
+                                                                      ";
+           }
          }
        }
      }
@@ -851,9 +880,8 @@ Table of Contents
        }
      }
 
-     augment
-       "/sys:system/sys-tcs-plus:tacacs-plus/sys-tcs-plus:server"
-     + "/sys-tcs-plus:security" {
+     augment "/sys:system/sys-tcs-plus:tacacs-plus/sys-tcs-plus:server"
+           + "/sys-tcs-plus:security" {
        description
          "Adds TLS case.";
        case tls {
@@ -1047,9 +1075,9 @@ Table of Contents
               Bierman, A., Boucadair, M., and Q. Wu, "Guidelines for
               Authors and Reviewers of Documents Containing YANG Data
               Models", Work in Progress, Internet-Draft, draft-ietf-
-              netmod-rfc8407bis-11, 18 April 2024,
+              netmod-rfc8407bis-12, 21 June 2024,
               <https://datatracker.ietf.org/doc/html/draft-ietf-netmod-
-              rfc8407bis-11>.
+              rfc8407bis-12>.
 
    [RFC8340]  Bjorklund, M. and L. Berger, Ed., "YANG Tree Diagrams",
               BCP 215, RFC 8340, DOI 10.17487/RFC8340, March 2018,

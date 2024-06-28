@@ -1031,7 +1031,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Boucadair</td>
-<td class="center">Expires 23 December 2024</td>
+<td class="center">Expires 30 December 2024</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1044,12 +1044,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-boucadair-opsawg-secure-tacacs-yang-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2024-06-21" class="published">21 June 2024</time>
+<time datetime="2024-06-28" class="published">28 June 2024</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Informational</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2024-12-23">23 December 2024</time></dd>
+<dd class="expires"><time datetime="2024-12-30">30 December 2024</time></dd>
 <dt class="label-authors">Author:</dt>
 <dd class="authors">
 <div class="author">
@@ -1100,7 +1100,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 23 December 2024.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 30 December 2024.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1393,6 +1393,8 @@ establishing a connection to a server. Both explicit and reference are supported
 <div class="breakable sourcecode" id="section-4-4">
 <pre>&lt;CODE BEGINS&gt; file "ietf-system-secure-tacacs@2024-05-23.yang"
 
+=============== NOTE: '\' line wrapping per RFC 8792 ================
+
 module ietf-system-secure-tacacs {
   yang-version 1.1;
   namespace "urn:ietf:params:xml:ns:yang:ietf-system-secure-tacacs";
@@ -1495,7 +1497,6 @@ module ietf-system-secure-tacacs {
     description
       "Defines a type to reference server credentials.";
   }
-
 
   grouping certificate {
     description
@@ -1654,7 +1655,7 @@ module ietf-system-secure-tacacs {
        and requested by the TLS server when establishing a TLS
        session, these credentials are passed in the Certificate
        message.";
-     choice ref-or-explicit {
+    choice ref-or-explicit {
       description
         "A choice between a reference of explicit configuration.";
       case ref {
@@ -1673,7 +1674,6 @@ module ietf-system-secure-tacacs {
       }
     }
   }
-
 
   grouping server-authentication {
     description
@@ -1748,7 +1748,7 @@ module ietf-system-secure-tacacs {
   grouping server-authentication-with-ref {
     description
       "Specifies how the TLS client can authenticate TLS servers.";
-     choice ref-or-explicit {
+    choice ref-or-explicit {
       description
         "A choice between a reference of explicit configuration.";
       case ref {
@@ -1807,15 +1807,15 @@ module ietf-system-secure-tacacs {
       refine "tls-versions/min" {
         must "not(derived-from-or-self(current(), "
            + "'tlscmn:tls12'))" {
-          error-message
-                "TLS 1.2 is not supported as min TLS version";
+          error-message "TLS 1.2 is not supported as min TLS version\
+                                                                   ";
         }
       }
       refine "tls-versions/max" {
         must "not(derived-from-or-self(current(), "
            + "'tlscmn:tls12'))" {
-          error-message
-                "TLS 1.2 is not supported as max TLS version";
+          error-message "TLS 1.2 is not supported as max TLS version\
+                                                                   ";
         }
       }
     }
@@ -1853,11 +1853,11 @@ module ietf-system-secure-tacacs {
        consideration for how an underlying TCP session is
        established.";
     container client-identity {
-      presence
-        "Indicates that a TLS-level client identity has been
-         configured.
-         This statement is present so the mandatory descendant do not
-         imply that this node must be configured.";
+      presence "Indicates that a TLS-level client identity has been
+                configured.
+                This statement is present so the mandatory \
+                                                    descendant do not
+                imply that this node must be configured.";
       description
         "Identity credentials the TLS client may present when
          establishing a connection to a TLS server.";
@@ -1905,6 +1905,35 @@ module ietf-system-secure-tacacs {
         type inet:port-number;
         description
           "The remote port number of the server.";
+      }
+    }
+  }
+
+  // currently not used
+
+  grouping tls-grouping-reuse {
+    description
+      "A grouping for TLS with TLS1.2 removed.";
+    uses tlsc:tls-client-grouping {
+      refine "client-identity/auth-type/tls12-psk" {
+        if-feature "not tlsc:client-ident-tls12-psk";
+      }
+      refine "server-authentication/tls12-psks" {
+        if-feature "not tlsc:server-auth-tls12-psk";
+      }
+      refine "hello-params/tls-versions/min" {
+        must "not(derived-from-or-self(current(), "
+           + "'tlscmn:tls12'))" {
+          error-message "TLS 1.2 is not supported as min TLS version\
+                                                                   ";
+        }
+      }
+      refine "hello-params/tls-versions/max" {
+        must "not(derived-from-or-self(current(), "
+           + "'tlscmn:tls12'))" {
+          error-message "TLS 1.2 is not supported as max TLS version\
+                                                                   ";
+        }
       }
     }
   }
@@ -1968,9 +1997,8 @@ module ietf-system-secure-tacacs {
     }
   }
 
-  augment
-    "/sys:system/sys-tcs-plus:tacacs-plus/sys-tcs-plus:server"
-  + "/sys-tcs-plus:security" {
+  augment "/sys:system/sys-tcs-plus:tacacs-plus/sys-tcs-plus:server"
+        + "/sys-tcs-plus:security" {
     description
       "Adds TLS case.";
     case tls {
@@ -2162,7 +2190,7 @@ subtrees and data nodes have particular sensitivities/vulnerabilities:<a href="#
 <dl class="references">
 <dt id="I-D.ietf-netmod-rfc8407bis">[I-D.ietf-netmod-rfc8407bis]</dt>
         <dd>
-<span class="refAuthor">Bierman, A.</span>, <span class="refAuthor">Boucadair, M.</span>, and <span class="refAuthor">Q. Wu</span>, <span class="refTitle">"Guidelines for Authors and Reviewers of Documents Containing YANG Data Models"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-netmod-rfc8407bis-11</span>, <time datetime="2024-04-18" class="refDate">18 April 2024</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-netmod-rfc8407bis-11">https://datatracker.ietf.org/doc/html/draft-ietf-netmod-rfc8407bis-11</a>&gt;</span>. </dd>
+<span class="refAuthor">Bierman, A.</span>, <span class="refAuthor">Boucadair, M.</span>, and <span class="refAuthor">Q. Wu</span>, <span class="refTitle">"Guidelines for Authors and Reviewers of Documents Containing YANG Data Models"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-netmod-rfc8407bis-12</span>, <time datetime="2024-06-21" class="refDate">21 June 2024</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-netmod-rfc8407bis-12">https://datatracker.ietf.org/doc/html/draft-ietf-netmod-rfc8407bis-12</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC8340">[RFC8340]</dt>
         <dd>
