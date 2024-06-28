@@ -101,7 +101,6 @@ module ietf-system-secure-tacacs {
       "Defines a type to reference server credentials.";
   }
 
-
   grouping certificate {
     description
       "Specifies the client identity using a certificate.";
@@ -193,7 +192,7 @@ module ietf-system-secure-tacacs {
     leaf target-protocol {
       type uint16;
       description
-        "Specifies the protocol for which a PSK is imported for 
+        "Specifies the protocol for which a PSK is imported for
          use.";
       reference
         "RFC 9258: Importing External Pre-Shared Keys (PSKs) for
@@ -259,12 +258,12 @@ module ietf-system-secure-tacacs {
        and requested by the TLS server when establishing a TLS
        session, these credentials are passed in the Certificate
        message.";
-     choice ref-or-explicit {
+    choice ref-or-explicit {
       description
         "A choice between a reference of explicit configuration.";
       case ref {
         description
-          "Provides a reference.";     
+          "Provides a reference.";
         leaf credentials-reference {
           type secure-tacacs:client-credentials-ref;
           description
@@ -273,12 +272,11 @@ module ietf-system-secure-tacacs {
       }
       case explicit {
         description
-          "Explicit configuration.";       
+          "Explicit configuration.";
         uses client-identity;
       }
     }
   }
-
 
   grouping server-authentication {
     description
@@ -291,7 +289,7 @@ module ietf-system-secure-tacacs {
                 nodes do not imply that this node must be
                 configured.";
       description
-        "A set of CA certificates used by the TLS client to 
+        "A set of CA certificates used by the TLS client to
          authenticate TLS server certificates.
          A server certificate is authenticated if it has a valid
          chain of trust to a configured CA certificate.";
@@ -353,12 +351,12 @@ module ietf-system-secure-tacacs {
   grouping server-authentication-with-ref {
     description
       "Specifies how the TLS client can authenticate TLS servers.";
-     choice ref-or-explicit {
+    choice ref-or-explicit {
       description
         "A choice between a reference of explicit configuration.";
       case ref {
         description
-          "Provides a reference.";     
+          "Provides a reference.";
         leaf credentials-reference {
           type secure-tacacs:server-credentials-ref;
           description
@@ -367,7 +365,7 @@ module ietf-system-secure-tacacs {
       }
       case explicit {
         description
-          "Explicit configuration.";       
+          "Explicit configuration.";
         uses server-authentication;
       }
     }
@@ -412,15 +410,13 @@ module ietf-system-secure-tacacs {
       refine "tls-versions/min" {
         must "not(derived-from-or-self(current(), "
            + "'tlscmn:tls12'))" {
-          error-message
-                "TLS 1.2 is not supported as min TLS version";
+          error-message "TLS 1.2 is not supported as min TLS version";
         }
       }
       refine "tls-versions/max" {
         must "not(derived-from-or-self(current(), "
            + "'tlscmn:tls12'))" {
-          error-message
-                "TLS 1.2 is not supported as max TLS version";
+          error-message "TLS 1.2 is not supported as max TLS version";
         }
       }
     }
@@ -455,14 +451,13 @@ module ietf-system-secure-tacacs {
   grouping tls-client {
     description
       "A grouping for configuring a TLS client without any
-       consideration for how an underlying TCP session is 
+       consideration for how an underlying TCP session is
        established.";
     container client-identity {
-      presence
-        "Indicates that a TLS-level client identity has been
-         configured.
-         This statement is present so the mandatory descendant do not
-         imply that this node must be configured.";
+      presence "Indicates that a TLS-level client identity has been
+                configured.
+                This statement is present so the mandatory descendant do not
+                imply that this node must be configured.";
       description
         "Identity credentials the TLS client may present when
          establishing a connection to a TLS server.";
@@ -514,6 +509,33 @@ module ietf-system-secure-tacacs {
     }
   }
 
+  // currently not used
+
+  grouping tls-grouping-reuse {
+    description
+      "A grouping for TLS with TLS1.2 removed.";
+    uses tlsc:tls-client-grouping {
+      refine "client-identity/auth-type/tls12-psk" {
+        if-feature "not tlsc:client-ident-tls12-psk";
+      }
+      refine "server-authentication/tls12-psks" {
+        if-feature "not tlsc:server-auth-tls12-psk";
+      }
+      refine "hello-params/tls-versions/min" {
+        must "not(derived-from-or-self(current(), "
+           + "'tlscmn:tls12'))" {
+          error-message "TLS 1.2 is not supported as min TLS version";
+        }
+      }
+      refine "hello-params/tls-versions/max" {
+        must "not(derived-from-or-self(current(), "
+           + "'tlscmn:tls12'))" {
+          error-message "TLS 1.2 is not supported as max TLS version";
+        }
+      }
+    }
+  }
+
   augment "/sys:system/sys-tcs-plus:tacacs-plus" {
     description
       "A list of client credentials to be referenced.";
@@ -527,7 +549,7 @@ module ietf-system-secure-tacacs {
         type string;
         description
           "A credential identifier.";
-      }       
+      }
       uses client-identity;
     }
     list server-credentials {
@@ -540,7 +562,7 @@ module ietf-system-secure-tacacs {
         type string;
         description
           "A credential identifier.";
-      }       
+      }
       uses server-authentication;
     }
   }
@@ -573,9 +595,8 @@ module ietf-system-secure-tacacs {
     }
   }
 
-  augment
-    "/sys:system/sys-tcs-plus:tacacs-plus/sys-tcs-plus:server"
-  + "/sys-tcs-plus:security" {
+  augment "/sys:system/sys-tcs-plus:tacacs-plus/sys-tcs-plus:server"
+        + "/sys-tcs-plus:security" {
     description
       "Adds TLS case.";
     case tls {
