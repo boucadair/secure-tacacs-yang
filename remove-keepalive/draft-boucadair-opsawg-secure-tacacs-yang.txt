@@ -755,7 +755,6 @@ Table of Contents
          }
          refine "keepalives" {
            if-feature "not tlsc:tls-client-keepalives";
-           }
          }
        }
      }
