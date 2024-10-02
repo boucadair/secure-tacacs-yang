@@ -1307,16 +1307,11 @@ module: ietf-system-secure-tacacs
        |        +--rw tls13-epsks?             empty
        |                {tlsc:server-auth-tls13-epsk}?
        +--rw hello-params {tlscmn:hello-params}?
-       |  +--rw tls-versions
-       |  |  +--rw min?   identityref
-       |  |  +--rw max?   identityref
-       |  +--rw cipher-suites
-       |     +--rw cipher-suite*   tlscsa:tls-cipher-suite-algorithm
-       +--rw keepalives {tlsc:tls-client-keepalives}?
-          +--rw peer-allowed-to-send?   empty
-          +--rw test-peer-aliveness!
-             +--rw max-wait?       uint16
-             +--rw max-attempts?   uint8
+          +--rw tls-versions
+          |  +--rw min?   identityref
+          |  +--rw max?   identityref
+          +--rw cipher-suites
+             +--rw cipher-suite*   tlscsa:tls-cipher-suite-algorithm
 </pre><a href="#section-3-4" class="pilcrow">¶</a>
 </div>
 <p id="section-3-5">The following data nodes are supported:<a href="#section-3-5" class="pilcrow">¶</a></p>

@@ -218,16 +218,11 @@ Table of Contents
           |        +--rw tls13-epsks?             empty
           |                {tlsc:server-auth-tls13-epsk}?
           +--rw hello-params {tlscmn:hello-params}?
-          |  +--rw tls-versions
-          |  |  +--rw min?   identityref
-          |  |  +--rw max?   identityref
-          |  +--rw cipher-suites
-          |     +--rw cipher-suite*   tlscsa:tls-cipher-suite-algorithm
-          +--rw keepalives {tlsc:tls-client-keepalives}?
-             +--rw peer-allowed-to-send?   empty
-             +--rw test-peer-aliveness!
-                +--rw max-wait?       uint16
-                +--rw max-attempts?   uint8
+             +--rw tls-versions
+             |  +--rw min?   identityref
+             |  +--rw max?   identityref
+             +--rw cipher-suites
+                +--rw cipher-suite*   tlscsa:tls-cipher-suite-algorithm
 
    The following data nodes are supported:
 
