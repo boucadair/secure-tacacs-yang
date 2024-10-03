@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-10-01T00:52:11.931442+00:00",
+  "timestamp": "2024-10-03T00:46:06.802364+00:00",
   "repo": "boucadair/secure-tacacs-yang",
   "labels": [
     {
@@ -131,5 +131,34 @@
       ]
     }
   ],
-  "pulls": []
+  "pulls": [
+    {
+      "number": 2,
+      "id": "PR_kwDOL_fxvc59YbPl",
+      "title": "remove keepalive",
+      "url": "https://github.com/boucadair/secure-tacacs-yang/pull/2",
+      "state": "MERGED",
+      "author": "boucadair",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2024-10-02T14:06:55Z",
+      "updatedAt": "2024-10-02T14:22:09Z",
+      "baseRepository": "boucadair/secure-tacacs-yang",
+      "baseRefName": "main",
+      "baseRefOid": "a5a5672ac89b0ddfd15b71f337ef32f8776e30c8",
+      "headRepository": "boucadair/secure-tacacs-yang",
+      "headRefName": "remove-keepalive",
+      "headRefOid": "167602dd3309beaaf37c064e821d7a556e9129ab",
+      "closedAt": "2024-10-02T14:22:09Z",
+      "mergedAt": "2024-10-02T14:22:09Z",
+      "mergedBy": "boucadair",
+      "mergeCommit": {
+        "oid": "54c4942ae247f3baf207d53c884e3ea96f76f6dd"
+      },
+      "comments": [],
+      "reviews": []
+    }
+  ]
 }
