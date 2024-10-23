@@ -11,17 +11,17 @@ module ietf-system-secure-tacacs {
   import ietf-keystore {
     prefix ks;
     reference
-      "RFC CCCC: A YANG Data Model for a Keystore";
+      "RFC 9642: A YANG Data Model for a Keystore";
   }
   import ietf-truststore {
     prefix ts;
     reference
-      "RFC BBBB: A YANG Data Model for a Truststore";
+      "RFC 9641: A YANG Data Model for a Truststore";
   }
   import ietf-tls-client {
     prefix tlsc;
     reference
-      "RFC FFFF: YANG Groupings for TLS Clients and TLS Servers";
+      "RFC 9645: YANG Groupings for TLS Clients and TLS Servers";
   }
   import ietf-netconf-acm {
     prefix nacm;
@@ -31,12 +31,12 @@ module ietf-system-secure-tacacs {
   import ietf-crypto-types {
     prefix ct;
     reference
-      "RFC AAAA: YANG Data Types and Groupings for Cryptography";
+      "RFC 9640: YANG Data Types and Groupings for Cryptography";
   }
   import ietf-tls-common {
     prefix tlscmn;
     reference
-      "RFC FFFF: YANG Groupings for TLS Clients and TLS Servers";
+      "RFC 9645: YANG Groupings for TLS Clients and TLS Servers";
   }
   import ietf-system {
     prefix sys;
@@ -294,7 +294,7 @@ module ietf-system-secure-tacacs {
          A server certificate is authenticated if it has a valid
          chain of trust to a configured CA certificate.";
       reference
-        "RFC BBBB: A YANG Data Model for a Truststore";
+        "RFC 9641: A YANG Data Model for a Truststore";
       uses ts:inline-or-truststore-certs-grouping;
     }
     container ee-certs {
@@ -309,7 +309,7 @@ module ietf-system-secure-tacacs {
          authenticated if it is an exact match to a configured server
          certificate.";
       reference
-        "RFC BBBB: A YANG Data Model for a Truststore";
+        "RFC 9641: A YANG Data Model for a Truststore";
       uses ts:inline-or-truststore-certs-grouping;
     }
     container raw-public-keys {
@@ -324,7 +324,7 @@ module ietf-system-secure-tacacs {
          A raw public key is authenticated if it is an exact match
          to a configured raw public key.";
       reference
-        "RFC BBBB: A YANG Data Model for a Truststore";
+        "RFC 9641: A YANG Data Model for a Truststore";
       uses ts:inline-or-truststore-public-keys-grouping {
         refine "inline-or-truststore/inline/inline-definition/"
              + "public-key" {
@@ -425,6 +425,7 @@ module ietf-system-secure-tacacs {
     }
   }
 
+/*
   grouping tcp-server-info {
     description
       "A grouping for configuring the information to contact
@@ -447,7 +448,7 @@ module ietf-system-secure-tacacs {
           "The remote port number of the server.";
       }
     }
-  }
+  }*/
 
   // currently not used
 
@@ -516,7 +517,7 @@ module ietf-system-secure-tacacs {
         + "/sys-tcs-plus:server" {
     description
       "Adds server's domain name.";
-    uses tcp-server-info {
+    /*uses tcp-server-info {
       refine "remote-address/address" {
         must 'not(../../sys-tcs-plus:address)' {
           error-message
@@ -532,7 +533,7 @@ module ietf-system-secure-tacacs {
         }
         default "1234"; // to be replaced by TACACS-TLS-PORT
       }
-    }
+    }*/
     leaf domain-name {
       type inet:domain-name;
       description
