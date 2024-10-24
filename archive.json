@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-10-22T00:47:21.151460+00:00",
+  "timestamp": "2024-10-24T00:46:25.255728+00:00",
   "repo": "boucadair/secure-tacacs-yang",
   "labels": [
     {
@@ -129,6 +129,38 @@
           "updatedAt": "2024-06-07T07:30:51Z"
         }
       ]
+    },
+    {
+      "number": 3,
+      "id": "I_kwDOL_fxvc6baYfZ",
+      "title": "Joe's Comments",
+      "url": "https://github.com/boucadair/secure-tacacs-yang/issues/3",
+      "state": "OPEN",
+      "author": "boucadair",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "```\r\nDe : Joe Clarke (jclarke) <jclarke@cisco.com> \r\n\r\nAs a contributor\u2026\r\n\r\nI support the adoption of this work as I feel it will help inform the overall T+ TLS 1.3 specification.  I have some specific comments and nits, though:\r\n\r\nAbstract:\r\n\r\ns/This modules augments/This module augments/\r\n\r\nSection 1:\r\n\r\nDo you need to state that the first version of this spec used a pruning approach?  Ultimately, when this is published that won\u2019t matter.\r\n\r\nIn the module itself, I\u2019d like a few abbreviations expanded in the descriptions:\r\n\r\nleaf target-kdf \uf0e8 expand KDF\r\n\r\ncontainer ca-certs \uf0e8 expand CA (yeah, I know)\r\n\r\ncontainer ee-certs \uf0e8 expand EE\r\n\r\nWhy do you define a new grouping, tcp-server-info?  Why not just augment what is in 9105?  This adds complexity with minimal, if any, benefit that I see.\r\n\r\nDoes the new domain-name leaf need to be mandatory if certs are used?\r\n\r\nFinally, on operational data, should this module introduce any TLS-specific stats in addition to those in 9105?  I feel like certificate issues or PSK problems might be useful.\r\n\r\nJoe\r\n\r\n```",
+      "createdAt": "2024-10-23T06:06:32Z",
+      "updatedAt": "2024-10-23T06:06:32Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 4,
+      "id": "I_kwDOL_fxvc6bai0H",
+      "title": "SNI activation + check on domain-name",
+      "url": "https://github.com/boucadair/secure-tacacs-yang/issues/4",
+      "state": "OPEN",
+      "author": "boucadair",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2024-10-23T06:26:08Z",
+      "updatedAt": "2024-10-23T06:26:08Z",
+      "closedAt": null,
+      "comments": []
     }
   ],
   "pulls": [
@@ -157,6 +189,32 @@
       "mergeCommit": {
         "oid": "54c4942ae247f3baf207d53c884e3ea96f76f6dd"
       },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 5,
+      "id": "PR_kwDOL_fxvc5_oQGf",
+      "title": "Remove tcp-server-info",
+      "url": "https://github.com/boucadair/secure-tacacs-yang/pull/5",
+      "state": "OPEN",
+      "author": "boucadair",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2024-10-23T14:38:36Z",
+      "updatedAt": "2024-10-23T14:38:36Z",
+      "baseRepository": "boucadair/secure-tacacs-yang",
+      "baseRefName": "main",
+      "baseRefOid": "fb0b890a104ece863f7275d35c877e2ec06301e4",
+      "headRepository": "boucadair/secure-tacacs-yang",
+      "headRefName": "Remove-tcp-server-info",
+      "headRefOid": "8f6662021ef8c32ce14ae5d98ed7a2e2bb36c10d",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
       "comments": [],
       "reviews": []
     }
