@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-10-31T00:47:42.491970+00:00",
+  "timestamp": "2024-11-03T00:51:42.463300+00:00",
   "repo": "boucadair/secure-tacacs-yang",
   "labels": [
     {
@@ -159,6 +159,22 @@
       "body": "",
       "createdAt": "2024-10-23T06:26:08Z",
       "updatedAt": "2024-10-23T06:26:08Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 6,
+      "id": "I_kwDOL_fxvc6cyeik",
+      "title": "Review comments from Tom",
+      "url": "https://github.com/boucadair/secure-tacacs-yang/issues/6",
+      "state": "OPEN",
+      "author": "boucadair",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "> This modules\r\n> /s//\r\n> \r\n> Concretely, this first version\r\n>    of the specification uses a pruning approach rather that a reuse of **eh??\r\n>    the groupings defined in [I-D.ietf-netconf-tls-client-server].\r\n> made sense by the end but a reference to the 'refine's would have helped and an explicit statement as to what is being prunec\r\n> \r\n>      A server instance may be identified by an IPv4 address, IPv6\r\n>       address, or both.\r\n> any precedence thereof?\r\n> \r\n> \r\n>       The same or distinct port numbers may be used per address family.\r\n> perhaps 'different port'\r\n> \r\n>       Both explicit and reference are supported.\r\n> could do with more detail IMHO\r\n> \r\n> \r\n>        \"This module provides configuration of TACACS+ over TLS\r\n>         clients.\r\n> reads slightly oddly IMHO - perhaps\r\n> \r\n>       \"This module provides configuration of TACACS+ clients over TLS ...\r\n>        \r\n>           must 'not(deref(.)/../ks:public-key-format) or '\r\n> I struggle with\r\n> must 'not ... or ...\r\n> because of precedence of operators.  I cannot recall if American mathematicians use the same rues as Europeans.  (I know they differ with 'strictly':-(  A clarifying phrase in the description clauses (lots of) would help.\r\n> \r\n>          type uint16;\r\n>          description\r\n>            \"Specifies the protocol for which a PSK is imported for\r\n>             use.\";\r\n>          reference\r\n>            \"RFC 9258: Importing External Pre-Shared Keys (PSKs) for\r\n>                       TLS 1.3, Section 3 \"; I do not see from the reference how the uint16 is turned into a protocol\r\n> \r\n>          \"A choice between a reference of explicit configuration.\"; /of/or/? in several places around here\r\n> \r\n>                    \"TLS 1.2 is not supported as min TLS version\"; ....\r\n>                    \"TLS 1.2 is not supported as max TLS version\"; reads a bit oddly.  It seems to avoid saying that TLS 1.3 is the only supported version\r\n> \r\n>           \"Indicates that a TLS-level client identity has been\r\n>             configured.\r\n> \r\n> \r\n>             This statement is present so the mandatory descendant do not\r\n>             imply that this node must be configured.\"; reads a bit oddly - I am not clear what it is telling me\r\n> \r\n> \r\n>            default \"1234\"; // to be replaced by TACACS-TLS-PORT from where - is this \r\n>    Port Number: [TBD] in draft-ietf-opsawg-tacacs-tls13-14 ??\r\n> TBD would seem better\r\n> \r\n>    [I-D.ietf-netmod-rfc8407bis].\r\n> IMHO needs to be Normative\r\n> \r\n> \r\n> Tom Petch\r\n",
+      "createdAt": "2024-11-02T14:08:20Z",
+      "updatedAt": "2024-11-02T14:08:20Z",
       "closedAt": null,
       "comments": []
     }
