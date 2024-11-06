@@ -1369,55 +1369,30 @@ module: ietf-system-secure-tacacs
           <p id="section-3-6.2.1">Defines a set credentials that can be globally provisioned and then referenced under specific servers.<a href="#section-3-6.2.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
-<dt id="section-3-6.3">'remote-address':</dt>
+<dt id="section-3-6.3">'domain-name':</dt>
         <dd style="margin-left: 1.5em" id="section-3-6.4">
-          <p id="section-3-6.4.1">Specifies a list of IP address/port numbers that can be used to reach a server instance.<a href="#section-3-6.4.1" class="pilcrow">¶</a></p>
+          <p id="section-3-6.4.1">Provides a domain name of the server per <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-opsawg-tacacs-tls13-14#section-3.3" class="relref">Section 3.3</a> of [<a href="#I-D.ietf-opsawg-tacacs-tls13" class="cite xref">I-D.ietf-opsawg-tacacs-tls13</a>]</span>.<a href="#section-3-6.4.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
-<dt id="section-3-6.5"></dt>
+<dt id="section-3-6.5">'client-identity':</dt>
         <dd style="margin-left: 1.5em" id="section-3-6.6">
-          <p id="section-3-6.6.1">A server instance may be identified by an IPv4 address, IPv6 address, or both.<a href="#section-3-6.6.1" class="pilcrow">¶</a></p>
+          <p id="section-3-6.6.1">Specifies the identity credentials that the client may present when
+establishing a connection to a server. Both explicit and reference are supported.<a href="#section-3-6.6.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
-<dt id="section-3-6.7"></dt>
+<dt id="section-3-6.7">'server-authentication':</dt>
         <dd style="margin-left: 1.5em" id="section-3-6.8">
-          <p id="section-3-6.8.1">One or multiple addresses of the same address family may be provided.<a href="#section-3-6.8.1" class="pilcrow">¶</a></p>
+          <p id="section-3-6.8.1">Specifies how a client authenticates servers. Both explicit and reference are supported.<a href="#section-3-6.8.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
-<dt id="section-3-6.9"></dt>
+<dt id="section-3-6.9">'hello-params':</dt>
         <dd style="margin-left: 1.5em" id="section-3-6.10">
-          <p id="section-3-6.10.1">The same or distinct port numbers may be used per address family.<a href="#section-3-6.10.1" class="pilcrow">¶</a></p>
+          <p id="section-3-6.10.1">Controls TLS versions and cipher suites.<a href="#section-3-6.10.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
-<dt id="section-3-6.11"></dt>
+<dt id="section-3-6.11">'keepalives':</dt>
         <dd style="margin-left: 1.5em" id="section-3-6.12">
-          <p id="section-3-6.12.1">This container takes precedence over "address" and "port" data nodes defined in <span>[<a href="#RFC9105" class="cite xref">RFC9105</a>]</span>.<a href="#section-3-6.12.1" class="pilcrow">¶</a></p>
-</dd>
-        <dd class="break"></dd>
-<dt id="section-3-6.13">'domain-name':</dt>
-        <dd style="margin-left: 1.5em" id="section-3-6.14">
-          <p id="section-3-6.14.1">Provides a domain name of the server per <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-opsawg-tacacs-tls13-14#section-3.3" class="relref">Section 3.3</a> of [<a href="#I-D.ietf-opsawg-tacacs-tls13" class="cite xref">I-D.ietf-opsawg-tacacs-tls13</a>]</span>.<a href="#section-3-6.14.1" class="pilcrow">¶</a></p>
-</dd>
-        <dd class="break"></dd>
-<dt id="section-3-6.15">'client-identity':</dt>
-        <dd style="margin-left: 1.5em" id="section-3-6.16">
-          <p id="section-3-6.16.1">Specifies the identity credentials that the client may present when
-establishing a connection to a server. Both explicit and reference are supported.<a href="#section-3-6.16.1" class="pilcrow">¶</a></p>
-</dd>
-        <dd class="break"></dd>
-<dt id="section-3-6.17">'server-authentication':</dt>
-        <dd style="margin-left: 1.5em" id="section-3-6.18">
-          <p id="section-3-6.18.1">Specifies how a client authenticates servers. Both explicit and reference are supported.<a href="#section-3-6.18.1" class="pilcrow">¶</a></p>
-</dd>
-        <dd class="break"></dd>
-<dt id="section-3-6.19">'hello-params':</dt>
-        <dd style="margin-left: 1.5em" id="section-3-6.20">
-          <p id="section-3-6.20.1">Controls TLS versions and cipher suites.<a href="#section-3-6.20.1" class="pilcrow">¶</a></p>
-</dd>
-        <dd class="break"></dd>
-<dt id="section-3-6.21">'keepalives':</dt>
-        <dd style="margin-left: 1.5em" id="section-3-6.22">
-          <p id="section-3-6.22.1">Providers a set of parameters for testing the aliveness of the server.<a href="#section-3-6.22.1" class="pilcrow">¶</a></p>
+          <p id="section-3-6.12.1">Providers a set of parameters for testing the aliveness of the server.<a href="#section-3-6.12.1" class="pilcrow">¶</a></p>
 </dd>
       <dd class="break"></dd>
 </dl>
@@ -2587,7 +2562,7 @@ module: ietf-system-secure-tacacs
 <a href="#name-acknowledgments" class="section-name selfRef">Acknowledgments</a>
       </h2>
 <p id="appendix-B-1">The document leverages data structures defined in <span>[<a href="#I-D.ietf-netconf-tls-client-server" class="cite xref">I-D.ietf-netconf-tls-client-server</a>]</span>.<a href="#appendix-B-1" class="pilcrow">¶</a></p>
-<p id="appendix-B-2">Thanks to Bo Wu for the review and comments.<a href="#appendix-B-2" class="pilcrow">¶</a></p>
+<p id="appendix-B-2">Thanks to Bo Wu, Joe Clarke, and Tom Petch for the review and comments.<a href="#appendix-B-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="authors-addresses">
