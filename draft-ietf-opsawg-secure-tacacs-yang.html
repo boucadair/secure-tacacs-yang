@@ -1321,11 +1321,6 @@ module: ietf-system-secure-tacacs
        +--rw raw-public-keys! {tlsc:server-auth-raw-public-key}?
        |  ...
        +--rw tls13-epsks?       empty {tlsc:server-auth-tls13-epsk}?
-  augment /sys:system/sys-tcs-plus:tacacs-plus/sys-tcs-plus:server:
-    +--rw remote-address* [address]
-    |  +--rw address        inet:ip-address
-    |  +--rw port-number?   inet:port-number
-    +--rw domain-name?      inet:domain-name
   augment /sys:system/sys-tcs-plus:tacacs-plus/sys-tcs-plus:server
             /sys-tcs-plus:security:
     +--:(tls)
