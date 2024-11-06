@@ -3,7 +3,7 @@ title: "A YANG Model for Terminal Access Controller Access-Control System Plus (
 abbrev: "YANG for TACACS+ over TLS"
 category: info
 
-docname: draft-boucadair-opsawg-secure-tacacs-yang-latest
+docname: draft-ietf-opsawg-secure-tacacs-yang-latest
 submissiontype: IETF  # also: "independent", "editorial", "IAB", or "IRTF"
 number:
 date:
