@@ -7,7 +7,7 @@
 <title>A YANG Model for Terminal Access Controller Access-Control System Plus (TACACS+) over TLS 1.3</title>
 <meta content="Mohamed Boucadair" name="author">
 <meta content="
-       This document defines a YANG module for Terminal Access Controller Access-Control System Plus (TACACS+) over TLS 1.3. This modules augments the YANG Data Model for Terminal Access Controller Access-Control System Plus (TACACS+) defined in the RFC 9105 with TLS-related data nodes. 
+       This document defines a YANG module for Terminal Access Controller Access-Control System Plus (TACACS+) over TLS 1.3. This module augments the YANG Data Model for Terminal Access Controller Access-Control System Plus (TACACS+) defined in the RFC 9105 with TLS-related data nodes. 
     " name="description">
 <meta content="xml2rfc 3.24.0" name="generator">
 <meta content="XXXX" name="keyword">
@@ -1115,7 +1115,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <h1 id="title">A YANG Model for Terminal Access Controller Access-Control System Plus (TACACS+) over TLS 1.3</h1>
 <section id="section-abstract">
       <h2 id="abstract"><a href="#abstract" class="selfRef">Abstract</a></h2>
-<p id="section-abstract-1">This document defines a YANG module for Terminal Access Controller Access-Control System Plus (TACACS+) over TLS 1.3. This modules augments the YANG Data Model for Terminal Access Controller Access-Control System Plus (TACACS+) defined in the RFC 9105 with TLS-related data nodes.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
+<p id="section-abstract-1">This document defines a YANG module for Terminal Access Controller Access-Control System Plus (TACACS+) over TLS 1.3. This module augments the YANG Data Model for Terminal Access Controller Access-Control System Plus (TACACS+) defined in the RFC 9105 with TLS-related data nodes.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
 </section>
 <section class="note rfcEditorRemove" id="section-note.1">
       <h2 id="name-about-this-document">
@@ -1235,7 +1235,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
           <p id="section-1-3.1.1">Discussion Note: RFC 9105bis or keep the current augment design.<a href="#section-1-3.1.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
-<p id="section-1-4">The module leverages the TLS structures defined in <span>[<a href="#I-D.ietf-netconf-tls-client-server" class="cite xref">I-D.ietf-netconf-tls-client-server</a>]</span>. Concretely, this first version of the specification uses a pruning approach rather that a reuse of the groupings defined in <span>[<a href="#I-D.ietf-netconf-tls-client-server" class="cite xref">I-D.ietf-netconf-tls-client-server</a>]</span>.<a href="#section-1-4" class="pilcrow">¶</a></p>
+<p id="section-1-4">The module leverages the TLS structures defined in <span>[<a href="#RFC9645" class="cite xref">RFC9645</a>]</span>. Concretely, this first version of the specification uses a pruning approach rather than a reuse of the groupings defined in <span>[<a href="#RFC9645" class="cite xref">RFC9645</a>]</span>.<a href="#section-1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="conventions-and-definitions">
@@ -2135,8 +2135,12 @@ subtrees and data nodes have particular sensitivities/vulnerabilities:<a href="#
 <span class="refAuthor">Housley, R.</span>, <span class="refAuthor">Hoyland, J.</span>, <span class="refAuthor">Sethi, M.</span>, and <span class="refAuthor">C. A. Wood</span>, <span class="refTitle">"Guidance for External Pre-Shared Key (PSK) Usage in TLS"</span>, <span class="seriesInfo">RFC 9257</span>, <span class="seriesInfo">DOI 10.17487/RFC9257</span>, <time datetime="2022-07" class="refDate">July 2022</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9257">https://www.rfc-editor.org/rfc/rfc9257</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC9258">[RFC9258]</dt>
-      <dd>
+        <dd>
 <span class="refAuthor">Benjamin, D.</span> and <span class="refAuthor">C. A. Wood</span>, <span class="refTitle">"Importing External Pre-Shared Keys (PSKs) for TLS 1.3"</span>, <span class="seriesInfo">RFC 9258</span>, <span class="seriesInfo">DOI 10.17487/RFC9258</span>, <time datetime="2022-07" class="refDate">July 2022</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9258">https://www.rfc-editor.org/rfc/rfc9258</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC9645">[RFC9645]</dt>
+      <dd>
+<span class="refAuthor">Watsen, K.</span>, <span class="refTitle">"YANG Groupings for TLS Clients and TLS Servers"</span>, <span class="seriesInfo">RFC 9645</span>, <span class="seriesInfo">DOI 10.17487/RFC9645</span>, <time datetime="2024-10" class="refDate">October 2024</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9645">https://www.rfc-editor.org/rfc/rfc9645</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 </dl>
 </section>
