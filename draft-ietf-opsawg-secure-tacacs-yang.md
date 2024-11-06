@@ -37,7 +37,7 @@ informative:
 
 --- abstract
 
-This document defines a YANG module for Terminal Access Controller Access-Control System Plus (TACACS+) over TLS 1.3. This modules augments the YANG Data Model for Terminal Access Controller Access-Control System Plus (TACACS+) defined in the RFC 9105 with TLS-related data nodes.
+This document defines a YANG module for Terminal Access Controller Access-Control System Plus (TACACS+) over TLS 1.3. This module augments the YANG Data Model for Terminal Access Controller Access-Control System Plus (TACACS+) defined in the RFC 9105 with TLS-related data nodes.
 
 --- middle
 
@@ -49,7 +49,7 @@ This document defines a YANG module for managing TACACS+ over TLS 1.3 clients {{
 
 > Discussion Note: RFC 9105bis or keep the current augment design.
 
-The module leverages the TLS structures defined in {{!I-D.ietf-netconf-tls-client-server}}. Concretely, this first version of the specification uses a pruning approach rather that a reuse of the groupings defined in {{!I-D.ietf-netconf-tls-client-server}}.
+The module leverages the TLS structures defined in {{!RFC9645}}. Concretely, this first version of the specification uses a pruning approach rather than a reuse of the groupings defined in {{!RFC9645}}.
 
 # Conventions and Definitions
 
