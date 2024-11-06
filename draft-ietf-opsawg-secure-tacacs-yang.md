@@ -90,13 +90,6 @@ The following data nodes are supported:
 'client-credentials' and 'server-credentials':
 : Defines a set credentials that can be globally provisioned and then referenced under specific servers.
 
-'remote-address':
-: Specifies a list of IP address/port numbers that can be used to reach a server instance.
-: A server instance may be identified by an IPv4 address, IPv6 address, or both.
-: One or multiple addresses of the same address family may be provided.
-: The same or distinct port numbers may be used per address family.
-: This container takes precedence over "address" and "port" data nodes defined in {{!RFC9105}}.
-
 'domain-name':
 : Provides a domain name of the server per {{Section 3.3 of !I-D.ietf-opsawg-tacacs-tls13}}.
 
@@ -209,4 +202,4 @@ The full tree structure is shown below:
 
 The document leverages data structures defined in {{!I-D.ietf-netconf-tls-client-server}}.
 
-Thanks to Bo Wu for the review and comments.
+Thanks to Bo Wu, Joe Clarke, and Tom Petch for the review and comments.
