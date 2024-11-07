@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-11-05T00:45:42.247317+00:00",
+  "timestamp": "2024-11-07T00:45:49.559236+00:00",
   "repo": "boucadair/secure-tacacs-yang",
   "labels": [
     {
@@ -213,24 +213,26 @@
       "id": "PR_kwDOL_fxvc5_oQGf",
       "title": "Remove tcp-server-info",
       "url": "https://github.com/boucadair/secure-tacacs-yang/pull/5",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "boucadair",
       "authorAssociation": "OWNER",
       "assignees": [],
       "labels": [],
       "body": "",
       "createdAt": "2024-10-23T14:38:36Z",
-      "updatedAt": "2024-10-23T14:38:36Z",
+      "updatedAt": "2024-11-06T17:09:46Z",
       "baseRepository": "boucadair/secure-tacacs-yang",
       "baseRefName": "main",
       "baseRefOid": "fb0b890a104ece863f7275d35c877e2ec06301e4",
       "headRepository": "boucadair/secure-tacacs-yang",
       "headRefName": "Remove-tcp-server-info",
       "headRefOid": "8f6662021ef8c32ce14ae5d98ed7a2e2bb36c10d",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2024-11-06T17:09:46Z",
+      "mergedAt": "2024-11-06T17:09:46Z",
+      "mergedBy": "boucadair",
+      "mergeCommit": {
+        "oid": "c6fd91055fbd55fe44590b6aa630766398ca74d0"
+      },
       "comments": [],
       "reviews": []
     }
