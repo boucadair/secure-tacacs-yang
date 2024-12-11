@@ -294,8 +294,6 @@ Table of Contents
    The module also cites [RFC9257], [RFC9258], [RFC9258], and [RFC6520].
 
    <CODE BEGINS> file "ietf-system-tacacs-plus@2024-12-11.yang"
-   =============== NOTE: '\' line wrapping per RFC 8792 ================
-
    module ietf-system-tacacs-plus {
      yang-version 1.1;
      namespace "urn:ietf:params:xml:ns:yang:ietf-system-tacacs-plus";
@@ -393,7 +391,7 @@ Table of Contents
 
      revision 2024-12-11 {
        description
-         "Revision with the following changes: TBC.";
+         "This revision adds TLS support";
        reference
          "RFC XXXX: A YANG Model for Terminal Access Controller
                     Access-Control System Plus (TACACS+)";
@@ -794,15 +792,15 @@ Table of Contents
          refine "tls-versions/min" {
            must "not(derived-from-or-self(current(), "
               + "'tlscmn:tls12'))" {
-             error-message "TLS 1.2 is not supported as min TLS version\
-                                                                      ";
+             error-message
+               "TLS 1.2 is not supported as min TLS version";
            }
          }
          refine "tls-versions/max" {
            must "not(derived-from-or-self(current(), "
               + "'tlscmn:tls12'))" {
-             error-message "TLS 1.2 is not supported as max TLS version\
-                                                                      ";
+             error-message
+               "TLS 1.2 is not supported as max TLS version";
            }
          }
        }
@@ -814,11 +812,11 @@ Table of Contents
           consideration for how an underlying TCP session is
           established.";
        container client-identity {
-         presence "Indicates that a TLS-level client identity has been
-                   configured.
-                   This statement is present so the mandatory \
-                                                       descendant do not
-                   imply that this node must be configured.";
+         presence
+           "Indicates that a TLS-level client identity has been
+            configured.
+            This statement is present so the mandatory descendant do
+            not imply that this node must be configured.";
          description
            "Identity credentials the TLS client may present when
             establishing a connection to a TLS server.";
@@ -853,15 +851,15 @@ Table of Contents
          refine "hello-params/tls-versions/min" {
            must "not(derived-from-or-self(current(), "
               + "'tlscmn:tls12'))" {
-             error-message "TLS 1.2 is not supported as min TLS version\
-                                                                      ";
+             error-message
+               "TLS 1.2 is not supported as min TLS version";
            }
          }
          refine "hello-params/tls-versions/max" {
            must "not(derived-from-or-self(current(), "
               + "'tlscmn:tls12'))" {
-             error-message "TLS 1.2 is not supported as max TLS version\
-                                                                      ";
+             error-message
+               "TLS 1.2 is not supported as max TLS version";
            }
          }
          refine "keepalives" {
@@ -877,9 +875,10 @@ Table of Contents
          must "not(derived-from-or-self(../sys:authentication"
             + "/sys:user-authentication-order, 'tacacs-plus'))"
             + " or bit-is-set(server/server-type,'authentication')" {
-           error-message "When 'tacacs-plus' is used as a system"
-                       + " authentication method, a TACACS+"
-                       + " authentication server must be configured.";
+           error-message
+             "When 'tacacs-plus' is used as a system authentication
+              method, a TACACS+ authentication server must be
+              configured.";
            description
              "When 'tacacs-plus' is used as an authentication method,
               a TACACS+ server must be configured.";
