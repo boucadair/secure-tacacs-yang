@@ -4,21 +4,24 @@
 
 Operations and Management Area Working Group           M. Boucadair, Ed.
 Internet-Draft                                                    Orange
-Intended status: Informational                           6 November 2024
-Expires: 10 May 2025
+Intended status: Informational                          11 December 2024
+Expires: 14 June 2025
 
 
- A YANG Model for Terminal Access Controller Access-Control System Plus
-                         (TACACS+) over TLS 1.3
+ A YANG Data Model for Terminal Access Controller Access-Control System
+                             Plus (TACACS+)
               draft-ietf-opsawg-secure-tacacs-yang-latest
 
 Abstract
 
-   This document defines a YANG module for Terminal Access Controller
-   Access-Control System Plus (TACACS+) over TLS 1.3.  This module
-   augments the YANG Data Model for Terminal Access Controller Access-
-   Control System Plus (TACACS+) defined in the RFC 9105 with TLS-
-   related data nodes.
+   This document defines a Terminal Access Controller Access-Control
+   System Plus (TACACS+) client YANG module that augments the System
+   Management data model, defined in RFC 7317, to allow devices to make
+   use of TACACS+ servers for centralized Authentication, Authorization,
+   and Accounting (AAA).  Specifically, this document defines a YANG
+   module for TACACS+ over TLS 1.3.
+
+   This document obsoletes RFC 9105
 
 About This Document
 
@@ -54,7 +57,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 10 May 2025.
+   This Internet-Draft will expire on 14 June 2025.
 
 Copyright Notice
 
@@ -74,8 +77,9 @@ Table of Contents
 
    1.  Introduction
    2.  Conventions and Definitions
-   3.  Module Tree Structure
-   4.  YANG Module
+     2.1.  Tree Diagrams
+   3.  Design of the TACACS+ Data Model
+   4.  TACACS+ Client Module
    5.  Security Considerations
    6.  IANA Considerations
    7.  References
@@ -95,16 +99,12 @@ Table of Contents
    deployment scenarios with centralized authentication, authorization,
    and accounting servers.
 
-   This document defines a YANG module for managing TACACS+ over TLS 1.3
-   clients [I-D.ietf-opsawg-tacacs-tls13].  The module is designed as an
-   augmentation to the "ietf-system-tacacs-plus" module specified in
-   [RFC9105].
+   This document defines a YANG module for managing TACACS+ client,
+   including TACACS+ over TLS 1.3 clients
+   [I-D.ietf-opsawg-tacacs-tls13].  This document obsoletes [RFC9105].
 
-      Discussion Note: RFC 9105bis or keep the current augment design.
-
-   The module leverages the TLS structures defined in [RFC9645].
-   Concretely, this first version of the specification uses a pruning
-   approach rather than a reuse of the groupings defined in [RFC9645].
+   The YANG module in this document conforms to the Network Management
+   Datastore Architecture (NMDA) defined in [RFC8342].
 
 2.  Conventions and Definitions
 
@@ -114,48 +114,71 @@ Table of Contents
    BCP 14 [RFC2119] [RFC8174] when, and only when, they appear in all
    capitals, as shown here.
 
-   The meanings of the symbols in the YANG tree diagrams are defined in
-   [RFC8340].
+   The following terms are defined in [RFC6241] and are used in this
+   specification:
+
+   *  configuration data
+
+   *  state data
+
+   The following terms are defined in [RFC7950] and are used in this
+   specification:
+
+   *  augment
+
+   *  data model
+
+   *  data node
+
+   The terminology for describing YANG data models is found in
+   [RFC7950].
 
    The document uses the terms defined in Section 2 of
    [I-D.ietf-opsawg-tacacs-tls13] and Section 3 of [RFC8907].
 
-   'client' refers to TLS TACACS+ client, while 'server' refers to TLS
-   TACACS+ server.
+   'client' refers to TACACS+ client, while 'server' refers to TACACS+
+   server.
 
-      Note to the RFC Editor: Please update the following:
+2.1.  Tree Diagrams
 
-      -  AAAA --> the assigned RFC number for
-         [I-D.ietf-netconf-crypto-types]
+   The tree diagram used in this document follows the notation defined
+   in [RFC8340].
 
-      -  BBBB --> the assigned RFC number for
-         [I-D.ietf-netconf-trust-anchors]
+3.  Design of the TACACS+ Data Model
 
-      -  CCCC --> the assigned RFC number for
-         [I-D.ietf-netconf-keystore]
+   This module is used to configure a TACACS+ client on a device to
+   support deployment scenarios with centralized authentication,
+   authorization, and accounting servers.  Authentication is used to
+   validate a user's username and password, authorization allows the
+   user to access and execute commands at various privilege levels
+   assigned to the user, and accounting keeps track of the activity of a
+   user who has accessed the device.
 
-      -  FFFF --> the assigned RFC number for
-         [I-D.ietf-netconf-tls-client-server]
+   The ietf-system-tacacs-plus module augments the "/sys:system" path
+   defined in the ietf-system module with the contents of the "tacacs-
+   plus" grouping.  Therefore, a device can use local, RADIUS, or
+   TACACS+ authentication to validate users who attempt to access the
+   router by several mechanisms, e.g., a command line interface or a
+   web-based user interface.
 
-      -  XXXX --> the assigned RFC number for this document.
+   The "server" list, which is directly under the "tacacs-plus"
+   container, holds a list of TACACS+ servers and uses server-type to
+   distinguish between Authentication, Authorization, and Accounting
+   (AAA) services.  The list of servers is for redundancy.
 
-3.  Module Tree Structure
+   When there are multiple interfaces connected to the TACACS+ client or
+   server, the source address of outgoing TACACS+ packets could be
+   specified, or the source address could be specified through the
+   interface IP address setting or derived from the outbound interface
+   from the local Forwarding Information Base (FIB).  For the TACACS+
+   server located in a Virtual Private Network (VPN), a VPN Routing and
+   Forwarding (VRF) instance needs to be specified.
 
-   The module is designed to cover the following key requirements
-   specified in [I-D.ietf-opsawg-tacacs-tls13]:
+   The "statistics" container under the "server list" is a collection of
+   read-only counters for sent and received messages from a configured
+   server.
 
-   *  TLS 1.3 [RFC8446] MUST be used for transport.
-
-   *  Earlier TLS versions TLS MUST NOT be used.
-
-   *  The cipher suites offered or accepted SHOULD be configurable.
-
-   *  Implementations MAY support Raw Public Keys and PSK.
-
-   *  Implementations MUST support the ability to configure the server's
-      domain name
-
-   The abstract tree structure is shown below:
+   The YANG module for TACACS+ client has the following structure:
 
    module: ietf-system-secure-tacacs
 
@@ -220,6 +243,20 @@ Table of Contents
              +--rw cipher-suites
                 +--rw cipher-suite*   tlscsa:tls-cipher-suite-algorithm
 
+   The module is designed to cover the following key requirements
+   specified in [I-D.ietf-opsawg-tacacs-tls13]:
+
+   *  TLS 1.3 [RFC8446] MUST be used for transport.
+
+   *  Earlier TLS versions TLS MUST NOT be used.
+
+   *  The cipher suites offered or accepted SHOULD be configurable.
+
+   *  Implementations MAY support Raw Public Keys and PSK.
+
+   *  Implementations MUST support the ability to configure the server's
+      domain name
+
    The following data nodes are supported:
 
    'client-credentials' and 'server-credentials':  Defines a set
@@ -241,18 +278,16 @@ Table of Contents
    'keepalives':  Providers a set of parameters for testing the
       aliveness of the server.
 
-4.  YANG Module
+4.  TACACS+ Client Module
 
    This module uses types and groupings defined in [RFC6991], [RFC8341],
-   [I-D.ietf-netconf-crypto-types], [I-D.ietf-netconf-trust-anchors],
-   [I-D.ietf-netconf-keystore], and
-   [I-D.ietf-netconf-tls-client-server].
+   [RFC8343], [RFC8529], [RFC9640], [RFC9641], [RFC9642], and [RFC9645].
 
-   The module augments [RFC9105], which is also an augment of [RFC7317].
+   The module augments [RFC7317].
 
    The module also cites [RFC9257], [RFC9258], [RFC9258], and [RFC6520].
 
-   <CODE BEGINS> file "ietf-system-secure-tacacs@2024-05-23.yang"
+   <CODE BEGINS> file "ietf-system-tacacs-plus@2024-12-11.yang"
    module ietf-system-secure-tacacs {
      yang-version 1.1;
      namespace "urn:ietf:params:xml:ns:yang:ietf-system-secure-tacacs";
@@ -836,8 +871,21 @@ Table of Contents
    Specifically, the following subtrees and data nodes have particular
    sensitivities/vulnerabilities:
 
-    'xxx':
-    :  xxxx.
+   /system/tacacs-plus/server:  This list contains the data nodes used
+      to control the TACACS+ servers used by the device.  Unauthorized
+      access to this list could enable an attacker to assume complete
+      control over the device by pointing to a compromised TACACS+
+      server, or to modify the counters to hide attacks against the
+      device.
+
+   /system/tacacs-plus/server/shared-secret:  This leaf controls the key
+      known to both the TACACS+ client and server.  Unauthorized access
+      to this leaf could make the device vulnerable to attacks;
+      therefore, it has been restricted using the "default-deny-all"
+      access control defined in [RFC8341].  When setting, it is highly
+      recommended that the leaf is at least 32 characters long and
+      sufficiently complex with a mix of different character types,
+      i.e., upper case, lower case, numeric, and punctuation.
 
    Some of the readable data nodes in this YANG module may be considered
    sensitive or vulnerable in some network environments.  It is thus
@@ -858,10 +906,10 @@ Table of Contents
 
 6.  IANA Considerations
 
-   IANA is requested to register the following URI in the "ns"
-   subregistry within the "IETF XML Registry" [RFC3688]:
+   IANA is requested to update the following URI in the "ns" subregistry
+   within the "IETF XML Registry" [RFC3688]:
 
-      URI:  urn:ietf:params:xml:ns:yang:ietf-system-secure-tacacs
+      URI:  urn:ietf:params:xml:ns:yang:ietf-system-tacacs-plus
       Registrant Contact:  The IESG.
       XML:  N/A; the requested URI is an XML namespace.
 
@@ -869,29 +917,15 @@ Table of Contents
    Module Names" registry [RFC6020] within the "YANG Parameters"
    registry group:
 
-      Name:  ietf-system-secure-tacacs
-      Namespace:  urn:ietf:params:xml:ns:yang:ietf-system-secure-tacacs
-      Prefix:  secure-tacacs
+      Name:  ietf-system-tacacs-plus
+      Namespace:  urn:ietf:params:xml:ns:yang:ietf-system-tacacs-plus
+      Prefix:  sys-tcs-plus
       Maintained by IANA?  N
       Reference:  RFC XXXX
 
 7.  References
 
 7.1.  Normative References
-
-   [I-D.ietf-netconf-crypto-types]
-              Watsen, K., "YANG Data Types and Groupings for
-              Cryptography", Work in Progress, Internet-Draft, draft-
-              ietf-netconf-crypto-types-34, 16 March 2024,
-              <https://datatracker.ietf.org/doc/html/draft-ietf-netconf-
-              crypto-types-34>.
-
-   [I-D.ietf-netconf-keystore]
-              Watsen, K., "A YANG Data Model for a Keystore and Keystore
-              Operations", Work in Progress, Internet-Draft, draft-ietf-
-              netconf-keystore-35, 16 March 2024,
-              <https://datatracker.ietf.org/doc/html/draft-ietf-netconf-
-              keystore-35>.
 
    [I-D.ietf-netconf-tls-client-server]
               Watsen, K., "YANG Groupings for TLS Clients and TLS
@@ -900,20 +934,13 @@ Table of Contents
               <https://datatracker.ietf.org/doc/html/draft-ietf-netconf-
               tls-client-server-41>.
 
-   [I-D.ietf-netconf-trust-anchors]
-              Watsen, K., "A YANG Data Model for a Truststore", Work in
-              Progress, Internet-Draft, draft-ietf-netconf-trust-
-              anchors-28, 16 March 2024,
-              <https://datatracker.ietf.org/doc/html/draft-ietf-netconf-
-              trust-anchors-28>.
-
    [I-D.ietf-opsawg-tacacs-tls13]
               Dahm, T., Heasley, J., dcmgash@cisco.com, and A. Ota,
               "Terminal Access Controller Access-Control System Plus
               (TACACS+) over TLS 1.3", Work in Progress, Internet-Draft,
-              draft-ietf-opsawg-tacacs-tls13-14, 16 October 2024,
+              draft-ietf-opsawg-tacacs-tls13-15, 18 November 2024,
               <https://datatracker.ietf.org/doc/html/draft-ietf-opsawg-
-              tacacs-tls13-14>.
+              tacacs-tls13-15>.
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
@@ -952,6 +979,10 @@ Table of Contents
               System Management", RFC 7317, DOI 10.17487/RFC7317, August
               2014, <https://www.rfc-editor.org/rfc/rfc7317>.
 
+   [RFC7950]  Bjorklund, M., Ed., "The YANG 1.1 Data Modeling Language",
+              RFC 7950, DOI 10.17487/RFC7950, August 2016,
+              <https://www.rfc-editor.org/rfc/rfc7950>.
+
    [RFC8040]  Bierman, A., Bjorklund, M., and K. Watsen, "RESTCONF
               Protocol", RFC 8040, DOI 10.17487/RFC8040, January 2017,
               <https://www.rfc-editor.org/rfc/rfc8040>.
@@ -965,14 +996,23 @@ Table of Contents
               DOI 10.17487/RFC8341, March 2018,
               <https://www.rfc-editor.org/rfc/rfc8341>.
 
+   [RFC8342]  Bjorklund, M., Schoenwaelder, J., Shafer, P., Watsen, K.,
+              and R. Wilton, "Network Management Datastore Architecture
+              (NMDA)", RFC 8342, DOI 10.17487/RFC8342, March 2018,
+              <https://www.rfc-editor.org/rfc/rfc8342>.
+
+   [RFC8343]  Bjorklund, M., "A YANG Data Model for Interface
+              Management", RFC 8343, DOI 10.17487/RFC8343, March 2018,
+              <https://www.rfc-editor.org/rfc/rfc8343>.
+
    [RFC8446]  Rescorla, E., "The Transport Layer Security (TLS) Protocol
               Version 1.3", RFC 8446, DOI 10.17487/RFC8446, August 2018,
               <https://www.rfc-editor.org/rfc/rfc8446>.
 
-   [RFC9105]  Wu, B., Ed., Zheng, G., and M. Wang, Ed., "A YANG Data
-              Model for Terminal Access Controller Access-Control System
-              Plus (TACACS+)", RFC 9105, DOI 10.17487/RFC9105, August
-              2021, <https://www.rfc-editor.org/rfc/rfc9105>.
+   [RFC8529]  Berger, L., Hopps, C., Lindem, A., Bogdanovic, D., and X.
+              Liu, "YANG Data Model for Network Instances", RFC 8529,
+              DOI 10.17487/RFC8529, March 2019,
+              <https://www.rfc-editor.org/rfc/rfc8529>.
 
    [RFC9257]  Housley, R., Hoyland, J., Sethi, M., and C. A. Wood,
               "Guidance for External Pre-Shared Key (PSK) Usage in TLS",
@@ -984,6 +1024,18 @@ Table of Contents
               DOI 10.17487/RFC9258, July 2022,
               <https://www.rfc-editor.org/rfc/rfc9258>.
 
+   [RFC9640]  Watsen, K., "YANG Data Types and Groupings for
+              Cryptography", RFC 9640, DOI 10.17487/RFC9640, October
+              2024, <https://www.rfc-editor.org/rfc/rfc9640>.
+
+   [RFC9641]  Watsen, K., "A YANG Data Model for a Truststore",
+              RFC 9641, DOI 10.17487/RFC9641, October 2024,
+              <https://www.rfc-editor.org/rfc/rfc9641>.
+
+   [RFC9642]  Watsen, K., "A YANG Data Model for a Keystore", RFC 9642,
+              DOI 10.17487/RFC9642, October 2024,
+              <https://www.rfc-editor.org/rfc/rfc9642>.
+
    [RFC9645]  Watsen, K., "YANG Groupings for TLS Clients and TLS
               Servers", RFC 9645, DOI 10.17487/RFC9645, October 2024,
               <https://www.rfc-editor.org/rfc/rfc9645>.
@@ -994,9 +1046,9 @@ Table of Contents
               Bierman, A., Boucadair, M., and Q. Wu, "Guidelines for
               Authors and Reviewers of Documents Containing YANG Data
               Models", Work in Progress, Internet-Draft, draft-ietf-
-              netmod-rfc8407bis-20, 21 October 2024,
+              netmod-rfc8407bis-21, 13 November 2024,
               <https://datatracker.ietf.org/doc/html/draft-ietf-netmod-
-              rfc8407bis-20>.
+              rfc8407bis-21>.
 
    [RFC8340]  Bjorklund, M. and L. Berger, Ed., "YANG Tree Diagrams",
               BCP 215, RFC 8340, DOI 10.17487/RFC8340, March 2018,
@@ -1007,6 +1059,11 @@ Table of Contents
               System Plus (TACACS+) Protocol", RFC 8907,
               DOI 10.17487/RFC8907, September 2020,
               <https://www.rfc-editor.org/rfc/rfc8907>.
+
+   [RFC9105]  Wu, B., Ed., Zheng, G., and M. Wang, Ed., "A YANG Data
+              Model for Terminal Access Controller Access-Control System
+              Plus (TACACS+)", RFC 9105, DOI 10.17487/RFC9105, August
+              2021, <https://www.rfc-editor.org/rfc/rfc9105>.
 
 Appendix A.  Full Tree
 
@@ -1399,8 +1456,7 @@ Appendix A.  Full Tree
 
 Acknowledgments
 
-   The document leverages data structures defined in
-   [I-D.ietf-netconf-tls-client-server].
+   The document leverages data structures defined in [RFC9645].
 
    Thanks to Bo Wu, Joe Clarke, and Tom Petch for the review and
    comments.
