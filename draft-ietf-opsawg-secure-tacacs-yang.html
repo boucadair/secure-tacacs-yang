@@ -1425,12 +1425,12 @@ module: ietf-system-tacacs-plus
 <dt id="section-3-11.5">'client-identity':</dt>
         <dd style="margin-left: 1.5em" id="section-3-11.6">
           <p id="section-3-11.6.1">Specifies the identity credentials that the client may present when
-establishing a connection to a server. Both explicit and reference are supported.<a href="#section-3-11.6.1" class="pilcrow">¶</a></p>
+establishing a connection to a server. Client identities can be configured at the top level and then referenced for specific server instances. Alternatively, client identities can be configured explicitely under each server instance.<a href="#section-3-11.6.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
 <dt id="section-3-11.7">'server-authentication':</dt>
         <dd style="margin-left: 1.5em" id="section-3-11.8">
-          <p id="section-3-11.8.1">Specifies how a client authenticates servers. Both explicit and reference are supported.<a href="#section-3-11.8.1" class="pilcrow">¶</a></p>
+          <p id="section-3-11.8.1">Specifies how a client authenticates servers. Server credentials can be configured at the top level and then referenced for specific server instances. Alternatively, client identities can be configured explicitely under each server instance.<a href="#section-3-11.8.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
 <dt id="section-3-11.9">'hello-params':</dt>
