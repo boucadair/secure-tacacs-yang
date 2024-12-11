@@ -16,13 +16,6 @@ keyword:
  - XXXX
  - XXXX
  - XXXX
-venue:
-  group: "Operations and Management Area Working Group"
-  type: "Working Group"
-  mail: "opsawg@ietf.org"
-  arch: "https://mailarchive.ietf.org/arch/browse/opsawg/"
-  github: "boucadair/secure-tacacs-yang"
-  latest: "https://boucadair.github.io/secure-tacacs-yang/draft-boucadair-opsawg-secure-tacacs-yang.html"
 
 author:
  -
@@ -30,7 +23,18 @@ author:
     organization: Orange
     role: editor
     email: mohamed.boucadair@orange.com
-
+ -
+    fullname: Bo Wu
+    organization: Huawei Technologies
+    email: mlana.wubo@huawei.com
+ -
+    fullname: Guangying Zheng
+    organization: Huawei Technologies
+    email: zhengguangying@huawei.com
+ -
+    fullname: Michael Wang
+    organization: Huawei Technologies
+    email: wangzitao@huawei.com
 normative:
 
 informative:
@@ -56,6 +60,14 @@ This document defines a YANG module for managing TACACS+ client, including TACAC
 
 The YANG module in this document conforms to the Network Management
    Datastore Architecture (NMDA) defined in {{!RFC8342}}.
+
+## Changes Since RFC 9105
+
+   The following changes have been made to the guidelines published in
+   {{?RFC8407}}:
+
+   * Add support for TLS
+
 
 # Conventions and Definitions
 
