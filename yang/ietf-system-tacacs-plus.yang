@@ -108,6 +108,12 @@ module ietf-system-tacacs-plus {
                  Access-Control System Plus (TACACS+)";
   }
 
+  feature credential-reference {
+    description
+      "Indicates whether service credentials references are
+       supported.";
+  }
+
   identity tacacs-plus {
     base sys:authentication-method;
     description
@@ -590,6 +596,7 @@ module ietf-system-tacacs-plus {
       description
         "Container for TACACS+ configurations and operations.";
       list client-credentials {
+        if-feature credential-reference;
         key "id";
         description
           "Identity credentials the TLS client may present when
@@ -604,6 +611,7 @@ module ietf-system-tacacs-plus {
         uses client-identity;
       }
       list server-credentials {
+        if-feature credential-reference;
         key "id";
         description
           "Identity credentials the TLS client may present when
