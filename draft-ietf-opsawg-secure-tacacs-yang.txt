@@ -1107,9 +1107,8 @@ Table of Contents
 
    This YANG module uses groupings from other YANG modules that define
    nodes that may be considered sensitive or vulnerable in network
-   environments.  Refer to Section 5.3 of
-   [I-D.ietf-netconf-tls-client-server] for information as to which
-   nodes may be considered sensitive or vulnerable in network
+   environments.  Refer to Section 5.3 of [RFC9645.] for information as
+   to which nodes may be considered sensitive or vulnerable in network
    environments.
 
 6.  IANA Considerations
@@ -1134,13 +1133,6 @@ Table of Contents
 7.  References
 
 7.1.  Normative References
-
-   [I-D.ietf-netconf-tls-client-server]
-              Watsen, K., "YANG Groupings for TLS Clients and TLS
-              Servers", Work in Progress, Internet-Draft, draft-ietf-
-              netconf-tls-client-server-41, 16 March 2024,
-              <https://datatracker.ietf.org/doc/html/draft-ietf-netconf-
-              tls-client-server-41>.
 
    [I-D.ietf-opsawg-tacacs-tls13]
               Dahm, T., Heasley, J., dcmgash@cisco.com, and A. Ota,
@@ -1232,6 +1224,10 @@ Table of Contents
               <https://www.rfc-editor.org/rfc/rfc9642>.
 
    [RFC9645]  Watsen, K., "YANG Groupings for TLS Clients and TLS
+              Servers", RFC 9645, DOI 10.17487/RFC9645, October 2024,
+              <https://www.rfc-editor.org/rfc/rfc9645>.
+
+   [RFC9645.] Watsen, K., "YANG Groupings for TLS Clients and TLS
               Servers", RFC 9645, DOI 10.17487/RFC9645, October 2024,
               <https://www.rfc-editor.org/rfc/rfc9645>.
 
