@@ -1,7 +1,7 @@
 ---
 title: "A YANG Data Model for Terminal Access Controller Access-Control System Plus (TACACS+)"
 abbrev: "YANG for TACACS+ over TLS"
-category: info
+category: std
 obsoletes: 9105
 
 docname: draft-ietf-opsawg-secure-tacacs-yang-latest
