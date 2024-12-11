@@ -269,8 +269,9 @@ module ietf-system-tacacs-plus {
        or provisioned out-of-band, i.e., not from a TLS
        connection.  An EPSK is a tuple of (Base Key,
        External Identity, Hash).  When PSKs are provisioned
-       out of band, the PSK identity and the KDF hash algorithm
-       to be used with the PSK must also be provisioned.";
+       out of band, the PSK identity and the Key Derivation
+       Function (KDF) hash algorithm to be used with the PSK
+       must also be provisioned.";
     reference
       "RFC 8446: The Transport Layer Security (TLS) Protocol
                  Version 1.3, Section 4.2.11
@@ -408,10 +409,11 @@ module ietf-system-tacacs-plus {
        Any combination of credentials is additive and unordered.";
     nacm:default-deny-write;
     container ca-certs {
-      presence "Indicates that CA certificates have been configured.
-                This statement is present so the mandatory descendant
-                nodes do not imply that this node must be
-                configured.";
+      presence 
+        "Indicates that Certification Authority (CA) certificates 
+         have been configured. 
+         This statement is present so the mandatory descendant
+         nodes do not imply that this node must be configured.";
       description
         "A set of CA certificates used by the TLS client to
          authenticate TLS server certificates.
@@ -422,10 +424,11 @@ module ietf-system-tacacs-plus {
       uses ts:inline-or-truststore-certs-grouping;
     }
     container ee-certs {
-      presence "Indicates that EE certificates have been configured.
-                This statement is present so the mandatory descendant
-                nodes do not imply that this node must be
-                configured.";
+      presence
+        "Indicates that End Entity (EE) certificates have been
+         configured.
+         This statement is present so the mandatory descendant
+         nodes do not imply that this node must be configured.";
       description
         "A set of server certificates (i.e., end entity certificates)
          used by the TLS client to authenticate certificates
