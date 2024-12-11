@@ -4,9 +4,9 @@
 
 Operations and Management Area Working Group           M. Boucadair, Ed.
 Internet-Draft                                                    Orange
-Intended status: Informational                                     B. Wu
-Expires: 14 June 2025                                           G. Zheng
-                                                                 M. Wang
+Obsoletes: 9105 (if approved)                                      B. Wu
+Intended status: Informational                                  G. Zheng
+Expires: 14 June 2025                                            M. Wang
                                                      Huawei Technologies
                                                         11 December 2024
 
@@ -24,7 +24,7 @@ Abstract
    and Accounting (AAA).  Specifically, this document defines a YANG
    module for TACACS+ over TLS 1.3.
 
-   This document obsoletes RFC 9105
+   This document obsoletes RFC 9105.
 
 Status of This Memo
 
@@ -280,7 +280,7 @@ Table of Contents
    *  Implementations MUST support the ability to configure the server's
       domain name
 
-   The following data nodes are supported:
+   The following new data nodes are supported compared to [RFC9105]:
 
    'client-credentials' and 'server-credentials':  Defines a set
       credentials that can be globally provisioned and then referenced
@@ -1066,16 +1066,14 @@ Table of Contents
 
 5.  Security Considerations
 
-   This section uses the template described in Section 3.7 of
-   [I-D.ietf-netmod-rfc8407bis].
+   This section is modeled after the template described in Section 3.7
+   of [I-D.ietf-netmod-rfc8407bis].
 
-   The YANG module specified in this document defines schema for data
-   that is designed to be accessed via network management protocols such
-   as NETCONF [RFC6241] or RESTCONF [RFC8040].  The lowest NETCONF layer
-   is the secure transport layer, and the mandatory-to-implement secure
-   transport is Secure Shell (SSH) [RFC6242].  The lowest RESTCONF layer
-   is HTTPS, and the mandatory-to-implement secure transport is TLS
-   [RFC8446].
+   The "ietf-ac-common" YANG module defines a data model that is
+   designed to be accessed via YANG-based management protocols, such as
+   NETCONF [RFC6241] and RESTCONF [RFC8040].  These protocols have to
+   use a secure transport layer (e.g., SSH [RFC4252], TLS [RFC8446], and
+   QUIC [RFC9000]) and have to use mutual authentication.
 
    The Network Configuration Access Control Model (NACM) [RFC8341]
    provides the means to restrict access for particular NETCONF or
@@ -1181,10 +1179,6 @@ Table of Contents
               (NETCONF)", RFC 6241, DOI 10.17487/RFC6241, June 2011,
               <https://www.rfc-editor.org/rfc/rfc6241>.
 
-   [RFC6242]  Wasserman, M., "Using the NETCONF Protocol over Secure
-              Shell (SSH)", RFC 6242, DOI 10.17487/RFC6242, June 2011,
-              <https://www.rfc-editor.org/rfc/rfc6242>.
-
    [RFC6520]  Seggelmann, R., Tuexen, M., and M. Williams, "Transport
               Layer Security (TLS) and Datagram Transport Layer Security
               (DTLS) Heartbeat Extension", RFC 6520,
@@ -1202,10 +1196,6 @@ Table of Contents
    [RFC7950]  Bjorklund, M., Ed., "The YANG 1.1 Data Modeling Language",
               RFC 7950, DOI 10.17487/RFC7950, August 2016,
               <https://www.rfc-editor.org/rfc/rfc7950>.
-
-   [RFC8040]  Bierman, A., Bjorklund, M., and K. Watsen, "RESTCONF
-              Protocol", RFC 8040, DOI 10.17487/RFC8040, January 2017,
-              <https://www.rfc-editor.org/rfc/rfc8040>.
 
    [RFC8174]  Leiba, B., "Ambiguity of Uppercase vs Lowercase in RFC
               2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
@@ -1270,6 +1260,14 @@ Table of Contents
               <https://datatracker.ietf.org/doc/html/draft-ietf-netmod-
               rfc8407bis-21>.
 
+   [RFC4252]  Ylonen, T. and C. Lonvick, Ed., "The Secure Shell (SSH)
+              Authentication Protocol", RFC 4252, DOI 10.17487/RFC4252,
+              January 2006, <https://www.rfc-editor.org/rfc/rfc4252>.
+
+   [RFC8040]  Bierman, A., Bjorklund, M., and K. Watsen, "RESTCONF
+              Protocol", RFC 8040, DOI 10.17487/RFC8040, January 2017,
+              <https://www.rfc-editor.org/rfc/rfc8040>.
+
    [RFC8340]  Bjorklund, M. and L. Berger, Ed., "YANG Tree Diagrams",
               BCP 215, RFC 8340, DOI 10.17487/RFC8340, March 2018,
               <https://www.rfc-editor.org/rfc/rfc8340>.
@@ -1284,6 +1282,11 @@ Table of Contents
               System Plus (TACACS+) Protocol", RFC 8907,
               DOI 10.17487/RFC8907, September 2020,
               <https://www.rfc-editor.org/rfc/rfc8907>.
+
+   [RFC9000]  Iyengar, J., Ed. and M. Thomson, Ed., "QUIC: A UDP-Based
+              Multiplexed and Secure Transport", RFC 9000,
+              DOI 10.17487/RFC9000, May 2021,
+              <https://www.rfc-editor.org/rfc/rfc9000>.
 
    [RFC9105]  Wu, B., Ed., Zheng, G., and M. Wang, Ed., "A YANG Data
               Model for Terminal Access Controller Access-Control System
