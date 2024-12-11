@@ -1823,6 +1823,18 @@ Appendix A.  Full Tree
              +--rw single-connection?             boolean
              +--rw timeout?                       uint16
              +--ro statistics
+             |  +--ro discontinuity-time     yang:date-and-time
+             |  +--ro connection-opens?      yang:counter64
+             |  +--ro connection-closes?     yang:counter64
+             |  +--ro connection-aborts?     yang:counter64
+             |  +--ro connection-failures?   yang:counter64
+             |  +--ro connection-timeouts?   yang:counter64
+             |  +--ro messages-sent?         yang:counter64
+             |  +--ro messages-received?     yang:counter64
+             |  +--ro errors-received?       yang:counter64
+             |  +--ro sessions?              yang:counter64
+             +--ro tls-statistics
+                +--ro discontinuity-time     yang:date-and-time
                 +--ro connection-opens?      yang:counter64
                 +--ro connection-closes?     yang:counter64
                 +--ro connection-aborts?     yang:counter64
@@ -1832,6 +1844,9 @@ Appendix A.  Full Tree
                 +--ro messages-received?     yang:counter64
                 +--ro errors-received?       yang:counter64
                 +--ro sessions?              yang:counter64
+                +--ro cert-errors?           yang:counter64
+                +--ro rpk-errors?            yang:counter64
+                        {tlsc:server-auth-raw-public-key}?
 
 Acknowledgments
 
