@@ -63,8 +63,7 @@ The YANG module in this document conforms to the Network Management
 
 ## Changes Since RFC 9105
 
-   The following changes have been made to the guidelines published in
-   {{?RFC8407}}:
+   The following changes have been made to {{?RFC9105}}:
 
    * Add support for TLS
 
