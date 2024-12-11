@@ -220,7 +220,7 @@ subtrees and data nodes have particular sensitivities/vulnerabilities:
 
    This YANG module uses groupings from other YANG modules that
    define nodes that may be considered sensitive or vulnerable
-   in network environments. Refer to {{Section 5.3 of !I-D.ietf-netconf-tls-client-server}} for information as to which nodes may
+   in network environments. Refer to {{Section 5.3 of !RFC9645.}} for information as to which nodes may
    be considered sensitive or vulnerable in network environments.
 
 # IANA Considerations
