@@ -651,6 +651,20 @@ module ietf-system-tacacs-plus {
           description
             "Provides a domain name of the TACACS+ server.";
         }
+        leaf sni-enabled {
+          type boolean;
+          must '../domain-name' {
+            error-message
+              "A domain name must be provided to make use of Server Name
+               Indication (SNI).";
+          }
+          description
+            "Enables the use of SNI, when set to true.
+             Disables the use of SNI, when set to false.";
+          reference
+            "RFC 6066: Transport Layer Security (TLS) Extensions:
+                       Extension Definitions, Section 3";
+        }
         leaf address {
           type inet:host;
           mandatory true;
