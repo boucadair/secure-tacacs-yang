@@ -2654,6 +2654,7 @@ module: ietf-system-tacacs-plus
           |  |  |     +--:(ref)
           |  |  |     |  +--rw credentials-reference?
           |  |  |     |          sys-tcs-plus:client-credentials-ref
+          |  |  |     |          {credential-reference}?
           |  |  |     +--:(explicit)
           |  |  |        +--rw (auth-type)?
           |  |  |           +--:(certificate)
@@ -2848,6 +2849,7 @@ module: ietf-system-tacacs-plus
           |  |  |     +--:(ref)
           |  |  |     |  +--rw credentials-reference?
           |  |  |     |          sys-tcs-plus:server-credentials-ref
+          |  |  |     |          {credential-reference}?
           |  |  |     +--:(explicit)
           |  |  |        +--rw ca-certs!
           |  |  |        |  +--rw (inline-or-truststore)

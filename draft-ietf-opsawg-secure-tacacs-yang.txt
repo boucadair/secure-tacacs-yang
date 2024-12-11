@@ -1473,6 +1473,7 @@ Appendix A.  Full Tree
              |  |  |     +--:(ref)
              |  |  |     |  +--rw credentials-reference?
              |  |  |     |          sys-tcs-plus:client-credentials-ref
+             |  |  |     |          {credential-reference}?
              |  |  |     +--:(explicit)
              |  |  |        +--rw (auth-type)?
              |  |  |           +--:(certificate)
@@ -1667,6 +1668,7 @@ Appendix A.  Full Tree
              |  |  |     +--:(ref)
              |  |  |     |  +--rw credentials-reference?
              |  |  |     |          sys-tcs-plus:server-credentials-ref
+             |  |  |     |          {credential-reference}?
              |  |  |     +--:(explicit)
              |  |  |        +--rw ca-certs!
              |  |  |        |  +--rw (inline-or-truststore)
