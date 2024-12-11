@@ -5,7 +5,7 @@
 Operations and Management Area Working Group           M. Boucadair, Ed.
 Internet-Draft                                                    Orange
 Obsoletes: 9105 (if approved)                                      B. Wu
-Intended status: Informational                                  G. Zheng
+Intended status: Standards Track                                G. Zheng
 Expires: 14 June 2025                                            M. Wang
                                                      Huawei Technologies
                                                         11 December 2024
