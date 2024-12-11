@@ -2,7 +2,7 @@
 title: "A YANG Data Model for Terminal Access Controller Access-Control System Plus (TACACS+)"
 abbrev: "YANG for TACACS+ over TLS"
 category: info
-obsolete: 9105
+obsoletes: 9105
 
 docname: draft-ietf-opsawg-secure-tacacs-yang-latest
 submissiontype: IETF
@@ -48,7 +48,7 @@ informative:
    use of TACACS+ servers for centralized Authentication, Authorization,
    and Accounting (AAA). Specifically, this document defines a YANG module for TACACS+ over TLS 1.3.
 
-   This document obsoletes RFC 9105
+   This document obsoletes RFC 9105.
 
 --- middle
 
@@ -67,7 +67,6 @@ The YANG module in this document conforms to the Network Management
    {{?RFC8407}}:
 
    * Add support for TLS
-
 
 # Conventions and Definitions
 
@@ -149,7 +148,7 @@ The module is designed to cover the following key requirements specified in {{!I
 * Implementations MAY support Raw Public Keys and PSK.
 * Implementations MUST support the ability to configure the server's domain name
 
-The following data nodes are supported:
+The following new data nodes are supported compared to {{?RFC9105}}:
 
 'client-credentials' and 'server-credentials':
 : Defines a set credentials that can be globally provisioned and then referenced under specific servers.
@@ -170,7 +169,6 @@ The following data nodes are supported:
 'keepalives':
 : Providers a set of parameters for testing the aliveness of the server.
 
-
 # TACACS+ Client Module
 
 This module uses types and groupings defined in {{!RFC6991}}, {{!RFC8341}}, {{!RFC8343}}, {{!RFC8529}}, {{!RFC9640}}, {{!RFC9641}},
@@ -188,15 +186,13 @@ The module also cites {{!RFC9257}}, {{!RFC9258}}, {{!RFC9258}}, and {{!RFC6520}}
 
 # Security Considerations
 
-  This section uses the template described in Section 3.7 of {{?I-D.ietf-netmod-rfc8407bis}}.
+This section is modeled after the template described in {{Section 3.7 of ?I-D.ietf-netmod-rfc8407bis}}.
 
-   The YANG module specified in this document defines schema for data
-   that is designed to be accessed via network management protocols such
-   as NETCONF {{!RFC6241}} or RESTCONF {{!RFC8040}}.  The lowest NETCONF layer
-   is the secure transport layer, and the mandatory-to-implement secure
-   transport is Secure Shell (SSH) {{!RFC6242}}.  The lowest RESTCONF layer
-   is HTTPS, and the mandatory-to-implement secure transport is TLS
-   {{!RFC8446}}.
+The "ietf-ac-common" YANG module defines a data model that is
+designed to be accessed via YANG-based management protocols, such as
+NETCONF {{?RFC6241}} and RESTCONF {{?RFC8040}}. These protocols have to
+use a secure transport layer (e.g., SSH {{?RFC4252}}, TLS {{?RFC8446}}, and
+QUIC {{?RFC9000}}) and have to use mutual authentication.
 
    The Network Configuration Access Control Model (NACM) {{!RFC8341}}
    provides the means to restrict access for particular NETCONF or
