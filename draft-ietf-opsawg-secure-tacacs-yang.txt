@@ -194,6 +194,7 @@ Table of Contents
              |  |  |     +--:(ref)
              |  |  |     |  +--rw credentials-reference?
              |  |  |     |          sys-tcs-plus:client-credentials-ref
+             |  |  |     |          {credential-reference}?
              |  |  |     +--:(explicit)
              |  |  |        +--rw (auth-type)?
              |  |  |           +--:(certificate)
@@ -210,6 +211,7 @@ Table of Contents
              |  |  |     +--:(ref)
              |  |  |     |  +--rw credentials-reference?
              |  |  |     |          sys-tcs-plus:server-credentials-ref
+             |  |  |     |          {credential-reference}?
              |  |  |     +--:(explicit)
              |  |  |        +--rw ca-certs!
              |  |  |        |  ...
