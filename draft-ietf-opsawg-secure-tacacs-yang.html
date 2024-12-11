@@ -2465,7 +2465,7 @@ module: ietf-system-tacacs-plus
 
   augment /sys:system:
     +--rw tacacs-plus
-       +--rw client-credentials* [id]
+       +--rw client-credentials* [id] {credential-reference}?
        |  +--rw id                       string
        |  +--rw (auth-type)?
        |     +--:(certificate)
@@ -2588,7 +2588,7 @@ module: ietf-system-tacacs-plus
        |           +--rw context?                            string
        |           +--rw target-protocol?                    uint16
        |           +--rw target-kdf?                         uint16
-       +--rw server-credentials* [id]
+       +--rw server-credentials* [id] {credential-reference}?
        |  +--rw id                 string
        |  +--rw ca-certs!
        |  |  +--rw (inline-or-truststore)
