@@ -4,8 +4,11 @@
 
 Operations and Management Area Working Group           M. Boucadair, Ed.
 Internet-Draft                                                    Orange
-Intended status: Informational                          11 December 2024
-Expires: 14 June 2025
+Intended status: Informational                                     B. Wu
+Expires: 14 June 2025                                           G. Zheng
+                                                                 M. Wang
+                                                     Huawei Technologies
+                                                        11 December 2024
 
 
  A YANG Data Model for Terminal Access Controller Access-Control System
@@ -22,25 +25,6 @@ Abstract
    module for TACACS+ over TLS 1.3.
 
    This document obsoletes RFC 9105
-
-About This Document
-
-   This note is to be removed before publishing as an RFC.
-
-   The latest revision of this draft can be found at
-   https://boucadair.github.io/secure-tacacs-yang/draft-boucadair-
-   opsawg-secure-tacacs-yang.html.  Status information for this document
-   may be found at https://datatracker.ietf.org/doc/draft-ietf-opsawg-
-   secure-tacacs-yang/.
-
-   Discussion of this document takes place on the Operations and
-   Management Area Working Group Working Group mailing list
-   (mailto:opsawg@ietf.org), which is archived at
-   https://mailarchive.ietf.org/arch/browse/opsawg/.  Subscribe at
-   https://www.ietf.org/mailman/listinfo/opsawg/.
-
-   Source for this draft and an issue tracker can be found at
-   https://github.com/boucadair/secure-tacacs-yang.
 
 Status of This Memo
 
@@ -76,6 +60,7 @@ Copyright Notice
 Table of Contents
 
    1.  Introduction
+     1.1.  Changes Since RFC 9105
    2.  Conventions and Definitions
      2.1.  Tree Diagrams
    3.  Design of the TACACS+ Data Model
@@ -87,7 +72,7 @@ Table of Contents
      7.2.  Informative References
    Appendix A.  Full Tree
    Acknowledgments
-   Author's Address
+   Authors' Addresses
 
 1.  Introduction
 
@@ -105,6 +90,13 @@ Table of Contents
 
    The YANG module in this document conforms to the Network Management
    Datastore Architecture (NMDA) defined in [RFC8342].
+
+1.1.  Changes Since RFC 9105
+
+   The following changes have been made to the guidelines published in
+   [RFC8407]:
+
+   *  Add support for TLS
 
 2.  Conventions and Definitions
 
@@ -1251,6 +1243,11 @@ Table of Contents
               BCP 215, RFC 8340, DOI 10.17487/RFC8340, March 2018,
               <https://www.rfc-editor.org/rfc/rfc8340>.
 
+   [RFC8407]  Bierman, A., "Guidelines for Authors and Reviewers of
+              Documents Containing YANG Data Models", BCP 216, RFC 8407,
+              DOI 10.17487/RFC8407, October 2018,
+              <https://www.rfc-editor.org/rfc/rfc8407>.
+
    [RFC8907]  Dahm, T., Ota, A., Medway Gash, D.C., Carrel, D., and L.
               Grant, "The Terminal Access Controller Access-Control
               System Plus (TACACS+) Protocol", RFC 8907,
@@ -2309,8 +2306,23 @@ Acknowledgments
    Thanks to Bo Wu, Joe Clarke, and Tom Petch for the review and
    comments.
 
-Author's Address
+Authors' Addresses
 
    Mohamed Boucadair (editor)
    Orange
    Email: mohamed.boucadair@orange.com
+
+
+   Bo Wu
+   Huawei Technologies
+   Email: mlana.wubo@huawei.com
+
+
+   Guangying Zheng
+   Huawei Technologies
+   Email: zhengguangying@huawei.com
+
+
+   Michael Wang
+   Huawei Technologies
+   Email: wangzitao@huawei.com
