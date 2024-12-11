@@ -87,7 +87,7 @@ The document uses the terms defined in {{Section 2 of !I-D.ietf-opsawg-tacacs-tl
 ## Tree Diagrams
 
    The tree diagram used in this document follows the notation defined
-   in {{?[RFC8340}}.
+   in {{?RFC8340}}.
 
 # Design of the TACACS+ Data Model
 
