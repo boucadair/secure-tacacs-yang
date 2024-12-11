@@ -141,10 +141,10 @@ The following new data nodes are supported compared to {{?RFC9105}}:
 
 'client-identity':
 : Specifies the identity credentials that the client may present when
-  establishing a connection to a server. Both explicit and reference are supported.
+  establishing a connection to a server. Client identities can be configured at the top level and then referenced for specific server instances. Alternatively, client identities can be configured explicitely under each server instance.
 
 'server-authentication':
-: Specifies how a client authenticates servers. Both explicit and reference are supported.
+: Specifies how a client authenticates servers. Server credentials can be configured at the top level and then referenced for specific server instances. Alternatively, client identities can be configured explicitely under each server instance.
 
 'hello-params':
 : Controls TLS versions and cipher suites.
