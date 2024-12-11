@@ -112,8 +112,6 @@ module ietf-system-tacacs-plus {
     base sys:authentication-method;
     description
       "Indicates AAA operation using TACACS+.";
-    reference
-      "RFC 8907: The TACACS+ Protocol";
   }
 
   typedef tacacs-plus-server-type {
@@ -541,32 +539,6 @@ module ietf-system-tacacs-plus {
     }
   }
 
-  /*
-    grouping tcp-server-info {
-      description
-        "A grouping for configuring the information to contact
-         a TCP server.";
-      list remote-address {
-        key "address";
-        description
-          "A server instance may be reachable using multiple IP address
-           and port numbers. For example, use the same port number in
-           different address families or different port numbers in the
-           same address family.";
-        leaf address {
-          type inet:ip-address;
-          description
-            "The remote IP address to reach a server.";
-        }
-        leaf port-number {
-          type inet:port-number;
-          description
-            "The remote port number of the server.";
-        }
-      }
-    }*/
-  // currently not used
-
   grouping tls-grouping-reuse {
     description
       "A grouping for TLS with TLS1.2 and keepalive removed.";
@@ -668,9 +640,9 @@ module ietf-system-tacacs-plus {
         }
         leaf port {
           type inet:port-number;
-          default "1234"; // to be replaced by TACACS-TLS-PORT
+          default "49"; // to be replaced by TACACS-TLS-PORT
           description
-            "The port number of TACACS+ Server port.";
+            "The port number of TACACS+ Sserver port number.";
         }
         choice security {
           mandatory true;
@@ -716,7 +688,7 @@ module ietf-system-tacacs-plus {
             leaf source-ip {
               type inet:ip-address;
               description
-                "Specifies source IP address for TACACS+ outbound
+                "Specifies the source IP address for TACACS+ outbound
                  packets.";
             }
           }
@@ -745,7 +717,7 @@ module ietf-system-tacacs-plus {
           default "false";
           description
             "Indicates whether the Single Connection Mode is enabled
-             for the server.  By default, the Single Connection Mode
+             for the server. By default, the Single Connection Mode
              is disabled.";
         }
         leaf timeout {
