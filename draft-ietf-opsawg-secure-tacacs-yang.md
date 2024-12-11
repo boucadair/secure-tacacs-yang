@@ -71,23 +71,7 @@ The YANG module in this document conforms to the Network Management
 
 {::boilerplate bcp14-tagged}
 
-   The following terms are defined in {{!RFC6241}} and are used in this
-   specification:
-
-   *  configuration data
-
-   *  state data
-
-   The following terms are defined in {{!RFC7950}} and are used in this
-   specification:
-
-   *  augment
-
-   *  data model
-
-   *  data node
-
-   The terminology for describing YANG data models is found in
+   The terminology for describing YANG data models is defined in
    {{!RFC7950}}.
 
 The document uses the terms defined in {{Section 2 of !I-D.ietf-opsawg-tacacs-tls13}} and {{Section 3 of ?RFC8907}}.
