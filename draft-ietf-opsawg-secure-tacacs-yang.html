@@ -1846,6 +1846,7 @@ module ietf-system-tacacs-plus {
         description
           "Provides a reference.";
         leaf credentials-reference {
+          if-feature credential-reference;
           type sys-tcs-plus:client-credentials-ref;
           description
             "Specifies the client credentials reference.";
@@ -1939,6 +1940,7 @@ module ietf-system-tacacs-plus {
         description
           "Provides a reference.";
         leaf credentials-reference {
+          if-feature credential-reference;
           type sys-tcs-plus:server-credentials-ref;
           description
             "Specifies the server credentials reference.";
