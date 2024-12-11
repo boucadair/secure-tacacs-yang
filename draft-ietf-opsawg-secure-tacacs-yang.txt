@@ -185,6 +185,7 @@ Table of Contents
              +--rw server-type
              |       tacacs-plus-server-type
              +--rw domain-name?                   inet:domain-name
+             +--rw sni-enabled?                   boolean
              +--rw address                        inet:host
              +--rw port?                          inet:port-number
              +--rw (security)
@@ -274,6 +275,10 @@ Table of Contents
    'domain-name':  Provides a domain name of the server per Section 3.3
       of [I-D.ietf-opsawg-tacacs-tls13].
 
+   'sni-enabled':  Controls activation of Server Name Indication (SNI)
+      (Section 3 of [RFC6066]).  This paramter can be used only if a
+      domain name is provided.
+
    'client-identity':  Specifies the identity credentials that the
       client may present when establishing a connection to a server.
       Client identities can be configured at the top level and then
@@ -302,6 +307,8 @@ Table of Contents
    The module also cites [RFC9257], [RFC9258], [RFC9258], and [RFC6520].
 
    <CODE BEGINS> file "ietf-system-tacacs-plus@2024-12-11.yang"
+   =============== NOTE: '\' line wrapping per RFC 8792 ================
+
    module ietf-system-tacacs-plus {
      yang-version 1.1;
      namespace "urn:ietf:params:xml:ns:yang:ietf-system-tacacs-plus";
@@ -955,6 +962,21 @@ Table of Contents
              description
                "Provides a domain name of the TACACS+ server.";
            }
+           leaf sni-enabled {
+             type boolean;
+             must '../domain-name' {
+               error-message
+                 "A domain name must be provided to make use of Server \
+                                                                    Name
+                  Indication (SNI).";
+             }
+             description
+               "Enables the use of SNI, when set to true.
+                Disables the use of SNI, when set to false.";
+             reference
+               "RFC 6066: Transport Layer Security (TLS) Extensions:
+                          Extension Definitions, Section 3";
+           }
            leaf address {
              type inet:host;
              mandatory true;
@@ -1168,6 +1190,11 @@ Table of Contents
               the Network Configuration Protocol (NETCONF)", RFC 6020,
               DOI 10.17487/RFC6020, October 2010,
               <https://www.rfc-editor.org/rfc/rfc6020>.
+
+   [RFC6066]  Eastlake 3rd, D., "Transport Layer Security (TLS)
+              Extensions: Extension Definitions", RFC 6066,
+              DOI 10.17487/RFC6066, January 2011,
+              <https://www.rfc-editor.org/rfc/rfc6066>.
 
    [RFC6520]  Seggelmann, R., Tuexen, M., and M. Williams, "Transport
               Layer Security (TLS) and Datagram Transport Layer Security
@@ -1473,6 +1500,7 @@ Appendix A.  Full Tree
              +--rw server-type
              |       tacacs-plus-server-type
              +--rw domain-name?                   inet:domain-name
+             +--rw sni-enabled?                   boolean
              +--rw address                        inet:host
              +--rw port?                          inet:port-number
              +--rw (security)
