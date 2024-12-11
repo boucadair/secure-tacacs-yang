@@ -170,7 +170,7 @@ The module also cites {{!RFC9257}}, {{!RFC9258}}, {{!RFC9258}}, and {{!RFC6520}}
 
 ~~~~~~~~~~
 <CODE BEGINS> file "ietf-system-tacacs-plus@2024-12-11.yang"
-{::include-fold ./yang/ietf-system-secure-tacacs.yang}
+{::include-fold ./yang/ietf-system-tacacs-plus.yang}
 <CODE ENDS>
 ~~~~~~~~~~
 
