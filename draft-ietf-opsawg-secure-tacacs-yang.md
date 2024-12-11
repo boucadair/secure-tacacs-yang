@@ -13,9 +13,13 @@ v: 3
 area: "Operations and Management"
 workgroup: "Operations and Management Area Working Group"
 keyword:
- - XXXX
- - XXXX
- - XXXX
+ - TLS
+ - device management
+ - network operator
+ - provider network
+ - AAA
+ - authentication
+ - authorization
 
 author:
  -
