@@ -322,8 +322,6 @@ Table of Contents
    The module also cites [RFC9257], [RFC9258], [RFC9258], and [RFC6520].
 
    <CODE BEGINS> file "ietf-system-tacacs-plus@2024-12-11.yang"
-   =============== NOTE: '\' line wrapping per RFC 8792 ================
-
    module ietf-system-tacacs-plus {
      yang-version 1.1;
      namespace "urn:ietf:params:xml:ns:yang:ietf-system-tacacs-plus";
@@ -1014,9 +1012,8 @@ Table of Contents
              type boolean;
              must '../domain-name' {
                error-message
-                 "A domain name must be provided to make use of Server \
-                                                                    Name
-                  Indication (SNI).";
+                 "A domain name must be provided to make use of Server
+                  Name Indication (SNI).";
              }
              description
                "Enables the use of SNI, when set to true.
