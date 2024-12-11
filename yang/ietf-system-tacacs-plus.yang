@@ -688,8 +688,8 @@ module ietf-system-tacacs-plus {
           type boolean;
           must '../domain-name' {
             error-message
-              "A domain name must be provided to make use of Server Name
-               Indication (SNI).";
+              "A domain name must be provided to make use of Server
+               Name Indication (SNI).";
           }
           description
             "Enables the use of SNI, when set to true.
