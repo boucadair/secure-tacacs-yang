@@ -242,6 +242,18 @@ Table of Contents
              +--rw single-connection?             boolean
              +--rw timeout?                       uint16
              +--ro statistics
+             |  +--ro discontinuity-time     yang:date-and-time
+             |  +--ro connection-opens?      yang:counter64
+             |  +--ro connection-closes?     yang:counter64
+             |  +--ro connection-aborts?     yang:counter64
+             |  +--ro connection-failures?   yang:counter64
+             |  +--ro connection-timeouts?   yang:counter64
+             |  +--ro messages-sent?         yang:counter64
+             |  +--ro messages-received?     yang:counter64
+             |  +--ro errors-received?       yang:counter64
+             |  +--ro sessions?              yang:counter64
+             +--ro tls-statistics
+                +--ro discontinuity-time     yang:date-and-time
                 +--ro connection-opens?      yang:counter64
                 +--ro connection-closes?     yang:counter64
                 +--ro connection-aborts?     yang:counter64
@@ -251,6 +263,9 @@ Table of Contents
                 +--ro messages-received?     yang:counter64
                 +--ro errors-received?       yang:counter64
                 +--ro sessions?              yang:counter64
+                +--ro cert-errors?           yang:counter64
+                +--ro rpk-errors?            yang:counter64
+                        {tlsc:server-auth-raw-public-key}?
 
    The module is designed to cover the following key requirements
    specified in [I-D.ietf-opsawg-tacacs-tls13]:
@@ -473,64 +488,97 @@ Table of Contents
          "Defines a type to reference server credentials.";
      }
 
+     grouping statistic-parameters {
+       description
+         "Grouping for TACACS+ statistics attributes.";
+       leaf connection-opens {
+         type yang:counter64;
+         description
+           "Number of new connection requests sent to the server,
+            e.g., socket open.";
+       }
+       leaf connection-closes {
+         type yang:counter64;
+         description
+           "Number of connection close requests sent to the server,
+            e.g., socket close.";
+       }
+       leaf connection-aborts {
+         type yang:counter64;
+         description
+           "Number of aborted connections to the server. These do
+            not include connections that are closed gracefully.";
+       }
+       leaf connection-failures {
+         type yang:counter64;
+         description
+           "Number of connection failures to the server.";
+       }
+       leaf connection-timeouts {
+         type yang:counter64;
+         description
+           "Number of connection timeouts to the server.";
+       }
+       leaf messages-sent {
+         type yang:counter64;
+         description
+           "Number of messages sent to the server.";
+       }
+       leaf messages-received {
+         type yang:counter64;
+         description
+           "Number of messages received from the server.";
+       }
+       leaf errors-received {
+         type yang:counter64;
+         description
+           "Number of error messages received from the server.";
+       }
+       leaf sessions {
+         type yang:counter64;
+         description
+           "Number of TACACS+ sessions completed with the server.
+            If the Single Connection Mode was not enabled, the number
+            of sessions is the same as the number of
+            'connection-closes'. If the Single Connection Mode was
+            enabled, a single TCP connection may contain multiple
+            TACACS+ sessions.";
+       }
+     }
+
      grouping statistics {
        description
          "Grouping for TACACS+ statistics attributes.";
+       leaf discontinuity-time {
+         type yang:date-and-time;
+         mandatory true;
+         description
+           "The time on the most recent occasion at which the TACACS+
+            client suffered a discontinuity.";
+       }
        container statistics {
          config false;
          description
-           "A collection of server-related statistics objects.";
-         leaf connection-opens {
+           "A collection of server-related statistics objects. It
+            aggregates all connection types (i.e., with or without
+            TLS).";
+         uses statistic-parameters;
+       }
+       container tls-statistics {
+         config false;
+         description
+           "A collection of TLS-specific server-related statistics.";
+         uses statistic-parameters;
+         leaf cert-errors {
            type yang:counter64;
            description
-             "Number of new connection requests sent to the server,
-              e.g., socket open.";
+             "Number of connection failures due to certificate issues.";
          }
-         leaf connection-closes {
+         leaf rpk-errors {
+           if-feature "tlsc:server-auth-raw-public-key";
            type yang:counter64;
            description
-             "Number of connection close requests sent to the server,
-              e.g., socket close.";
-         }
-         leaf connection-aborts {
-           type yang:counter64;
-           description
-             "Number of aborted connections to the server.  These do
-              not include connections that are closed gracefully.";
-         }
-         leaf connection-failures {
-           type yang:counter64;
-           description
-             "Number of connection failures to the server.";
-         }
-         leaf connection-timeouts {
-           type yang:counter64;
-           description
-             "Number of connection timeouts to the server.";
-         }
-         leaf messages-sent {
-           type yang:counter64;
-           description
-             "Number of messages sent to the server.";
-         }
-         leaf messages-received {
-           type yang:counter64;
-           description
-             "Number of messages received from the server.";
-         }
-         leaf errors-received {
-           type yang:counter64;
-           description
-             "Number of error messages received from the server.";
-         }
-         leaf sessions {
-           type yang:counter64;
-           description
-             "Number of TACACS+ sessions completed with the server.
-              If the Single Connection Mode was NOT enabled, the number
-              of sessions is the same as the number of
-              'connection-closes'.  If the Mode was enabled, a single
-              TCP connection may contain multiple TACACS+ sessions.";
+             "Number of RPK-related connection failures.";
          }
        }
      }
@@ -991,11 +1039,9 @@ Table of Contents
            }
            choice security {
              mandatory true;
+             //default "tls";
              description
-               "Security mechanism between TACACS+ client and server.
-                This is modeled as a YANG 'choice' so that it can be
-                augmented by a YANG module in a backwards-compatible
-                manner.";
+               "Security mechanism between TACACS+ client and server.";
              case tls {
                description
                  "TLS is used.";
@@ -1792,6 +1838,18 @@ Appendix A.  Full Tree
              +--rw single-connection?             boolean
              +--rw timeout?                       uint16
              +--ro statistics
+             |  +--ro discontinuity-time     yang:date-and-time
+             |  +--ro connection-opens?      yang:counter64
+             |  +--ro connection-closes?     yang:counter64
+             |  +--ro connection-aborts?     yang:counter64
+             |  +--ro connection-failures?   yang:counter64
+             |  +--ro connection-timeouts?   yang:counter64
+             |  +--ro messages-sent?         yang:counter64
+             |  +--ro messages-received?     yang:counter64
+             |  +--ro errors-received?       yang:counter64
+             |  +--ro sessions?              yang:counter64
+             +--ro tls-statistics
+                +--ro discontinuity-time     yang:date-and-time
                 +--ro connection-opens?      yang:counter64
                 +--ro connection-closes?     yang:counter64
                 +--ro connection-aborts?     yang:counter64
@@ -1801,6 +1859,9 @@ Appendix A.  Full Tree
                 +--ro messages-received?     yang:counter64
                 +--ro errors-received?       yang:counter64
                 +--ro sessions?              yang:counter64
+                +--ro cert-errors?           yang:counter64
+                +--ro rpk-errors?            yang:counter64
+                        {tlsc:server-auth-raw-public-key}?
 
 Acknowledgments
 
