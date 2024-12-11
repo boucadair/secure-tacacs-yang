@@ -268,4 +268,4 @@ The full tree structure is shown below:
 
 The document leverages data structures defined in {{!RFC9645}}.
 
-Thanks toJoe Clarke and Tom Petch for the review and comments.
+Thanks to Joe Clarke and Tom Petch for the review and comments.
