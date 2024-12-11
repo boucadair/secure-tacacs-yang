@@ -95,7 +95,7 @@ module ietf-system-tacacs-plus {
 
   revision 2024-12-11 {
     description
-      "Revision with the following changes: TBC.";
+      "This revision adds TLS support";
     reference
       "RFC XXXX: A YANG Model for Terminal Access Controller
                  Access-Control System Plus (TACACS+)";
@@ -496,13 +496,15 @@ module ietf-system-tacacs-plus {
       refine "tls-versions/min" {
         must "not(derived-from-or-self(current(), "
            + "'tlscmn:tls12'))" {
-          error-message "TLS 1.2 is not supported as min TLS version";
+          error-message 
+            "TLS 1.2 is not supported as min TLS version";
         }
       }
       refine "tls-versions/max" {
         must "not(derived-from-or-self(current(), "
            + "'tlscmn:tls12'))" {
-          error-message "TLS 1.2 is not supported as max TLS version";
+          error-message
+            "TLS 1.2 is not supported as max TLS version";
         }
       }
     }
@@ -514,10 +516,11 @@ module ietf-system-tacacs-plus {
        consideration for how an underlying TCP session is
        established.";
     container client-identity {
-      presence "Indicates that a TLS-level client identity has been
-                configured.
-                This statement is present so the mandatory descendant do not
-                imply that this node must be configured.";
+      presence
+        "Indicates that a TLS-level client identity has been
+         configured.
+         This statement is present so the mandatory descendant do
+         not imply that this node must be configured.";
       description
         "Identity credentials the TLS client may present when
          establishing a connection to a TLS server.";
@@ -552,13 +555,15 @@ module ietf-system-tacacs-plus {
       refine "hello-params/tls-versions/min" {
         must "not(derived-from-or-self(current(), "
            + "'tlscmn:tls12'))" {
-          error-message "TLS 1.2 is not supported as min TLS version";
+          error-message
+            "TLS 1.2 is not supported as min TLS version";
         }
       }
       refine "hello-params/tls-versions/max" {
         must "not(derived-from-or-self(current(), "
            + "'tlscmn:tls12'))" {
-          error-message "TLS 1.2 is not supported as max TLS version";
+          error-message
+            "TLS 1.2 is not supported as max TLS version";
         }
       }
       refine "keepalives" {
@@ -574,9 +579,10 @@ module ietf-system-tacacs-plus {
       must "not(derived-from-or-self(../sys:authentication"
          + "/sys:user-authentication-order, 'tacacs-plus'))"
          + " or bit-is-set(server/server-type,'authentication')" {
-        error-message "When 'tacacs-plus' is used as a system"
-                    + " authentication method, a TACACS+"
-                    + " authentication server must be configured.";
+        error-message
+          "When 'tacacs-plus' is used as a system authentication
+           method, a TACACS+ authentication server must be
+           configured.";
         description
           "When 'tacacs-plus' is used as an authentication method,
            a TACACS+ server must be configured.";
