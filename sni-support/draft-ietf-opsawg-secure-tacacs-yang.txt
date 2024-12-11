@@ -185,6 +185,7 @@ Table of Contents
              +--rw server-type
              |       tacacs-plus-server-type
              +--rw domain-name?                   inet:domain-name
+             +--rw sni-enabled?                   boolean
              +--rw address                        inet:host
              +--rw port?                          inet:port-number
              +--rw (security)
