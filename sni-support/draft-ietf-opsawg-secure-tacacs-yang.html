@@ -1426,25 +1426,30 @@ module: ietf-system-tacacs-plus
           <p id="section-3-11.4.1">Provides a domain name of the server per <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-opsawg-tacacs-tls13-15#section-3.3" class="relref">Section 3.3</a> of [<a href="#I-D.ietf-opsawg-tacacs-tls13" class="cite xref">I-D.ietf-opsawg-tacacs-tls13</a>]</span>.<a href="#section-3-11.4.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
-<dt id="section-3-11.5">'client-identity':</dt>
+<dt id="section-3-11.5">'sni-enabled':</dt>
         <dd style="margin-left: 1.5em" id="section-3-11.6">
-          <p id="section-3-11.6.1">Specifies the identity credentials that the client may present when
-establishing a connection to a server. Client identities can be configured at the top level and then referenced for specific server instances. Alternatively, client identities can be configured explicitely under each server instance.<a href="#section-3-11.6.1" class="pilcrow">¶</a></p>
+          <p id="section-3-11.6.1">Controls activation of Server Name Indication (SNI) (<span><a href="https://rfc-editor.org/rfc/rfc6066#section-3" class="relref">Section 3</a> of [<a href="#RFC6066" class="cite xref">RFC6066</a>]</span>). This paramter can be used only if a domain name is provided.<a href="#section-3-11.6.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
-<dt id="section-3-11.7">'server-authentication':</dt>
+<dt id="section-3-11.7">'client-identity':</dt>
         <dd style="margin-left: 1.5em" id="section-3-11.8">
-          <p id="section-3-11.8.1">Specifies how a client authenticates servers. Server credentials can be configured at the top level and then referenced for specific server instances. Alternatively, client identities can be configured explicitely under each server instance.<a href="#section-3-11.8.1" class="pilcrow">¶</a></p>
+          <p id="section-3-11.8.1">Specifies the identity credentials that the client may present when
+establishing a connection to a server. Client identities can be configured at the top level and then referenced for specific server instances. Alternatively, client identities can be configured explicitely under each server instance.<a href="#section-3-11.8.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
-<dt id="section-3-11.9">'hello-params':</dt>
+<dt id="section-3-11.9">'server-authentication':</dt>
         <dd style="margin-left: 1.5em" id="section-3-11.10">
-          <p id="section-3-11.10.1">Controls TLS versions and cipher suites.<a href="#section-3-11.10.1" class="pilcrow">¶</a></p>
+          <p id="section-3-11.10.1">Specifies how a client authenticates servers. Server credentials can be configured at the top level and then referenced for specific server instances. Alternatively, client identities can be configured explicitely under each server instance.<a href="#section-3-11.10.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
-<dt id="section-3-11.11">'keepalives':</dt>
+<dt id="section-3-11.11">'hello-params':</dt>
         <dd style="margin-left: 1.5em" id="section-3-11.12">
-          <p id="section-3-11.12.1">Providers a set of parameters for testing the aliveness of the server.<a href="#section-3-11.12.1" class="pilcrow">¶</a></p>
+          <p id="section-3-11.12.1">Controls TLS versions and cipher suites.<a href="#section-3-11.12.1" class="pilcrow">¶</a></p>
+</dd>
+        <dd class="break"></dd>
+<dt id="section-3-11.13">'keepalives':</dt>
+        <dd style="margin-left: 1.5em" id="section-3-11.14">
+          <p id="section-3-11.14.1">Providers a set of parameters for testing the aliveness of the server.<a href="#section-3-11.14.1" class="pilcrow">¶</a></p>
 </dd>
       <dd class="break"></dd>
 </dl>
@@ -2364,6 +2369,10 @@ subtrees and data nodes have particular sensitivities/vulnerabilities:<a href="#
 <dt id="RFC6020">[RFC6020]</dt>
         <dd>
 <span class="refAuthor">Bjorklund, M., Ed.</span>, <span class="refTitle">"YANG - A Data Modeling Language for the Network Configuration Protocol (NETCONF)"</span>, <span class="seriesInfo">RFC 6020</span>, <span class="seriesInfo">DOI 10.17487/RFC6020</span>, <time datetime="2010-10" class="refDate">October 2010</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc6020">https://www.rfc-editor.org/rfc/rfc6020</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC6066">[RFC6066]</dt>
+        <dd>
+<span class="refAuthor">Eastlake 3rd, D.</span>, <span class="refTitle">"Transport Layer Security (TLS) Extensions: Extension Definitions"</span>, <span class="seriesInfo">RFC 6066</span>, <span class="seriesInfo">DOI 10.17487/RFC6066</span>, <time datetime="2011-01" class="refDate">January 2011</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc6066">https://www.rfc-editor.org/rfc/rfc6066</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC6520">[RFC6520]</dt>
         <dd>
