@@ -143,6 +143,9 @@ The following new data nodes are supported compared to {{?RFC9105}}:
 'domain-name':
 : Provides a domain name of the server per {{Section 3.3 of !I-D.ietf-opsawg-tacacs-tls13}}.
 
+'sni-enabled':
+: Controls activation of Server Name Indication (SNI) ({{Section 3 of !RFC6066}}). This paramter can be used only if a domain name is provided.
+
 'client-identity':
 : Specifies the identity credentials that the client may present when
   establishing a connection to a server. Client identities can be configured at the top level and then referenced for specific server instances. Alternatively, client identities can be configured explicitely under each server instance.
