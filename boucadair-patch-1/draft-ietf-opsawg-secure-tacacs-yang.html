@@ -1386,6 +1386,18 @@ module: ietf-system-tacacs-plus
           +--rw single-connection?             boolean
           +--rw timeout?                       uint16
           +--ro statistics
+          |  +--ro discontinuity-time     yang:date-and-time
+          |  +--ro connection-opens?      yang:counter64
+          |  +--ro connection-closes?     yang:counter64
+          |  +--ro connection-aborts?     yang:counter64
+          |  +--ro connection-failures?   yang:counter64
+          |  +--ro connection-timeouts?   yang:counter64
+          |  +--ro messages-sent?         yang:counter64
+          |  +--ro messages-received?     yang:counter64
+          |  +--ro errors-received?       yang:counter64
+          |  +--ro sessions?              yang:counter64
+          +--ro tls-statistics
+             +--ro discontinuity-time     yang:date-and-time
              +--ro connection-opens?      yang:counter64
              +--ro connection-closes?     yang:counter64
              +--ro connection-aborts?     yang:counter64
@@ -1395,6 +1407,9 @@ module: ietf-system-tacacs-plus
              +--ro messages-received?     yang:counter64
              +--ro errors-received?       yang:counter64
              +--ro sessions?              yang:counter64
+             +--ro cert-errors?           yang:counter64
+             +--ro rpk-errors?            yang:counter64
+                     {tlsc:server-auth-raw-public-key}?
 </pre><a href="#section-3-7" class="pilcrow">¶</a>
 </div>
 <p id="section-3-8">The module is designed to cover the following key requirements specified in <span>[<a href="#I-D.ietf-opsawg-tacacs-tls13" class="cite xref">I-D.ietf-opsawg-tacacs-tls13</a>]</span>:<a href="#section-3-8" class="pilcrow">¶</a></p>
