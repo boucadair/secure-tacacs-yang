@@ -69,7 +69,7 @@ The YANG module in this document conforms to the Network Management
 
    The following changes have been made to {{?RFC9105}}:
 
-   * Add support for TLS
+   * Add support for TLS {{!I-D.ietf-opsawg-tacacs-tls13}}
 
 # Conventions and Definitions
 
@@ -127,13 +127,13 @@ The document uses the terms defined in {{Section 2 of !I-D.ietf-opsawg-tacacs-tl
 {::include-fold ./trees/tree-overview.txt}
 ~~~~~~~~~~
 
-The module is designed to cover the following key requirements specified in {{!I-D.ietf-opsawg-tacacs-tls13}}:
+Specifically, the module is designed to cover the following key requirements specified in {{!I-D.ietf-opsawg-tacacs-tls13}}:
 
 * TLS 1.3 {{!RFC8446}} MUST be used for transport.
 * Earlier TLS versions TLS MUST NOT be used.
 * The cipher suites offered or accepted SHOULD be configurable.
 * Implementations MAY support Raw Public Keys and PSK.
-* Implementations MUST support the ability to configure the server's domain name
+* Implementations MUST support the ability to configure the server's domain name, so that it may be included in the TLS Server Name Indication (SNI) extension.
 
 The following new data nodes are supported compared to {{?RFC9105}}:
 
