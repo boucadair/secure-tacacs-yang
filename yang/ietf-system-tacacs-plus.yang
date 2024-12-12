@@ -230,30 +230,17 @@ module ietf-system-tacacs-plus {
         "The time on the most recent occasion at which the TACACS+
          client suffered a discontinuity.";
     }
-    container statistics {
-      config false;
+    uses statistic-parameters;
+    leaf cert-errors {
+      type yang:counter64;
       description
-        "A collection of server-related statistics objects. It
-         aggregates all connection types (i.e., with or without
-         TLS).";
-      uses statistic-parameters;
+        "Number of connection failures due to certificate issues.";
     }
-    container tls-statistics {
-      config false;
+    leaf rpk-errors {
+      if-feature "tlsc:server-auth-raw-public-key";
+      type yang:counter64;
       description
-        "A collection of TLS-specific server-related statistics.";
-      uses statistic-parameters;
-      leaf cert-errors {
-        type yang:counter64;
-        description
-          "Number of connection failures due to certificate issues.";
-      }
-      leaf rpk-errors {
-        if-feature "tlsc:server-auth-raw-public-key";
-        type yang:counter64;
-        description
-          "Number of RPK-related connection failures.";
-      }
+        "Number of RPK-related connection failures.";
     }
   }
 
