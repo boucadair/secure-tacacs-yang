@@ -484,7 +484,7 @@ Table of Contents
          "Defines a type to reference server credentials.";
      }
 
-     grouping statistic-parameters {
+     grouping base-statistics {
        description
          "Grouping for TACACS+ statistics attributes.";
        leaf connection-opens {
@@ -552,7 +552,7 @@ Table of Contents
            "The time on the most recent occasion at which the TACACS+
             client suffered a discontinuity.";
        }
-       uses statistic-parameters;
+       uses base-statistics;
        leaf cert-errors {
          type yang:counter64;
          description
