@@ -1233,7 +1233,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <p id="section-1.1-1">The following changes have been made to <span>[<a href="#RFC9105" class="cite xref">RFC9105</a>]</span>:<a href="#section-1.1-1" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-1.1-2.1">
-            <p id="section-1.1-2.1.1">Add support for TLS<a href="#section-1.1-2.1.1" class="pilcrow">¶</a></p>
+            <p id="section-1.1-2.1.1">Add support for TLS <span>[<a href="#I-D.ietf-opsawg-tacacs-tls13" class="cite xref">I-D.ietf-opsawg-tacacs-tls13</a>]</span><a href="#section-1.1-2.1.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
 </section>
@@ -1401,7 +1401,7 @@ module: ietf-system-tacacs-plus
                      {tlsc:server-auth-raw-public-key}?
 </pre><a href="#section-3-7" class="pilcrow">¶</a>
 </div>
-<p id="section-3-8">The module is designed to cover the following key requirements specified in <span>[<a href="#I-D.ietf-opsawg-tacacs-tls13" class="cite xref">I-D.ietf-opsawg-tacacs-tls13</a>]</span>:<a href="#section-3-8" class="pilcrow">¶</a></p>
+<p id="section-3-8">Specifically, the module is designed to cover the following key requirements specified in <span>[<a href="#I-D.ietf-opsawg-tacacs-tls13" class="cite xref">I-D.ietf-opsawg-tacacs-tls13</a>]</span>:<a href="#section-3-8" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-3-9.1">
           <p id="section-3-9.1.1">TLS 1.3 <span>[<a href="#RFC8446" class="cite xref">RFC8446</a>]</span> <span class="bcp14">MUST</span> be used for transport.<a href="#section-3-9.1.1" class="pilcrow">¶</a></p>
@@ -1416,7 +1416,7 @@ module: ietf-system-tacacs-plus
           <p id="section-3-9.4.1">Implementations <span class="bcp14">MAY</span> support Raw Public Keys and PSK.<a href="#section-3-9.4.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="section-3-9.5">
-          <p id="section-3-9.5.1">Implementations <span class="bcp14">MUST</span> support the ability to configure the server's domain name<a href="#section-3-9.5.1" class="pilcrow">¶</a></p>
+          <p id="section-3-9.5.1">Implementations <span class="bcp14">MUST</span> support the ability to configure the server's domain name, so that it may be included in the TLS Server Name Indication (SNI) extension.<a href="#section-3-9.5.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
 <p id="section-3-10">The following new data nodes are supported compared to <span>[<a href="#RFC9105" class="cite xref">RFC9105</a>]</span>:<a href="#section-3-10" class="pilcrow">¶</a></p>
