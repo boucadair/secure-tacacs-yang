@@ -159,6 +159,15 @@ The following new data nodes are supported compared to {{?RFC9105}}:
 'keepalives':
 : Providers a set of parameters for testing the aliveness of the server.
 
+'discontinuity-time':
+: The time on the most recent occasion at which the client suffered a discontinuity.
+
+'cert-errors':
+: Number of connection failures due to certificate issues.
+
+'rpk-errors':
+: Number of RPK-related connection failures.
+
 # TACACS+ Client Module
 
 This module uses types and groupings defined in {{!RFC6991}}, {{!RFC8341}}, {{!RFC8343}}, {{!RFC8529}}, {{!RFC9640}}, {{!RFC9641}},
