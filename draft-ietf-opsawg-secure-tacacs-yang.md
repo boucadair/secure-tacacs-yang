@@ -60,7 +60,7 @@ informative:
 
 {{?RFC9105}} defines a YANG module ("ietf-system-tacacs-plus") that augments the System Management data model defined in {{!RFC7317}} for the management of Terminal Access Controller Access-Control System Plus (TACACS+) clients. Typically, the "ietf-system-tacacs-plus" module is used to configure a TACACS+ client on a device to support deployment scenarios with centralized authentication, authorization, and accounting servers.
 
-This document defines a YANG module for managing TACACS+ client, including TACACS+ over TLS 1.3 clients {{!I-D.ietf-opsawg-tacacs-tls13}}. This document obsoletes {{?RFC9105}}.
+This document defines a YANG module for managing TACACS+ client ({{sec-module}}), including TACACS+ over TLS 1.3 clients {{!I-D.ietf-opsawg-tacacs-tls13}}. This document obsoletes {{?RFC9105}}.
 
 The YANG module in this document conforms to the Network Management
    Datastore Architecture (NMDA) defined in {{!RFC8342}}.
@@ -70,6 +70,10 @@ The YANG module in this document conforms to the Network Management
    The following changes have been made to {{?RFC9105}}:
 
    * Add support for TLS {{!I-D.ietf-opsawg-tacacs-tls13}}
+   * Fix a must statement to indicate a missing prefix   
+   * Fix errors in the example provided in Appendix A of {{?RFC9105}}
+
+Detailed YANG changes are listed in {{sec-module}}.
 
 ## Editorial Note (To be removed by RFC Editor)
 
@@ -182,7 +186,7 @@ The following new data nodes are supported compared to {{?RFC9105}}:
 'rpk-errors':
 : Number of RPK-related connection failures.
 
-# TACACS+ Client Module
+# TACACS+ Client Module {#sec-module}
 
 This module uses types and groupings defined in {{!RFC6991}}, {{!RFC8341}}, {{!RFC8343}}, {{!RFC8529}}, {{!RFC9640}}, {{!RFC9641}},
 {{!RFC9642}}, and {{!RFC9645}}.
