@@ -70,7 +70,8 @@ Table of Contents
    7.  References
      7.1.  Normative References
      7.2.  Informative References
-   Appendix A.  Full Tree
+   Appendix A.  Example TACACS+ Authentication Configuration
+   Appendix B.  Full Tree
    Acknowledgments
    Authors' Addresses
 
@@ -255,6 +256,8 @@ Table of Contents
                 +--ro cert-errors?           yang:counter64
                 +--ro rpk-errors?            yang:counter64
                         {tlsc:server-auth-raw-public-key}?
+
+                     Figure 1: Tree Structure Overview
 
    Specifically, the module is designed to cover the following key
    requirements specified in [I-D.ietf-opsawg-tacacs-tls13]:
@@ -1355,7 +1358,37 @@ Table of Contents
               Plus (TACACS+)", RFC 9105, DOI 10.17487/RFC9105, August
               2021, <https://www.rfc-editor.org/rfc/rfc9105>.
 
-Appendix A.  Full Tree
+Appendix A.  Example TACACS+ Authentication Configuration
+
+   Figure 2 shows an example where a TACACS+ authentication server
+   instance is configured using shared secret for authentication.
+
+   {
+     "ietf-system:system": {
+       "authentication": {
+         "user-authentication-order": [
+           "ietf-system-tacacs-plus:tacacs-plus",
+           "ietf-system:local-users"
+         ]
+       },
+       "ietf-system-tacacs-plus:tacacs-plus": {
+         "server": [
+           {
+             "name": "tac_plus1",
+             "server-type": "authentication",
+             "address": "192.0.2.2",
+             "shared-secret": "QaEfThUkO198010075460923+h3TbE8n",
+             "source-ip": "192.0.2.12",
+             "timeout": "10"
+           }
+         ]
+       }
+     }
+   }
+
+                    Figure 2: Example with Shared Secret
+
+Appendix B.  Full Tree
 
    The full tree structure is shown below:
 
