@@ -86,8 +86,8 @@ Table of Contents
    deployment scenarios with centralized authentication, authorization,
    and accounting servers.
 
-   This document defines a YANG module for managing TACACS+ client,
-   including TACACS+ over TLS 1.3 clients
+   This document defines a YANG module for managing TACACS+ client
+   (Section 4), including TACACS+ over TLS 1.3 clients
    [I-D.ietf-opsawg-tacacs-tls13].  This document obsoletes [RFC9105].
 
    The YANG module in this document conforms to the Network Management
@@ -98,6 +98,12 @@ Table of Contents
    The following changes have been made to [RFC9105]:
 
    *  Add support for TLS [I-D.ietf-opsawg-tacacs-tls13]
+
+   *  Fix a must statement to indicate a missing prefix
+
+   *  Fix errors in the example provided in Appendix A of [RFC9105]
+
+   Detailed YANG changes are listed in Section 4.
 
 1.2.  Editorial Note (To be removed by RFC Editor)
 
