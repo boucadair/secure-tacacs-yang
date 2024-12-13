@@ -198,26 +198,26 @@ QUIC {{?RFC9000}}) and have to use mutual authentication.
    RESTCONF users to a preconfigured subset of all available NETCONF or
    RESTCONF protocol operations and content.
 
-   There are a number of data nodes defined in this YANG module that are
-   writable/creatable/deletable (i.e., config true, which is the
-   default).  These data nodes may be considered sensitive or vulnerable
-   in some network environments.  Write operations (e.g., edit-config)
-   and delete operations to these data nodes without proper protection
-   or authentication can have a negative effect on network operations.
-   Specifically, the following subtrees and data nodes have particular
-   sensitivities/vulnerabilities:
+There are a number of data nodes defined in this YANG module that are
+writable/creatable/deletable (i.e., "config true", which is the
+default).  All writable data nodes are likely to be reasonably
+sensitive or vulnerable in some network environments.  Write
+operations (e.g., edit-config) and delete operations to these data
+nodes without proper protection or authentication can have a negative
+effect on network operations.  The following subtrees and data nodes
+have particular sensitivities/vulnerabilities:
 
-   /system/tacacs-plus/server:
+   'server':
    :  This list contains the data nodes used
-      to control the TACACS+ servers used by the device.  Unauthorized
+      to control the TACACS+ servers used by the device. Unauthorized
       access to this list could enable an attacker to assume complete
       control over the device by pointing to a compromised TACACS+
       server, or to modify the counters to hide attacks against the
       device.
 
-   /system/tacacs-plus/server/shared-secret:
+   'shared-secret':
    :  This leaf controls the key
-      known to both the TACACS+ client and server.  Unauthorized access
+      known to both the TACACS+ client and server. Unauthorized access
       to this leaf could make the device vulnerable to attacks;
       therefore, it has been restricted using the "default-deny-all"
       access control defined in {{!RFC8341}}.  When setting, it is highly
@@ -225,19 +225,10 @@ QUIC {{?RFC9000}}) and have to use mutual authentication.
       sufficiently complex with a mix of different character types,
       i.e., upper case, lower case, numeric, and punctuation.
 
-   Some of the readable data nodes in this YANG module may be considered
-   sensitive or vulnerable in some network environments.  It is thus
-   important to control read access (e.g., via get, get-config, or
-   notification) to these data nodes.  Specifically, the following
-subtrees and data nodes have particular sensitivities/vulnerabilities:
+    'client-identity' and 'server-authentication':
+    : Any modification to a key or reference to a key may dramatically alter the implemented security policy. For this reason, the NACM extension "default-deny-write" has been set.
 
-     'xxx':
-     :  xxxx.
-
-   This YANG module uses groupings from other YANG modules that
-   define nodes that may be considered sensitive or vulnerable
-   in network environments. Refer to {{Section 5.3 of !RFC9645.}} for information as to which nodes may
-   be considered sensitive or vulnerable in network environments.
+This YANG module uses groupings from other YANG modules that define nodes that may be considered sensitive or vulnerable in network environments. Refer to {{Section 5.3 of !RFC9642}} and {{Section 5.3 of !RFC9645}} for information as to which nodes may be considered sensitive or vulnerable in network environments.
 
 # IANA Considerations
 
