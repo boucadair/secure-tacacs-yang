@@ -70,7 +70,7 @@ The YANG module in this document conforms to the Network Management
    The following changes have been made to {{?RFC9105}}:
 
    * Add support for TLS {{!I-D.ietf-opsawg-tacacs-tls13}}
-   * Fix a must statement to indicate a missing prefix   
+   * Fix a must statement to indicate a missing prefix
    * Fix errors in the example provided in Appendix A of {{?RFC9105}}
 
 Detailed YANG changes are listed in {{sec-module}}.
