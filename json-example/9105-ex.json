@@ -1,0 +1,22 @@
+{
+  "ietf-system:system": {
+    "authentication": {
+      "user-authentication-order": [
+        "ietf-system-tacacs-plus:tacacs-plus",
+        "ietf-system:local-users"
+      ]
+    },
+    "ietf-system-tacacs-plus:tacacs-plus": {
+      "server": [
+        {
+          "name": "tac_plus1",
+          "server-type": "authentication",
+          "address": "192.0.2.2",
+          "shared-secret": "QaEfThUkO198010075460923+h3TbE8n",
+          "source-ip": "192.0.2.12",
+          "timeout": "10"
+        }
+      ]
+    }
+  }
+}
