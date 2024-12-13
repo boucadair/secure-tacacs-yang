@@ -126,6 +126,7 @@ The document uses the terms defined in {{Section 2 of !I-D.ietf-opsawg-tacacs-tl
 ~~~~~~~~~~
 {::include-fold ./trees/tree-overview.txt}
 ~~~~~~~~~~
+{: #tree-overview title="Tree Structure Overview"}
 
 Specifically, the module is designed to cover the following key requirements specified in {{!I-D.ietf-opsawg-tacacs-tls13}}:
 
@@ -254,6 +255,15 @@ This YANG module uses groupings from other YANG modules that define nodes that m
 
 
 --- back
+
+# Example TACACS+ Authentication Configuration
+
+{{#9105-ex}} shows an example where a TACACS+ authentication server instance is configured using shared secret for authentication.
+
+~~~~~~~~~~
+{::include-fold ./json-example/9105-ex.json}
+~~~~~~~~~~
+{: #9105-ex title="Example with Shared Secret"}
 
 # Full Tree {#sec-full}
 
