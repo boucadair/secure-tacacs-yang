@@ -1605,6 +1605,8 @@ module ietf-system-tacacs-plus {
          - a new leaf 'cert-errors' under 'statistics'
          - a new leaf 'rpk-errors' under 'statistics'
        Also, this revision:
+         - updates the reference of 'tacacs-plus' identity
+           to also cite RFC SSSS
          - fixes a 'must' statement under 'tacacs-plus' container
            to include a missing prefix
          - updates the description of the 'name' under 'server'
@@ -1636,6 +1638,10 @@ module ietf-system-tacacs-plus {
     base sys:authentication-method;
     description
       "Indicates AAA operation using TACACS+.";
+    reference
+      "RFC SSSS: Terminal Access Controller Access-Control
+                 System Plus (TACACS+) over TLS 1.3
+       RFC 8907: The TACACS+ Protocol";
   }
 
   typedef tacacs-plus-server-type {
@@ -1882,7 +1888,7 @@ module ietf-system-tacacs-plus {
                  Version 1.3, Section 4.4.2";
     nacm:default-deny-write;
     choice auth-type {
-      //default "certificate";
+      default "certificate";
       //mandatory true;
       description
         "A choice amongst authentication types, of which one must
@@ -2057,6 +2063,10 @@ module ietf-system-tacacs-plus {
         }
       }
     }
+    reference
+      "RFC SSSS: Terminal Access Controller Access-Control
+                 System Plus (TACACS+) over TLS 1.3,
+                 Section 5.1";
   }
 
   grouping tls-client {
@@ -2190,6 +2200,9 @@ module ietf-system-tacacs-plus {
           type inet:domain-name;
           description
             "Provides a domain name of the TACACS+ server.";
+          reference
+            "RFC SSSS: Terminal Access Controller Access-Control
+                 System Plus (TACACS+) over TLS 1.3, Section 3.4.2";
         }
         leaf sni-enabled {
           type boolean;
@@ -2203,7 +2216,10 @@ module ietf-system-tacacs-plus {
              use of SNI, when set to false.";
           reference
             "RFC 6066: Transport Layer Security (TLS) Extensions:
-                       Extension Definitions, Section 3";
+                       Extension Definitions, Section 3
+             RFC SSSS: Terminal Access Controller Access-Control
+                       System Plus (TACACS+) over TLS 1.3,
+                       Section 3.4.2";
         }
         leaf address {
           type inet:host;
@@ -2228,6 +2244,9 @@ module ietf-system-tacacs-plus {
             description
               "TLS is used.";
             uses tls-client;
+            reference
+              "RFC SSSS: Terminal Access Controller Access-Control
+                         System Plus (TACACS+) over TLS 1.3";
           }
           case obfuscation {
             leaf shared-secret {
