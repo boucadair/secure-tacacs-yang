@@ -296,3 +296,8 @@ The full tree structure is shown below:
 The document leverages data structures defined in {{!RFC9645}}.
 
 Thanks to Joe Clarke and Tom Petch for the review and comments.
+
+Acknowledgments from RFC 9105:
+: The authors wish to thank Alex Campbell, John Heasley, Ebben Aries,
+   Alan DeKok, Joe Clarke, Tom Petch, Robert Wilton, and many others for
+   their helpful comments and suggestions.
