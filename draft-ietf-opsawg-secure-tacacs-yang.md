@@ -225,8 +225,8 @@ have particular sensitivities/vulnerabilities:
       sufficiently complex with a mix of different character types,
       i.e., upper case, lower case, numeric, and punctuation.
 
-    'client-identity' and 'server-authentication':
-    : Any modification to a key or reference to a key may dramatically alter the implemented security policy. For this reason, the NACM extension "default-deny-write" has been set.
+   'client-identity' and 'server-authentication':
+   : Any modification to a key or reference to a key may dramatically alter the implemented security policy. For this reason, the NACM extension "default-deny-write" has been set.
 
 This YANG module uses groupings from other YANG modules that define nodes that may be considered sensitive or vulnerable in network environments. Refer to {{Section 5.3 of !RFC9642}} and {{Section 5.3 of !RFC9645}} for information as to which nodes may be considered sensitive or vulnerable in network environments.
 
