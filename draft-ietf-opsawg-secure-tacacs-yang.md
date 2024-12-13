@@ -258,7 +258,7 @@ This YANG module uses groupings from other YANG modules that define nodes that m
 
 # Example TACACS+ Authentication Configuration
 
-{{#9105-ex}} shows an example where a TACACS+ authentication server instance is configured using shared secret for authentication.
+{{9105-ex}} shows an example where a TACACS+ authentication server instance is configured using shared secret for authentication.
 
 ~~~~~~~~~~
 {::include-fold ./json-example/9105-ex.json}
