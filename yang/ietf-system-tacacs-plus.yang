@@ -95,9 +95,27 @@ module ietf-system-tacacs-plus {
 
   revision 2024-12-11 {
     description
-      "This revision adds TLS support";
+      "This revision adds TLS support. Specifically, this revision
+       adds:
+         - a new feature 'credential-reference'
+         - a new container 'client-credentials'
+         - a new container 'server-credentials'
+         - a new leaf 'domain-name'
+         - a new leaf 'sni-enabled'
+         - TLS as a new security choice
+         - a new leaf 'discontinuity-time' under 'statistics'
+         - a new leaf 'cert-errors' under 'statistics'
+         - a new leaf 'rpk-errors' under 'statistics'
+       Also, this revision:
+         - updates the description of the 'name' under 'server'
+           list to better reflect the intended use
+         - removes the default statement for the 'port' under
+           'server' list because a distinct defaumt port number
+           is used for TACACS+TLS
+         - updates the 'port' leaf under 'server' list to enumerate
+           the various TACACS+ default port numbers";
     reference
-      "RFC XXXX: A YANG Model for Terminal Access Controller
+      "RFC XXXX: A YANG Data Model for Terminal Access Controller
                  Access-Control System Plus (TACACS+)";
   }
   revision 2021-08-05 {
@@ -139,9 +157,8 @@ module ietf-system-tacacs-plus {
       }
     }
     description
-      "tacacs-plus-server-type can be set to
-       authentication/authorization/accounting
-       or any combination of the three types.";
+      "The type can be set to authentication, authorization,
+       accounting, or any combination of the three types.";
   }
 
   typedef client-credentials-ref {
@@ -222,7 +239,8 @@ module ietf-system-tacacs-plus {
 
   grouping statistics {
     description
-      "Grouping for TACACS+ statistics attributes.";
+      "Grouping for TACACS+ statistics attributes, including TLS
+       specifics.";
     leaf discontinuity-time {
       type yang:date-and-time;
       mandatory true;
@@ -285,13 +303,13 @@ module ietf-system-tacacs-plus {
 
   grouping tls13-epsk {
     description
-      "An External Pre-Shared Key (EPSK) is established
-       or provisioned out-of-band, i.e., not from a TLS
-       connection.  An EPSK is a tuple of (Base Key,
-       External Identity, Hash).  When PSKs are provisioned
-       out of band, the PSK identity and the Key Derivation
-       Function (KDF) hash algorithm to be used with the PSK
-       must also be provisioned.";
+      "An External Pre-Shared Key (EPSK) is established or
+       provisioned out-of-band, i.e., not from a TLS connection.
+       An EPSK is a tuple of (Base Key, External Identity, Hash).
+       When Pre-Shared Keys (PSKs) are provisioned out of band,
+       the PSK identity and the Key Derivation Function (KDF) hash
+       algorithm to be used with the PSK must also be 
+       provisioned.";
     reference
       "RFC 8446: The Transport Layer Security (TLS) Protocol
                  Version 1.3, Section 4.2.11
@@ -601,7 +619,7 @@ module ietf-system-tacacs-plus {
         if-feature "not tlsc:tls-client-keepalives";
       }
     }
-  }
+  } //currently not used
 
   grouping tacacs-plus {
     description
@@ -657,7 +675,8 @@ module ietf-system-tacacs-plus {
         leaf name {
           type string;
           description
-            "An arbitrary name for the TACACS+ server.";
+            "A name that is used to uniquely identify a TACACS+
+             server.";
         }
         leaf server-type {
           type tacacs-plus-server-type;
@@ -679,8 +698,8 @@ module ietf-system-tacacs-plus {
                Name Indication (SNI).";
           }
           description
-            "Enables the use of SNI, when set to true.
-             Disables the use of SNI, when set to false.";
+            "Enables the use of SNI, when set to true. Disables the
+             use of SNI, when set to false.";
           reference
             "RFC 6066: Transport Layer Security (TLS) Extensions:
                        Extension Definitions, Section 3";
@@ -693,9 +712,11 @@ module ietf-system-tacacs-plus {
         }
         leaf port {
           type inet:port-number;
-          default "49"; // to be replaced by TACACS-TLS-PORT
+          //default "49"; //replace TBD with assigned port
           description
-            "The port number of TACACS+ Sserver port number.";
+            "The port number of TACACS+ server port number.
+             Default port number for legacy TACACS+ is 46,
+             while it is TBD for TACACS+TLS.";
         }
         choice security {
           mandatory true;
@@ -706,7 +727,6 @@ module ietf-system-tacacs-plus {
             description
               "TLS is used.";
             uses tls-client;
-            //uses client-identity-with-ref;
           }
           case obfuscation {
             leaf shared-secret {
@@ -715,7 +735,7 @@ module ietf-system-tacacs-plus {
               }
               description
                 "The shared secret, which is known to both the
-                 TACACS+ client and server.  TACACS+ server
+                 TACACS+ client and server. TACACS+ server
                  administrators SHOULD configure a shared secret with
                  a minimum length of 16 characters.
                  It is highly recommended that this shared secret is
