@@ -71,6 +71,19 @@ The YANG module in this document conforms to the Network Management
 
    * Add support for TLS {{!I-D.ietf-opsawg-tacacs-tls13}}
 
+## Editorial Note (To be removed by RFC Editor)
+
+> Note to the RFC Editor: This section is to be removed prior to publication.
+
+This document contains placeholder values that need to be replaced with finalized values at the time of publication. This note summarizes all of the substitutions that are needed.
+
+Please apply the following replacements:
+
+* XXXX --> the assigned RFC number for this I-D
+* SSSS --> the assigned RFC number for {{!I-D.ietf-opsawg-tacacs-tls13}}
+* TBD  --> the assigned port number in {{Section 7 of !I-D.ietf-opsawg-tacacs-tls13}}
+* 2024-12-11 --> the actual date of the publication of this document
+
 # Conventions and Definitions
 
 {::boilerplate bcp14-tagged}
