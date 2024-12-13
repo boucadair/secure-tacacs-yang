@@ -429,6 +429,8 @@ Table of Contents
             - a new leaf 'cert-errors' under 'statistics'
             - a new leaf 'rpk-errors' under 'statistics'
           Also, this revision:
+            - fixes a 'must' statement under 'tacacs-plus' container
+              to include a missing prefix
             - updates the description of the 'name' under 'server'
               list to better reflect the intended use
             - removes the default statement for the 'port' under
@@ -948,7 +950,8 @@ Table of Contents
          "Grouping for TACACS+ attributes.";
        container tacacs-plus {
          must "not(derived-from-or-self(../sys:authentication"
-            + "/sys:user-authentication-order, 'tacacs-plus'))"
+            + "/sys:user-authentication-order, "
+            + "'sys-tcs-plus:tacacs-plus'))"
             + " or bit-is-set(server/server-type,'authentication')" {
            error-message
              "When 'tacacs-plus' is used as a system authentication
