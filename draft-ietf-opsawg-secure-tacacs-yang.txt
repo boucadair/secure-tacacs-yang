@@ -312,7 +312,7 @@ Table of Contents
       of [I-D.ietf-opsawg-tacacs-tls13].
 
    'sni-enabled':  Controls activation of Server Name Indication (SNI)
-      (Section 3 of [RFC6066]).  This paramter can be used only if a
+      (Section 3 of [RFC6066]).  This parameter can be used only if a
       domain name is provided.
 
    'client-identity':  Specifies the identity credentials that the
@@ -329,9 +329,6 @@ Table of Contents
       instance.
 
    'hello-params':  Controls TLS versions and cipher suites.
-
-   'keepalives':  Providers a set of parameters for testing the
-      aliveness of the server.
 
    'discontinuity-time':  The time on the most recent occasion at which
       the client suffered a discontinuity.

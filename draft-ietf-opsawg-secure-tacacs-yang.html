@@ -1480,7 +1480,7 @@ module: ietf-system-tacacs-plus
         <dd class="break"></dd>
 <dt id="section-3-11.5">'sni-enabled':</dt>
         <dd style="margin-left: 1.5em" id="section-3-11.6">
-          <p id="section-3-11.6.1">Controls activation of Server Name Indication (SNI) (<span><a href="https://rfc-editor.org/rfc/rfc6066#section-3" class="relref">Section 3</a> of [<a href="#RFC6066" class="cite xref">RFC6066</a>]</span>). This paramter can be used only if a domain name is provided.<a href="#section-3-11.6.1" class="pilcrow">¶</a></p>
+          <p id="section-3-11.6.1">Controls activation of Server Name Indication (SNI) (<span><a href="https://rfc-editor.org/rfc/rfc6066#section-3" class="relref">Section 3</a> of [<a href="#RFC6066" class="cite xref">RFC6066</a>]</span>). This parameter can be used only if a domain name is provided.<a href="#section-3-11.6.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
 <dt id="section-3-11.7">'client-identity':</dt>
@@ -1499,24 +1499,19 @@ establishing a connection to a server. Client identities can be configured at th
           <p id="section-3-11.12.1">Controls TLS versions and cipher suites.<a href="#section-3-11.12.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
-<dt id="section-3-11.13">'keepalives':</dt>
+<dt id="section-3-11.13">'discontinuity-time':</dt>
         <dd style="margin-left: 1.5em" id="section-3-11.14">
-          <p id="section-3-11.14.1">Providers a set of parameters for testing the aliveness of the server.<a href="#section-3-11.14.1" class="pilcrow">¶</a></p>
+          <p id="section-3-11.14.1">The time on the most recent occasion at which the client suffered a discontinuity.<a href="#section-3-11.14.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
-<dt id="section-3-11.15">'discontinuity-time':</dt>
+<dt id="section-3-11.15">'cert-errors':</dt>
         <dd style="margin-left: 1.5em" id="section-3-11.16">
-          <p id="section-3-11.16.1">The time on the most recent occasion at which the client suffered a discontinuity.<a href="#section-3-11.16.1" class="pilcrow">¶</a></p>
+          <p id="section-3-11.16.1">Number of connection failures due to certificate issues.<a href="#section-3-11.16.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
-<dt id="section-3-11.17">'cert-errors':</dt>
+<dt id="section-3-11.17">'rpk-errors':</dt>
         <dd style="margin-left: 1.5em" id="section-3-11.18">
-          <p id="section-3-11.18.1">Number of connection failures due to certificate issues.<a href="#section-3-11.18.1" class="pilcrow">¶</a></p>
-</dd>
-        <dd class="break"></dd>
-<dt id="section-3-11.19">'rpk-errors':</dt>
-        <dd style="margin-left: 1.5em" id="section-3-11.20">
-          <p id="section-3-11.20.1">Number of RPK-related connection failures.<a href="#section-3-11.20.1" class="pilcrow">¶</a></p>
+          <p id="section-3-11.18.1">Number of RPK-related connection failures.<a href="#section-3-11.18.1" class="pilcrow">¶</a></p>
 </dd>
       <dd class="break"></dd>
 </dl>
@@ -2608,7 +2603,7 @@ i.e., upper case, lower case, numeric, and punctuation.<a href="#section-5-5.4.1
 <p id="appendix-A-1"><a href="#ex9105" class="auto internal xref">Figure 2</a> shows an example where a TACACS+ authentication server instance is configured using shared secret for authentication.<a href="#appendix-A-1" class="pilcrow">¶</a></p>
 <span id="name-example-with-shared-secret"></span><div id="ex9105">
 <figure id="figure-2">
-        <div class="alignLeft art-text artwork" id="appendix-A-2.1">
+        <div class="lang-json sourcecode" id="appendix-A-2.1">
 <pre>
 {
   "ietf-system:system": {
