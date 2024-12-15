@@ -162,7 +162,7 @@ The following new data nodes are supported compared to {{?RFC9105}}:
 : Provides a domain name of the server per {{Section 3.3 of !I-D.ietf-opsawg-tacacs-tls13}}.
 
 'sni-enabled':
-: Controls activation of Server Name Indication (SNI) ({{Section 3 of !RFC6066}}). This paramter can be used only if a domain name is provided.
+: Controls activation of Server Name Indication (SNI) ({{Section 3 of !RFC6066}}). This parameter can be used only if a domain name is provided.
 
 'client-identity':
 : Specifies the identity credentials that the client may present when
@@ -173,9 +173,6 @@ The following new data nodes are supported compared to {{?RFC9105}}:
 
 'hello-params':
 : Controls TLS versions and cipher suites.
-
-'keepalives':
-: Providers a set of parameters for testing the aliveness of the server.
 
 'discontinuity-time':
 : The time on the most recent occasion at which the client suffered a discontinuity.
@@ -277,9 +274,9 @@ This YANG module uses groupings from other YANG modules that define nodes that m
 
 {{ex9105}} shows an example where a TACACS+ authentication server instance is configured using shared secret for authentication.
 
-~~~~~~~~~~
+~~~ json
 {::include-fold ./json-example/9105-ex.json}
-~~~~~~~~~~
+~~~
 {: #ex9105 title="Example with Shared Secret"}
 
 # Full Tree {#sec-full}
