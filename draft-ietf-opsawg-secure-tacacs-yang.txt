@@ -6,9 +6,9 @@ Operations and Management Area Working Group           M. Boucadair, Ed.
 Internet-Draft                                                    Orange
 Obsoletes: 9105 (if approved)                                      B. Wu
 Intended status: Standards Track                                G. Zheng
-Expires: 16 June 2025                                            M. Wang
+Expires: 18 June 2025                                            M. Wang
                                                      Huawei Technologies
-                                                        13 December 2024
+                                                        15 December 2024
 
 
  A YANG Data Model for Terminal Access Controller Access-Control System
@@ -41,7 +41,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 16 June 2025.
+   This Internet-Draft will expire on 18 June 2025.
 
 Copyright Notice
 
