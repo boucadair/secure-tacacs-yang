@@ -1,10 +1,7 @@
 {
   "ietf-system:system": {
     "authentication": {
-      "user-authentication-order": [
-        tacacs-plus,
-        local-users
-      ]
+      "user-authentication-order": [tacacs-plus, local-users]
     }
     "tacacs-plus": {
       "server": [
