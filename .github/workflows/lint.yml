@@ -4,9 +4,11 @@ on:
   push:
     paths:
     - '**.yang'
+    - '**.json'
   pull_request:
     paths:
     - '**.yang'
+    - '**.json'
 
 jobs:
   build:
@@ -29,3 +31,7 @@ jobs:
     - name: "Lint using pyang"
       run: |
         make pyang-lint
+
+    - name: "yanglint"
+      run: |
+        make yang-lint
