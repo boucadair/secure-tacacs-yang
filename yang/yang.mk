@@ -1,6 +1,6 @@
 YANGDIR ?= yang
 
-SVCEXDIR ?= json-examples/svc
+EXDIR ?= json-example
 
 STDYANGDIR ?= tools/yang
 $(STDYANGDIR):
@@ -14,7 +14,7 @@ YANG_PATH="$(YANGDIR):$(STDYANGDIR)/standard/ietf/RFC/:$(STDYANGDIR)/standard/ie
 endif
 YANG=$(wildcard $(YANGDIR)/*.yang)
 STDYANG=$(wildcard $(YANGDIR)/ietf-*.yang)
-EXPSVCJSON=$(wildcard $(SVCEXDIR)/*.json)
+EXPJSON=$(wildcard $(EXDIR)/*.json)
 TXT=$(patsubst $(YANGDIR)/%.yang,%-diagram.txt,$(YANG))
 
 .PHONY: yang-lint yang-gen-diagram yang-clean
@@ -29,9 +29,6 @@ yang-gen-diagram: yang-lint $(TXT)
 
 yang-clean:
 	rm -f $(TXT)
-
-yangson-validate: $(EXPSVCJSON) $(STDYANGDIR)
-	yangson -p $(YANGDIR) -p $(YANGDIR):$(STDYANGDIR)/standard/ietf/RFC/:$(STDYANGDIR)/experimental/ietf-extracted-YANG-modules -v $(EXPSVCJSON) $(YANGDIR)/yanglib-ac-svc.json
 
 %-diagram.txt: $(YANGDIR)/%.yang
 	pyang $(OPTIONS) -p $(YANG_PATH) $< > $@
