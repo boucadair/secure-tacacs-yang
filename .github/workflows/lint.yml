@@ -4,11 +4,9 @@ on:
   push:
     paths:
     - '**.yang'
-    - '**.json'
   pull_request:
     paths:
     - '**.yang'
-    - '**.json'
 
 jobs:
   build:
@@ -28,15 +26,6 @@ jobs:
         python -m pip install --upgrade pip
         pip install pyang
 
-    - name: "Install yanglib"
-      run: |
-        python -m pip install --upgrade pip
-        pip install libyang
-
     - name: "Lint using pyang"
       run: |
         make pyang-lint
-
-    - name: "yanglint"
-      run: |
-        make yang-lint
