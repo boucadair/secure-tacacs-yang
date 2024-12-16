@@ -459,8 +459,8 @@ Table of Contents
           Also, this revision:
             - updates the reference of 'tacacs-plus' identity
               to also cite RFC SSSS
-            - fixes a 'must' statement under 'tacacs-plus' container
-              to include a missing prefix
+            - fixes a check in 'must' statement under 'tacacs-plus'
+              container and includes a missing prefix
             - updates the description of the 'name' under 'server'
               list to better reflect the intended use
             - removes the default statement for the 'port' under
@@ -986,9 +986,9 @@ Table of Contents
        description
          "Grouping for TACACS+ attributes.";
        container tacacs-plus {
-         must "not(derived-from-or-self(../sys:authentication"
+         must "derived-from-or-self(../sys:authentication"
             + "/sys:user-authentication-order, "
-            + "'sys-tcs-plus:tacacs-plus'))"
+            + "'sys-tcs-plus:tacacs-plus')"
             + " or bit-is-set(server/server-type,'authentication')" {
            error-message
              "When 'tacacs-plus' is used as a system authentication
