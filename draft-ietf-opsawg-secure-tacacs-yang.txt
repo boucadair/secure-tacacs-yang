@@ -271,7 +271,7 @@ Table of Contents
              +--rw single-connection?             boolean
              +--rw timeout?                       uint16
              +--ro statistics
-                +--ro discontinuity-time     yang:date-and-time
+                +--ro discontinuity-time?    yang:date-and-time
                 +--ro connection-opens?      yang:counter64
                 +--ro connection-closes?     yang:counter64
                 +--ro connection-aborts?     yang:counter64
