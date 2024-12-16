@@ -73,13 +73,14 @@ Table of Contents
      7.2.  Informative References
    Appendix A.  Example TACACS+ Authentication Configuration with
            Shared Secret
-   Appendix B.  Example TACACS+ Authentication Configuration with
-           Central Keystore
-   Appendix C.  Example TACACS+ Authentication Configuration with
-           Explicit Certificate Definitions
-   Appendix D.  Example TACACS+ Authentication Configuration with
+   Appendix B.  TACACS+TLS Examples
+     B.1.  Example TACACS+ Authentication Configuration with Central
+           Keystore
+     B.2.  Example TACACS+ Authentication Configuration with Explicit
+           Certificate Definitions
+     B.3.  Example TACACS+ Authentication Configuration with
            Certificate References
-   Appendix E.  Full Tree
+   Appendix C.  Full Tree
    Acknowledgments
    Authors' Addresses
 
@@ -106,9 +107,11 @@ Table of Contents
 
    *  Add support for TLS [I-D.ietf-opsawg-tacacs-tls13]
 
-   *  Fix a must statement to indicate a missing prefix
+   *  Fix a must statement and indicate a missing prefix
 
    *  Fix errors in the example provided in Appendix A of [RFC9105]
+
+   *  Add new examples to illustrate the use of TACACS+TLS data nodes
 
    Detailed YANG changes are listed in Section 4.
 
@@ -1440,11 +1443,18 @@ Appendix A.  Example TACACS+ Authentication Configuration with Shared
 
                     Figure 2: Example with Shared Secret
 
-Appendix B.  Example TACACS+ Authentication Configuration with Central
-             Keystore
+Appendix B.  TACACS+TLS Examples
 
-   Figure 3 shows a configuration example with use of central-keystore-
-   references for the client identity and central-truststore-references
+   This section provides example to illustrate the configuration of
+   TACACS+TLS clients.
+
+   These examples follow the convention used in Section 1.5 of [RFC9645]
+   for binary data that has been base64 encoded.
+
+B.1.  Example TACACS+ Authentication Configuration with Central Keystore
+
+   Figure 3 shows a configuration example with use of 'central-keystore-
+   reference' for the client identity and 'central-truststore-reference'
    for server authentication from a keystore.
 
    =============== NOTE: '\' line wrapping per RFC 8792 ================
@@ -1491,10 +1501,10 @@ Appendix B.  Example TACACS+ Authentication Configuration with Central
 
             Figure 3: Example with TACACS+TLS with Central Store
 
-Appendix C.  Example TACACS+ Authentication Configuration with Explicit
-             Certificate Definitions
+B.2.  Example TACACS+ Authentication Configuration with Explicit
+      Certificate Definitions
 
-   Figure 4 shows a configuration example with inline-definitions for
+   Figure 4 shows a configuration example with 'inline-definition' for
    the client identity and server authentication.
 
    =============== NOTE: '\' line wrapping per RFC 8792 ================
@@ -1566,8 +1576,8 @@ Appendix C.  Example TACACS+ Authentication Configuration with Explicit
 
    Figure 4: Example with TACACS+TLS with Inline Certificate Definitions
 
-Appendix D.  Example TACACS+ Authentication Configuration with
-             Certificate References
+B.3.  Example TACACS+ Authentication Configuration with Certificate
+      References
 
    Figure 5 shows a configuration example with credential references for
    multiple service instances: four server instances are configured with
@@ -1678,7 +1688,7 @@ Appendix D.  Example TACACS+ Authentication Configuration with
 
              Figure 5: Example with TACACS+TLS with References
 
-Appendix E.  Full Tree
+Appendix C.  Full Tree
 
    The full tree structure is shown below:
 
