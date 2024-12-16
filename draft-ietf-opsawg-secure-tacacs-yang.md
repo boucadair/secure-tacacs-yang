@@ -282,18 +282,9 @@ This YANG module uses groupings from other YANG modules that define nodes that m
 
 # TACACS+TLS Examples
 
-This section provides example to illustrate the configuration of TACACS+TLS clients.
+This section provides examples to illustrate the configuration of TACACS+TLS clients.
 
 These examples follow the convention used in {{Section 1.5 of !RFC9645}} for binary data that has been base64 encoded.
-
-## Example TACACS+ Authentication Configuration with Central Keystore
-
-{{exce}} shows a configuration example with  use of 'central-keystore-reference' for the client identity and 'central-truststore-reference' for server authentication from a keystore.
-
-~~~ json
-{::include-fold ./json-example/tls-ex-central.json}
-~~~
-{: #exce title="Example with TACACS+TLS with Central Store"}
 
 ## Example TACACS+ Authentication Configuration with Explicit Certificate Definitions
 
@@ -312,6 +303,15 @@ These examples follow the convention used in {{Section 1.5 of !RFC9645}} for bin
 {::include-fold ./json-example/tls-ex-with-ref.json}
 ~~~
 {: #ex-ref title="Example with TACACS+TLS with References"}
+
+## Example TACACS+ Authentication Configuration with Central Keystore
+
+{{exce}} shows a configuration example with  use of 'central-keystore-reference' for the client identity and 'central-truststore-reference' for server authentication.
+
+~~~ json
+{::include-fold ./json-example/tls-ex-central.json}
+~~~
+{: #exce title="Example with TACACS+TLS with Central Store"}
 
 # Full Tree {#sec-full}
 
