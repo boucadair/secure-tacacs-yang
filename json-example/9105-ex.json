@@ -14,7 +14,7 @@
           "address": "192.0.2.2",
           "shared-secret": "QaEfThUkO198010075460923+h3TbE8n",
           "source-ip": "192.0.2.12",
-          "timeout": "10"
+          "timeout": 10
         }
       ]
     }
