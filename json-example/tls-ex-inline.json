@@ -1,0 +1,58 @@
+{
+  "ietf-system:system": {
+    "authentication": {
+      "user-authentication-order": [
+        "ietf-system-tacacs-plus:tacacs-plus",
+        "ietf-system:local-users"
+      ]
+    },
+    "ietf-system-tacacs-plus:tacacs-plus": {
+      "server": [
+        {
+          "name": "instance-1",
+          "server-type": "authentication",
+          "domain-name": "tacacs.example.com",
+          "sni-enabled": true,
+          "address": "2001:db8::1",
+          "port": 1234,
+          "client-identity": {
+            "certificate": {
+              "inline-definition": {
+                "public-key-format": "ietf-crypto-types:subject-public-key-info-format",
+                "public-key": "ce4d4a274dcf41e0b20877108654d8ea3b14f115b15c249ea1def857b0fc12ea",
+                "private-key-format": "ietf-crypto-types:rsa-private-key-format",
+                "cleartext-private-key": "736af466af183169a49ee18753d3c69273a5c0bdf3cf3f6dbd6a1c71180b39da",
+                "cert-data": "0fe02484f34f439517218bd3f47d4c42c4c32626bdb916a77c49a646a54b5847"
+              }
+            }
+          },
+          "server-authentication": {
+            "ca-certs": {
+              "inline-definition": {
+                "certificate": [
+                  {
+                    "name": "CA-Certificate-1",
+                    "cert-data": "6dd480bf28fac82552fc7b9be84c165284d1a352c7c535f34f7253552ad4daf4"
+                  }
+                ]
+              }
+            }
+          },
+          "hello-params": {
+            "tls-versions": {
+              "min": "ietf-tls-common:tls13",
+              "max": "ietf-tls-common:tls13"
+            },
+            "cipher-suites": {
+              "cipher-suite": [
+                "TLS_AES_128_GCM_SHA256"
+              ]
+            }
+          },
+          "single-connection": false,
+          "timeout": 10
+        }
+      ]
+    }
+  }
+}
