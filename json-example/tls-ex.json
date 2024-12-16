@@ -1,0 +1,62 @@
+{
+  "ietf-system:system": {
+    "ietf-system-tacacs-plus:tacacs-plus": {
+      "client-credentials": [
+        {
+          "id": "client-cred-1",
+          "certificate": {
+            "inline-definition": {
+              "private-key-format": "ct:rsa-private-key-format",
+              "cleartext-private-key": "736af466af183169a49ee18753d3c69273a5c0bdf3cf3f6dbd6a1c71180b39da",
+              "cert-data": "0fe02484f34f439517218bd3f47d4c42c4c32626bdb916a77c49a646a54b5847"
+            }
+          }
+        }
+      ],
+      "server-credentials": [
+        {
+          "id": "server-cred-1",
+          "ca-certs": {
+            "inline-definition": {
+              "certificate": [
+                {
+                  "name": "CA-Certificate-1",
+                  "cert-data": "6dd480bf28fac82552fc7b9be84c165284d1a352c7c535f34f7253552ad4daf4"
+                }
+              ]
+            }
+          }
+        }
+      ],
+      "server": [
+        {
+          "name": "tacacs-server-1",
+          "server-type": "authentication",
+          "domain-name": "tacacs.example.com",
+          "sni-enabled": true,
+          "address": "2001:db8::1",
+          "port": 1234,
+          "client-identity": {
+            "credentials-reference": "client-cred-1"
+          },
+          "server-authentication": {
+            "credentials-reference": "server-cred-1"
+          },
+          "hello-params": {
+            "tls-versions": {
+              "min": "tlscmn:tls13",
+              "max": "tlscmn:tls13"
+            },
+            "cipher-suites": {
+              "cipher-suite": [
+                "TLS_AES_128_GCM_SHA256"
+              ]
+            }
+          },
+          "single-connection": false,
+          "timeout": 10
+        }
+      ]
+    }
+  }
+}
