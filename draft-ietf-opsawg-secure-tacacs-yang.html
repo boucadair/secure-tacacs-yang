@@ -1207,16 +1207,25 @@ svg :is([fill="white"], [fill^="#fff"]) {
             </ul>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8">
-            <p id="section-toc.1-1.8.1"><a href="#appendix-A" class="auto internal xref">Appendix A</a>.  <a href="#name-example-tacacs-authenticati" class="internal xref">Example TACACS+ Authentication Configuration</a></p>
+            <p id="section-toc.1-1.8.1"><a href="#appendix-A" class="auto internal xref">Appendix A</a>.  <a href="#name-example-tacacs-authenticati" class="internal xref">Example TACACS+ Authentication Configuration with Shared Secret</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9">
-            <p id="section-toc.1-1.9.1"><a href="#appendix-B" class="auto internal xref">Appendix B</a>.  <a href="#name-full-tree" class="internal xref">Full Tree</a></p>
+            <p id="section-toc.1-1.9.1"><a href="#appendix-B" class="auto internal xref">Appendix B</a>.  <a href="#name-example-tacacs-authenticatio" class="internal xref">Example TACACS+ Authentication Configuration with Central Keystore</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10">
-            <p id="section-toc.1-1.10.1"><a href="#appendix-C" class="auto internal xref"></a><a href="#name-acknowledgments" class="internal xref">Acknowledgments</a></p>
+            <p id="section-toc.1-1.10.1"><a href="#appendix-C" class="auto internal xref">Appendix C</a>.  <a href="#name-example-tacacs-authentication" class="internal xref">Example TACACS+ Authentication Configuration with Explicit Certificate Definitions</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.11">
-            <p id="section-toc.1-1.11.1"><a href="#appendix-D" class="auto internal xref"></a><a href="#name-authors-addresses" class="internal xref">Authors' Addresses</a></p>
+            <p id="section-toc.1-1.11.1"><a href="#appendix-D" class="auto internal xref">Appendix D</a>.  <a href="#name-example-tacacs-authentication-" class="internal xref">Example TACACS+ Authentication Configuration with Certificate References</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.12">
+            <p id="section-toc.1-1.12.1"><a href="#appendix-E" class="auto internal xref">Appendix E</a>.  <a href="#name-full-tree" class="internal xref">Full Tree</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.13">
+            <p id="section-toc.1-1.13.1"><a href="#appendix-F" class="auto internal xref"></a><a href="#name-acknowledgments" class="internal xref">Acknowledgments</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.14">
+            <p id="section-toc.1-1.14.1"><a href="#appendix-G" class="auto internal xref"></a><a href="#name-authors-addresses" class="internal xref">Authors' Addresses</a></p>
 </li>
         </ul>
 </nav>
@@ -2594,10 +2603,10 @@ i.e., upper case, lower case, numeric, and punctuation.<a href="#section-5-5.4.1
 </div>
 </section>
 </div>
-<div id="example-tacacs-authentication-configuration">
+<div id="example-tacacs-authentication-configuration-with-shared-secret">
 <section id="appendix-A">
       <h2 id="name-example-tacacs-authenticati">
-<a href="#appendix-A" class="section-number selfRef">Appendix A. </a><a href="#name-example-tacacs-authenticati" class="section-name selfRef">Example TACACS+ Authentication Configuration</a>
+<a href="#appendix-A" class="section-number selfRef">Appendix A. </a><a href="#name-example-tacacs-authenticati" class="section-name selfRef">Example TACACS+ Authentication Configuration with Shared Secret</a>
       </h2>
 <p id="appendix-A-1"><a href="#ex9105" class="auto internal xref">Figure 2</a> shows an example where a TACACS+ authentication server instance is configured using shared secret for authentication.<a href="#appendix-A-1" class="pilcrow">¶</a></p>
 <span id="name-example-with-shared-secret"></span><div id="ex9105">
@@ -2634,13 +2643,275 @@ i.e., upper case, lower case, numeric, and punctuation.<a href="#section-5-5.4.1
 </div>
 </section>
 </div>
-<div id="sec-full">
+<div id="example-tacacs-authentication-configuration-with-central-keystore">
 <section id="appendix-B">
-      <h2 id="name-full-tree">
-<a href="#appendix-B" class="section-number selfRef">Appendix B. </a><a href="#name-full-tree" class="section-name selfRef">Full Tree</a>
+      <h2 id="name-example-tacacs-authenticatio">
+<a href="#appendix-B" class="section-number selfRef">Appendix B. </a><a href="#name-example-tacacs-authenticatio" class="section-name selfRef">Example TACACS+ Authentication Configuration with Central Keystore</a>
       </h2>
-<p id="appendix-B-1">The full tree structure is shown below:<a href="#appendix-B-1" class="pilcrow">¶</a></p>
-<div class="alignLeft art-text artwork" id="appendix-B-2">
+<p id="appendix-B-1"><a href="#exce" class="auto internal xref">Figure 3</a> shows a configuration example with  use of central-keystore-references for the client identity and central-truststore-references for server authentication from a keystore.<a href="#appendix-B-1" class="pilcrow">¶</a></p>
+<span id="name-example-with-tacacstls-with"></span><div id="exce">
+<figure id="figure-3">
+        <div class="lang-json sourcecode" id="appendix-B-2.1">
+<pre>
+=============== NOTE: '\' line wrapping per RFC 8792 ================
+
+{
+  "ietf-system:system": {
+    "authentication": {
+      "user-authentication-order": [
+        "ietf-system-tacacs-plus:tacacs-plus"
+      ]
+    },
+    "ietf-system-tacacs-plus:tacacs-plus": {
+      "server": [
+        {
+          "name": "instance-1",
+          "server-type": "authentication",
+          "domain-name": "tacacs.example.com",
+          "sni-enabled": true,
+          "address": "2001:db8::1",
+          "port": 1234,
+          "client-identity": {
+            "certificate": {
+              "central-keystore-reference": {
+                "asymmetric-key": "rsa-asymmetric-key",
+                "certificate": "ex-rsa-cert"
+              }
+            }
+          },
+          "server-authentication": {
+            "ca-certs": {
+              "central-truststore-reference": "trusted-server-ca-\
+                                                               certs"
+            },
+            "ee-certs": {
+              "central-truststore-reference": "trusted-server-ee-\
+                                                               certs"
+            }
+          }
+        }
+      ]
+    }
+  }
+}
+</pre>
+</div>
+<figcaption><a href="#figure-3" class="selfRef">Figure 3</a>:
+<a href="#name-example-with-tacacstls-with" class="selfRef">Example with TACACS+TLS with Central Store</a>
+        </figcaption></figure>
+</div>
+</section>
+</div>
+<div id="example-tacacs-authentication-configuration-with-explicit-certificate-definitions">
+<section id="appendix-C">
+      <h2 id="name-example-tacacs-authentication">
+<a href="#appendix-C" class="section-number selfRef">Appendix C. </a><a href="#name-example-tacacs-authentication" class="section-name selfRef">Example TACACS+ Authentication Configuration with Explicit Certificate Definitions</a>
+      </h2>
+<p id="appendix-C-1"><a href="#exin" class="auto internal xref">Figure 4</a> shows a configuration example with inline-definitions for the client identity and server authentication.<a href="#appendix-C-1" class="pilcrow">¶</a></p>
+<span id="name-example-with-tacacstls-with-"></span><div id="exin">
+<figure id="figure-4">
+        <div class="breakable lang-json sourcecode" id="appendix-C-2.1">
+<pre>
+=============== NOTE: '\' line wrapping per RFC 8792 ================
+
+{
+  "ietf-system:system": {
+    "authentication": {
+      "user-authentication-order": [
+        "ietf-system-tacacs-plus:tacacs-plus",
+        "ietf-system:local-users"
+      ]
+    },
+    "ietf-system-tacacs-plus:tacacs-plus": {
+      "server": [
+        {
+          "name": "instance-1",
+          "server-type": "authentication",
+          "domain-name": "tacacs.example.com",
+          "sni-enabled": true,
+          "address": "2001:db8::1",
+          "port": 1234,
+          "client-identity": {
+            "certificate": {
+              "inline-definition": {
+                "public-key-format": "ietf-crypto-types:subject-\
+                                             public-key-info-format",
+                "public-key": "\
+   ce4d4a274dcf41e0b20877108654d8ea3b14f115b15c249ea1def857b0fc12ea",
+                "private-key-format": "ietf-crypto-types:rsa-private\
+                                                        -key-format",
+                "cleartext-private-key": "\
+   736af466af183169a49ee18753d3c69273a5c0bdf3cf3f6dbd6a1c71180b39da",
+                "cert-data": "\
+    0fe02484f34f439517218bd3f47d4c42c4c32626bdb916a77c49a646a54b5847"
+              }
+            }
+          },
+          "server-authentication": {
+            "ca-certs": {
+              "inline-definition": {
+                "certificate": [
+                  {
+                    "name": "CA-Certificate-1",
+                    "cert-data": "\
+    6dd480bf28fac82552fc7b9be84c165284d1a352c7c535f34f7253552ad4daf4"
+                  }
+                ]
+              }
+            }
+          },
+          "hello-params": {
+            "tls-versions": {
+              "min": "ietf-tls-common:tls13",
+              "max": "ietf-tls-common:tls13"
+            },
+            "cipher-suites": {
+              "cipher-suite": [
+                "TLS_AES_128_GCM_SHA256"
+              ]
+            }
+          },
+          "single-connection": false,
+          "timeout": 10
+        }
+      ]
+    }
+  }
+}
+</pre>
+</div>
+<figcaption><a href="#figure-4" class="selfRef">Figure 4</a>:
+<a href="#name-example-with-tacacstls-with-" class="selfRef">Example with TACACS+TLS with Inline Certificate Definitions</a>
+        </figcaption></figure>
+</div>
+</section>
+</div>
+<div id="example-tacacs-authentication-configuration-with-certificate-references">
+<section id="appendix-D">
+      <h2 id="name-example-tacacs-authentication-">
+<a href="#appendix-D" class="section-number selfRef">Appendix D. </a><a href="#name-example-tacacs-authentication-" class="section-name selfRef">Example TACACS+ Authentication Configuration with Certificate References</a>
+      </h2>
+<p id="appendix-D-1"><a href="#ex-ref" class="auto internal xref">Figure 5</a> shows a configuration example with credential references for multiple service instances: four server instances are configured with all using the same credentials. These instances form a redundancy group for both IPv4 and IPv6.<a href="#appendix-D-1" class="pilcrow">¶</a></p>
+<span id="name-example-with-tacacstls-with-r"></span><div id="ex-ref">
+<figure id="figure-5">
+        <div class="breakable lang-json sourcecode" id="appendix-D-2.1">
+<pre>
+=============== NOTE: '\' line wrapping per RFC 8792 ================
+
+{
+  "ietf-system:system": {
+    "ietf-system-tacacs-plus:tacacs-plus": {
+      "client-credentials": [
+        {
+          "id": "client-cred-1",
+          "certificate": {
+            "inline-definition": {
+              "public-key-format": "ietf-crypto-types:subject-public\
+                                                   -key-info-format",
+              "public-key": "\
+   ce4d4a274dcf41e0b20877108654d8ea3b14f115b15c249ea1def857b0fc12ea",
+              "private-key-format": "ietf-crypto-types:rsa-private-\
+                                                         key-format",
+              "cleartext-private-key": "\
+   736af466af183169a49ee18753d3c69273a5c0bdf3cf3f6dbd6a1c71180b39da",
+              "cert-data": "\
+    0fe02484f34f439517218bd3f47d4c42c4c32626bdb916a77c49a646a54b5847"
+            }
+          }
+        }
+      ],
+      "server-credentials": [
+        {
+          "id": "server-cred-1",
+          "ca-certs": {
+            "inline-definition": {
+              "certificate": [
+                {
+                  "name": "CA-Certificate-1",
+                  "cert-data": "\
+    6dd480bf28fac82552fc7b9be84c165284d1a352c7c535f34f7253552ad4daf4"
+                }
+              ]
+            }
+          }
+        }
+      ],
+      "server": [
+        {
+          "name": "primary-v6",
+          "server-type": "authentication",
+          "domain-name": "tacacs.example.com",
+          "sni-enabled": true,
+          "address": "2001:db8::1",
+          "port": 1234,
+          "client-identity": {
+            "credentials-reference": "client-cred-1"
+          },
+          "server-authentication": {
+            "credentials-reference": "server-cred-1"
+          }
+        },
+        {
+          "name": "backup-v6",
+          "server-type": "authentication",
+          "domain-name": "tacacs.example.com",
+          "sni-enabled": true,
+          "address": "2001:db8::2",
+          "port": 1234,
+          "client-identity": {
+            "credentials-reference": "client-cred-1"
+          },
+          "server-authentication": {
+            "credentials-reference": "server-cred-1"
+          }
+        },
+        {
+          "name": "primary-v4",
+          "server-type": "authentication",
+          "domain-name": "tacacs.example.com",
+          "sni-enabled": true,
+          "address": "192.0.2.1",
+          "port": 49,
+          "client-identity": {
+            "credentials-reference": "client-cred-1"
+          },
+          "server-authentication": {
+            "credentials-reference": "server-cred-1"
+          }
+        },
+        {
+          "name": "backup-v4",
+          "server-type": "authentication",
+          "domain-name": "tacacs.example.com",
+          "sni-enabled": true,
+          "address": "192.0.2.2",
+          "port": 49,
+          "client-identity": {
+            "credentials-reference": "client-cred-1"
+          },
+          "server-authentication": {
+            "credentials-reference": "server-cred-1"
+          }
+        }
+      ]
+    }
+  }
+}
+</pre>
+</div>
+<figcaption><a href="#figure-5" class="selfRef">Figure 5</a>:
+<a href="#name-example-with-tacacstls-with-r" class="selfRef">Example with TACACS+TLS with References</a>
+        </figcaption></figure>
+</div>
+</section>
+</div>
+<div id="sec-full">
+<section id="appendix-E">
+      <h2 id="name-full-tree">
+<a href="#appendix-E" class="section-number selfRef">Appendix E. </a><a href="#name-full-tree" class="section-name selfRef">Full Tree</a>
+      </h2>
+<p id="appendix-E-1">The full tree structure is shown below:<a href="#appendix-E-1" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="appendix-E-2">
 <pre>
 =============== NOTE: '\' line wrapping per RFC 8792 ================
 
@@ -3129,30 +3400,30 @@ module: ietf-system-tacacs-plus
              +--ro cert-errors?           yang:counter64
              +--ro rpk-errors?            yang:counter64
                      {tlsc:server-auth-raw-public-key}?
-</pre><a href="#appendix-B-2" class="pilcrow">¶</a>
+</pre><a href="#appendix-E-2" class="pilcrow">¶</a>
 </div>
 </section>
 </div>
 <div id="acknowledgments">
-<section id="appendix-C">
+<section id="appendix-F">
       <h2 id="name-acknowledgments">
 <a href="#name-acknowledgments" class="section-name selfRef">Acknowledgments</a>
       </h2>
-<p id="appendix-C-1">The document leverages data structures defined in <span>[<a href="#RFC9645" class="cite xref">RFC9645</a>]</span>.<a href="#appendix-C-1" class="pilcrow">¶</a></p>
-<p id="appendix-C-2">Thanks to Joe Clarke and Tom Petch for the review and comments.<a href="#appendix-C-2" class="pilcrow">¶</a></p>
-<span class="break"></span><dl class="dlParallel" id="appendix-C-3">
-        <dt id="appendix-C-3.1">Acknowledgments from RFC 9105:</dt>
-        <dd style="margin-left: 1.5em" id="appendix-C-3.2">
-          <p id="appendix-C-3.2.1">The authors wish to thank Alex Campbell, John Heasley, Ebben Aries,
+<p id="appendix-F-1">The document leverages data structures defined in <span>[<a href="#RFC9645" class="cite xref">RFC9645</a>]</span>.<a href="#appendix-F-1" class="pilcrow">¶</a></p>
+<p id="appendix-F-2">Thanks to Joe Clarke and Tom Petch for the review and comments.<a href="#appendix-F-2" class="pilcrow">¶</a></p>
+<span class="break"></span><dl class="dlParallel" id="appendix-F-3">
+        <dt id="appendix-F-3.1">Acknowledgments from RFC 9105:</dt>
+        <dd style="margin-left: 1.5em" id="appendix-F-3.2">
+          <p id="appendix-F-3.2.1">The authors wish to thank Alex Campbell, John Heasley, Ebben Aries,
  Alan DeKok, Joe Clarke, Tom Petch, Robert Wilton, and many others for
- their helpful comments and suggestions.<a href="#appendix-C-3.2.1" class="pilcrow">¶</a></p>
+ their helpful comments and suggestions.<a href="#appendix-F-3.2.1" class="pilcrow">¶</a></p>
 </dd>
       <dd class="break"></dd>
 </dl>
 </section>
 </div>
 <div id="authors-addresses">
-<section id="appendix-D">
+<section id="appendix-G">
       <h2 id="name-authors-addresses">
 <a href="#name-authors-addresses" class="section-name selfRef">Authors' Addresses</a>
       </h2>

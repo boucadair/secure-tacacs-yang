@@ -71,8 +71,15 @@ Table of Contents
    7.  References
      7.1.  Normative References
      7.2.  Informative References
-   Appendix A.  Example TACACS+ Authentication Configuration
-   Appendix B.  Full Tree
+   Appendix A.  Example TACACS+ Authentication Configuration with
+           Shared Secret
+   Appendix B.  Example TACACS+ Authentication Configuration with
+           Central Keystore
+   Appendix C.  Example TACACS+ Authentication Configuration with
+           Explicit Certificate Definitions
+   Appendix D.  Example TACACS+ Authentication Configuration with
+           Certificate References
+   Appendix E.  Full Tree
    Acknowledgments
    Authors' Addresses
 
@@ -1402,7 +1409,8 @@ Table of Contents
               Plus (TACACS+)", RFC 9105, DOI 10.17487/RFC9105, August
               2021, <https://www.rfc-editor.org/rfc/rfc9105>.
 
-Appendix A.  Example TACACS+ Authentication Configuration
+Appendix A.  Example TACACS+ Authentication Configuration with Shared
+             Secret
 
    Figure 2 shows an example where a TACACS+ authentication server
    instance is configured using shared secret for authentication.
@@ -1432,7 +1440,245 @@ Appendix A.  Example TACACS+ Authentication Configuration
 
                     Figure 2: Example with Shared Secret
 
-Appendix B.  Full Tree
+Appendix B.  Example TACACS+ Authentication Configuration with Central
+             Keystore
+
+   Figure 3 shows a configuration example with use of central-keystore-
+   references for the client identity and central-truststore-references
+   for server authentication from a keystore.
+
+   =============== NOTE: '\' line wrapping per RFC 8792 ================
+
+   {
+     "ietf-system:system": {
+       "authentication": {
+         "user-authentication-order": [
+           "ietf-system-tacacs-plus:tacacs-plus"
+         ]
+       },
+       "ietf-system-tacacs-plus:tacacs-plus": {
+         "server": [
+           {
+             "name": "instance-1",
+             "server-type": "authentication",
+             "domain-name": "tacacs.example.com",
+             "sni-enabled": true,
+             "address": "2001:db8::1",
+             "port": 1234,
+             "client-identity": {
+               "certificate": {
+                 "central-keystore-reference": {
+                   "asymmetric-key": "rsa-asymmetric-key",
+                   "certificate": "ex-rsa-cert"
+                 }
+               }
+             },
+             "server-authentication": {
+               "ca-certs": {
+                 "central-truststore-reference": "trusted-server-ca-\
+                                                                  certs"
+               },
+               "ee-certs": {
+                 "central-truststore-reference": "trusted-server-ee-\
+                                                                  certs"
+               }
+             }
+           }
+         ]
+       }
+     }
+   }
+
+            Figure 3: Example with TACACS+TLS with Central Store
+
+Appendix C.  Example TACACS+ Authentication Configuration with Explicit
+             Certificate Definitions
+
+   Figure 4 shows a configuration example with inline-definitions for
+   the client identity and server authentication.
+
+   =============== NOTE: '\' line wrapping per RFC 8792 ================
+
+   {
+     "ietf-system:system": {
+       "authentication": {
+         "user-authentication-order": [
+           "ietf-system-tacacs-plus:tacacs-plus",
+           "ietf-system:local-users"
+         ]
+       },
+       "ietf-system-tacacs-plus:tacacs-plus": {
+         "server": [
+           {
+             "name": "instance-1",
+             "server-type": "authentication",
+             "domain-name": "tacacs.example.com",
+             "sni-enabled": true,
+             "address": "2001:db8::1",
+             "port": 1234,
+             "client-identity": {
+               "certificate": {
+                 "inline-definition": {
+                   "public-key-format": "ietf-crypto-types:subject-\
+                                                public-key-info-format",
+                   "public-key": "\
+      ce4d4a274dcf41e0b20877108654d8ea3b14f115b15c249ea1def857b0fc12ea",
+                   "private-key-format": "ietf-crypto-types:rsa-private\
+                                                           -key-format",
+                   "cleartext-private-key": "\
+      736af466af183169a49ee18753d3c69273a5c0bdf3cf3f6dbd6a1c71180b39da",
+                   "cert-data": "\
+       0fe02484f34f439517218bd3f47d4c42c4c32626bdb916a77c49a646a54b5847"
+                 }
+               }
+             },
+             "server-authentication": {
+               "ca-certs": {
+                 "inline-definition": {
+                   "certificate": [
+                     {
+                       "name": "CA-Certificate-1",
+                       "cert-data": "\
+       6dd480bf28fac82552fc7b9be84c165284d1a352c7c535f34f7253552ad4daf4"
+                     }
+                   ]
+                 }
+               }
+             },
+             "hello-params": {
+               "tls-versions": {
+                 "min": "ietf-tls-common:tls13",
+                 "max": "ietf-tls-common:tls13"
+               },
+               "cipher-suites": {
+                 "cipher-suite": [
+                   "TLS_AES_128_GCM_SHA256"
+                 ]
+               }
+             },
+             "single-connection": false,
+             "timeout": 10
+           }
+         ]
+       }
+     }
+   }
+
+   Figure 4: Example with TACACS+TLS with Inline Certificate Definitions
+
+Appendix D.  Example TACACS+ Authentication Configuration with
+             Certificate References
+
+   Figure 5 shows a configuration example with credential references for
+   multiple service instances: four server instances are configured with
+   all using the same credentials.  These instances form a redundancy
+   group for both IPv4 and IPv6.
+
+   =============== NOTE: '\' line wrapping per RFC 8792 ================
+
+   {
+     "ietf-system:system": {
+       "ietf-system-tacacs-plus:tacacs-plus": {
+         "client-credentials": [
+           {
+             "id": "client-cred-1",
+             "certificate": {
+               "inline-definition": {
+                 "public-key-format": "ietf-crypto-types:subject-public\
+                                                      -key-info-format",
+                 "public-key": "\
+      ce4d4a274dcf41e0b20877108654d8ea3b14f115b15c249ea1def857b0fc12ea",
+                 "private-key-format": "ietf-crypto-types:rsa-private-\
+                                                            key-format",
+                 "cleartext-private-key": "\
+      736af466af183169a49ee18753d3c69273a5c0bdf3cf3f6dbd6a1c71180b39da",
+                 "cert-data": "\
+       0fe02484f34f439517218bd3f47d4c42c4c32626bdb916a77c49a646a54b5847"
+               }
+             }
+           }
+         ],
+         "server-credentials": [
+           {
+             "id": "server-cred-1",
+             "ca-certs": {
+               "inline-definition": {
+                 "certificate": [
+                   {
+                     "name": "CA-Certificate-1",
+                     "cert-data": "\
+       6dd480bf28fac82552fc7b9be84c165284d1a352c7c535f34f7253552ad4daf4"
+                   }
+                 ]
+               }
+             }
+           }
+         ],
+         "server": [
+           {
+             "name": "primary-v6",
+             "server-type": "authentication",
+             "domain-name": "tacacs.example.com",
+             "sni-enabled": true,
+             "address": "2001:db8::1",
+             "port": 1234,
+             "client-identity": {
+               "credentials-reference": "client-cred-1"
+             },
+             "server-authentication": {
+               "credentials-reference": "server-cred-1"
+             }
+           },
+           {
+             "name": "backup-v6",
+             "server-type": "authentication",
+             "domain-name": "tacacs.example.com",
+             "sni-enabled": true,
+             "address": "2001:db8::2",
+             "port": 1234,
+             "client-identity": {
+               "credentials-reference": "client-cred-1"
+             },
+             "server-authentication": {
+               "credentials-reference": "server-cred-1"
+             }
+           },
+           {
+             "name": "primary-v4",
+             "server-type": "authentication",
+             "domain-name": "tacacs.example.com",
+             "sni-enabled": true,
+             "address": "192.0.2.1",
+             "port": 49,
+             "client-identity": {
+               "credentials-reference": "client-cred-1"
+             },
+             "server-authentication": {
+               "credentials-reference": "server-cred-1"
+             }
+           },
+           {
+             "name": "backup-v4",
+             "server-type": "authentication",
+             "domain-name": "tacacs.example.com",
+             "sni-enabled": true,
+             "address": "192.0.2.2",
+             "port": 49,
+             "client-identity": {
+               "credentials-reference": "client-cred-1"
+             },
+             "server-authentication": {
+               "credentials-reference": "server-cred-1"
+             }
+           }
+         ]
+       }
+     }
+   }
+
+             Figure 5: Example with TACACS+TLS with References
+
+Appendix E.  Full Tree
 
    The full tree structure is shown below:
 
