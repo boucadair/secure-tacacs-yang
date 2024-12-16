@@ -304,15 +304,6 @@ These examples follow the convention used in {{Section 1.5 of !RFC9645}} for bin
 ~~~
 {: #ex-ref title="Example with TACACS+TLS with References"}
 
-## Example TACACS+ Authentication Configuration with Central Keystore
-
-{{exce}} shows a configuration example with  use of 'central-keystore-reference' for the client identity and 'central-truststore-reference' for server authentication.
-
-~~~ json
-{::include-fold ./json-example/tls-ex-central.json}
-~~~
-{: #exce title="Example with TACACS+TLS with Central Store"}
-
 # Full Tree {#sec-full}
 
 The full tree structure is shown below:
