@@ -1213,13 +1213,13 @@ svg :is([fill="white"], [fill^="#fff"]) {
             <p id="section-toc.1-1.9.1"><a href="#appendix-B" class="auto internal xref">Appendix B</a>.  <a href="#name-tacacstls-examples" class="internal xref">TACACS+TLS Examples</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9.2.1">
-                <p id="section-toc.1-1.9.2.1.1"><a href="#appendix-B.1" class="auto internal xref">B.1</a>.  <a href="#name-example-tacacs-authenticatio" class="internal xref">Example TACACS+ Authentication Configuration with Central Keystore</a></p>
+                <p id="section-toc.1-1.9.2.1.1"><a href="#appendix-B.1" class="auto internal xref">B.1</a>.  <a href="#name-example-tacacs-authenticatio" class="internal xref">Example TACACS+ Authentication Configuration with Explicit Certificate Definitions</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9.2.2">
-                <p id="section-toc.1-1.9.2.2.1"><a href="#appendix-B.2" class="auto internal xref">B.2</a>.  <a href="#name-example-tacacs-authentication" class="internal xref">Example TACACS+ Authentication Configuration with Explicit Certificate Definitions</a></p>
+                <p id="section-toc.1-1.9.2.2.1"><a href="#appendix-B.2" class="auto internal xref">B.2</a>.  <a href="#name-example-tacacs-authentication" class="internal xref">Example TACACS+ Authentication Configuration with Certificate References</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9.2.3">
-                <p id="section-toc.1-1.9.2.3.1"><a href="#appendix-B.3" class="auto internal xref">B.3</a>.  <a href="#name-example-tacacs-authentication-" class="internal xref">Example TACACS+ Authentication Configuration with Certificate References</a></p>
+                <p id="section-toc.1-1.9.2.3.1"><a href="#appendix-B.3" class="auto internal xref">B.3</a>.  <a href="#name-example-tacacs-authentication-" class="internal xref">Example TACACS+ Authentication Configuration with Central Keystore</a></p>
 </li>
             </ul>
 </li>
@@ -2656,76 +2656,17 @@ i.e., upper case, lower case, numeric, and punctuation.<a href="#section-5-5.4.1
       <h2 id="name-tacacstls-examples">
 <a href="#appendix-B" class="section-number selfRef">Appendix B. </a><a href="#name-tacacstls-examples" class="section-name selfRef">TACACS+TLS Examples</a>
       </h2>
-<p id="appendix-B-1">This section provides example to illustrate the configuration of TACACS+TLS clients.<a href="#appendix-B-1" class="pilcrow">¶</a></p>
+<p id="appendix-B-1">This section provides examples to illustrate the configuration of TACACS+TLS clients.<a href="#appendix-B-1" class="pilcrow">¶</a></p>
 <p id="appendix-B-2">These examples follow the convention used in <span><a href="https://rfc-editor.org/rfc/rfc9645#section-1.5" class="relref">Section 1.5</a> of [<a href="#RFC9645" class="cite xref">RFC9645</a>]</span> for binary data that has been base64 encoded.<a href="#appendix-B-2" class="pilcrow">¶</a></p>
-<div id="example-tacacs-authentication-configuration-with-central-keystore">
+<div id="example-tacacs-authentication-configuration-with-explicit-certificate-definitions">
 <section id="appendix-B.1">
         <h3 id="name-example-tacacs-authenticatio">
-<a href="#appendix-B.1" class="section-number selfRef">B.1. </a><a href="#name-example-tacacs-authenticatio" class="section-name selfRef">Example TACACS+ Authentication Configuration with Central Keystore</a>
+<a href="#appendix-B.1" class="section-number selfRef">B.1. </a><a href="#name-example-tacacs-authenticatio" class="section-name selfRef">Example TACACS+ Authentication Configuration with Explicit Certificate Definitions</a>
         </h3>
-<p id="appendix-B.1-1"><a href="#exce" class="auto internal xref">Figure 3</a> shows a configuration example with  use of 'central-keystore-reference' for the client identity and 'central-truststore-reference' for server authentication from a keystore.<a href="#appendix-B.1-1" class="pilcrow">¶</a></p>
-<span id="name-example-with-tacacstls-with"></span><div id="exce">
+<p id="appendix-B.1-1"><a href="#exin" class="auto internal xref">Figure 3</a> shows a configuration example with 'inline-definition' for the client identity and server authentication.<a href="#appendix-B.1-1" class="pilcrow">¶</a></p>
+<span id="name-example-with-tacacstls-with"></span><div id="exin">
 <figure id="figure-3">
-          <div class="lang-json sourcecode" id="appendix-B.1-2.1">
-<pre>
-=============== NOTE: '\' line wrapping per RFC 8792 ================
-
-{
-  "ietf-system:system": {
-    "authentication": {
-      "user-authentication-order": [
-        "ietf-system-tacacs-plus:tacacs-plus"
-      ]
-    },
-    "ietf-system-tacacs-plus:tacacs-plus": {
-      "server": [
-        {
-          "name": "instance-1",
-          "server-type": "authentication",
-          "domain-name": "tacacs.example.com",
-          "sni-enabled": true,
-          "address": "2001:db8::1",
-          "port": 1234,
-          "client-identity": {
-            "certificate": {
-              "central-keystore-reference": {
-                "asymmetric-key": "rsa-asymmetric-key",
-                "certificate": "ex-rsa-cert"
-              }
-            }
-          },
-          "server-authentication": {
-            "ca-certs": {
-              "central-truststore-reference": "trusted-server-ca-\
-                                                               certs"
-            },
-            "ee-certs": {
-              "central-truststore-reference": "trusted-server-ee-\
-                                                               certs"
-            }
-          }
-        }
-      ]
-    }
-  }
-}
-</pre>
-</div>
-<figcaption><a href="#figure-3" class="selfRef">Figure 3</a>:
-<a href="#name-example-with-tacacstls-with" class="selfRef">Example with TACACS+TLS with Central Store</a>
-          </figcaption></figure>
-</div>
-</section>
-</div>
-<div id="example-tacacs-authentication-configuration-with-explicit-certificate-definitions">
-<section id="appendix-B.2">
-        <h3 id="name-example-tacacs-authentication">
-<a href="#appendix-B.2" class="section-number selfRef">B.2. </a><a href="#name-example-tacacs-authentication" class="section-name selfRef">Example TACACS+ Authentication Configuration with Explicit Certificate Definitions</a>
-        </h3>
-<p id="appendix-B.2-1"><a href="#exin" class="auto internal xref">Figure 4</a> shows a configuration example with 'inline-definition' for the client identity and server authentication.<a href="#appendix-B.2-1" class="pilcrow">¶</a></p>
-<span id="name-example-with-tacacstls-with-"></span><div id="exin">
-<figure id="figure-4">
-          <div class="breakable lang-json sourcecode" id="appendix-B.2-2.1">
+          <div class="breakable lang-json sourcecode" id="appendix-B.1-2.1">
 <pre>
 =============== NOTE: '\' line wrapping per RFC 8792 ================
 
@@ -2791,21 +2732,21 @@ i.e., upper case, lower case, numeric, and punctuation.<a href="#section-5-5.4.1
 }
 </pre>
 </div>
-<figcaption><a href="#figure-4" class="selfRef">Figure 4</a>:
-<a href="#name-example-with-tacacstls-with-" class="selfRef">Example with TACACS+TLS with Inline Certificate Definitions</a>
+<figcaption><a href="#figure-3" class="selfRef">Figure 3</a>:
+<a href="#name-example-with-tacacstls-with" class="selfRef">Example with TACACS+TLS with Inline Certificate Definitions</a>
           </figcaption></figure>
 </div>
 </section>
 </div>
 <div id="example-tacacs-authentication-configuration-with-certificate-references">
-<section id="appendix-B.3">
-        <h3 id="name-example-tacacs-authentication-">
-<a href="#appendix-B.3" class="section-number selfRef">B.3. </a><a href="#name-example-tacacs-authentication-" class="section-name selfRef">Example TACACS+ Authentication Configuration with Certificate References</a>
+<section id="appendix-B.2">
+        <h3 id="name-example-tacacs-authentication">
+<a href="#appendix-B.2" class="section-number selfRef">B.2. </a><a href="#name-example-tacacs-authentication" class="section-name selfRef">Example TACACS+ Authentication Configuration with Certificate References</a>
         </h3>
-<p id="appendix-B.3-1"><a href="#ex-ref" class="auto internal xref">Figure 5</a> shows a configuration example with credential references for multiple service instances: four server instances are configured with all using the same credentials. These instances form a redundancy group for both IPv4 and IPv6.<a href="#appendix-B.3-1" class="pilcrow">¶</a></p>
-<span id="name-example-with-tacacstls-with-r"></span><div id="ex-ref">
-<figure id="figure-5">
-          <div class="breakable lang-json sourcecode" id="appendix-B.3-2.1">
+<p id="appendix-B.2-1"><a href="#ex-ref" class="auto internal xref">Figure 4</a> shows a configuration example with credential references for multiple service instances: four server instances are configured with all using the same credentials. These instances form a redundancy group for both IPv4 and IPv6.<a href="#appendix-B.2-1" class="pilcrow">¶</a></p>
+<span id="name-example-with-tacacstls-with-"></span><div id="ex-ref">
+<figure id="figure-4">
+          <div class="breakable lang-json sourcecode" id="appendix-B.2-2.1">
 <pre>
 =============== NOTE: '\' line wrapping per RFC 8792 ================
 
@@ -2906,8 +2847,67 @@ i.e., upper case, lower case, numeric, and punctuation.<a href="#section-5-5.4.1
 }
 </pre>
 </div>
+<figcaption><a href="#figure-4" class="selfRef">Figure 4</a>:
+<a href="#name-example-with-tacacstls-with-" class="selfRef">Example with TACACS+TLS with References</a>
+          </figcaption></figure>
+</div>
+</section>
+</div>
+<div id="example-tacacs-authentication-configuration-with-central-keystore">
+<section id="appendix-B.3">
+        <h3 id="name-example-tacacs-authentication-">
+<a href="#appendix-B.3" class="section-number selfRef">B.3. </a><a href="#name-example-tacacs-authentication-" class="section-name selfRef">Example TACACS+ Authentication Configuration with Central Keystore</a>
+        </h3>
+<p id="appendix-B.3-1"><a href="#exce" class="auto internal xref">Figure 5</a> shows a configuration example with  use of 'central-keystore-reference' for the client identity and 'central-truststore-reference' for server authentication.<a href="#appendix-B.3-1" class="pilcrow">¶</a></p>
+<span id="name-example-with-tacacstls-with-c"></span><div id="exce">
+<figure id="figure-5">
+          <div class="lang-json sourcecode" id="appendix-B.3-2.1">
+<pre>
+=============== NOTE: '\' line wrapping per RFC 8792 ================
+
+{
+  "ietf-system:system": {
+    "authentication": {
+      "user-authentication-order": [
+        "ietf-system-tacacs-plus:tacacs-plus"
+      ]
+    },
+    "ietf-system-tacacs-plus:tacacs-plus": {
+      "server": [
+        {
+          "name": "instance-1",
+          "server-type": "authentication",
+          "domain-name": "tacacs.example.com",
+          "sni-enabled": true,
+          "address": "2001:db8::1",
+          "port": 1234,
+          "client-identity": {
+            "certificate": {
+              "central-keystore-reference": {
+                "asymmetric-key": "rsa-asymmetric-key",
+                "certificate": "ex-rsa-cert"
+              }
+            }
+          },
+          "server-authentication": {
+            "ca-certs": {
+              "central-truststore-reference": "trusted-server-ca-\
+                                                               certs"
+            },
+            "ee-certs": {
+              "central-truststore-reference": "trusted-server-ee-\
+                                                               certs"
+            }
+          }
+        }
+      ]
+    }
+  }
+}
+</pre>
+</div>
 <figcaption><a href="#figure-5" class="selfRef">Figure 5</a>:
-<a href="#name-example-with-tacacstls-with-r" class="selfRef">Example with TACACS+TLS with References</a>
+<a href="#name-example-with-tacacstls-with-c" class="selfRef">Example with TACACS+TLS with Central Store</a>
           </figcaption></figure>
 </div>
 </section>

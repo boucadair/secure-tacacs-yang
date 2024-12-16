@@ -74,12 +74,12 @@ Table of Contents
    Appendix A.  Example TACACS+ Authentication Configuration with
            Shared Secret
    Appendix B.  TACACS+TLS Examples
-     B.1.  Example TACACS+ Authentication Configuration with Central
-           Keystore
-     B.2.  Example TACACS+ Authentication Configuration with Explicit
+     B.1.  Example TACACS+ Authentication Configuration with Explicit
            Certificate Definitions
-     B.3.  Example TACACS+ Authentication Configuration with
+     B.2.  Example TACACS+ Authentication Configuration with
            Certificate References
+     B.3.  Example TACACS+ Authentication Configuration with Central
+           Keystore
    Appendix C.  Full Tree
    Acknowledgments
    Authors' Addresses
@@ -1445,66 +1445,16 @@ Appendix A.  Example TACACS+ Authentication Configuration with Shared
 
 Appendix B.  TACACS+TLS Examples
 
-   This section provides example to illustrate the configuration of
+   This section provides examples to illustrate the configuration of
    TACACS+TLS clients.
 
    These examples follow the convention used in Section 1.5 of [RFC9645]
    for binary data that has been base64 encoded.
 
-B.1.  Example TACACS+ Authentication Configuration with Central Keystore
-
-   Figure 3 shows a configuration example with use of 'central-keystore-
-   reference' for the client identity and 'central-truststore-reference'
-   for server authentication from a keystore.
-
-   =============== NOTE: '\' line wrapping per RFC 8792 ================
-
-   {
-     "ietf-system:system": {
-       "authentication": {
-         "user-authentication-order": [
-           "ietf-system-tacacs-plus:tacacs-plus"
-         ]
-       },
-       "ietf-system-tacacs-plus:tacacs-plus": {
-         "server": [
-           {
-             "name": "instance-1",
-             "server-type": "authentication",
-             "domain-name": "tacacs.example.com",
-             "sni-enabled": true,
-             "address": "2001:db8::1",
-             "port": 1234,
-             "client-identity": {
-               "certificate": {
-                 "central-keystore-reference": {
-                   "asymmetric-key": "rsa-asymmetric-key",
-                   "certificate": "ex-rsa-cert"
-                 }
-               }
-             },
-             "server-authentication": {
-               "ca-certs": {
-                 "central-truststore-reference": "trusted-server-ca-\
-                                                                  certs"
-               },
-               "ee-certs": {
-                 "central-truststore-reference": "trusted-server-ee-\
-                                                                  certs"
-               }
-             }
-           }
-         ]
-       }
-     }
-   }
-
-            Figure 3: Example with TACACS+TLS with Central Store
-
-B.2.  Example TACACS+ Authentication Configuration with Explicit
+B.1.  Example TACACS+ Authentication Configuration with Explicit
       Certificate Definitions
 
-   Figure 4 shows a configuration example with 'inline-definition' for
+   Figure 3 shows a configuration example with 'inline-definition' for
    the client identity and server authentication.
 
    =============== NOTE: '\' line wrapping per RFC 8792 ================
@@ -1570,12 +1520,12 @@ B.2.  Example TACACS+ Authentication Configuration with Explicit
      }
    }
 
-   Figure 4: Example with TACACS+TLS with Inline Certificate Definitions
+   Figure 3: Example with TACACS+TLS with Inline Certificate Definitions
 
-B.3.  Example TACACS+ Authentication Configuration with Certificate
+B.2.  Example TACACS+ Authentication Configuration with Certificate
       References
 
-   Figure 5 shows a configuration example with credential references for
+   Figure 4 shows a configuration example with credential references for
    multiple service instances: four server instances are configured with
    all using the same credentials.  These instances form a redundancy
    group for both IPv4 and IPv6.
@@ -1678,7 +1628,57 @@ B.3.  Example TACACS+ Authentication Configuration with Certificate
      }
    }
 
-             Figure 5: Example with TACACS+TLS with References
+             Figure 4: Example with TACACS+TLS with References
+
+B.3.  Example TACACS+ Authentication Configuration with Central Keystore
+
+   Figure 5 shows a configuration example with use of 'central-keystore-
+   reference' for the client identity and 'central-truststore-reference'
+   for server authentication.
+
+   =============== NOTE: '\' line wrapping per RFC 8792 ================
+
+   {
+     "ietf-system:system": {
+       "authentication": {
+         "user-authentication-order": [
+           "ietf-system-tacacs-plus:tacacs-plus"
+         ]
+       },
+       "ietf-system-tacacs-plus:tacacs-plus": {
+         "server": [
+           {
+             "name": "instance-1",
+             "server-type": "authentication",
+             "domain-name": "tacacs.example.com",
+             "sni-enabled": true,
+             "address": "2001:db8::1",
+             "port": 1234,
+             "client-identity": {
+               "certificate": {
+                 "central-keystore-reference": {
+                   "asymmetric-key": "rsa-asymmetric-key",
+                   "certificate": "ex-rsa-cert"
+                 }
+               }
+             },
+             "server-authentication": {
+               "ca-certs": {
+                 "central-truststore-reference": "trusted-server-ca-\
+                                                                  certs"
+               },
+               "ee-certs": {
+                 "central-truststore-reference": "trusted-server-ee-\
+                                                                  certs"
+               }
+             }
+           }
+         ]
+       }
+     }
+   }
+
+            Figure 5: Example with TACACS+TLS with Central Store
 
 Appendix C.  Full Tree
 
