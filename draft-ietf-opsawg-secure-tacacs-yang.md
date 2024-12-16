@@ -70,8 +70,9 @@ The YANG module in this document conforms to the Network Management
    The following changes have been made to {{?RFC9105}}:
 
    * Add support for TLS {{!I-D.ietf-opsawg-tacacs-tls13}}
-   * Fix a must statement to indicate a missing prefix
+   * Fix a must statement and indicate a missing prefix
    * Fix errors in the example provided in Appendix A of {{?RFC9105}}
+   * Add new examples to illustrate the use of TACACS+TLS data nodes
 
 Detailed YANG changes are listed in {{sec-module}}.
 
@@ -279,25 +280,31 @@ This YANG module uses groupings from other YANG modules that define nodes that m
 ~~~
 {: #ex9105 title="Example with Shared Secret"}
 
-# Example TACACS+ Authentication Configuration with Central Keystore
+# TACACS+TLS Examples
 
-{{exce}} shows a configuration example with  use of central-keystore-references for the client identity and central-truststore-references for server authentication from a keystore.
+This section provides example to illustrate the configuration of TACACS+TLS clients.
+
+These examples follow the convention used in {{Section 1.5 of !RFC9645}} for binary data that has been base64 encoded.
+
+## Example TACACS+ Authentication Configuration with Central Keystore
+
+{{exce}} shows a configuration example with  use of 'central-keystore-reference' for the client identity and 'central-truststore-reference' for server authentication from a keystore.
 
 ~~~ json
 {::include-fold ./json-example/tls-ex-central.json}
 ~~~
 {: #exce title="Example with TACACS+TLS with Central Store"}
 
-# Example TACACS+ Authentication Configuration with Explicit Certificate Definitions
+## Example TACACS+ Authentication Configuration with Explicit Certificate Definitions
 
-{{exin}} shows a configuration example with inline-definitions for the client identity and server authentication.
+{{exin}} shows a configuration example with 'inline-definition' for the client identity and server authentication.
 
 ~~~ json
 {::include-fold ./json-example/tls-ex-inline.json}
 ~~~
 {: #exin title="Example with TACACS+TLS with Inline Certificate Definitions"}
 
-# Example TACACS+ Authentication Configuration with Certificate References
+## Example TACACS+ Authentication Configuration with Certificate References
 
 {{ex-ref}} shows a configuration example with credential references for multiple service instances: four server instances are configured with all using the same credentials. These instances form a redundancy group for both IPv4 and IPv6.
 
