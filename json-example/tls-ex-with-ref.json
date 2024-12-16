@@ -6,7 +6,9 @@
           "id": "client-cred-1",
           "certificate": {
             "inline-definition": {
-              "private-key-format": "ct:rsa-private-key-format",
+              "public-key-format": "ietf-crypto-types:subject-public-key-info-format",
+              "public-key": "ce4d4a274dcf41e0b20877108654d8ea3b14f115b15c249ea1def857b0fc12ea",
+              "private-key-format": "ietf-crypto-types:rsa-private-key-format",
               "cleartext-private-key": "736af466af183169a49ee18753d3c69273a5c0bdf3cf3f6dbd6a1c71180b39da",
               "cert-data": "0fe02484f34f439517218bd3f47d4c42c4c32626bdb916a77c49a646a54b5847"
             }
@@ -30,7 +32,7 @@
       ],
       "server": [
         {
-          "name": "tacacs-server-1",
+          "name": "primary-v6",
           "server-type": "authentication",
           "domain-name": "tacacs.example.com",
           "sni-enabled": true,
@@ -41,20 +43,49 @@
           },
           "server-authentication": {
             "credentials-reference": "server-cred-1"
+          }
+        },
+        {
+          "name": "backup-v6",
+          "server-type": "authentication",
+          "domain-name": "tacacs.example.com",
+          "sni-enabled": true,
+          "address": "2001:db8::2",
+          "port": 1234,
+          "client-identity": {
+            "credentials-reference": "client-cred-1"
           },
-          "hello-params": {
-            "tls-versions": {
-              "min": "tlscmn:tls13",
-              "max": "tlscmn:tls13"
-            },
-            "cipher-suites": {
-              "cipher-suite": [
-                "TLS_AES_128_GCM_SHA256"
-              ]
-            }
+          "server-authentication": {
+            "credentials-reference": "server-cred-1"
+          }
+        },
+        {
+          "name": "primary-v4",
+          "server-type": "authentication",
+          "domain-name": "tacacs.example.com",
+          "sni-enabled": true,
+          "address": "192.0.2.1",
+          "port": 49,
+          "client-identity": {
+            "credentials-reference": "client-cred-1"
           },
-          "single-connection": false,
-          "timeout": 10
+          "server-authentication": {
+            "credentials-reference": "server-cred-1"
+          }
+        },
+        {
+          "name": "backup-v4",
+          "server-type": "authentication",
+          "domain-name": "tacacs.example.com",
+          "sni-enabled": true,
+          "address": "192.0.2.2",
+          "port": 49,
+          "client-identity": {
+            "credentials-reference": "client-cred-1"
+          },
+          "server-authentication": {
+            "credentials-reference": "server-cred-1"
+          }
         }
       ]
     }
