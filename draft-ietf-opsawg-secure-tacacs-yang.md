@@ -270,7 +270,7 @@ This YANG module uses groupings from other YANG modules that define nodes that m
 
 --- back
 
-# Example TACACS+ Authentication Configuration
+# Example TACACS+ Authentication Configuration with Shared Secret
 
 {{ex9105}} shows an example where a TACACS+ authentication server instance is configured using shared secret for authentication.
 
@@ -278,6 +278,33 @@ This YANG module uses groupings from other YANG modules that define nodes that m
 {::include-fold ./json-example/9105-ex.json}
 ~~~
 {: #ex9105 title="Example with Shared Secret"}
+
+# Example TACACS+ Authentication Configuration with Central Keystore
+
+{{exce}} shows a configuration example with  use of central-keystore-references for the client identity and central-truststore-references for server authentication from a keystore.
+
+~~~ json
+{::include-fold ./json-example/tls-ex-central.json}
+~~~
+{: #exce title="Example with TACACS+TLS with Central Store"}
+
+# Example TACACS+ Authentication Configuration with Explicit Certificate Definitions
+
+{{exin}} shows a configuration example with inline-definitions for the client identity and server authentication.
+
+~~~ json
+{::include-fold ./json-example/tls-ex-inline.json}
+~~~
+{: #exin title="Example with TACACS+TLS with Inline Certificate Definitions"}
+
+# Example TACACS+ Authentication Configuration with Certificate References
+
+{{ex-ref}} shows a configuration example with credential references for multiple service instances: four server instances are configured with all using the same credentials. These instances form a redundancy group for both IPv4 and IPv6.
+
+~~~ json
+{::include-fold ./json-example/tls-ex-with-ref.json}
+~~~
+{: #ex-ref title="Example with TACACS+TLS with References"}
 
 # Full Tree {#sec-full}
 
