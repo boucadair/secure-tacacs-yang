@@ -601,7 +601,6 @@ Table of Contents
           specifics.";
        leaf discontinuity-time {
          type yang:date-and-time;
-         mandatory true;
          description
            "The time on the most recent occasion at which the TACACS+
             client suffered a discontinuity.";
