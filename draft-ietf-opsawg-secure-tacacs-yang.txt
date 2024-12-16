@@ -78,8 +78,6 @@ Table of Contents
            Certificate Definitions
      B.2.  Example TACACS+ Authentication Configuration with
            Certificate References
-     B.3.  Example TACACS+ Authentication Configuration with Central
-           Keystore
    Appendix C.  Full Tree
    Acknowledgments
    Authors' Addresses
@@ -1629,56 +1627,6 @@ B.2.  Example TACACS+ Authentication Configuration with Certificate
    }
 
              Figure 4: Example with TACACS+TLS with References
-
-B.3.  Example TACACS+ Authentication Configuration with Central Keystore
-
-   Figure 5 shows a configuration example with use of 'central-keystore-
-   reference' for the client identity and 'central-truststore-reference'
-   for server authentication.
-
-   =============== NOTE: '\' line wrapping per RFC 8792 ================
-
-   {
-     "ietf-system:system": {
-       "authentication": {
-         "user-authentication-order": [
-           "ietf-system-tacacs-plus:tacacs-plus"
-         ]
-       },
-       "ietf-system-tacacs-plus:tacacs-plus": {
-         "server": [
-           {
-             "name": "instance-1",
-             "server-type": "authentication",
-             "domain-name": "tacacs.example.com",
-             "sni-enabled": true,
-             "address": "2001:db8::1",
-             "port": 1234,
-             "client-identity": {
-               "certificate": {
-                 "central-keystore-reference": {
-                   "asymmetric-key": "rsa-asymmetric-key",
-                   "certificate": "ex-rsa-cert"
-                 }
-               }
-             },
-             "server-authentication": {
-               "ca-certs": {
-                 "central-truststore-reference": "trusted-server-ca-\
-                                                                  certs"
-               },
-               "ee-certs": {
-                 "central-truststore-reference": "trusted-server-ee-\
-                                                                  certs"
-               }
-             }
-           }
-         ]
-       }
-     }
-   }
-
-            Figure 5: Example with TACACS+TLS with Central Store
 
 Appendix C.  Full Tree
 
