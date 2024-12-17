@@ -108,16 +108,20 @@ module ietf-system-tacacs-plus {
          - a new leaf 'rpk-errors' under 'statistics'
        Also, this revision:
          - updates the reference of 'tacacs-plus' identity 
-           to also cite RFC SSSS
-         - fixes a check in 'must' statement under 'tacacs-plus'
+           to also cite RFC SSSS         
+         - --fixes a check in 'must' statement under 'tacacs-plus'
            container and includes a missing prefix
+         - replaces a must check with a when
          - updates the description of the 'name' under 'server'
-           list to better reflect the intended use
+           list to better reflect the intended use and clarifies
+           the difference with the new domain-name
          - removes the default statement for the 'port' under
            'server' list because a distinct defaumt port number
            is used for TACACS+TLS
          - updates the 'port' leaf under 'server' list to enumerate
-           the various TACACS+ default port numbers";
+           the various TACACS+ default port numbers
+         - updates the description of timeout to remove redundant
+           text with the default statement";
     reference
       "RFC XXXX: A YANG Data Model for Terminal Access Controller
                  Access-Control System Plus (TACACS+)";
@@ -613,21 +617,9 @@ module ietf-system-tacacs-plus {
     description
       "Grouping for TACACS+ attributes.";
     container tacacs-plus {
-      /*must "derived-from-or-self(../sys:authentication"
-         + "/sys:user-authentication-order, "
-         + "'sys-tcs-plus:tacacs-plus')"
-         + " and bit-is-set(server/server-type,'authentication')" {
-        error-message
-          "When 'tacacs-plus' is used as a system authentication
-           method, a TACACS+ authentication server must be
-           configured.";*/
       when "derived-from-or-self(../sys:authentication"
          + "/sys:user-authentication-order, "
          + "'sys-tcs-plus:tacacs-plus')";
-        description
-          "When 'tacacs-plus' is used as an authentication method,
-           a TACACS+ server must be configured.";
-      }
       description
         "Container for TACACS+ configurations and operations.";
       list client-credentials {
