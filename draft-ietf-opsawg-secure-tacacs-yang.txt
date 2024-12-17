@@ -967,48 +967,21 @@ Table of Contents
        }
      }
 
-     grouping tls-grouping-reuse {
-       description
-         "A grouping for TLS with TLS1.2 and keepalive removed.";
-       uses tlsc:tls-client-grouping {
-         refine "client-identity/auth-type/tls12-psk" {
-           if-feature "not tlsc:client-ident-tls12-psk";
-         }
-         refine "server-authentication/tls12-psks" {
-           if-feature "not tlsc:server-auth-tls12-psk";
-         }
-         refine "hello-params/tls-versions/min" {
-           must "not(derived-from-or-self(current(), "
-              + "'tlscmn:tls12'))" {
-             error-message
-               "TLS 1.2 is not supported as min TLS version";
-           }
-         }
-         refine "hello-params/tls-versions/max" {
-           must "not(derived-from-or-self(current(), "
-              + "'tlscmn:tls12'))" {
-             error-message
-               "TLS 1.2 is not supported as max TLS version";
-           }
-         }
-         refine "keepalives" {
-           if-feature "not tlsc:tls-client-keepalives";
-         }
-       }
-     } //currently not used
-
      grouping tacacs-plus {
        description
          "Grouping for TACACS+ attributes.";
        container tacacs-plus {
-         must "derived-from-or-self(../sys:authentication"
+         /*must "derived-from-or-self(../sys:authentication"
             + "/sys:user-authentication-order, "
             + "'sys-tcs-plus:tacacs-plus')"
             + " and bit-is-set(server/server-type,'authentication')" {
            error-message
              "When 'tacacs-plus' is used as a system authentication
               method, a TACACS+ authentication server must be
-              configured.";
+              configured.";*/
+         when "derived-from-or-self(../sys:authentication"
+            + "/sys:user-authentication-order, "
+            + "'sys-tcs-plus:tacacs-plus')";
            description
              "When 'tacacs-plus' is used as an authentication method,
               a TACACS+ server must be configured.";
@@ -1019,8 +992,8 @@ Table of Contents
            if-feature credential-reference;
            key "id";
            description
-             "Identity credentials the TLS client may present when
-              establishing a connection to a TLS server.
+             "Identity credentials that the TLS client may present
+              when establishing a connection to a TLS server.
               A list of client credentials to be referenced.";
            nacm:default-deny-write;
            leaf id {
@@ -1053,7 +1026,8 @@ Table of Contents
              type string;
              description
                "A name that is used to uniquely identify a TACACS+
-                server.";
+                server within the device configuration.
+                This name MUST NOT be confused with the domain-name.";
            }
            leaf server-type {
              type tacacs-plus-server-type;
@@ -1092,14 +1066,14 @@ Table of Contents
              type inet:host;
              mandatory true;
              description
-               "The address of the TACACS+ server.";
+               "The IP address of the TACACS+ server.";
            }
            leaf port {
              type inet:port-number;
              //default "49"; //replace TBD with assigned port
              description
                "The port number of TACACS+ server port number.
-                Default port number for legacy TACACS+ is 46,
+                Default port number for legacy TACACS+ is 49,
                 while it is TBD for TACACS+TLS.";
            }
            choice security {
@@ -1175,8 +1149,7 @@ Table of Contents
              default "false";
              description
                "Indicates whether the Single Connection Mode is enabled
-                for the server. By default, the Single Connection Mode
-                is disabled.";
+                for the server.";
            }
            leaf timeout {
              type uint16 {
@@ -1185,7 +1158,7 @@ Table of Contents
              units "seconds";
              default "5";
              description
-               "The number of seconds the device will wait for a
+               "The number of seconds that the device will wait for a
                 response from each TACACS+ server before trying with a
                 different server.";
            }
