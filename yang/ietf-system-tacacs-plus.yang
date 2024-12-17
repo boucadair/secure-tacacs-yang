@@ -588,7 +588,8 @@ module ietf-system-tacacs-plus {
       uses client-identity-with-ref;
     }
     container server-authentication {
-      must 'ca-certs or ee-certs or raw-public-keys or tls13-epsks';
+      must 'credentials-reference or ca-certs or ee-certs or '
+         + 'raw-public-keys or tls13-epsks';
       description
         "Specifies how the TLS client can authenticate TLS servers.";
       //uses server-authentication;
@@ -639,7 +640,7 @@ module ietf-system-tacacs-plus {
       must "derived-from-or-self(../sys:authentication"
          + "/sys:user-authentication-order, "
          + "'sys-tcs-plus:tacacs-plus')"
-         + " or bit-is-set(server/server-type,'authentication')" {
+         + " and bit-is-set(server/server-type,'authentication')" {
         error-message
           "When 'tacacs-plus' is used as a system authentication
            method, a TACACS+ authentication server must be
