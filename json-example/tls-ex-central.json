@@ -8,7 +8,7 @@
     "ietf-system-tacacs-plus:tacacs-plus": {
       "server": [
         {
-          "name": "instance-1",
+          "name": "server-instance-1",
           "server-type": "authentication",
           "domain-name": "tacacs.example.com",
           "sni-enabled": true,
