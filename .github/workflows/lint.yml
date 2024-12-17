@@ -30,8 +30,11 @@ jobs:
 
     - name: "Install yanglint"
       run: |
-        python -m pip install --upgrade pip
-        pip install yang-tools
+        LIBYANG_HEADERS=/home/build/opt/ly/include \
+        LIBYANG_LIBRARIES=/home/build/opt/ly/lib \
+        LIBYANG_EXTRA_CFLAGS="-O3" \
+        LIBYANG_EXTRA_LDFLAGS="-rpath=/opt/ly/lib" \
+        pip install libyang        
 
     - name: "Lint using pyang"
       run: |
