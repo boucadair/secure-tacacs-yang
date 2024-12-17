@@ -36,7 +36,7 @@
       ],
       "server": [
         {
-          "name": "tacacs-server-1",
+          "name": "first-server-instance",
           "server-type": "authentication",
           "domain-name": "tacacs.example.com",
           "sni-enabled": true,
