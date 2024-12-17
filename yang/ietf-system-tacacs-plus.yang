@@ -109,7 +109,7 @@ module ietf-system-tacacs-plus {
        Also, this revision:
          - updates the reference of 'tacacs-plus' identity 
            to also cite RFC SSSS         
-         - --fixes a check in 'must' statement under 'tacacs-plus'
+         - fixes a check in 'must' statement under 'tacacs-plus'
            container and includes a missing prefix
          - replaces a must check with a when
          - updates the description of the 'name' under 'server'
@@ -281,7 +281,8 @@ module ietf-system-tacacs-plus {
 
   grouping certificate {
     description
-      "Specifies the client identity using a certificate.";
+      "Specifies a certificate that can be used for client
+       identity.";
     uses "ks:inline-or-keystore-end-entity-cert-with-key-"
        + "grouping" {
       refine "inline-or-keystore/inline/inline-definition" {
@@ -301,8 +302,8 @@ module ietf-system-tacacs-plus {
 
   grouping raw-private-key {
     description
-      "Specifies the client identity using a raw private
-       key.";
+      "Specifies raw private key (RPK) that can be used for 
+       client identity.";
     uses ks:inline-or-keystore-asymmetric-key-grouping {
       refine "inline-or-keystore/inline/inline-definition" {
         must 'not(public-key-format) or derived-from-or-self'
@@ -389,7 +390,7 @@ module ietf-system-tacacs-plus {
 
   grouping client-identity {
     description
-      "Identity credentials that the TLS client may present when
+      "Identity credentials that a TLS client may present when
        establishing a connection to a TLS server. When configured,
        and requested by the TLS server when establishing a TLS
        session, these credentials are passed in the Certificate
@@ -532,13 +533,13 @@ module ietf-system-tacacs-plus {
 
   grouping server-authentication-with-ref {
     description
-      "Specifies how the TLS client can authenticate TLS servers.";
+      "Specifies how a TLS client can authenticate TLS servers.";
     choice ref-or-explicit {
       description
         "A choice between a reference of explicit configuration.";
       case ref {
         description
-          "Provides a reference.";
+          "Provides a reference to server credentials.";
         leaf credentials-reference {
           if-feature credential-reference;
           type sys-tcs-plus:server-credentials-ref;
@@ -594,7 +595,6 @@ module ietf-system-tacacs-plus {
       description
         "Identity credentials the TLS client may present when
          establishing a connection to a TLS server.";
-      //uses client-identity;
       uses client-identity-with-ref;
     }
     container server-authentication {
@@ -602,7 +602,6 @@ module ietf-system-tacacs-plus {
          + 'raw-public-keys or tls13-epsks';
       description
         "Specifies how the TLS client can authenticate TLS servers.";
-      //uses server-authentication;
       uses server-authentication-with-ref;
     }
     container hello-params {
@@ -641,8 +640,8 @@ module ietf-system-tacacs-plus {
         if-feature credential-reference;
         key "id";
         description
-          "Identity credentials the TLS client may present when
-           establishing a connection to a TLS server.";
+          "Identity credentials that the TLS client may present
+           when establishing a connection to a TLS server.";
         nacm:default-deny-write;
         leaf id {
           type string;
@@ -661,7 +660,7 @@ module ietf-system-tacacs-plus {
           description
             "A name that is used to uniquely identify a TACACS+
              server within the device configuration.
-             This name MUST NOT be confused with the domain-name.";
+             This name is not to be confused with the domain-name.";
         }
         leaf server-type {
           type tacacs-plus-server-type;
@@ -704,7 +703,7 @@ module ietf-system-tacacs-plus {
         }
         leaf port {
           type inet:port-number;
-          //default "49"; //replace TBD with assigned port
+          //default "49";
           description
             "The port number of TACACS+ server port number.
              Default port number for legacy TACACS+ is 49,
