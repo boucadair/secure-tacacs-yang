@@ -1,0 +1,67 @@
+{
+  "ietf-system:system": {
+    "authentication": {
+      "user-authentication-order": [
+        "ietf-system-tacacs-plus:tacacs-plus",
+        "ietf-system:local-users"
+      ]
+    },
+    "ietf-system-tacacs-plus:tacacs-plus": {
+      "client-credentials": [
+        {
+          "id": "client-cred-1",
+          "certificate": {
+            "inline-definition": {
+              "private-key-format": "ietf-crypto-types:rsa-private-key-format",
+              "cleartext-private-key": "BASE64VALUE=",
+              "cert-data": "BASE64VALUE="
+            }
+          }
+        }
+      ],
+      "server-credentials": [
+        {
+          "id": "server-cred-1",
+          "ca-certs": {
+            "inline-definition": {
+              "certificate": [
+                {
+                  "name": "CA-Certificate-1",
+                  "cert-data": "BASE64VALUE="
+                }
+              ]
+            }
+          }
+        }
+      ],
+      "server": [
+        {
+          "name": "tacacs-server-1",
+          "server-type": "authentication",
+          "domain-name": "tacacs.example.com",
+          "sni-enabled": true,
+          "address": "192.0.2.1",
+          "port": 1234,
+          "client-identity": {
+            "credentials-reference": "client-cred-1"
+          },
+          "server-authentication": {
+            "credentials-reference": "server-cred-1"
+          },
+          "hello-params": {
+            "tls-versions": {
+              "min": "ietf-tls-common:tls13",
+              "max": "ietf-tls-common:tls13"
+            }
+          },
+          "source-ip": "192.0.2.13",
+          "single-connection": false,
+          "timeout": 10,
+          "statistics": {
+            "discontinuity-time": "2024-07-29T00:00:00Z"
+          }
+        }
+      ]
+    }
+  }
+}
