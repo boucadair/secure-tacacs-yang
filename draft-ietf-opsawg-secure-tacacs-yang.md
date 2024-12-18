@@ -126,35 +126,35 @@ The document uses the terms defined in {{Section 2 of !I-D.ietf-opsawg-tacacs-tl
    assigned to the user, and accounting keeps track of the activity of a
    user who has accessed the device.
 
-   The ietf-system-tacacs-plus module augments the "/sys:system" path
-   defined in the ietf-system module with the contents of the "tacacs-
-   plus" grouping.  Therefore, a device can use local, RADIUS, or
+   The "ietf-system-tacacs-plus" module augments the '/sys:system' path
+   defined in the "ietf-system" module with the contents of the 'tacacs-plus'
+   grouping.  Therefore, a device can use local, RADIUS, or
    TACACS+ authentication to validate users who attempt to access the
-   router by several mechanisms, e.g., a command line interface or a
+   device by several mechanisms, e.g., a command line interface or a
    web-based user interface.
 
-   The "server" list, which is directly under the "tacacs-plus"
-   container, holds a list of TACACS+ servers and uses server-type to
+   The 'server' list, which is directly under the 'tacacs-plus'
+   container, holds a list of TACACS+ servers and uses 'server-type' to
    distinguish between Authentication, Authorization, and Accounting
-   (AAA) services.  The list of servers is for redundancy.
+   (AAA) services. The list of servers is for redundancy.
 
-   When there are multiple interfaces connected to the TACACS+ client or
+   When there are multiple interfaces connected to a TACACS+ client or
    server, the source address of outgoing TACACS+ packets could be
    specified, or the source address could be specified through the
    interface IP address setting or derived from the outbound interface
-   from the local Forwarding Information Base (FIB).  For the TACACS+
+   from the local Forwarding Information Base (FIB).  For a TACACS+
    server located in a Virtual Private Network (VPN), a VPN Routing and
    Forwarding (VRF) instance needs to be specified.
 
-   The "statistics" container under the "server list" is a collection of
+   The 'statistics' container under the 'server' list is a collection of
    read-only counters for sent and received messages from a configured
    server.
 
-   The YANG module for TACACS+ client has the following structure:
+   The YANG module for TACACS+ client has the structure shown in {{tree-overview}}.
 
-~~~~~~~~~~
+~~~
 {::include-fold ./trees/tree-overview.txt}
-~~~~~~~~~~
+~~~
 {: #tree-overview title="Tree Structure Overview"}
 
 Specifically, the module is designed to cover the following key requirements specified in {{!I-D.ietf-opsawg-tacacs-tls13}}:
@@ -193,7 +193,7 @@ The following new data nodes are supported compared to {{?RFC9105}}:
 : Number of connection failures due to certificate issues.
 
 'rpk-errors':
-: Number of RPK-related connection failures.
+: Number of raw public key related connection failures.
 
 # TACACS+ Client Module {#sec-module}
 
@@ -204,11 +204,11 @@ The module augments {{!RFC7317}}.
 
 The module also cites {{!RFC9257}}, {{!RFC9258}}, {{!RFC9258}}, and {{!RFC6520}}.
 
-~~~~~~~~~~
+~~~
 <CODE BEGINS> file "ietf-system-tacacs-plus@2024-12-11.yang"
 {::include-fold ./yang/ietf-system-tacacs-plus.yang}
 <CODE ENDS>
-~~~~~~~~~~
+~~~
 
 # Security Considerations
 
@@ -220,7 +220,7 @@ NETCONF {{?RFC6241}} and RESTCONF {{?RFC8040}}. These protocols have to
 use a secure transport layer (e.g., SSH {{?RFC4252}}, TLS {{?RFC8446}}, and
 QUIC {{?RFC9000}}) and have to use mutual authentication.
 
-   The Network Configuration Access Control Model (NACM) {{!RFC8341}}
+The Network Configuration Access Control Model (NACM) {{!RFC8341}}
    provides the means to restrict access for particular NETCONF or
    RESTCONF users to a preconfigured subset of all available NETCONF or
    RESTCONF protocol operations and content.
