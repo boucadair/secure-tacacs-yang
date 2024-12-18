@@ -1512,12 +1512,6 @@ B.2.  Example TACACS+ Authentication Configuration with Certificate
 
    {
      "ietf-system:system": {
-       "authentication": {
-         "user-authentication-order": [
-           "ietf-system-tacacs-plus:tacacs-plus",
-           "ietf-system:local-users"
-         ]
-       },
        "ietf-system-tacacs-plus:tacacs-plus": {
          "client-credentials": [
            {
