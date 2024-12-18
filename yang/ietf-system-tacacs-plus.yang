@@ -741,7 +741,7 @@ module ietf-system-tacacs-plus {
         }
         choice source-type {
           description
-            "The source IP address type for outbound TACACS+ packets.";
+            "The source address type for outbound TACACS+ packets.";
           case source-ip {
             leaf source-ip {
               type inet:ip-address;
