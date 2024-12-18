@@ -81,7 +81,7 @@ The YANG module in this document conforms to the Network Management
    The following changes have been made to {{?RFC9105}}:
 
    * Add support for TLS {{!I-D.ietf-opsawg-tacacs-tls13}}
-   * Fix a must statement and indicate a missing prefix
+   * Fix a must statement under 'tacacs-plus'
    * Fix errors in the example provided in Appendix A of {{?RFC9105}}
    * Add new examples to illustrate the use of TACACS+TLS data nodes
 
@@ -197,12 +197,12 @@ The following new data nodes are supported compared to {{?RFC9105}}:
 
 # TACACS+ Client Module {#sec-module}
 
-This module uses types and groupings defined in {{!RFC6991}}, {{!RFC8341}}, {{!RFC8343}}, {{!RFC8529}}, {{!RFC9640}}, {{!RFC9641}},
+This YANG module uses types and groupings defined in {{!RFC6991}}, {{!RFC8341}}, {{!RFC8343}}, {{!RFC8529}}, {{!RFC9640}}, {{!RFC9641}},
 {{!RFC9642}}, and {{!RFC9645}}.
 
 The module augments {{!RFC7317}}.
 
-The module also cites {{!RFC9257}}, {{!RFC9258}}, {{!RFC9258}}, and {{!RFC6520}}.
+The module also cites {{!RFC6520}}, {{!RFC9257}}, and {{!RFC9258}}.
 
 ~~~
 <CODE BEGINS> file "ietf-system-tacacs-plus@2024-12-11.yang"
