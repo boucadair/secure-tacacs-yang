@@ -58,10 +58,10 @@ informative:
 
 #  Introduction
 
-The System Management data model {{!RFC7317}} defines separate functionality to support local and RADIUS authentication:
+The System Management data model {{!RFC7317}} defines separate functionality to support local and Remote Authentication Dial In User Service (RADIUS) authentication:
 
    User Authentication Model:
-   :  Defines a list of usernames with
+   :  Defines a list of user names with
       associated passwords and a configuration leaf to decide the order
       in which local or RADIUS authentication is used.
 
@@ -69,7 +69,7 @@ The System Management data model {{!RFC7317}} defines separate functionality to 
    : Defines a list of RADIUS servers used by a
       device for centralized user authentication.
 
-{{?RFC9105}} defines a YANG module ("ietf-system-tacacs-plus") that augments the System Management data model {{!RFC7317}} for the management of Terminal Access Controller Access-Control System Plus (TACACS+) clients as an alternative to RADIUS servers. Typically, the "ietf-system-tacacs-plus" module is used to configure a TACACS+ client on a device to support deployment scenarios with centralized authentication, authorization, and accounting servers.
+{{?RFC9105}} defines a YANG module ("ietf-system-tacacs-plus") that augments the System Management data model {{!RFC7317}} for the management of Terminal Access Controller Access-Control System Plus (TACACS+) clients as an alternative to RADIUS servers {{?RFC2865}}. Typically, the "ietf-system-tacacs-plus" module is used to configure a TACACS+ client on a device to support deployment scenarios with centralized authentication, authorization, and accounting servers.
 
 This document defines a YANG module for managing TACACS+ clients ({{sec-module}}), including TACACS+ over TLS 1.3 clients {{!I-D.ietf-opsawg-tacacs-tls13}}. This document obsoletes {{?RFC9105}}.
 
