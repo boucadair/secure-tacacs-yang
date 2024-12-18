@@ -1559,8 +1559,6 @@ establishing a connection to a server. Client identities can be configured at th
 <div class="breakable sourcecode" id="section-4-4">
 <pre>&lt;CODE BEGINS&gt; file "ietf-system-tacacs-plus@2024-12-11.yang"
 
-=============== NOTE: '\' line wrapping per RFC 8792 ================
-
 module ietf-system-tacacs-plus {
   yang-version 1.1;
   namespace "urn:ietf:params:xml:ns:yang:ietf-system-tacacs-plus";
@@ -2304,8 +2302,7 @@ module ietf-system-tacacs-plus {
         }
         choice source-type {
           description
-            "The source IP address type for outbound TACACS+ packets\
-                                                                  .";
+            "The source address type for outbound TACACS+ packets.";
           case source-ip {
             leaf source-ip {
               type inet:ip-address;
