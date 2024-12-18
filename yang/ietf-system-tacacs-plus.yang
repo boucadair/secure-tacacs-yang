@@ -18,15 +18,15 @@ module ietf-system-tacacs-plus {
     reference
       "RFC 7317: A YANG Data Model for System Management";
   }
-  import ietf-interfaces {
-    prefix if;
-    reference
-      "RFC 8343: A YANG Data Model for Interface Management";
-  }
   import ietf-netconf-acm {
     prefix nacm;
     reference
       "RFC 8341: Network Configuration Access Control Model";
+  }
+  import ietf-interfaces {
+    prefix if;
+    reference
+      "RFC 8343: A YANG Data Model for Interface Management";
   }
   import ietf-network-instance {
     prefix ni;
@@ -107,16 +107,14 @@ module ietf-system-tacacs-plus {
          - a new leaf 'cert-errors' under 'statistics'
          - a new leaf 'rpk-errors' under 'statistics'
        Also, this revision:
-         - updates the reference of 'tacacs-plus' identity 
-           to also cite RFC SSSS         
-         - fixes a check in 'must' statement under 'tacacs-plus'
-           container and includes a missing prefix
+         - updates the reference of 'tacacs-plus' identity
+           to also cite RFC SSSS
          - replaces a must check with a when
          - updates the description of the 'name' under 'server'
            list to better reflect the intended use and clarifies
            the difference with the new domain-name
          - removes the default statement for the 'port' under
-           'server' list because a distinct defaumt port number
+           'server' list because a distinct default port number
            is used for TACACS+TLS
          - updates the 'port' leaf under 'server' list to enumerate
            the various TACACS+ default port numbers
@@ -126,6 +124,7 @@ module ietf-system-tacacs-plus {
       "RFC XXXX: A YANG Data Model for Terminal Access Controller
                  Access-Control System Plus (TACACS+)";
   }
+
   revision 2021-08-05 {
     description
       "Initial revision.";
@@ -191,64 +190,6 @@ module ietf-system-tacacs-plus {
       "Defines a type to reference server credentials.";
   }
 
-  grouping base-statistics {
-    description
-      "Grouping for TACACS+ statistics attributes.";
-    leaf connection-opens {
-      type yang:counter64;
-      description
-        "Number of new connection requests sent to the server,
-         e.g., socket open.";
-    }
-    leaf connection-closes {
-      type yang:counter64;
-      description
-        "Number of connection close requests sent to the server,
-         e.g., socket close.";
-    }
-    leaf connection-aborts {
-      type yang:counter64;
-      description
-        "Number of aborted connections to the server. These do
-         not include connections that are closed gracefully.";
-    }
-    leaf connection-failures {
-      type yang:counter64;
-      description
-        "Number of connection failures to the server.";
-    }
-    leaf connection-timeouts {
-      type yang:counter64;
-      description
-        "Number of connection timeouts to the server.";
-    }
-    leaf messages-sent {
-      type yang:counter64;
-      description
-        "Number of messages sent to the server.";
-    }
-    leaf messages-received {
-      type yang:counter64;
-      description
-        "Number of messages received from the server.";
-    }
-    leaf errors-received {
-      type yang:counter64;
-      description
-        "Number of error messages received from the server.";
-    }
-    leaf sessions {
-      type yang:counter64;
-      description
-        "Number of TACACS+ sessions completed with the server.
-         If the Single Connection Mode was not enabled, the number
-         of sessions is the same as the number of
-         'connection-closes'. If the Single Connection Mode was 
-         enabled, a single TCP connection may contain multiple
-         TACACS+ sessions.";
-    }
-  }
-
   grouping statistics {
     description
       "Grouping for TACACS+ statistics attributes, including TLS
@@ -263,11 +204,63 @@ module ietf-system-tacacs-plus {
           "The time on the most recent occasion at which the
            TACACS+ client suffered a discontinuity.";
       }
-      uses base-statistics;
+      leaf connection-opens {
+        type yang:counter64;
+        description
+          "Number of new connection requests sent to the server,
+           e.g., socket open.";
+      }
+      leaf connection-closes {
+        type yang:counter64;
+        description
+          "Number of connection close requests sent to the server,
+           e.g., socket close.";
+      }
+      leaf connection-aborts {
+        type yang:counter64;
+        description
+          "Number of aborted connections to the server. These do
+           not include connections that are closed gracefully.";
+      }
+      leaf connection-failures {
+        type yang:counter64;
+        description
+          "Number of connection failures to the server.";
+      }
+      leaf connection-timeouts {
+        type yang:counter64;
+        description
+          "Number of connection timeouts to the server.";
+      }
+      leaf messages-sent {
+        type yang:counter64;
+        description
+          "Number of messages sent to the server.";
+      }
+      leaf messages-received {
+        type yang:counter64;
+        description
+          "Number of messages received from the server.";
+      }
+      leaf errors-received {
+        type yang:counter64;
+        description
+          "Number of error messages received from the server.";
+      }
+      leaf sessions {
+        type yang:counter64;
+        description
+          "Number of TACACS+ sessions completed with the server.
+           If the Single Connection Mode was not enabled, the number
+           of sessions is the same as the number of
+           'connection-closes'. If the Single Connection Mode was
+           enabled, a single TCP connection may contain multiple
+           TACACS+ sessions.";
+      }
       leaf cert-errors {
         type yang:counter64;
         description
-          "Number of connection failures due to certificate 
+          "Number of connection failures due to certificate
            issues.";
       }
       leaf rpk-errors {
@@ -302,7 +295,7 @@ module ietf-system-tacacs-plus {
 
   grouping raw-private-key {
     description
-      "Specifies raw private key (RPK) that can be used for 
+      "Specifies raw private key (RPK) that can be used for
        client identity.";
     uses ks:inline-or-keystore-asymmetric-key-grouping {
       refine "inline-or-keystore/inline/inline-definition" {
@@ -326,7 +319,7 @@ module ietf-system-tacacs-plus {
        An EPSK is a tuple of (Base Key, External Identity, Hash).
        When Pre-Shared Keys (PSKs) are provisioned out of band,
        the PSK identity and the Key Derivation Function (KDF) hash
-       algorithm to be used with the PSK must also be 
+       algorithm to be used with the PSK must also be
        provisioned.";
     reference
       "RFC 8446: The Transport Layer Security (TLS) Protocol
@@ -403,8 +396,7 @@ module ietf-system-tacacs-plus {
       default "certificate";
       //mandatory true;
       description
-        "A choice amongst authentication types, of which one must
-         be enabled and selected.";
+        "A choice amongst authentication types.";
       case certificate {
         container certificate {
           description
@@ -440,12 +432,12 @@ module ietf-system-tacacs-plus {
        message.";
     choice ref-or-explicit {
       description
-        "A choice between a reference of explicit configuration.";
+        "A choice between a reference or explicit configuration.";
       case ref {
         description
-          "Provides a reference.";
+          "Provides a reference to a client identity.";
         leaf credentials-reference {
-          if-feature credential-reference;
+          if-feature "credential-reference";
           type sys-tcs-plus:client-credentials-ref;
           description
             "Specifies the client credentials reference.";
@@ -453,7 +445,7 @@ module ietf-system-tacacs-plus {
       }
       case explicit {
         description
-          "Explicit configuration.";
+          "Explicit configuration of the client identity.";
         uses client-identity;
       }
     }
@@ -461,15 +453,15 @@ module ietf-system-tacacs-plus {
 
   grouping server-authentication {
     description
-      "Specifies how the TLS client can authenticate TLS servers.
+      "Specifies how a TLS client can authenticate TLS servers.
        Any combination of credentials is additive and unordered.";
     nacm:default-deny-write;
     container ca-certs {
-      presence 
-        "Indicates that Certification Authority (CA) certificates 
-         have been configured. 
-         This statement is present so the mandatory descendant
-         nodes do not imply that this node must be configured.";
+      presence "Indicates that Certification Authority (CA) 
+                certificates have been configured.
+                This statement is present so the mandatory descendant
+                nodes do not imply that this node must be 
+                configured.";
       description
         "A set of CA certificates used by the TLS client to
          authenticate TLS server certificates.
@@ -480,14 +472,14 @@ module ietf-system-tacacs-plus {
       uses ts:inline-or-truststore-certs-grouping;
     }
     container ee-certs {
-      presence
-        "Indicates that End Entity (EE) certificates have been
-         configured.
-         This statement is present so the mandatory descendant
-         nodes do not imply that this node must be configured.";
+      presence "Indicates that End Entity (EE) certificates have been
+                configured.
+                This statement is present so the mandatory descendant
+                nodes do not imply that this node must be 
+                configured.";
       description
         "A set of server certificates (i.e., end entity certificates)
-         used by the TLS client to authenticate certificates
+         used by a TLS client to authenticate certificates
          presented by TLS servers. A server certificate is
          authenticated if it is an exact match to a configured server
          certificate.";
@@ -502,7 +494,7 @@ module ietf-system-tacacs-plus {
                 nodes do not imply that this node must be
                 configured.";
       description
-        "A set of raw public keys used by the TLS client to
+        "A set of raw public keys used by a TLS client to
          authenticate raw public keys presented by the TLS server.
          A raw public key is authenticated if it is an exact match
          to a configured raw public key.";
@@ -526,8 +518,8 @@ module ietf-system-tacacs-plus {
       if-feature "tlsc:server-auth-tls13-epsk";
       type empty;
       description
-        "Indicates that the TLS client can authenticate TLS servers
-         using configured external PSKs.";
+        "Indicates that a TLS client can authenticate TLS servers
+         using configured EPSKs.";
     }
   }
 
@@ -541,7 +533,7 @@ module ietf-system-tacacs-plus {
         description
           "Provides a reference to server credentials.";
         leaf credentials-reference {
-          if-feature credential-reference;
+          if-feature "credential-reference";
           type sys-tcs-plus:server-credentials-ref;
           description
             "Specifies the server credentials reference.";
@@ -549,7 +541,7 @@ module ietf-system-tacacs-plus {
       }
       case explicit {
         description
-          "Explicit configuration.";
+          "Explicit configuration of a server credentials.";
         uses server-authentication;
       }
     }
@@ -557,13 +549,17 @@ module ietf-system-tacacs-plus {
 
   grouping hello-params {
     description
-      "Configurable parameters for the TLS hello message.";
+      "Configurable parameters for the TLS Hello message.";
+    reference
+      "RFC SSSS: Terminal Access Controller Access-Control
+                 System Plus (TACACS+) over TLS 1.3,
+                 Section 5.1";
     nacm:default-deny-write;
     uses tlscmn:hello-params-grouping {
       refine "tls-versions/min" {
         must "not(derived-from-or-self(current(), "
            + "'tlscmn:tls12'))" {
-          error-message 
+          error-message
             "TLS 1.2 is not supported as min TLS version";
         }
       }
@@ -575,10 +571,6 @@ module ietf-system-tacacs-plus {
         }
       }
     }
-    reference
-      "RFC SSSS: Terminal Access Controller Access-Control
-                 System Plus (TACACS+) over TLS 1.3,
-                 Section 5.1";
   }
 
   grouping tls-client {
@@ -587,13 +579,12 @@ module ietf-system-tacacs-plus {
        consideration for how an underlying TCP session is
        established.";
     container client-identity {
-      presence
-        "Indicates that a TLS-level client identity has been
-         configured.
-         This statement is present so the mandatory descendant do
-         not imply that this node must be configured.";
+      presence "Indicates that a TLS-level client identity has been
+                configured.
+                This statement is present so the mandatory descendant
+                do not imply that this node must be configured.";
       description
-        "Identity credentials the TLS client may present when
+        "Identity credentials that a TLS client may present when
          establishing a connection to a TLS server.";
       uses client-identity-with-ref;
     }
@@ -601,13 +592,13 @@ module ietf-system-tacacs-plus {
       must 'credentials-reference or ca-certs or ee-certs or '
          + 'raw-public-keys or tls13-epsks';
       description
-        "Specifies how the TLS client can authenticate TLS servers.";
+        "Specifies how a TLS client can authenticate TLS servers.";
       uses server-authentication-with-ref;
     }
     container hello-params {
       if-feature "tlscmn:hello-params";
       description
-        "Configurable parameters for the TLS hello message.";
+        "Configurable parameters for the TLS Hello message.";
       uses hello-params;
     }
   }
@@ -622,31 +613,34 @@ module ietf-system-tacacs-plus {
       description
         "Container for TACACS+ configurations and operations.";
       list client-credentials {
-        if-feature credential-reference;
+        if-feature "credential-reference";
         key "id";
         description
-          "Identity credentials that the TLS client may present 
+          "Identity credentials that a TLS client may present
            when establishing a connection to a TLS server.
-           A list of client credentials to be referenced.";
+           A list of client credentials that can be referenced
+           when configuring server instances.";
         nacm:default-deny-write;
         leaf id {
           type string;
           description
-            "A credential identifier.";
+            "An identifier that uniquely identifies a client 
+             identity within the device configuration.";
         }
         uses client-identity;
       }
       list server-credentials {
-        if-feature credential-reference;
+        if-feature "credential-reference";
         key "id";
         description
-          "Identity credentials that the TLS client may present
+          "Identity credentials that a TLS client may present
            when establishing a connection to a TLS server.";
         nacm:default-deny-write;
         leaf id {
           type string;
           description
-            "A credential identifier.";
+            "An identifier that uniquely identify server
+             credentials within the device configuration.";
         }
         uses server-authentication;
       }
@@ -675,7 +669,7 @@ module ietf-system-tacacs-plus {
             "Provides a domain name of the TACACS+ server.";
           reference
             "RFC SSSS: Terminal Access Controller Access-Control
-                       System Plus (TACACS+) over TLS 1.3, 
+                       System Plus (TACACS+) over TLS 1.3,
                        Section 3.4.2";
         }
         leaf sni-enabled {
@@ -692,7 +686,7 @@ module ietf-system-tacacs-plus {
             "RFC 6066: Transport Layer Security (TLS) Extensions:
                        Extension Definitions, Section 3
              RFC SSSS: Terminal Access Controller Access-Control
-                       System Plus (TACACS+) over TLS 1.3, 
+                       System Plus (TACACS+) over TLS 1.3,
                        Section 3.4.2";
         }
         leaf address {
@@ -711,16 +705,15 @@ module ietf-system-tacacs-plus {
         }
         choice security {
           mandatory true;
-          //default "tls";
           description
             "Security mechanism between TACACS+ client and server.";
           case tls {
             description
-              "TLS is used.";
-            uses tls-client;
+              "TLS is used to secure TACACS+ exchanges.";
             reference
               "RFC SSSS: Terminal Access Controller Access-Control
                          System Plus (TACACS+) over TLS 1.3";
+            uses tls-client;
           }
           case obfuscation {
             leaf shared-secret {
@@ -748,7 +741,7 @@ module ietf-system-tacacs-plus {
         }
         choice source-type {
           description
-            "The source address type for outbound TACACS+ packets.";
+            "The source IP address type for outbound TACACS+ packets.";
           case source-ip {
             leaf source-ip {
               type inet:ip-address;
@@ -762,8 +755,8 @@ module ietf-system-tacacs-plus {
               type if:interface-ref;
               description
                 "Specifies the interface from which the IP address
-                 is derived for use as the source for the outbound
-                 TACACS+ packet.";
+                 is derived for use as the source for outbound
+                 TACACS+ packets.";
             }
           }
         }
@@ -802,7 +795,7 @@ module ietf-system-tacacs-plus {
 
   augment "/sys:system" {
     description
-      "Augments the system model with the tacacs-plus model.";
+      "Augments the system model with the tacacs-plus data nodes.";
     uses tacacs-plus;
   }
 }
