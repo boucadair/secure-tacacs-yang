@@ -474,7 +474,7 @@ Table of Contents
           Also, this revision:
             - updates the reference of 'tacacs-plus' identity
               to also cite RFC SSSS
-            - replaces a must check with a when
+            - fixes a must statement by adding a missing prefix
             - updates the description of the 'name' under 'server'
               list to better reflect the intended use and clarifies
               the difference with the new domain-name
@@ -972,9 +972,18 @@ Table of Contents
        description
          "Grouping for TACACS+ attributes.";
        container tacacs-plus {
-         when "derived-from-or-self(../sys:authentication"
+         must "not(derived-from-or-self(../sys:authentication"
             + "/sys:user-authentication-order, "
-            + "'sys-tcs-plus:tacacs-plus')";
+            + "'sys-tcs-plus:tacacs-plus'))"
+            + " or bit-is-set(server/server-type,'authentication')" {
+           error-message
+             "When 'tacacs-plus' is used as a system authentication
+              method, a TACACS+ authentication server must be
+              configured.";
+           description
+             "When 'tacacs-plus' is used as an authentication method,
+              a TACACS+ server must be configured.";
+         }
          description
            "Container for TACACS+ configurations and operations.";
          list client-credentials {
