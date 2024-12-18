@@ -1347,27 +1347,27 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
    user to access and execute commands at various privilege levels
    assigned to the user, and accounting keeps track of the activity of a
    user who has accessed the device.<a href="#section-3-1" class="pilcrow">¶</a></p>
-<p id="section-3-2">The ietf-system-tacacs-plus module augments the "/sys:system" path
-   defined in the ietf-system module with the contents of the "tacacs-
-   plus" grouping.  Therefore, a device can use local, RADIUS, or
+<p id="section-3-2">The "ietf-system-tacacs-plus" module augments the '/sys:system' path
+   defined in the "ietf-system" module with the contents of the 'tacacs-plus'
+   grouping.  Therefore, a device can use local, RADIUS, or
    TACACS+ authentication to validate users who attempt to access the
-   router by several mechanisms, e.g., a command line interface or a
+   device by several mechanisms, e.g., a command line interface or a
    web-based user interface.<a href="#section-3-2" class="pilcrow">¶</a></p>
-<p id="section-3-3">The "server" list, which is directly under the "tacacs-plus"
-   container, holds a list of TACACS+ servers and uses server-type to
+<p id="section-3-3">The 'server' list, which is directly under the 'tacacs-plus'
+   container, holds a list of TACACS+ servers and uses 'server-type' to
    distinguish between Authentication, Authorization, and Accounting
-   (AAA) services.  The list of servers is for redundancy.<a href="#section-3-3" class="pilcrow">¶</a></p>
-<p id="section-3-4">When there are multiple interfaces connected to the TACACS+ client or
+   (AAA) services. The list of servers is for redundancy.<a href="#section-3-3" class="pilcrow">¶</a></p>
+<p id="section-3-4">When there are multiple interfaces connected to a TACACS+ client or
    server, the source address of outgoing TACACS+ packets could be
    specified, or the source address could be specified through the
    interface IP address setting or derived from the outbound interface
-   from the local Forwarding Information Base (FIB).  For the TACACS+
+   from the local Forwarding Information Base (FIB).  For a TACACS+
    server located in a Virtual Private Network (VPN), a VPN Routing and
    Forwarding (VRF) instance needs to be specified.<a href="#section-3-4" class="pilcrow">¶</a></p>
-<p id="section-3-5">The "statistics" container under the "server list" is a collection of
+<p id="section-3-5">The 'statistics' container under the 'server' list is a collection of
    read-only counters for sent and received messages from a configured
    server.<a href="#section-3-5" class="pilcrow">¶</a></p>
-<p id="section-3-6">The YANG module for TACACS+ client has the following structure:<a href="#section-3-6" class="pilcrow">¶</a></p>
+<p id="section-3-6">The YANG module for TACACS+ client has the structure shown in <a href="#tree-overview" class="auto internal xref">Figure 1</a>.<a href="#section-3-6" class="pilcrow">¶</a></p>
 <span id="name-tree-structure-overview"></span><div id="tree-overview">
 <figure id="figure-1">
         <div class="alignLeft art-text artwork" id="section-3-7.1">
@@ -1541,7 +1541,7 @@ establishing a connection to a server. Client identities can be configured at th
         <dd class="break"></dd>
 <dt id="section-3-11.17">'rpk-errors':</dt>
         <dd style="margin-left: 1.5em" id="section-3-11.18">
-          <p id="section-3-11.18.1">Number of RPK-related connection failures.<a href="#section-3-11.18.1" class="pilcrow">¶</a></p>
+          <p id="section-3-11.18.1">Number of raw public key related connection failures.<a href="#section-3-11.18.1" class="pilcrow">¶</a></p>
 </dd>
       <dd class="break"></dd>
 </dl>
