@@ -6,9 +6,9 @@ Operations and Management Area Working Group           M. Boucadair, Ed.
 Internet-Draft                                                    Orange
 Obsoletes: 9105 (if approved)                                      B. Wu
 Intended status: Standards Track                                G. Zheng
-Expires: 19 June 2025                                            M. Wang
+Expires: 27 July 2025                                            M. Wang
                                                      Huawei Technologies
-                                                        16 December 2024
+                                                         23 January 2025
 
 
  A YANG Data Model for Terminal Access Controller Access-Control System
@@ -41,11 +41,11 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 19 June 2025.
+   This Internet-Draft will expire on 27 July 2025.
 
 Copyright Notice
 
-   Copyright (c) 2024 IETF Trust and the persons identified as the
+   Copyright (c) 2025 IETF Trust and the persons identified as the
    document authors.  All rights reserved.
 
    This document is subject to BCP 78 and the IETF Trust's Legal
@@ -84,15 +84,26 @@ Table of Contents
 
 1.  Introduction
 
-   [RFC9105] defines a YANG module ("ietf-system-tacacs-plus") that
-   augments the System Management data model defined in [RFC7317] for
-   the management of Terminal Access Controller Access-Control System
-   Plus (TACACS+) clients.  Typically, the "ietf-system-tacacs-plus"
-   module is used to configure a TACACS+ client on a device to support
-   deployment scenarios with centralized authentication, authorization,
-   and accounting servers.
+   The System Management data model [RFC7317] defines separate
+   functionality to support local and Remote Authentication Dial In User
+   Service (RADIUS) authentication:
 
-   This document defines a YANG module for managing TACACS+ client
+   User Authentication Model:  Defines a list of user names with
+      associated passwords and a configuration leaf to decide the order
+      in which local or RADIUS authentication is used.
+
+   RADIUS Client Model:  Defines a list of RADIUS servers used by a
+      device for centralized user authentication.
+
+   [RFC9105] defines a YANG module ("ietf-system-tacacs-plus") that
+   augments the System Management data model [RFC7317] for the
+   management of Terminal Access Controller Access-Control System Plus
+   (TACACS+) clients as an alternative to RADIUS servers [RFC2865].
+   Typically, the "ietf-system-tacacs-plus" module is used to configure
+   a TACACS+ client on a device to support deployment scenarios with
+   centralized authentication, authorization, and accounting servers.
+
+   This document defines a YANG module for managing TACACS+ clients
    (Section 4), including TACACS+ over TLS 1.3 clients
    [I-D.ietf-opsawg-tacacs-tls13].  This document obsoletes [RFC9105].
 
@@ -105,7 +116,7 @@ Table of Contents
 
    *  Add support for TLS [I-D.ietf-opsawg-tacacs-tls13]
 
-   *  Fix a must statement and indicate a missing prefix
+   *  Fix a must statement under 'tacacs-plus'
 
    *  Fix errors in the example provided in Appendix A of [RFC9105]
 
@@ -166,132 +177,128 @@ Table of Contents
    assigned to the user, and accounting keeps track of the activity of a
    user who has accessed the device.
 
-   The ietf-system-tacacs-plus module augments the "/sys:system" path
-   defined in the ietf-system module with the contents of the "tacacs-
-   plus" grouping.  Therefore, a device can use local, RADIUS, or
+   The "ietf-system-tacacs-plus" module augments the '/sys:system' path
+   defined in the "ietf-system" module with the contents of the 'tacacs-
+   plus' grouping.  Therefore, a device can use local, RADIUS, or
    TACACS+ authentication to validate users who attempt to access the
-   router by several mechanisms, e.g., a command line interface or a
+   device by several mechanisms, e.g., a command line interface or a
    web-based user interface.
 
-   The "server" list, which is directly under the "tacacs-plus"
-   container, holds a list of TACACS+ servers and uses server-type to
+   The 'server' list, which is directly under the 'tacacs-plus'
+   container, holds a list of TACACS+ servers and uses 'server-type' to
    distinguish between Authentication, Authorization, and Accounting
    (AAA) services.  The list of servers is for redundancy.
 
-   When there are multiple interfaces connected to the TACACS+ client or
+   When there are multiple interfaces connected to a TACACS+ client or
    server, the source address of outgoing TACACS+ packets could be
    specified, or the source address could be specified through the
    interface IP address setting or derived from the outbound interface
-   from the local Forwarding Information Base (FIB).  For the TACACS+
+   from the local Forwarding Information Base (FIB).  For a TACACS+
    server located in a Virtual Private Network (VPN), a VPN Routing and
    Forwarding (VRF) instance needs to be specified.
 
-   The "statistics" container under the "server list" is a collection of
+   The 'statistics' container under the 'server' list is a collection of
    read-only counters for sent and received messages from a configured
    server.
 
-   The YANG module for TACACS+ client has the following structure:
+   The YANG module for TACACS+ client has the structure shown in
+   Figure 1.
 
-   =============== NOTE: '\' line wrapping per RFC 8792 ================
-
-   module: ietf-system-tacacs-plus
-
-     augment /sys:system:
-       +--rw tacacs-plus
-          +--rw client-credentials* [id] {credential-reference}?
-          |  +--rw id                       string
-          |  +--rw (auth-type)?
-          |     +--:(certificate)
-          |     |  ...
-          |     +--:(raw-public-key) {tlsc:client-ident-raw-public-key}?
-          |     |  ...
-          |     +--:(tls13-epsk) {tlsc:client-ident-tls13-epsk}?
-          |        ...
-          +--rw server-credentials* [id] {credential-reference}?
-          |  +--rw id                 string
-          |  +--rw ca-certs!
-          |  |  ...
-          |  +--rw ee-certs!
-          |  |  ...
-          |  +--rw raw-public-keys! {tlsc:server-auth-raw-public-key}?
-          |  |  ...
-          |  +--rw tls13-epsks?       empty
-          |          {tlsc:server-auth-tls13-epsk}?
-          +--rw server* [name]
-             +--rw name                           string
-             +--rw server-type
-             |       tacacs-plus-server-type
-             +--rw domain-name?                   inet:domain-name
-             +--rw sni-enabled?                   boolean
-             +--rw address                        inet:host
-             +--rw port?                          inet:port-number
-             +--rw (security)
-             |  +--:(tls)
-             |  |  +--rw client-identity!
-             |  |  |  +--rw (ref-or-explicit)?
-             |  |  |     +--:(ref)
-             |  |  |     |  +--rw credentials-reference?
-             |  |  |     |          sys-tcs-plus:client-credentials-ref
-             |  |  |     |          {credential-reference}?
-             |  |  |     +--:(explicit)
-             |  |  |        +--rw (auth-type)?
-             |  |  |           +--:(certificate)
-             |  |  |           |  ...
-             |  |  |           +--:(raw-public-key)
-             |  |  |           |        {tlsc:client-ident-raw-public-\
-                                                                   key}?
-             |  |  |           |  ...
-             |  |  |           +--:(tls13-epsk)
-             |  |  |                    {tlsc:client-ident-tls13-epsk}?
-             |  |  |              ...
-             |  |  +--rw server-authentication
-             |  |  |  +--rw (ref-or-explicit)?
-             |  |  |     +--:(ref)
-             |  |  |     |  +--rw credentials-reference?
-             |  |  |     |          sys-tcs-plus:server-credentials-ref
-             |  |  |     |          {credential-reference}?
-             |  |  |     +--:(explicit)
-             |  |  |        +--rw ca-certs!
-             |  |  |        |  ...
-             |  |  |        +--rw ee-certs!
-             |  |  |        |  ...
-             |  |  |        +--rw raw-public-keys!
-             |  |  |        |       {tlsc:server-auth-raw-public-key}?
-             |  |  |        |  ...
-             |  |  |        +--rw tls13-epsks?             empty
-             |  |  |                {tlsc:server-auth-tls13-epsk}
-             |  |  +--rw hello-params {tlscmn:hello-params}?
-             |  |     +--rw tls-versions
-             |  |     |  +--rw min?   identityref
-             |  |     |  +--rw max?   identityref
-             |  |     +--rw cipher-suites
-             |  |        +--rw cipher-suite*
-             |  |                tlscsa:tls-cipher-suite-algorithm
-             |  +--:(obfuscation)
-             |     +--rw shared-secret?           string
-             +--rw (source-type)?
-             |  +--:(source-ip)
-             |  |  +--rw source-ip?               inet:ip-address
-             |  +--:(source-interface)
-             |     +--rw source-interface?        if:interface-ref
-             +--rw vrf-instance?
-             |       -> /ni:network-instances/network-instance/name
-             +--rw single-connection?             boolean
-             +--rw timeout?                       uint16
-             +--ro statistics
-                +--ro discontinuity-time?    yang:date-and-time
-                +--ro connection-opens?      yang:counter64
-                +--ro connection-closes?     yang:counter64
-                +--ro connection-aborts?     yang:counter64
-                +--ro connection-failures?   yang:counter64
-                +--ro connection-timeouts?   yang:counter64
-                +--ro messages-sent?         yang:counter64
-                +--ro messages-received?     yang:counter64
-                +--ro errors-received?       yang:counter64
-                +--ro sessions?              yang:counter64
-                +--ro cert-errors?           yang:counter64
-                +--ro rpk-errors?            yang:counter64
-                        {tlsc:server-auth-raw-public-key}?
+   augment /sys:system:
+     +--rw tacacs-plus
+        +--rw client-credentials* [id] {credential-reference}?
+        |  +--rw id                       string
+        |  +--rw (auth-type)?
+        |     +--:(certificate)
+        |     |  ...
+        |     +--:(raw-public-key) {tlsc:client-ident-raw-public-key}?
+        |     |  ...
+        |     +--:(tls13-epsk) {tlsc:client-ident-tls13-epsk}?
+        |        ...
+        +--rw server-credentials* [id] {credential-reference}?
+        |  +--rw id                 string
+        |  +--rw ca-certs!
+        |  |  ...
+        |  +--rw ee-certs!
+        |  |  ...
+        |  +--rw raw-public-keys! {tlsc:server-auth-raw-public-key}?
+        |  |  ...
+        |  +--rw tls13-epsks?       empty
+        |          {tlsc:server-auth-tls13-epsk}?
+        +--rw server* [name]
+           +--rw name                           string
+           +--rw server-type
+           |       tacacs-plus-server-type
+           +--rw domain-name?                   inet:domain-name
+           +--rw sni-enabled?                   boolean
+           +--rw address                        inet:host
+           +--rw port?                          inet:port-number
+           +--rw (security)
+           |  +--:(tls)
+           |  |  +--rw client-identity!
+           |  |  |  +--rw (ref-or-explicit)?
+           |  |  |     +--:(ref)
+           |  |  |     |  +--rw credentials-reference?
+           |  |  |     |          sys-tcs-plus:client-credentials-ref
+           |  |  |     |          {credential-reference}?
+           |  |  |     +--:(explicit)
+           |  |  |        +--rw (auth-type)?
+           |  |  |           +--:(certificate)
+           |  |  |           |  ...
+           |  |  |           +--:(raw-public-key)
+           |  |  |           |     {tlsc:client-ident-raw-public-key}?
+           |  |  |           |  ...
+           |  |  |           +--:(tls13-epsk)
+           |  |  |                 {tlsc:client-ident-tls13-epsk}?
+           |  |  |              ...
+           |  |  +--rw server-authentication
+           |  |  |  +--rw (ref-or-explicit)?
+           |  |  |     +--:(ref)
+           |  |  |     |  +--rw credentials-reference?
+           |  |  |     |          sys-tcs-plus:server-credentials-ref
+           |  |  |     |          {credential-reference}?
+           |  |  |     +--:(explicit)
+           |  |  |        +--rw ca-certs!
+           |  |  |        |  ...
+           |  |  |        +--rw ee-certs!
+           |  |  |        |  ...
+           |  |  |        +--rw raw-public-keys!
+           |  |  |        |       {tlsc:server-auth-raw-public-key}?
+           |  |  |        |  ...
+           |  |  |        +--rw tls13-epsks?             empty
+           |  |  |                {tlsc:server-auth-tls13-epsk}
+           |  |  +--rw hello-params {tlscmn:hello-params}?
+           |  |     +--rw tls-versions
+           |  |     |  +--rw min?   identityref
+           |  |     |  +--rw max?   identityref
+           |  |     +--rw cipher-suites
+           |  |        +--rw cipher-suite*
+           |  |                tlscsa:tls-cipher-suite-algorithm
+           |  +--:(obfuscation)
+           |     +--rw shared-secret?           string
+           +--rw (source-type)?
+           |  +--:(source-ip)
+           |  |  +--rw source-ip?               inet:ip-address
+           |  +--:(source-interface)
+           |     +--rw source-interface?        if:interface-ref
+           +--rw vrf-instance?
+           |       -> /ni:network-instances/network-instance/name
+           +--rw single-connection?             boolean
+           +--rw timeout?                       uint16
+           +--ro statistics
+              +--ro discontinuity-time?    yang:date-and-time
+              +--ro connection-opens?      yang:counter64
+              +--ro connection-closes?     yang:counter64
+              +--ro connection-aborts?     yang:counter64
+              +--ro connection-failures?   yang:counter64
+              +--ro connection-timeouts?   yang:counter64
+              +--ro messages-sent?         yang:counter64
+              +--ro messages-received?     yang:counter64
+              +--ro errors-received?       yang:counter64
+              +--ro sessions?              yang:counter64
+              +--ro cert-errors?           yang:counter64
+              +--ro rpk-errors?            yang:counter64
+                      {tlsc:server-auth-raw-public-key}?
 
                      Figure 1: Tree Structure Overview
 
@@ -344,16 +351,17 @@ Table of Contents
    'cert-errors':  Number of connection failures due to certificate
       issues.
 
-   'rpk-errors':  Number of RPK-related connection failures.
+   'rpk-errors':  Number of raw public key related connection failures.
 
 4.  TACACS+ Client Module
 
-   This module uses types and groupings defined in [RFC6991], [RFC8341],
-   [RFC8343], [RFC8529], [RFC9640], [RFC9641], [RFC9642], and [RFC9645].
+   This YANG module uses types and groupings defined in [RFC6991],
+   [RFC8341], [RFC8343], [RFC8529], [RFC9640], [RFC9641], [RFC9642], and
+   [RFC9645].
 
    The module augments [RFC7317].
 
-   The module also cites [RFC9257], [RFC9258], [RFC9258], and [RFC6520].
+   The module also cites [RFC6520], [RFC9257], and [RFC9258].
 
    <CODE BEGINS> file "ietf-system-tacacs-plus@2024-12-11.yang"
    module ietf-system-tacacs-plus {
@@ -376,15 +384,15 @@ Table of Contents
        reference
          "RFC 7317: A YANG Data Model for System Management";
      }
-     import ietf-interfaces {
-       prefix if;
-       reference
-         "RFC 8343: A YANG Data Model for Interface Management";
-     }
      import ietf-netconf-acm {
        prefix nacm;
        reference
          "RFC 8341: Network Configuration Access Control Model";
+     }
+     import ietf-interfaces {
+       prefix if;
+       reference
+         "RFC 8343: A YANG Data Model for Interface Management";
      }
      import ietf-network-instance {
        prefix ni;
@@ -467,19 +475,25 @@ Table of Contents
           Also, this revision:
             - updates the reference of 'tacacs-plus' identity
               to also cite RFC SSSS
-            - fixes a check in 'must' statement under 'tacacs-plus'
-              container and includes a missing prefix
+            - indicates that the the servers list must be unique
+              per address/port.
+            - fixes a must statement under 'tacacs-plus' by adding
+              a missing prefix
             - updates the description of the 'name' under 'server'
-              list to better reflect the intended use
+              list to better reflect the intended use and clarifies
+              the difference with the new domain-name
             - removes the default statement for the 'port' under
-              'server' list because a distinct defaumt port number
+              'server' list because a distinct default port number
               is used for TACACS+TLS
             - updates the 'port' leaf under 'server' list to enumerate
-              the various TACACS+ default port numbers";
+              the various TACACS+ default port numbers
+            - updates the description of timeout to remove redundant
+              text with the default statement";
        reference
          "RFC XXXX: A YANG Data Model for Terminal Access Controller
                     Access-Control System Plus (TACACS+)";
      }
+
      revision 2021-08-05 {
        description
          "Initial revision.";
@@ -545,91 +559,92 @@ Table of Contents
          "Defines a type to reference server credentials.";
      }
 
-     grouping base-statistics {
-       description
-         "Grouping for TACACS+ statistics attributes.";
-       leaf connection-opens {
-         type yang:counter64;
-         description
-           "Number of new connection requests sent to the server,
-            e.g., socket open.";
-       }
-       leaf connection-closes {
-         type yang:counter64;
-         description
-           "Number of connection close requests sent to the server,
-            e.g., socket close.";
-       }
-       leaf connection-aborts {
-         type yang:counter64;
-         description
-           "Number of aborted connections to the server. These do
-            not include connections that are closed gracefully.";
-       }
-       leaf connection-failures {
-         type yang:counter64;
-         description
-           "Number of connection failures to the server.";
-       }
-       leaf connection-timeouts {
-         type yang:counter64;
-         description
-           "Number of connection timeouts to the server.";
-       }
-       leaf messages-sent {
-         type yang:counter64;
-         description
-           "Number of messages sent to the server.";
-       }
-       leaf messages-received {
-         type yang:counter64;
-         description
-           "Number of messages received from the server.";
-       }
-       leaf errors-received {
-         type yang:counter64;
-         description
-           "Number of error messages received from the server.";
-       }
-       leaf sessions {
-         type yang:counter64;
-         description
-           "Number of TACACS+ sessions completed with the server.
-            If the Single Connection Mode was not enabled, the number
-            of sessions is the same as the number of
-            'connection-closes'. If the Single Connection Mode was
-            enabled, a single TCP connection may contain multiple
-            TACACS+ sessions.";
-       }
-     }
-
      grouping statistics {
        description
          "Grouping for TACACS+ statistics attributes, including TLS
           specifics.";
-       leaf discontinuity-time {
-         type yang:date-and-time;
+       container statistics {
+         config false;
          description
-           "The time on the most recent occasion at which the TACACS+
-            client suffered a discontinuity.";
-       }
-       uses base-statistics;
-       leaf cert-errors {
-         type yang:counter64;
-         description
-           "Number of connection failures due to certificate issues.";
-       }
-       leaf rpk-errors {
-         if-feature "tlsc:server-auth-raw-public-key";
-         type yang:counter64;
-         description
-           "Number of RPK-related connection failures.";
+           "A collection of server-related statistics objects.";
+         leaf discontinuity-time {
+           type yang:date-and-time;
+           description
+             "The time on the most recent occasion at which the
+              TACACS+ client suffered a discontinuity.";
+         }
+         leaf connection-opens {
+           type yang:counter64;
+           description
+             "Number of new connection requests sent to the server,
+              e.g., socket open.";
+         }
+         leaf connection-closes {
+           type yang:counter64;
+           description
+             "Number of connection close requests sent to the server,
+              e.g., socket close.";
+         }
+         leaf connection-aborts {
+           type yang:counter64;
+           description
+             "Number of aborted connections to the server. These do
+              not include connections that are closed gracefully.";
+         }
+         leaf connection-failures {
+           type yang:counter64;
+           description
+             "Number of connection failures to the server.";
+         }
+         leaf connection-timeouts {
+           type yang:counter64;
+           description
+             "Number of connection timeouts to the server.";
+         }
+         leaf messages-sent {
+           type yang:counter64;
+           description
+             "Number of messages sent to the server.";
+         }
+         leaf messages-received {
+           type yang:counter64;
+           description
+             "Number of messages received from the server.";
+         }
+         leaf errors-received {
+           type yang:counter64;
+           description
+             "Number of error messages received from the server.";
+         }
+         leaf sessions {
+           type yang:counter64;
+           description
+             "Number of TACACS+ sessions completed with the server.
+              If the Single Connection Mode was not enabled, the number
+              of sessions is the same as the number of
+              'connection-closes'. If the Single Connection Mode was
+              enabled, a single TCP connection may contain multiple
+              TACACS+ sessions.";
+         }
+         leaf cert-errors {
+           type yang:counter64;
+           description
+             "Number of connection failures due to certificate
+              issues.";
+         }
+         leaf rpk-errors {
+           if-feature "tlsc:server-auth-raw-public-key";
+           type yang:counter64;
+           description
+             "Number of RPK-related connection failures.";
+         }
        }
      }
 
      grouping certificate {
        description
-         "Specifies the client identity using a certificate.";
+         "Specifies a certificate that can be used for client
+          identity.";
        uses "ks:inline-or-keystore-end-entity-cert-with-key-"
           + "grouping" {
          refine "inline-or-keystore/inline/inline-definition" {
@@ -649,8 +664,8 @@ Table of Contents
 
      grouping raw-private-key {
        description
-         "Specifies the client identity using a raw private
-          key.";
+         "Specifies raw private key (RPK) that can be used for
+          client identity.";
        uses ks:inline-or-keystore-asymmetric-key-grouping {
          refine "inline-or-keystore/inline/inline-definition" {
            must 'not(public-key-format) or derived-from-or-self'
@@ -737,7 +752,7 @@ Table of Contents
 
      grouping client-identity {
        description
-         "Identity credentials that the TLS client may present when
+         "Identity credentials that a TLS client may present when
           establishing a connection to a TLS server. When configured,
           and requested by the TLS server when establishing a TLS
           session, these credentials are passed in the Certificate
@@ -750,8 +765,7 @@ Table of Contents
          default "certificate";
          //mandatory true;
          description
-           "A choice amongst authentication types, of which one must
-            be enabled and selected.";
+           "A choice amongst authentication types.";
          case certificate {
            container certificate {
              description
@@ -787,12 +801,12 @@ Table of Contents
           message.";
        choice ref-or-explicit {
          description
-           "A choice between a reference of explicit configuration.";
+           "A choice between a reference or explicit configuration.";
          case ref {
            description
-             "Provides a reference.";
+             "Provides a reference to a client identity.";
            leaf credentials-reference {
-             if-feature credential-reference;
+             if-feature "credential-reference";
              type sys-tcs-plus:client-credentials-ref;
              description
                "Specifies the client credentials reference.";
@@ -800,7 +814,7 @@ Table of Contents
          }
          case explicit {
            description
-             "Explicit configuration.";
+             "Explicit configuration of the client identity.";
            uses client-identity;
          }
        }
@@ -808,15 +822,15 @@ Table of Contents
 
      grouping server-authentication {
        description
-         "Specifies how the TLS client can authenticate TLS servers.
+         "Specifies how a TLS client can authenticate TLS servers.
           Any combination of credentials is additive and unordered.";
        nacm:default-deny-write;
        container ca-certs {
-         presence
-           "Indicates that Certification Authority (CA) certificates
-            have been configured.
-            This statement is present so the mandatory descendant
-            nodes do not imply that this node must be configured.";
+         presence "Indicates that Certification Authority (CA)
+                   certificates have been configured.
+                   This statement is present so the mandatory descendant
+                   nodes do not imply that this node must be
+                   configured.";
          description
            "A set of CA certificates used by the TLS client to
             authenticate TLS server certificates.
@@ -827,14 +841,14 @@ Table of Contents
          uses ts:inline-or-truststore-certs-grouping;
        }
        container ee-certs {
-         presence
-           "Indicates that End Entity (EE) certificates have been
-            configured.
-            This statement is present so the mandatory descendant
-            nodes do not imply that this node must be configured.";
+         presence "Indicates that End Entity (EE) certificates have been
+                   configured.
+                   This statement is present so the mandatory descendant
+                   nodes do not imply that this node must be
+                   configured.";
          description
            "A set of server certificates (i.e., end entity certificates)
-            used by the TLS client to authenticate certificates
+            used by a TLS client to authenticate certificates
             presented by TLS servers. A server certificate is
             authenticated if it is an exact match to a configured server
             certificate.";
@@ -849,7 +863,7 @@ Table of Contents
                    nodes do not imply that this node must be
                    configured.";
          description
-           "A set of raw public keys used by the TLS client to
+           "A set of raw public keys used by a TLS client to
             authenticate raw public keys presented by the TLS server.
             A raw public key is authenticated if it is an exact match
             to a configured raw public key.";
@@ -873,22 +887,22 @@ Table of Contents
          if-feature "tlsc:server-auth-tls13-epsk";
          type empty;
          description
-           "Indicates that the TLS client can authenticate TLS servers
-            using configured external PSKs.";
+           "Indicates that a TLS client can authenticate TLS servers
+            using configured EPSKs.";
        }
      }
 
      grouping server-authentication-with-ref {
        description
-         "Specifies how the TLS client can authenticate TLS servers.";
+         "Specifies how a TLS client can authenticate TLS servers.";
        choice ref-or-explicit {
          description
            "A choice between a reference of explicit configuration.";
          case ref {
            description
-             "Provides a reference.";
+             "Provides a reference to server credentials.";
            leaf credentials-reference {
-             if-feature credential-reference;
+             if-feature "credential-reference";
              type sys-tcs-plus:server-credentials-ref;
              description
                "Specifies the server credentials reference.";
@@ -896,7 +910,7 @@ Table of Contents
          }
          case explicit {
            description
-             "Explicit configuration.";
+             "Explicit configuration of a server credentials.";
            uses server-authentication;
          }
        }
@@ -904,7 +918,11 @@ Table of Contents
 
      grouping hello-params {
        description
-         "Configurable parameters for the TLS hello message.";
+         "Configurable parameters for the TLS Hello message.";
+       reference
+         "RFC SSSS: Terminal Access Controller Access-Control
+                    System Plus (TACACS+) over TLS 1.3,
+                    Section 5.1";
        nacm:default-deny-write;
        uses tlscmn:hello-params-grouping {
          refine "tls-versions/min" {
@@ -922,10 +940,6 @@ Table of Contents
            }
          }
        }
-       reference
-         "RFC SSSS: Terminal Access Controller Access-Control
-                    System Plus (TACACS+) over TLS 1.3,
-                    Section 5.1";
      }
 
      grouping tls-client {
@@ -934,69 +948,37 @@ Table of Contents
           consideration for how an underlying TCP session is
           established.";
        container client-identity {
-         presence
-           "Indicates that a TLS-level client identity has been
-            configured.
-            This statement is present so the mandatory descendant do
-            not imply that this node must be configured.";
+         presence "Indicates that a TLS-level client identity has been
+                   configured.
+                   This statement is present so the mandatory descendant
+                   do not imply that this node must be configured.";
          description
-           "Identity credentials the TLS client may present when
+           "Identity credentials that a TLS client may present when
             establishing a connection to a TLS server.";
-         //uses client-identity;
          uses client-identity-with-ref;
        }
        container server-authentication {
-         must 'ca-certs or ee-certs or raw-public-keys or tls13-epsks';
+         must 'credentials-reference or ca-certs or ee-certs or '
+            + 'raw-public-keys or tls13-epsks';
          description
-           "Specifies how the TLS client can authenticate TLS servers.";
-         //uses server-authentication;
+           "Specifies how a TLS client can authenticate TLS servers.";
          uses server-authentication-with-ref;
        }
        container hello-params {
          if-feature "tlscmn:hello-params";
          description
-           "Configurable parameters for the TLS hello message.";
+           "Configurable parameters for the TLS Hello message.";
          uses hello-params;
        }
      }
-
-     grouping tls-grouping-reuse {
-       description
-         "A grouping for TLS with TLS1.2 and keepalive removed.";
-       uses tlsc:tls-client-grouping {
-         refine "client-identity/auth-type/tls12-psk" {
-           if-feature "not tlsc:client-ident-tls12-psk";
-         }
-         refine "server-authentication/tls12-psks" {
-           if-feature "not tlsc:server-auth-tls12-psk";
-         }
-         refine "hello-params/tls-versions/min" {
-           must "not(derived-from-or-self(current(), "
-              + "'tlscmn:tls12'))" {
-             error-message
-               "TLS 1.2 is not supported as min TLS version";
-           }
-         }
-         refine "hello-params/tls-versions/max" {
-           must "not(derived-from-or-self(current(), "
-              + "'tlscmn:tls12'))" {
-             error-message
-               "TLS 1.2 is not supported as max TLS version";
-           }
-         }
-         refine "keepalives" {
-           if-feature "not tlsc:tls-client-keepalives";
-         }
-       }
-     } //currently not used
 
      grouping tacacs-plus {
        description
          "Grouping for TACACS+ attributes.";
        container tacacs-plus {
-         must "derived-from-or-self(../sys:authentication"
+         must "not(derived-from-or-self(../sys:authentication"
             + "/sys:user-authentication-order, "
-            + "'sys-tcs-plus:tacacs-plus')"
+            + "'sys-tcs-plus:tacacs-plus'))"
             + " or bit-is-set(server/server-type,'authentication')" {
            error-message
              "When 'tacacs-plus' is used as a system authentication
@@ -1009,36 +991,40 @@ Table of Contents
          description
            "Container for TACACS+ configurations and operations.";
          list client-credentials {
-           if-feature credential-reference;
+           if-feature "credential-reference";
            key "id";
            description
-             "Identity credentials the TLS client may present when
-              establishing a connection to a TLS server.
-              A list of client credentials to be referenced.";
+             "Identity credentials that a TLS client may present
+              when establishing a connection to a TLS server.
+              A list of client credentials that can be referenced
+              when configuring server instances.";
            nacm:default-deny-write;
            leaf id {
              type string;
              description
-               "A credential identifier.";
+               "An identifier that uniquely identifies a client
+                identity within the device configuration.";
            }
            uses client-identity;
          }
          list server-credentials {
-           if-feature credential-reference;
+           if-feature "credential-reference";
            key "id";
            description
-             "Identity credentials the TLS client may present when
-              establishing a connection to a TLS server.";
+             "Identity credentials that a TLS client may present
+              when establishing a connection to a TLS server.";
            nacm:default-deny-write;
            leaf id {
              type string;
              description
-               "A credential identifier.";
+               "An identifier that uniquely identify server
+                credentials within the device configuration.";
            }
            uses server-authentication;
          }
          list server {
            key "name";
+           unique "address port";
            ordered-by user;
            description
              "List of TACACS+ servers used by the device.";
@@ -1046,7 +1032,8 @@ Table of Contents
              type string;
              description
                "A name that is used to uniquely identify a TACACS+
-                server.";
+                server within the device configuration.
+                This name is not to be confused with the domain-name.";
            }
            leaf server-type {
              type tacacs-plus-server-type;
@@ -1085,28 +1072,26 @@ Table of Contents
              type inet:host;
              mandatory true;
              description
-               "The address of the TACACS+ server.";
+               "The IP address of the TACACS+ server.";
            }
            leaf port {
              type inet:port-number;
-             //default "49"; //replace TBD with assigned port
              description
                "The port number of TACACS+ server port number.
-                Default port number for legacy TACACS+ is 46,
+                Default port number for legacy TACACS+ is 49,
                 while it is TBD for TACACS+TLS.";
            }
            choice security {
              mandatory true;
-             //default "tls";
              description
                "Security mechanism between TACACS+ client and server.";
              case tls {
                description
-                 "TLS is used.";
-               uses tls-client;
+                 "TLS is used to secure TACACS+ exchanges.";
                reference
                  "RFC SSSS: Terminal Access Controller Access-Control
                             System Plus (TACACS+) over TLS 1.3";
+               uses tls-client;
              }
              case obfuscation {
                leaf shared-secret {
@@ -1148,8 +1133,8 @@ Table of Contents
                  type if:interface-ref;
                  description
                    "Specifies the interface from which the IP address
-                    is derived for use as the source for the outbound
-                    TACACS+ packet.";
+                    is derived for use as the source for outbound
+                    TACACS+ packets.";
                }
              }
            }
@@ -1168,8 +1153,9 @@ Table of Contents
              default "false";
              description
                "Indicates whether the Single Connection Mode is enabled
-                for the server. By default, the Single Connection Mode
-                is disabled.";
+                for the server.";
+             reference
+               "RFC 8907: The TACACS+ Protocol, Section 4.3";
            }
            leaf timeout {
              type uint16 {
@@ -1178,7 +1164,7 @@ Table of Contents
              units "seconds";
              default "5";
              description
-               "The number of seconds the device will wait for a
+               "The number of seconds that the device will wait for a
                 response from each TACACS+ server before trying with a
                 different server.";
            }
@@ -1189,7 +1175,7 @@ Table of Contents
 
      augment "/sys:system" {
        description
-         "Augments the system model with the tacacs-plus model.";
+         "Augments the system model with the tacacs-plus data nodes.";
        uses tacacs-plus;
      }
    }
@@ -1373,9 +1359,14 @@ Table of Contents
               Bierman, A., Boucadair, M., and Q. Wu, "Guidelines for
               Authors and Reviewers of Documents Containing YANG Data
               Models", Work in Progress, Internet-Draft, draft-ietf-
-              netmod-rfc8407bis-21, 13 November 2024,
+              netmod-rfc8407bis-22, 14 January 2025,
               <https://datatracker.ietf.org/doc/html/draft-ietf-netmod-
-              rfc8407bis-21>.
+              rfc8407bis-22>.
+
+   [RFC2865]  Rigney, C., Willens, S., Rubens, A., and W. Simpson,
+              "Remote Authentication Dial In User Service (RADIUS)",
+              RFC 2865, DOI 10.17487/RFC2865, June 2000,
+              <https://www.rfc-editor.org/rfc/rfc2865>.
 
    [RFC4252]  Ylonen, T. and C. Lonvick, Ed., "The Secure Shell (SSH)
               Authentication Protocol", RFC 4252, DOI 10.17487/RFC4252,
