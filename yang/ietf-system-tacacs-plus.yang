@@ -80,7 +80,7 @@ module ietf-system-tacacs-plus {
      described in BCP 14 (RFC 2119) (RFC 8174) when, and only when,
      they appear in all capitals, as shown here.
 
-     Copyright (c) 2024 IETF Trust and the persons identified as
+     Copyright (c) 2025 IETF Trust and the persons identified as
      authors of the code.  All rights reserved.
 
      Redistribution and use in source and binary forms, with or
@@ -93,7 +93,7 @@ module ietf-system-tacacs-plus {
      This version of this YANG module is part of RFC XXXX; see the
      RFC itself for full legal notices.";
 
-  revision 2024-12-11 {
+  revision 2025-01-23 {
     description
       "This revision adds TLS support. Specifically, this revision
        adds:
@@ -109,8 +109,8 @@ module ietf-system-tacacs-plus {
        Also, this revision:
          - updates the reference of 'tacacs-plus' identity
            to also cite RFC SSSS
-         - indicates that the the servers list must be unique
-           per address/port. 
+         - requires that the servers list must be unique per
+           address/port number. 
          - fixes a must statement under 'tacacs-plus' by adding
            a missing prefix
          - updates the description of the 'name' under 'server'
