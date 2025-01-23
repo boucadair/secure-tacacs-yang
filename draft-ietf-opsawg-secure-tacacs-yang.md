@@ -81,6 +81,7 @@ The YANG module in this document conforms to the Network Management
    The following changes have been made to {{?RFC9105}}:
 
    * Add support for TLS {{!I-D.ietf-opsawg-tacacs-tls13}}
+   * Add a constraint to ensure that the list of servers is unique per address/port number
    * Fix a must statement under 'tacacs-plus'
    * Fix errors in the example provided in Appendix A of {{?RFC9105}}
    * Add new examples to illustrate the use of TACACS+TLS data nodes
@@ -204,8 +205,8 @@ The module augments {{!RFC7317}}.
 
 The module also cites {{!RFC6520}}, {{!RFC9257}}, and {{!RFC9258}}.
 
-~~~
-<CODE BEGINS> file "ietf-system-tacacs-plus@2024-12-11.yang"
+~~~ yang
+<CODE BEGINS> file "ietf-system-tacacs-plus@2025-01-23.yang"
 {::include-fold ./yang/ietf-system-tacacs-plus.yang}
 <CODE ENDS>
 ~~~
@@ -329,6 +330,8 @@ The full tree structure is shown below:
 The document leverages data structures defined in {{!RFC9645}}.
 
 Thanks to Joe Clarke and Tom Petch for the review and comments.
+
+Thanks to Reshad Rahman for the yangdoctors review.
 
 Acknowledgments from RFC 9105:
 : The authors wish to thank Alex Campbell, John Heasley, Ebben Aries,
