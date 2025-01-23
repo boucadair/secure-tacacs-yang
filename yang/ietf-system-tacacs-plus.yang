@@ -109,6 +109,8 @@ module ietf-system-tacacs-plus {
        Also, this revision:
          - updates the reference of 'tacacs-plus' identity
            to also cite RFC SSSS
+         - indicates that the the servers list must be unique
+           per address/port. 
          - fixes a must statement under 'tacacs-plus' by adding
            a missing prefix
          - updates the description of the 'name' under 'server'
@@ -656,6 +658,7 @@ module ietf-system-tacacs-plus {
       }
       list server {
         key "name";
+        unique "address port";
         ordered-by user;
         description
           "List of TACACS+ servers used by the device.";
@@ -707,7 +710,6 @@ module ietf-system-tacacs-plus {
         }
         leaf port {
           type inet:port-number;
-          //default "49";
           description
             "The port number of TACACS+ server port number.
              Default port number for legacy TACACS+ is 49,
@@ -786,6 +788,8 @@ module ietf-system-tacacs-plus {
           description
             "Indicates whether the Single Connection Mode is enabled
              for the server.";
+          reference
+            "RFC 8907: The TACACS+ Protocol, Section 4.3";
         }
         leaf timeout {
           type uint16 {
