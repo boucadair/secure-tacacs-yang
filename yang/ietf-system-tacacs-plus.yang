@@ -109,13 +109,15 @@ module ietf-system-tacacs-plus {
        Also, this revision:
          - updates the reference of 'tacacs-plus' identity
            to also cite RFC SSSS
-         - requires that the servers list must be unique per
-           address/port number. 
          - fixes a must statement under 'tacacs-plus' by adding
            a missing prefix
+         - requires that the servers list must be unique per
+           address/port number.
          - updates the description of the 'name' under 'server'
            list to better reflect the intended use and clarifies
            the difference with the new domain-name
+         - updates the description of the 'address' to be
+           consistent with the type
          - removes the default statement for the 'port' under
            'server' list because a distinct default port number
            is used for TACACS+TLS
@@ -706,7 +708,7 @@ module ietf-system-tacacs-plus {
           type inet:host;
           mandatory true;
           description
-            "The IP address of the TACACS+ server.";
+            "The IP address or name of the TACACS+ server.";
         }
         leaf port {
           type inet:port-number;
