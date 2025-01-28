@@ -82,8 +82,10 @@ The YANG module in this document conforms to the Network Management
 
    * Add support for TLS {{!I-D.ietf-opsawg-tacacs-tls13}}
    * Add a constraint to ensure that the list of servers is unique per address/port number
+   * Update the description of 'address' to be consistent with the type
    * Fix a must statement under 'tacacs-plus'
    * Fix errors in the example provided in Appendix A of {{?RFC9105}}
+   * Add an example to illustrate the use of VRF
    * Add new examples to illustrate the use of TACACS+TLS data nodes
 
 Detailed YANG changes are listed in {{sec-module}}.
@@ -143,7 +145,7 @@ The document uses the terms defined in {{Section 2 of !I-D.ietf-opsawg-tacacs-tl
    server, the source address of outgoing TACACS+ packets could be
    specified, or the source address could be specified through the
    interface IP address setting or derived from the outbound interface
-   from the local Forwarding Information Base (FIB).  For a TACACS+
+   from the local Forwarding Information Base (FIB). For a TACACS+
    server located in a Virtual Private Network (VPN), a VPN Routing and
    Forwarding (VRF) instance needs to be specified.
 
@@ -172,7 +174,7 @@ The following new data nodes are supported compared to {{?RFC9105}}:
 : Defines a set credentials that can be globally provisioned and then referenced under specific servers.
 
 'domain-name':
-: Provides a domain name of the server per {{Section 3.3 of !I-D.ietf-opsawg-tacacs-tls13}}.
+: Provides a domain name of the server per {{Section 3.3 of !I-D.ietf-opsawg-tacacs-tls13}}. This is the TLS TACACS+ server's domain name that is  included in the SNI extension. This domain name is distinct from the IP address/hostname used for the underlying transport connection.
 
 'sni-enabled':
 : Controls activation of Server Name Indication (SNI) ({{Section 3 of !RFC6066}}). This parameter can be used only if a domain name is provided.
@@ -291,6 +293,13 @@ This YANG module uses groupings from other YANG modules that define nodes that m
 {::include-fold ./json-example/9105-ex.json}
 ~~~
 {: #ex9105 title="Example with Shared Secret"}
+
+{{ex9105-vrf}} provides an example to associate a TACACS+ server with a VRF.
+
+~~~ json
+{::include-fold ./json-example/9105-with-vrf.json}
+~~~
+{: #ex9105-vrf title="Example with VRF"}
 
 # TACACS+TLS Examples
 
