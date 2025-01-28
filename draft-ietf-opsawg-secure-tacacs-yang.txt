@@ -779,7 +779,6 @@ Table of Contents
        nacm:default-deny-write;
        choice auth-type {
          default "certificate";
-         //mandatory true;
          description
            "A choice amongst authentication types.";
          case certificate {
@@ -1158,12 +1157,6 @@ Table of Contents
              type leafref {
                path "/ni:network-instances/ni:network-instance/ni:name";
              }
-             description
-               "Specifies the VPN Routing and Forwarding (VRF) instance
-                to use to communicate with the TACACS+ server.
-                If 'source-interface' is configured, this value MUST
-                match the network instance bound to the source interface
-                (via bind-ni-name).";
              must "(not(../source-interface)) or "
                 + "(current() = /if:interfaces/if:interface"
                 + "[if:name = current()/../source-interface]/bind-ni-\
@@ -1173,6 +1166,12 @@ Table of Contents
                                                                   source
                   interface.";
              }
+             description
+               "Specifies the VPN Routing and Forwarding (VRF) instance
+                to use to communicate with the TACACS+ server.
+                If 'source-interface' is configured, this value MUST
+                match the network instance bound to the source interface
+                (via bind-ni-name).";
              reference
                "RFC 8529: YANG Data Model for Network Instances";
            }
