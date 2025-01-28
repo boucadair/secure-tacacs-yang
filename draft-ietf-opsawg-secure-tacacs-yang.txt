@@ -6,9 +6,9 @@ Operations and Management Area Working Group           M. Boucadair, Ed.
 Internet-Draft                                                    Orange
 Obsoletes: 9105 (if approved)                                      B. Wu
 Intended status: Standards Track                                G. Zheng
-Expires: 21 June 2025                                            M. Wang
+Expires: 1 August 2025                                           M. Wang
                                                      Huawei Technologies
-                                                        18 December 2024
+                                                         28 January 2025
 
 
  A YANG Data Model for Terminal Access Controller Access-Control System
@@ -41,11 +41,11 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 21 June 2025.
+   This Internet-Draft will expire on 1 August 2025.
 
 Copyright Notice
 
-   Copyright (c) 2024 IETF Trust and the persons identified as the
+   Copyright (c) 2025 IETF Trust and the persons identified as the
    document authors.  All rights reserved.
 
    This document is subject to BCP 78 and the IETF Trust's Legal
@@ -115,6 +115,9 @@ Table of Contents
    The following changes have been made to [RFC9105]:
 
    *  Add support for TLS [I-D.ietf-opsawg-tacacs-tls13]
+
+   *  Add a constraint to ensure that the list of servers is unique per
+      address/port number
 
    *  Fix a must statement under 'tacacs-plus'
 
@@ -363,7 +366,7 @@ Table of Contents
 
    The module also cites [RFC6520], [RFC9257], and [RFC9258].
 
-   <CODE BEGINS> file "ietf-system-tacacs-plus@2024-12-11.yang"
+   <CODE BEGINS> file "ietf-system-tacacs-plus@2025-01-23.yang"
    module ietf-system-tacacs-plus {
      yang-version 1.1;
      namespace "urn:ietf:params:xml:ns:yang:ietf-system-tacacs-plus";
@@ -446,7 +449,7 @@ Table of Contents
         described in BCP 14 (RFC 2119) (RFC 8174) when, and only when,
         they appear in all capitals, as shown here.
 
-        Copyright (c) 2024 IETF Trust and the persons identified as
+        Copyright (c) 2025 IETF Trust and the persons identified as
         authors of the code.  All rights reserved.
 
         Redistribution and use in source and binary forms, with or
@@ -459,7 +462,7 @@ Table of Contents
         This version of this YANG module is part of RFC XXXX; see the
         RFC itself for full legal notices.";
 
-     revision 2024-12-11 {
+     revision 2025-01-23 {
        description
          "This revision adds TLS support. Specifically, this revision
           adds:
@@ -477,9 +480,13 @@ Table of Contents
               to also cite RFC SSSS
             - fixes a must statement under 'tacacs-plus' by adding
               a missing prefix
+            - requires that the servers list must be unique per
+              address/port number.
             - updates the description of the 'name' under 'server'
               list to better reflect the intended use and clarifies
               the difference with the new domain-name
+            - updates the description of the 'address' to be
+              consistent with the type
             - removes the default statement for the 'port' under
               'server' list because a distinct default port number
               is used for TACACS+TLS
@@ -1022,6 +1029,7 @@ Table of Contents
          }
          list server {
            key "name";
+           unique "address port";
            ordered-by user;
            description
              "List of TACACS+ servers used by the device.";
@@ -1069,11 +1077,10 @@ Table of Contents
              type inet:host;
              mandatory true;
              description
-               "The IP address of the TACACS+ server.";
+               "The IP address or name of the TACACS+ server.";
            }
            leaf port {
              type inet:port-number;
-             //default "49";
              description
                "The port number of TACACS+ server port number.
                 Default port number for legacy TACACS+ is 49,
@@ -1152,6 +1159,8 @@ Table of Contents
              description
                "Indicates whether the Single Connection Mode is enabled
                 for the server.";
+             reference
+               "RFC 8907: The TACACS+ Protocol, Section 4.3";
            }
            leaf timeout {
              type uint16 {
@@ -1255,9 +1264,9 @@ Table of Contents
               Dahm, T., Heasley, J., dcmgash@cisco.com, and A. Ota,
               "Terminal Access Controller Access-Control System Plus
               (TACACS+) over TLS 1.3", Work in Progress, Internet-Draft,
-              draft-ietf-opsawg-tacacs-tls13-16, 12 December 2024,
+              draft-ietf-opsawg-tacacs-tls13-17, 27 January 2025,
               <https://datatracker.ietf.org/doc/html/draft-ietf-opsawg-
-              tacacs-tls13-16>.
+              tacacs-tls13-17>.
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
@@ -1355,9 +1364,9 @@ Table of Contents
               Bierman, A., Boucadair, M., and Q. Wu, "Guidelines for
               Authors and Reviewers of Documents Containing YANG Data
               Models", Work in Progress, Internet-Draft, draft-ietf-
-              netmod-rfc8407bis-21, 13 November 2024,
+              netmod-rfc8407bis-22, 14 January 2025,
               <https://datatracker.ietf.org/doc/html/draft-ietf-netmod-
-              rfc8407bis-21>.
+              rfc8407bis-22>.
 
    [RFC2865]  Rigney, C., Willens, S., Rubens, A., and W. Simpson,
               "Remote Authentication Dial In User Service (RADIUS)",
@@ -2112,6 +2121,8 @@ Acknowledgments
    The document leverages data structures defined in [RFC9645].
 
    Thanks to Joe Clarke and Tom Petch for the review and comments.
+
+   Thanks to Reshad Rahman for the yangdoctors review.
 
    Acknowledgments from RFC 9105:  The authors wish to thank Alex
       Campbell, John Heasley, Ebben Aries, Alan DeKok, Joe Clarke, Tom

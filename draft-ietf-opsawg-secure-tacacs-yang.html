@@ -32,7 +32,7 @@
     ConfigArgParse 1.7
     google-i18n-address 3.1.1
     intervaltree 3.1.0
-    Jinja2 3.1.4
+    Jinja2 3.1.5
     lxml 5.3.0
     platformdirs 4.3.6
     pycountry 24.6.1
@@ -1058,11 +1058,11 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <thead><tr>
 <td class="left">Internet-Draft</td>
 <td class="center">YANG for TACACS+ over TLS</td>
-<td class="right">December 2024</td>
+<td class="right">January 2025</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">Boucadair, et al.</td>
-<td class="center">Expires 21 June 2025</td>
+<td class="center">Expires 1 August 2025</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1078,12 +1078,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <a href="https://www.rfc-editor.org/rfc/rfc9105" class="eref">9105</a> (if approved)</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2024-12-18" class="published">18 December 2024</time>
+<time datetime="2025-01-28" class="published">28 January 2025</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2025-06-21">21 June 2025</time></dd>
+<dd class="expires"><time datetime="2025-08-01">1 August 2025</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1135,7 +1135,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 21 June 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 1 August 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1144,7 +1144,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <a href="#name-copyright-notice" class="section-name selfRef">Copyright Notice</a>
         </h2>
 <p id="section-boilerplate.2-1">
-            Copyright (c) 2024 IETF Trust and the persons identified as the
+            Copyright (c) 2025 IETF Trust and the persons identified as the
             document authors. All rights reserved.<a href="#section-boilerplate.2-1" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.2-2">
             This document is subject to BCP 78 and the IETF Trust's Legal
@@ -1269,13 +1269,16 @@ in which local or RADIUS authentication is used.<a href="#section-1-2.2.1" class
             <p id="section-1.1-2.1.1">Add support for TLS <span>[<a href="#I-D.ietf-opsawg-tacacs-tls13" class="cite xref">I-D.ietf-opsawg-tacacs-tls13</a>]</span><a href="#section-1.1-2.1.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-1.1-2.2">
-            <p id="section-1.1-2.2.1">Fix a must statement under 'tacacs-plus'<a href="#section-1.1-2.2.1" class="pilcrow">¶</a></p>
+            <p id="section-1.1-2.2.1">Add a constraint to ensure that the list of servers is unique per address/port number<a href="#section-1.1-2.2.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-1.1-2.3">
-            <p id="section-1.1-2.3.1">Fix errors in the example provided in Appendix A of <span>[<a href="#RFC9105" class="cite xref">RFC9105</a>]</span><a href="#section-1.1-2.3.1" class="pilcrow">¶</a></p>
+            <p id="section-1.1-2.3.1">Fix a must statement under 'tacacs-plus'<a href="#section-1.1-2.3.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-1.1-2.4">
-            <p id="section-1.1-2.4.1">Add new examples to illustrate the use of TACACS+TLS data nodes<a href="#section-1.1-2.4.1" class="pilcrow">¶</a></p>
+            <p id="section-1.1-2.4.1">Fix errors in the example provided in Appendix A of <span>[<a href="#RFC9105" class="cite xref">RFC9105</a>]</span><a href="#section-1.1-2.4.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-1.1-2.5">
+            <p id="section-1.1-2.5.1">Add new examples to illustrate the use of TACACS+TLS data nodes<a href="#section-1.1-2.5.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
 <p id="section-1.1-3">Detailed YANG changes are listed in <a href="#sec-module" class="auto internal xref">Section 4</a>.<a href="#section-1.1-3" class="pilcrow">¶</a></p>
@@ -1301,7 +1304,7 @@ in which local or RADIUS authentication is used.<a href="#section-1-2.2.1" class
             <p id="section-1.2-4.2.1">SSSS --&gt; the assigned RFC number for <span>[<a href="#I-D.ietf-opsawg-tacacs-tls13" class="cite xref">I-D.ietf-opsawg-tacacs-tls13</a>]</span><a href="#section-1.2-4.2.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-1.2-4.3">
-            <p id="section-1.2-4.3.1">TBD  --&gt; the assigned port number in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-opsawg-tacacs-tls13-16#section-7" class="relref">Section 7</a> of [<a href="#I-D.ietf-opsawg-tacacs-tls13" class="cite xref">I-D.ietf-opsawg-tacacs-tls13</a>]</span><a href="#section-1.2-4.3.1" class="pilcrow">¶</a></p>
+            <p id="section-1.2-4.3.1">TBD  --&gt; the assigned port number in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-opsawg-tacacs-tls13-17#section-7" class="relref">Section 7</a> of [<a href="#I-D.ietf-opsawg-tacacs-tls13" class="cite xref">I-D.ietf-opsawg-tacacs-tls13</a>]</span><a href="#section-1.2-4.3.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-1.2-4.4">
             <p id="section-1.2-4.4.1">2024-12-11 --&gt; the actual date of the publication of this document<a href="#section-1.2-4.4.1" class="pilcrow">¶</a></p>
@@ -1322,7 +1325,7 @@ described in BCP 14 <span>[<a href="#RFC2119" class="cite xref">RFC2119</a>]</s
 appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶</a></p>
 <p id="section-2-2">The terminology for describing YANG data models is defined in
    <span>[<a href="#RFC7950" class="cite xref">RFC7950</a>]</span>.<a href="#section-2-2" class="pilcrow">¶</a></p>
-<p id="section-2-3">The document uses the terms defined in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-opsawg-tacacs-tls13-16#section-2" class="relref">Section 2</a> of [<a href="#I-D.ietf-opsawg-tacacs-tls13" class="cite xref">I-D.ietf-opsawg-tacacs-tls13</a>]</span> and <span><a href="https://rfc-editor.org/rfc/rfc8907#section-3" class="relref">Section 3</a> of [<a href="#RFC8907" class="cite xref">RFC8907</a>]</span>.<a href="#section-2-3" class="pilcrow">¶</a></p>
+<p id="section-2-3">The document uses the terms defined in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-opsawg-tacacs-tls13-17#section-2" class="relref">Section 2</a> of [<a href="#I-D.ietf-opsawg-tacacs-tls13" class="cite xref">I-D.ietf-opsawg-tacacs-tls13</a>]</span> and <span><a href="https://rfc-editor.org/rfc/rfc8907#section-3" class="relref">Section 3</a> of [<a href="#RFC8907" class="cite xref">RFC8907</a>]</span>.<a href="#section-2-3" class="pilcrow">¶</a></p>
 <p id="section-2-4">'client' refers to TACACS+ client, while 'server' refers to TACACS+ server.<a href="#section-2-4" class="pilcrow">¶</a></p>
 <div id="tree-diagrams">
 <section id="section-2.1">
@@ -1500,7 +1503,7 @@ augment /sys:system:
         <dd class="break"></dd>
 <dt id="section-3-11.3">'domain-name':</dt>
         <dd style="margin-left: 1.5em" id="section-3-11.4">
-          <p id="section-3-11.4.1">Provides a domain name of the server per <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-opsawg-tacacs-tls13-16#section-3.3" class="relref">Section 3.3</a> of [<a href="#I-D.ietf-opsawg-tacacs-tls13" class="cite xref">I-D.ietf-opsawg-tacacs-tls13</a>]</span>.<a href="#section-3-11.4.1" class="pilcrow">¶</a></p>
+          <p id="section-3-11.4.1">Provides a domain name of the server per <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-opsawg-tacacs-tls13-17#section-3.3" class="relref">Section 3.3</a> of [<a href="#I-D.ietf-opsawg-tacacs-tls13" class="cite xref">I-D.ietf-opsawg-tacacs-tls13</a>]</span>.<a href="#section-3-11.4.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
 <dt id="section-3-11.5">'sni-enabled':</dt>
@@ -1551,9 +1554,9 @@ establishing a connection to a server. Client identities can be configured at th
 <span>[<a href="#RFC9642" class="cite xref">RFC9642</a>]</span>, and <span>[<a href="#RFC9645" class="cite xref">RFC9645</a>]</span>.<a href="#section-4-1" class="pilcrow">¶</a></p>
 <p id="section-4-2">The module augments <span>[<a href="#RFC7317" class="cite xref">RFC7317</a>]</span>.<a href="#section-4-2" class="pilcrow">¶</a></p>
 <p id="section-4-3">The module also cites <span>[<a href="#RFC6520" class="cite xref">RFC6520</a>]</span>, <span>[<a href="#RFC9257" class="cite xref">RFC9257</a>]</span>, and <span>[<a href="#RFC9258" class="cite xref">RFC9258</a>]</span>.<a href="#section-4-3" class="pilcrow">¶</a></p>
-<div class="breakable sourcecode" id="section-4-4">
-<pre>&lt;CODE BEGINS&gt; file "ietf-system-tacacs-plus@2024-12-11.yang"
-
+<div class="breakable lang-yang sourcecode" id="section-4-4">
+<pre>
+&lt;CODE BEGINS&gt; file "ietf-system-tacacs-plus@2025-01-23.yang"
 module ietf-system-tacacs-plus {
   yang-version 1.1;
   namespace "urn:ietf:params:xml:ns:yang:ietf-system-tacacs-plus";
@@ -1636,7 +1639,7 @@ module ietf-system-tacacs-plus {
      described in BCP 14 (RFC 2119) (RFC 8174) when, and only when,
      they appear in all capitals, as shown here.
 
-     Copyright (c) 2024 IETF Trust and the persons identified as
+     Copyright (c) 2025 IETF Trust and the persons identified as
      authors of the code.  All rights reserved.
 
      Redistribution and use in source and binary forms, with or
@@ -1649,7 +1652,7 @@ module ietf-system-tacacs-plus {
      This version of this YANG module is part of RFC XXXX; see the
      RFC itself for full legal notices.";
 
-  revision 2024-12-11 {
+  revision 2025-01-23 {
     description
       "This revision adds TLS support. Specifically, this revision
        adds:
@@ -1667,9 +1670,13 @@ module ietf-system-tacacs-plus {
            to also cite RFC SSSS
          - fixes a must statement under 'tacacs-plus' by adding
            a missing prefix
+         - requires that the servers list must be unique per
+           address/port number.
          - updates the description of the 'name' under 'server'
            list to better reflect the intended use and clarifies
            the difference with the new domain-name
+         - updates the description of the 'address' to be
+           consistent with the type
          - removes the default statement for the 'port' under
            'server' list because a distinct default port number
            is used for TACACS+TLS
@@ -2212,6 +2219,7 @@ module ietf-system-tacacs-plus {
       }
       list server {
         key "name";
+        unique "address port";
         ordered-by user;
         description
           "List of TACACS+ servers used by the device.";
@@ -2259,11 +2267,10 @@ module ietf-system-tacacs-plus {
           type inet:host;
           mandatory true;
           description
-            "The IP address of the TACACS+ server.";
+            "The IP address or name of the TACACS+ server.";
         }
         leaf port {
           type inet:port-number;
-          //default "49";
           description
             "The port number of TACACS+ server port number.
              Default port number for legacy TACACS+ is 49,
@@ -2342,6 +2349,8 @@ module ietf-system-tacacs-plus {
           description
             "Indicates whether the Single Connection Mode is enabled
              for the server.";
+          reference
+            "RFC 8907: The TACACS+ Protocol, Section 4.3";
         }
         leaf timeout {
           type uint16 {
@@ -2365,8 +2374,8 @@ module ietf-system-tacacs-plus {
     uses tacacs-plus;
   }
 }
-
-&lt;CODE ENDS&gt;</pre><a href="#section-4-4" class="pilcrow">¶</a>
+&lt;CODE ENDS&gt;
+</pre><a href="#section-4-4" class="pilcrow">¶</a>
 </div>
 </section>
 </div>
@@ -2375,7 +2384,7 @@ module ietf-system-tacacs-plus {
       <h2 id="name-security-considerations">
 <a href="#section-5" class="section-number selfRef">5. </a><a href="#name-security-considerations" class="section-name selfRef">Security Considerations</a>
       </h2>
-<p id="section-5-1">This section is modeled after the template described in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-netmod-rfc8407bis-21#section-3.7" class="relref">Section 3.7</a> of [<a href="#I-D.ietf-netmod-rfc8407bis" class="cite xref">I-D.ietf-netmod-rfc8407bis</a>]</span>.<a href="#section-5-1" class="pilcrow">¶</a></p>
+<p id="section-5-1">This section is modeled after the template described in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-netmod-rfc8407bis-22#section-3.7" class="relref">Section 3.7</a> of [<a href="#I-D.ietf-netmod-rfc8407bis" class="cite xref">I-D.ietf-netmod-rfc8407bis</a>]</span>.<a href="#section-5-1" class="pilcrow">¶</a></p>
 <p id="section-5-2">The "ietf-ac-common" YANG module defines a data model that is
 designed to be accessed via YANG-based management protocols, such as
 NETCONF <span>[<a href="#RFC6241" class="cite xref">RFC6241</a>]</span> and RESTCONF <span>[<a href="#RFC8040" class="cite xref">RFC8040</a>]</span>. These protocols have to
@@ -2465,7 +2474,7 @@ i.e., upper case, lower case, numeric, and punctuation.<a href="#section-5-5.4.1
 <dl class="references">
 <dt id="I-D.ietf-opsawg-tacacs-tls13">[I-D.ietf-opsawg-tacacs-tls13]</dt>
         <dd>
-<span class="refAuthor">Dahm, T.</span>, <span class="refAuthor">Heasley, J.</span>, <span class="refAuthor">dcmgash@cisco.com</span>, and <span class="refAuthor">A. Ota</span>, <span class="refTitle">"Terminal Access Controller Access-Control System Plus (TACACS+) over TLS 1.3"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-opsawg-tacacs-tls13-16</span>, <time datetime="2024-12-12" class="refDate">12 December 2024</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-opsawg-tacacs-tls13-16">https://datatracker.ietf.org/doc/html/draft-ietf-opsawg-tacacs-tls13-16</a>&gt;</span>. </dd>
+<span class="refAuthor">Dahm, T.</span>, <span class="refAuthor">Heasley, J.</span>, <span class="refAuthor">dcmgash@cisco.com</span>, and <span class="refAuthor">A. Ota</span>, <span class="refTitle">"Terminal Access Controller Access-Control System Plus (TACACS+) over TLS 1.3"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-opsawg-tacacs-tls13-17</span>, <time datetime="2025-01-27" class="refDate">27 January 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-opsawg-tacacs-tls13-17">https://datatracker.ietf.org/doc/html/draft-ietf-opsawg-tacacs-tls13-17</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC2119">[RFC2119]</dt>
         <dd>
@@ -2558,7 +2567,7 @@ i.e., upper case, lower case, numeric, and punctuation.<a href="#section-5-5.4.1
 <dl class="references">
 <dt id="I-D.ietf-netmod-rfc8407bis">[I-D.ietf-netmod-rfc8407bis]</dt>
         <dd>
-<span class="refAuthor">Bierman, A.</span>, <span class="refAuthor">Boucadair, M.</span>, and <span class="refAuthor">Q. Wu</span>, <span class="refTitle">"Guidelines for Authors and Reviewers of Documents Containing YANG Data Models"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-netmod-rfc8407bis-21</span>, <time datetime="2024-11-13" class="refDate">13 November 2024</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-netmod-rfc8407bis-21">https://datatracker.ietf.org/doc/html/draft-ietf-netmod-rfc8407bis-21</a>&gt;</span>. </dd>
+<span class="refAuthor">Bierman, A.</span>, <span class="refAuthor">Boucadair, M.</span>, and <span class="refAuthor">Q. Wu</span>, <span class="refTitle">"Guidelines for Authors and Reviewers of Documents Containing YANG Data Models"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-netmod-rfc8407bis-22</span>, <time datetime="2025-01-14" class="refDate">14 January 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-netmod-rfc8407bis-22">https://datatracker.ietf.org/doc/html/draft-ietf-netmod-rfc8407bis-22</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC2865">[RFC2865]</dt>
         <dd>
@@ -3347,12 +3356,13 @@ module: ietf-system-tacacs-plus
       </h2>
 <p id="appendix-D-1">The document leverages data structures defined in <span>[<a href="#RFC9645" class="cite xref">RFC9645</a>]</span>.<a href="#appendix-D-1" class="pilcrow">¶</a></p>
 <p id="appendix-D-2">Thanks to Joe Clarke and Tom Petch for the review and comments.<a href="#appendix-D-2" class="pilcrow">¶</a></p>
-<span class="break"></span><dl class="dlParallel" id="appendix-D-3">
-        <dt id="appendix-D-3.1">Acknowledgments from RFC 9105:</dt>
-        <dd style="margin-left: 1.5em" id="appendix-D-3.2">
-          <p id="appendix-D-3.2.1">The authors wish to thank Alex Campbell, John Heasley, Ebben Aries,
+<p id="appendix-D-3">Thanks to Reshad Rahman for the yangdoctors review.<a href="#appendix-D-3" class="pilcrow">¶</a></p>
+<span class="break"></span><dl class="dlParallel" id="appendix-D-4">
+        <dt id="appendix-D-4.1">Acknowledgments from RFC 9105:</dt>
+        <dd style="margin-left: 1.5em" id="appendix-D-4.2">
+          <p id="appendix-D-4.2.1">The authors wish to thank Alex Campbell, John Heasley, Ebben Aries,
  Alan DeKok, Joe Clarke, Tom Petch, Robert Wilton, and many others for
- their helpful comments and suggestions.<a href="#appendix-D-3.2.1" class="pilcrow">¶</a></p>
+ their helpful comments and suggestions.<a href="#appendix-D-4.2.1" class="pilcrow">¶</a></p>
 </dd>
       <dd class="break"></dd>
 </dl>
