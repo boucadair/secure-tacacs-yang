@@ -1563,8 +1563,6 @@ establishing a connection to a server. Client identities can be configured at th
 <div class="breakable lang-yang sourcecode" id="section-4-4">
 <pre>
 &lt;CODE BEGINS&gt; file "ietf-system-tacacs-plus@2025-01-23.yang"
-=============== NOTE: '\' line wrapping per RFC 8792 ================
-
 module ietf-system-tacacs-plus {
   yang-version 1.1;
   namespace "urn:ietf:params:xml:ns:yang:ietf-system-tacacs-plus";
@@ -2348,12 +2346,11 @@ module ietf-system-tacacs-plus {
           }
           must "(not(../source-interface)) or "
              + "(current() = /if:interfaces/if:interface"
-             + "[if:name = current()/../source-interface]/bind-ni-\
-                                                             name)" {
+             + "[if:name = current()/../source-interface]"
+             + "/bind-ni-name)" {
             error-message
-              "VRF instance must match the network instance of the \
-                                                               source
-               interface.";
+              "VRF instance must match the network instance of the
+               source interface.";
           }
           description
             "Specifies the VPN Routing and Forwarding (VRF) instance
