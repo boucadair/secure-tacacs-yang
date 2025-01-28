@@ -1272,13 +1272,19 @@ in which local or RADIUS authentication is used.<a href="#section-1-2.2.1" class
             <p id="section-1.1-2.2.1">Add a constraint to ensure that the list of servers is unique per address/port number<a href="#section-1.1-2.2.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-1.1-2.3">
-            <p id="section-1.1-2.3.1">Fix a must statement under 'tacacs-plus'<a href="#section-1.1-2.3.1" class="pilcrow">¶</a></p>
+            <p id="section-1.1-2.3.1">Update the description of 'address' to be consistent with the type<a href="#section-1.1-2.3.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-1.1-2.4">
-            <p id="section-1.1-2.4.1">Fix errors in the example provided in Appendix A of <span>[<a href="#RFC9105" class="cite xref">RFC9105</a>]</span><a href="#section-1.1-2.4.1" class="pilcrow">¶</a></p>
+            <p id="section-1.1-2.4.1">Fix a must statement under 'tacacs-plus'<a href="#section-1.1-2.4.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-1.1-2.5">
-            <p id="section-1.1-2.5.1">Add new examples to illustrate the use of TACACS+TLS data nodes<a href="#section-1.1-2.5.1" class="pilcrow">¶</a></p>
+            <p id="section-1.1-2.5.1">Fix errors in the example provided in Appendix A of <span>[<a href="#RFC9105" class="cite xref">RFC9105</a>]</span><a href="#section-1.1-2.5.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-1.1-2.6">
+            <p id="section-1.1-2.6.1">Add an example to illustrate the use of VRF<a href="#section-1.1-2.6.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-1.1-2.7">
+            <p id="section-1.1-2.7.1">Add new examples to illustrate the use of TACACS+TLS data nodes<a href="#section-1.1-2.7.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
 <p id="section-1.1-3">Detailed YANG changes are listed in <a href="#sec-module" class="auto internal xref">Section 4</a>.<a href="#section-1.1-3" class="pilcrow">¶</a></p>
@@ -1364,7 +1370,7 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
    server, the source address of outgoing TACACS+ packets could be
    specified, or the source address could be specified through the
    interface IP address setting or derived from the outbound interface
-   from the local Forwarding Information Base (FIB).  For a TACACS+
+   from the local Forwarding Information Base (FIB). For a TACACS+
    server located in a Virtual Private Network (VPN), a VPN Routing and
    Forwarding (VRF) instance needs to be specified.<a href="#section-3-4" class="pilcrow">¶</a></p>
 <p id="section-3-5">The 'statistics' container under the 'server' list is a collection of
@@ -1503,7 +1509,7 @@ augment /sys:system:
         <dd class="break"></dd>
 <dt id="section-3-11.3">'domain-name':</dt>
         <dd style="margin-left: 1.5em" id="section-3-11.4">
-          <p id="section-3-11.4.1">Provides a domain name of the server per <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-opsawg-tacacs-tls13-17#section-3.3" class="relref">Section 3.3</a> of [<a href="#I-D.ietf-opsawg-tacacs-tls13" class="cite xref">I-D.ietf-opsawg-tacacs-tls13</a>]</span>.<a href="#section-3-11.4.1" class="pilcrow">¶</a></p>
+          <p id="section-3-11.4.1">Provides a domain name of the server per <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-opsawg-tacacs-tls13-17#section-3.3" class="relref">Section 3.3</a> of [<a href="#I-D.ietf-opsawg-tacacs-tls13" class="cite xref">I-D.ietf-opsawg-tacacs-tls13</a>]</span>. This is the TLS TACACS+ server's domain name that is  included in the SNI extension. This domain name is distinct from the IP address/hostname used for the underlying transport connection.<a href="#section-3-11.4.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
 <dt id="section-3-11.5">'sni-enabled':</dt>
@@ -2644,6 +2650,48 @@ i.e., upper case, lower case, numeric, and punctuation.<a href="#section-5-5.4.1
 <a href="#name-example-with-shared-secret" class="selfRef">Example with Shared Secret</a>
         </figcaption></figure>
 </div>
+<p id="appendix-A-3"><a href="#ex9105-vrf" class="auto internal xref">Figure 3</a> provides an example to associate a TACACS+ server with a VRF.<a href="#appendix-A-3" class="pilcrow">¶</a></p>
+<span id="name-example-with-vrf"></span><div id="ex9105-vrf">
+<figure id="figure-3">
+        <div class="lang-json sourcecode" id="appendix-A-4.1">
+<pre>
+{
+  "ietf-network-instance:network-instances": {
+    "network-instance": [
+      {
+        "name": "MANAGEMENT_VRF",
+        "description": "Management VRF for TACACS+ traffic isolation"
+      }
+    ]
+  },
+  "ietf-system:system": {
+    "authentication": {
+      "user-authentication-order": [
+        "ietf-system-tacacs-plus:tacacs-plus",
+        "ietf-system:local-users"
+      ]
+    },
+    "ietf-system-tacacs-plus:tacacs-plus": {
+      "server": [
+        {
+          "name": "tac_plus1",
+          "server-type": "authentication",
+          "address": "192.0.2.2",
+          "shared-secret": "QaEfThUkO198010075460923+h3TbE8n",
+          "source-ip": "192.0.2.12",
+          "vrf-instance": "MANAGEMENT_VRF",
+          "timeout": 10
+        }
+      ]
+    }
+  }
+}
+</pre>
+</div>
+<figcaption><a href="#figure-3" class="selfRef">Figure 3</a>:
+<a href="#name-example-with-vrf" class="selfRef">Example with VRF</a>
+        </figcaption></figure>
+</div>
 </section>
 </div>
 <div id="tacacstls-examples">
@@ -2658,9 +2706,9 @@ i.e., upper case, lower case, numeric, and punctuation.<a href="#section-5-5.4.1
         <h3 id="name-example-tacacs-authenticatio">
 <a href="#appendix-B.1" class="section-number selfRef">B.1. </a><a href="#name-example-tacacs-authenticatio" class="section-name selfRef">Example TACACS+ Authentication Configuration with Explicit Certificate Definitions</a>
         </h3>
-<p id="appendix-B.1-1"><a href="#exin" class="auto internal xref">Figure 3</a> shows a configuration example with 'inline-definition' for the client identity and server authentication.<a href="#appendix-B.1-1" class="pilcrow">¶</a></p>
+<p id="appendix-B.1-1"><a href="#exin" class="auto internal xref">Figure 4</a> shows a configuration example with 'inline-definition' for the client identity and server authentication.<a href="#appendix-B.1-1" class="pilcrow">¶</a></p>
 <span id="name-example-with-tacacstls-with"></span><div id="exin">
-<figure id="figure-3">
+<figure id="figure-4">
           <div class="breakable lang-json sourcecode" id="appendix-B.1-2.1">
 <pre>
 =============== NOTE: '\' line wrapping per RFC 8792 ================
@@ -2727,7 +2775,7 @@ i.e., upper case, lower case, numeric, and punctuation.<a href="#section-5-5.4.1
 }
 </pre>
 </div>
-<figcaption><a href="#figure-3" class="selfRef">Figure 3</a>:
+<figcaption><a href="#figure-4" class="selfRef">Figure 4</a>:
 <a href="#name-example-with-tacacstls-with" class="selfRef">Example with TACACS+TLS with Inline Certificate Definitions</a>
           </figcaption></figure>
 </div>
@@ -2738,9 +2786,9 @@ i.e., upper case, lower case, numeric, and punctuation.<a href="#section-5-5.4.1
         <h3 id="name-example-tacacs-authentication">
 <a href="#appendix-B.2" class="section-number selfRef">B.2. </a><a href="#name-example-tacacs-authentication" class="section-name selfRef">Example TACACS+ Authentication Configuration with Certificate References</a>
         </h3>
-<p id="appendix-B.2-1"><a href="#ex-ref" class="auto internal xref">Figure 4</a> shows a configuration example with credential references for multiple service instances: four server instances are configured with all using the same credentials. These instances form a redundancy group for both IPv4 and IPv6.<a href="#appendix-B.2-1" class="pilcrow">¶</a></p>
+<p id="appendix-B.2-1"><a href="#ex-ref" class="auto internal xref">Figure 5</a> shows a configuration example with credential references for multiple service instances: four server instances are configured with all using the same credentials. These instances form a redundancy group for both IPv4 and IPv6.<a href="#appendix-B.2-1" class="pilcrow">¶</a></p>
 <span id="name-example-with-tacacstls-with-"></span><div id="ex-ref">
-<figure id="figure-4">
+<figure id="figure-5">
           <div class="breakable lang-json sourcecode" id="appendix-B.2-2.1">
 <pre>
 =============== NOTE: '\' line wrapping per RFC 8792 ================
@@ -2842,7 +2890,7 @@ i.e., upper case, lower case, numeric, and punctuation.<a href="#section-5-5.4.1
 }
 </pre>
 </div>
-<figcaption><a href="#figure-4" class="selfRef">Figure 4</a>:
+<figcaption><a href="#figure-5" class="selfRef">Figure 5</a>:
 <a href="#name-example-with-tacacstls-with-" class="selfRef">Example with TACACS+TLS with References</a>
           </figcaption></figure>
 </div>

@@ -119,9 +119,13 @@ Table of Contents
    *  Add a constraint to ensure that the list of servers is unique per
       address/port number
 
+   *  Update the description of 'address' to be consistent with the type
+
    *  Fix a must statement under 'tacacs-plus'
 
    *  Fix errors in the example provided in Appendix A of [RFC9105]
+
+   *  Add an example to illustrate the use of VRF
 
    *  Add new examples to illustrate the use of TACACS+TLS data nodes
 
@@ -327,7 +331,10 @@ Table of Contents
       under specific servers.
 
    'domain-name':  Provides a domain name of the server per Section 3.3
-      of [I-D.ietf-opsawg-tacacs-tls13].
+      of [I-D.ietf-opsawg-tacacs-tls13].  This is the TLS TACACS+
+      server's domain name that is included in the SNI extension.  This
+      domain name is distinct from the IP address/hostname used for the
+      underlying transport connection.
 
    'sni-enabled':  Controls activation of Server Name Indication (SNI)
       (Section 3 of [RFC6066]).  This parameter can be used only if a
@@ -1437,6 +1444,43 @@ Appendix A.  Example TACACS+ Authentication Configuration with Shared
 
                     Figure 2: Example with Shared Secret
 
+   Figure 3 provides an example to associate a TACACS+ server with a
+   VRF.
+
+   {
+     "ietf-network-instance:network-instances": {
+       "network-instance": [
+         {
+           "name": "MANAGEMENT_VRF",
+           "description": "Management VRF for TACACS+ traffic isolation"
+         }
+       ]
+     },
+     "ietf-system:system": {
+       "authentication": {
+         "user-authentication-order": [
+           "ietf-system-tacacs-plus:tacacs-plus",
+           "ietf-system:local-users"
+         ]
+       },
+       "ietf-system-tacacs-plus:tacacs-plus": {
+         "server": [
+           {
+             "name": "tac_plus1",
+             "server-type": "authentication",
+             "address": "192.0.2.2",
+             "shared-secret": "QaEfThUkO198010075460923+h3TbE8n",
+             "source-ip": "192.0.2.12",
+             "vrf-instance": "MANAGEMENT_VRF",
+             "timeout": 10
+           }
+         ]
+       }
+     }
+   }
+
+                         Figure 3: Example with VRF
+
 Appendix B.  TACACS+TLS Examples
 
    This section provides examples to illustrate the configuration of
@@ -1448,7 +1492,7 @@ Appendix B.  TACACS+TLS Examples
 B.1.  Example TACACS+ Authentication Configuration with Explicit
       Certificate Definitions
 
-   Figure 3 shows a configuration example with 'inline-definition' for
+   Figure 4 shows a configuration example with 'inline-definition' for
    the client identity and server authentication.
 
    =============== NOTE: '\' line wrapping per RFC 8792 ================
@@ -1514,12 +1558,12 @@ B.1.  Example TACACS+ Authentication Configuration with Explicit
      }
    }
 
-   Figure 3: Example with TACACS+TLS with Inline Certificate Definitions
+   Figure 4: Example with TACACS+TLS with Inline Certificate Definitions
 
 B.2.  Example TACACS+ Authentication Configuration with Certificate
       References
 
-   Figure 4 shows a configuration example with credential references for
+   Figure 5 shows a configuration example with credential references for
    multiple service instances: four server instances are configured with
    all using the same credentials.  These instances form a redundancy
    group for both IPv4 and IPv6.
@@ -1622,7 +1666,7 @@ B.2.  Example TACACS+ Authentication Configuration with Certificate
      }
    }
 
-             Figure 4: Example with TACACS+TLS with References
+             Figure 5: Example with TACACS+TLS with References
 
 Appendix C.  Full Tree
 
