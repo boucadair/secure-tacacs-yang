@@ -80,7 +80,7 @@ module ietf-system-tacacs-plus {
      described in BCP 14 (RFC 2119) (RFC 8174) when, and only when,
      they appear in all capitals, as shown here.
 
-     Copyright (c) 2024 IETF Trust and the persons identified as
+     Copyright (c) 2025 IETF Trust and the persons identified as
      authors of the code.  All rights reserved.
 
      Redistribution and use in source and binary forms, with or
@@ -93,7 +93,7 @@ module ietf-system-tacacs-plus {
      This version of this YANG module is part of RFC XXXX; see the
      RFC itself for full legal notices.";
 
-  revision 2024-12-11 {
+  revision 2025-01-23 {
     description
       "This revision adds TLS support. Specifically, this revision
        adds:
@@ -111,9 +111,13 @@ module ietf-system-tacacs-plus {
            to also cite RFC SSSS
          - fixes a must statement under 'tacacs-plus' by adding
            a missing prefix
+         - requires that the servers list must be unique per
+           address/port number.
          - updates the description of the 'name' under 'server'
            list to better reflect the intended use and clarifies
            the difference with the new domain-name
+         - updates the description of the 'address' to be
+           consistent with the type
          - removes the default statement for the 'port' under
            'server' list because a distinct default port number
            is used for TACACS+TLS
@@ -656,6 +660,7 @@ module ietf-system-tacacs-plus {
       }
       list server {
         key "name";
+        unique "address port";
         ordered-by user;
         description
           "List of TACACS+ servers used by the device.";
@@ -703,11 +708,10 @@ module ietf-system-tacacs-plus {
           type inet:host;
           mandatory true;
           description
-            "The IP address of the TACACS+ server.";
+            "The IP address or name of the TACACS+ server.";
         }
         leaf port {
           type inet:port-number;
-          //default "49";
           description
             "The port number of TACACS+ server port number.
              Default port number for legacy TACACS+ is 49,
@@ -786,6 +790,8 @@ module ietf-system-tacacs-plus {
           description
             "Indicates whether the Single Connection Mode is enabled
              for the server.";
+          reference
+            "RFC 8907: The TACACS+ Protocol, Section 4.3";
         }
         leaf timeout {
           type uint16 {
