@@ -374,6 +374,8 @@ Table of Contents
    The module also cites [RFC6520], [RFC9257], and [RFC9258].
 
    <CODE BEGINS> file "ietf-system-tacacs-plus@2025-01-23.yang"
+   =============== NOTE: '\' line wrapping per RFC 8792 ================
+
    module ietf-system-tacacs-plus {
      yang-version 1.1;
      namespace "urn:ietf:params:xml:ns:yang:ietf-system-tacacs-plus";
@@ -499,6 +501,8 @@ Table of Contents
               is used for TACACS+TLS
             - updates the 'port' leaf under 'server' list to enumerate
               the various TACACS+ default port numbers
+            - added a constraint on the VRF with 'source-interface'
+              is also provided
             - updates the description of timeout to remove redundant
               text with the default statement";
        reference
@@ -1157,6 +1161,21 @@ Table of Contents
              description
                "Specifies the VPN Routing and Forwarding (VRF) instance
                 to use to communicate with the TACACS+ server.";
+
+               "Specifies the VPN Routing and Forwarding (VRF) instance
+                to use to communicate with the TACACS+ server.
+                If 'source-interface' is configured, this value MUST
+                match the network instance bound to the source interface
+                (via bind-ni-name).";
+             must "(not(../source-interface)) or "
+                + "(current() = /if:interfaces/if:interface"
+                + "[if:name = current()/../source-interface]/bind-ni-\
+                                                                name)" {
+               error-message
+                 "VRF instance must match the network instance of the \
+                                                                  source
+                  interface.";
+             }
              reference
                "RFC 8529: YANG Data Model for Network Instances";
            }
