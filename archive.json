@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-01-28T00:46:11.089304+00:00",
+  "timestamp": "2025-01-30T00:44:51.865382+00:00",
   "repo": "boucadair/secure-tacacs-yang",
   "labels": [
     {
@@ -381,24 +381,26 @@
       "id": "PR_kwDOL_fxvc6IvV3K",
       "title": "Reshad-yangdoctors",
       "url": "https://github.com/boucadair/secure-tacacs-yang/pull/12",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "boucadair",
       "authorAssociation": "OWNER",
       "assignees": [],
       "labels": [],
       "body": "",
       "createdAt": "2025-01-23T10:12:40Z",
-      "updatedAt": "2025-01-24T07:06:18Z",
+      "updatedAt": "2025-01-28T07:27:35Z",
       "baseRepository": "boucadair/secure-tacacs-yang",
       "baseRefName": "main",
       "baseRefOid": "e440e562c6ce0881cf72584d84616460dac8020a",
       "headRepository": "boucadair/secure-tacacs-yang",
       "headRefName": "Reshad-yangdoctors",
       "headRefOid": "2db2f7fce51d0f6e65d25198d69c40e6241d81b7",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2025-01-28T07:27:35Z",
+      "mergedAt": "2025-01-28T07:27:35Z",
+      "mergedBy": "boucadair",
+      "mergeCommit": {
+        "oid": "1dd180ab968932a3e34a5e8ec17a8002d5594651"
+      },
       "comments": [],
       "reviews": []
     }
