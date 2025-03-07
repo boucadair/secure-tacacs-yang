@@ -782,9 +782,9 @@ module ietf-system-tacacs-plus {
           must "(not(../source-interface)) or "
              + "(current() = /if:interfaces/if:interface"
              + "[if:name = current()/../source-interface]"
-             + "/bind-ni-name)" {
+             + "/ni:bind-ni-name)" {
             error-message
-              "VRF instance must match the network instance of the 
+              "VRF instance must match the network instance of the
                source interface.";
           }
           description
