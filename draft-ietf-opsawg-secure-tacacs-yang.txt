@@ -357,7 +357,8 @@ Table of Contents
    'hello-params':  Controls TLS versions and cipher suites.
 
    'discontinuity-time':  The time on the most recent occasion at which
-      the client suffered a discontinuity.
+      the client suffered a discontinuity (a configuration action to
+      reset all counters, re-initialization, etc.).
 
    'cert-errors':  Number of connection failures due to certificate
       issues.
@@ -586,7 +587,11 @@ Table of Contents
            type yang:date-and-time;
            description
              "The time on the most recent occasion at which the
-              TACACS+ client suffered a discontinuity.";
+              TACACS+ client suffered a discontinuity. Examples of
+              discontinuity can be a configuration action to reset
+              all counters, re-initialization of the system, or any
+              other events that prevent reliable contiguous tracking
+              of counters.";
          }
          leaf connection-opens {
            type yang:counter64;

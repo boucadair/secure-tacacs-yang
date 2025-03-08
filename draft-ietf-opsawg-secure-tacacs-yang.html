@@ -1535,7 +1535,8 @@ establishing a connection to a server. Client identities can be configured at th
         <dd class="break"></dd>
 <dt id="section-3-11.13">'discontinuity-time':</dt>
         <dd style="margin-left: 1.5em" id="section-3-11.14">
-          <p id="section-3-11.14.1">The time on the most recent occasion at which the client suffered a discontinuity.<a href="#section-3-11.14.1" class="pilcrow">¶</a></p>
+          <p id="section-3-11.14.1">The time on the most recent occasion at which the client suffered a discontinuity
+(a configuration action to reset all counters, re-initialization, etc.).<a href="#section-3-11.14.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
 <dt id="section-3-11.15">'cert-errors':</dt>
@@ -1774,7 +1775,11 @@ module ietf-system-tacacs-plus {
         type yang:date-and-time;
         description
           "The time on the most recent occasion at which the
-           TACACS+ client suffered a discontinuity.";
+           TACACS+ client suffered a discontinuity. Examples of
+           discontinuity can be a configuration action to reset
+           all counters, re-initialization of the system, or any
+           other events that prevent reliable contiguous tracking
+           of counters.";
       }
       leaf connection-opens {
         type yang:counter64;
