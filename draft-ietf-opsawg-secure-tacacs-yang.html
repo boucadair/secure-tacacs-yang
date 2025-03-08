@@ -1488,13 +1488,13 @@ augment /sys:system:
           <p id="section-3-9.1.1">TLS 1.3 <span>[<a href="#RFC8446" class="cite xref">RFC8446</a>]</span> <span class="bcp14">MUST</span> be used for transport.<a href="#section-3-9.1.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="section-3-9.2">
-          <p id="section-3-9.2.1">Earlier TLS versions TLS <span class="bcp14">MUST NOT</span> be used.<a href="#section-3-9.2.1" class="pilcrow">¶</a></p>
+          <p id="section-3-9.2.1">Earlier TLS versions <span class="bcp14">MUST NOT</span> be used.<a href="#section-3-9.2.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="section-3-9.3">
           <p id="section-3-9.3.1">The cipher suites offered or accepted <span class="bcp14">SHOULD</span> be configurable.<a href="#section-3-9.3.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="section-3-9.4">
-          <p id="section-3-9.4.1">Implementations <span class="bcp14">MAY</span> support Raw Public Keys and PSK.<a href="#section-3-9.4.1" class="pilcrow">¶</a></p>
+          <p id="section-3-9.4.1">Implementations <span class="bcp14">MAY</span> support Raw Public Keys (RPKs) and Pre-Shared Keys (PSKs).<a href="#section-3-9.4.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="section-3-9.5">
           <p id="section-3-9.5.1">Implementations <span class="bcp14">MUST</span> support the ability to configure the server's domain name, so that it may be included in the TLS Server Name Indication (SNI) extension.<a href="#section-3-9.5.1" class="pilcrow">¶</a></p>
@@ -1520,12 +1520,12 @@ augment /sys:system:
 <dt id="section-3-11.7">'client-identity':</dt>
         <dd style="margin-left: 1.5em" id="section-3-11.8">
           <p id="section-3-11.8.1">Specifies the identity credentials that the client may present when
-establishing a connection to a server. Client identities can be configured at the top level and then referenced for specific server instances. Alternatively, client identities can be configured explicitely under each server instance.<a href="#section-3-11.8.1" class="pilcrow">¶</a></p>
+establishing a connection to a server. Client identities can be configured at the top level and then referenced for specific server instances. Alternatively, client identities can be configured explicitly under each server instance.<a href="#section-3-11.8.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
 <dt id="section-3-11.9">'server-authentication':</dt>
         <dd style="margin-left: 1.5em" id="section-3-11.10">
-          <p id="section-3-11.10.1">Specifies how a client authenticates servers. Server credentials can be configured at the top level and then referenced for specific server instances. Alternatively, client identities can be configured explicitely under each server instance.<a href="#section-3-11.10.1" class="pilcrow">¶</a></p>
+          <p id="section-3-11.10.1">Specifies how a client authenticates servers. Server credentials can be configured at the top level and then referenced for specific server instances. Alternatively, client identities can be configured explicitly under each server instance.<a href="#section-3-11.10.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
 <dt id="section-3-11.11">'hello-params':</dt>
