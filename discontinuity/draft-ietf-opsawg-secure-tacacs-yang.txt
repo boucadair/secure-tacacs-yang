@@ -586,7 +586,11 @@ Table of Contents
            type yang:date-and-time;
            description
              "The time on the most recent occasion at which the
-              TACACS+ client suffered a discontinuity.";
+              TACACS+ client suffered a discontinuity. Examples of
+              discontinuity can be a configuration action to reset
+              all counters, re-initialization of the system, or any
+              other events that prevent reliable contiguous tracking
+              of counters.";
          }
          leaf connection-opens {
            type yang:counter64;
