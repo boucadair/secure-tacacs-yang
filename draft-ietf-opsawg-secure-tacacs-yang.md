@@ -190,7 +190,8 @@ The following new data nodes are supported compared to {{?RFC9105}}:
 : Controls TLS versions and cipher suites.
 
 'discontinuity-time':
-: The time on the most recent occasion at which the client suffered a discontinuity.
+: The time on the most recent occasion at which the client suffered a discontinuity
+(a configuration action to reset all counters, re-initialization, etc.).
 
 'cert-errors':
 : Number of connection failures due to certificate issues.
