@@ -6,9 +6,9 @@ Operations and Management Area Working Group           M. Boucadair, Ed.
 Internet-Draft                                                    Orange
 Obsoletes: 9105 (if approved)                                      B. Wu
 Intended status: Standards Track                                G. Zheng
-Expires: 7 August 2025                                           M. Wang
+Expires: 9 September 2025                                        M. Wang
                                                      Huawei Technologies
-                                                         3 February 2025
+                                                            8 March 2025
 
 
  A YANG Data Model for Terminal Access Controller Access-Control System
@@ -41,7 +41,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 7 August 2025.
+   This Internet-Draft will expire on 9 September 2025.
 
 Copyright Notice
 
@@ -1158,7 +1158,7 @@ Table of Contents
              must "(not(../source-interface)) or "
                 + "(current() = /if:interfaces/if:interface"
                 + "[if:name = current()/../source-interface]"
-                + "/bind-ni-name)" {
+                + "/ni:bind-ni-name)" {
                error-message
                  "VRF instance must match the network instance of the
                   source interface.";
@@ -1283,9 +1283,9 @@ Table of Contents
               Dahm, T., Heasley, J., dcmgash@cisco.com, and A. Ota,
               "Terminal Access Controller Access-Control System Plus
               (TACACS+) over TLS 1.3", Work in Progress, Internet-Draft,
-              draft-ietf-opsawg-tacacs-tls13-17, 27 January 2025,
+              draft-ietf-opsawg-tacacs-tls13-18, 13 February 2025,
               <https://datatracker.ietf.org/doc/html/draft-ietf-opsawg-
-              tacacs-tls13-17>.
+              tacacs-tls13-18>.
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
