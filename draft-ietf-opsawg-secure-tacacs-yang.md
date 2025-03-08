@@ -163,9 +163,9 @@ The document uses the terms defined in {{Section 2 of !I-D.ietf-opsawg-tacacs-tl
 Specifically, the module is designed to cover the following key requirements specified in {{!I-D.ietf-opsawg-tacacs-tls13}}:
 
 * TLS 1.3 {{!RFC8446}} MUST be used for transport.
-* Earlier TLS versions TLS MUST NOT be used.
+* Earlier TLS versions MUST NOT be used.
 * The cipher suites offered or accepted SHOULD be configurable.
-* Implementations MAY support Raw Public Keys and PSK.
+* Implementations MAY support Raw Public Keys (RPKs) and Pre-Shared Keys (PSKs).
 * Implementations MUST support the ability to configure the server's domain name, so that it may be included in the TLS Server Name Indication (SNI) extension.
 
 The following new data nodes are supported compared to {{?RFC9105}}:
@@ -181,10 +181,10 @@ The following new data nodes are supported compared to {{?RFC9105}}:
 
 'client-identity':
 : Specifies the identity credentials that the client may present when
-  establishing a connection to a server. Client identities can be configured at the top level and then referenced for specific server instances. Alternatively, client identities can be configured explicitely under each server instance.
+  establishing a connection to a server. Client identities can be configured at the top level and then referenced for specific server instances. Alternatively, client identities can be configured explicitly under each server instance.
 
 'server-authentication':
-: Specifies how a client authenticates servers. Server credentials can be configured at the top level and then referenced for specific server instances. Alternatively, client identities can be configured explicitely under each server instance.
+: Specifies how a client authenticates servers. Server credentials can be configured at the top level and then referenced for specific server instances. Alternatively, client identities can be configured explicitly under each server instance.
 
 'hello-params':
 : Controls TLS versions and cipher suites.
