@@ -6,9 +6,9 @@ Operations and Management Area Working Group           M. Boucadair, Ed.
 Internet-Draft                                                    Orange
 Obsoletes: 9105 (if approved)                                      B. Wu
 Intended status: Standards Track                                G. Zheng
-Expires: 9 September 2025                                        M. Wang
+Expires: 6 October 2025                                          M. Wang
                                                      Huawei Technologies
-                                                            8 March 2025
+                                                            4 April 2025
 
 
  A YANG Data Model for Terminal Access Controller Access-Control System
@@ -41,7 +41,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 9 September 2025.
+   This Internet-Draft will expire on 6 October 2025.
 
 Copyright Notice
 
@@ -1218,9 +1218,10 @@ Table of Contents
 
    The "ietf-ac-common" YANG module defines a data model that is
    designed to be accessed via YANG-based management protocols, such as
-   NETCONF [RFC6241] and RESTCONF [RFC8040].  These protocols have to
-   use a secure transport layer (e.g., SSH [RFC4252], TLS [RFC8446], and
-   QUIC [RFC9000]) and have to use mutual authentication.
+   NETCONF [RFC6241] and RESTCONF [RFC8040].  These YANG-based
+   management protocols (1) have to use a secure transport layer (e.g.,
+   SSH [RFC4252], TLS [RFC8446], and QUIC [RFC9000]) and (2) have to use
+   mutual authentication.
 
    The Network Configuration Access Control Model (NACM) [RFC8341]
    provides the means to restrict access for particular NETCONF or
@@ -1289,9 +1290,9 @@ Table of Contents
               Dahm, T., Heasley, J., dcmgash@cisco.com, and A. Ota,
               "Terminal Access Controller Access-Control System Plus
               (TACACS+) over TLS 1.3", Work in Progress, Internet-Draft,
-              draft-ietf-opsawg-tacacs-tls13-18, 13 February 2025,
+              draft-ietf-opsawg-tacacs-tls13-19, 3 April 2025,
               <https://datatracker.ietf.org/doc/html/draft-ietf-opsawg-
-              tacacs-tls13-18>.
+              tacacs-tls13-19>.
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
