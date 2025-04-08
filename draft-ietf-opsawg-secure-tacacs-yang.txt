@@ -5,10 +5,8 @@
 Operations and Management Area Working Group           M. Boucadair, Ed.
 Internet-Draft                                                    Orange
 Obsoletes: 9105 (if approved)                                      B. Wu
-Intended status: Standards Track                                G. Zheng
-Expires: 6 October 2025                                          M. Wang
-                                                     Huawei Technologies
-                                                            4 April 2025
+Intended status: Standards Track                     Huawei Technologies
+Expires: 10 October 2025                                    8 April 2025
 
 
  A YANG Data Model for Terminal Access Controller Access-Control System
@@ -41,7 +39,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 6 October 2025.
+   This Internet-Draft will expire on 10 October 2025.
 
 Copyright Notice
 
@@ -2187,6 +2185,12 @@ Acknowledgments
 
    Thanks to Reshad Rahman for the yangdoctors review.
 
+   Authors of RFC 9105:  Bo Wu
+
+      Guangying Zheng
+
+      Michael Wang
+
    Acknowledgments from RFC 9105:  The authors wish to thank Alex
       Campbell, John Heasley, Ebben Aries, Alan DeKok, Joe Clarke, Tom
       Petch, Robert Wilton, and many others for their helpful comments
@@ -2202,13 +2206,3 @@ Authors' Addresses
    Bo Wu
    Huawei Technologies
    Email: mlana.wubo@huawei.com
-
-
-   Guangying Zheng
-   Huawei Technologies
-   Email: zhengguangying@huawei.com
-
-
-   Michael Wang
-   Huawei Technologies
-   Email: wangzitao@huawei.com

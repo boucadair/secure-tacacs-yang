@@ -7,8 +7,6 @@
 <title>A YANG Data Model for Terminal Access Controller Access-Control System Plus (TACACS+)</title>
 <meta content="Mohamed Boucadair" name="author">
 <meta content="Bo Wu" name="author">
-<meta content="Guangying Zheng" name="author">
-<meta content="Michael Wang" name="author">
 <meta content="
        This document defines a Terminal Access Controller Access-Control
    System Plus (TACACS+) client YANG module that augments the System
@@ -1061,8 +1059,8 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <td class="right">April 2025</td>
 </tr></thead>
 <tfoot><tr>
-<td class="left">Boucadair, et al.</td>
-<td class="center">Expires 6 October 2025</td>
+<td class="left">Boucadair &amp; Wu</td>
+<td class="center">Expires 10 October 2025</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1078,12 +1076,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <a href="https://www.rfc-editor.org/rfc/rfc9105" class="eref">9105</a> (if approved)</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2025-04-04" class="published">4 April 2025</time>
+<time datetime="2025-04-08" class="published">8 April 2025</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2025-10-06">6 October 2025</time></dd>
+<dd class="expires"><time datetime="2025-10-10">10 October 2025</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1093,14 +1091,6 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </div>
 <div class="author">
       <div class="author-name">B. Wu</div>
-<div class="org">Huawei Technologies</div>
-</div>
-<div class="author">
-      <div class="author-name">G. Zheng</div>
-<div class="org">Huawei Technologies</div>
-</div>
-<div class="author">
-      <div class="author-name">M. Wang</div>
 <div class="org">Huawei Technologies</div>
 </div>
 </dd>
@@ -1135,7 +1125,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 6 October 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 10 October 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -3423,11 +3413,26 @@ module: ietf-system-tacacs-plus
 <p id="appendix-D-2">Thanks to Joe Clarke and Tom Petch for the review and comments.<a href="#appendix-D-2" class="pilcrow">¶</a></p>
 <p id="appendix-D-3">Thanks to Reshad Rahman for the yangdoctors review.<a href="#appendix-D-3" class="pilcrow">¶</a></p>
 <span class="break"></span><dl class="dlParallel" id="appendix-D-4">
-        <dt id="appendix-D-4.1">Acknowledgments from RFC 9105:</dt>
+        <dt id="appendix-D-4.1">Authors of RFC 9105:</dt>
         <dd style="margin-left: 1.5em" id="appendix-D-4.2">
-          <p id="appendix-D-4.2.1">The authors wish to thank Alex Campbell, John Heasley, Ebben Aries,
+          <p id="appendix-D-4.2.1">Bo Wu<a href="#appendix-D-4.2.1" class="pilcrow">¶</a></p>
+</dd>
+        <dd class="break"></dd>
+<dt id="appendix-D-4.3"></dt>
+        <dd style="margin-left: 1.5em" id="appendix-D-4.4">
+          <p id="appendix-D-4.4.1">Guangying Zheng<a href="#appendix-D-4.4.1" class="pilcrow">¶</a></p>
+</dd>
+        <dd class="break"></dd>
+<dt id="appendix-D-4.5"></dt>
+        <dd style="margin-left: 1.5em" id="appendix-D-4.6">
+          <p id="appendix-D-4.6.1">Michael Wang<a href="#appendix-D-4.6.1" class="pilcrow">¶</a></p>
+</dd>
+        <dd class="break"></dd>
+<dt id="appendix-D-4.7">Acknowledgments from RFC 9105:</dt>
+        <dd style="margin-left: 1.5em" id="appendix-D-4.8">
+          <p id="appendix-D-4.8.1">The authors wish to thank Alex Campbell, John Heasley, Ebben Aries,
  Alan DeKok, Joe Clarke, Tom Petch, Robert Wilton, and many others for
- their helpful comments and suggestions.<a href="#appendix-D-4.2.1" class="pilcrow">¶</a></p>
+ their helpful comments and suggestions.<a href="#appendix-D-4.8.1" class="pilcrow">¶</a></p>
 </dd>
       <dd class="break"></dd>
 </dl>
@@ -3452,22 +3457,6 @@ module: ietf-system-tacacs-plus
 <div class="email">
 <span>Email:</span>
 <a href="mailto:mlana.wubo@huawei.com" class="email">mlana.wubo@huawei.com</a>
-</div>
-</address>
-<address class="vcard">
-        <div dir="auto" class="left"><span class="fn nameRole">Guangying Zheng</span></div>
-<div dir="auto" class="left"><span class="org">Huawei Technologies</span></div>
-<div class="email">
-<span>Email:</span>
-<a href="mailto:zhengguangying@huawei.com" class="email">zhengguangying@huawei.com</a>
-</div>
-</address>
-<address class="vcard">
-        <div dir="auto" class="left"><span class="fn nameRole">Michael Wang</span></div>
-<div dir="auto" class="left"><span class="org">Huawei Technologies</span></div>
-<div class="email">
-<span>Email:</span>
-<a href="mailto:wangzitao@huawei.com" class="email">wangzitao@huawei.com</a>
 </div>
 </address>
 </section>
