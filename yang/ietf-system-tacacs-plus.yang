@@ -404,7 +404,6 @@ module ietf-system-tacacs-plus {
                  Version 1.3, Section 4.4.2";
     nacm:default-deny-write;
     choice auth-type {
-      //default "certificate";
       description
         "A choice amongst authentication types.";
       case certificate {
