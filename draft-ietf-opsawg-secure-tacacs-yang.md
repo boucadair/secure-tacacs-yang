@@ -223,7 +223,7 @@ The Network Configuration Access Control Model (NACM) {{!RFC8341}}
 
 There are a number of data nodes defined in this YANG module that are
 writable/creatable/deletable (i.e., "config true", which is the
-default).  All writable data nodes are likely to be reasonably
+default).  All writable data nodes are likely to be
 sensitive or vulnerable in some network environments.  Write
 operations (e.g., edit-config) and delete operations to these data
 nodes without proper protection or authentication can have a negative
