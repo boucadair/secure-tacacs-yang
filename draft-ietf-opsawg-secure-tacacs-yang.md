@@ -31,14 +31,6 @@ author:
     fullname: Bo Wu
     organization: Huawei Technologies
     email: mlana.wubo@huawei.com
- -
-    fullname: Guangying Zheng
-    organization: Huawei Technologies
-    email: zhengguangying@huawei.com
- -
-    fullname: Michael Wang
-    organization: Huawei Technologies
-    email: wangzitao@huawei.com
 normative:
 
 informative:
@@ -342,6 +334,11 @@ The document leverages data structures defined in {{!RFC9645}}.
 Thanks to Joe Clarke and Tom Petch for the review and comments.
 
 Thanks to Reshad Rahman for the yangdoctors review.
+
+Authors of RFC 9105:
+: Bo Wu
+: Guangying Zheng
+: Michael Wang
 
 Acknowledgments from RFC 9105:
 : The authors wish to thank Alex Campbell, John Heasley, Ebben Aries,
