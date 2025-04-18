@@ -718,7 +718,7 @@ module ietf-system-tacacs-plus {
         leaf port {
           type inet:port-number;
           description
-            "The port number of TACACS+ server port number.
+            "The port number of TACACS+ server.
              Default port number for legacy TACACS+ is 49,
              while it is TBD for TACACS+TLS.";
         }
