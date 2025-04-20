@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-04-01T00:58:36.392894+00:00",
+  "timestamp": "2025-04-20T00:57:16.078970+00:00",
   "repo": "boucadair/secure-tacacs-yang",
   "labels": [
     {
@@ -512,6 +512,62 @@
       "mergedBy": "boucadair",
       "mergeCommit": {
         "oid": "809da9083bad61e456beaf07ad40521d9fd82753"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 17,
+      "id": "PR_kwDOL_fxvc6TGPy9",
+      "title": "nit",
+      "url": "https://github.com/boucadair/secure-tacacs-yang/pull/17",
+      "state": "MERGED",
+      "author": "boucadair",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2025-04-18T09:07:52Z",
+      "updatedAt": "2025-04-18T09:17:31Z",
+      "baseRepository": "boucadair/secure-tacacs-yang",
+      "baseRefName": "main",
+      "baseRefOid": "0876ceaa44682d006ac91aba904e8b99b057bf1e",
+      "headRepository": "boucadair/secure-tacacs-yang",
+      "headRefName": "opsdir-review",
+      "headRefOid": "8be0c3a2f1e3c94c2d153092a088bbe4d2f5f47c",
+      "closedAt": "2025-04-18T09:17:31Z",
+      "mergedAt": "2025-04-18T09:17:31Z",
+      "mergedBy": "boucadair",
+      "mergeCommit": {
+        "oid": "8bf8a9f50baeed9ed765dfa9fe26115cededcaae"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 18,
+      "id": "PR_kwDOL_fxvc6TGTR7",
+      "title": "align with template",
+      "url": "https://github.com/boucadair/secure-tacacs-yang/pull/18",
+      "state": "MERGED",
+      "author": "boucadair",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2025-04-18T09:12:03Z",
+      "updatedAt": "2025-04-18T09:12:12Z",
+      "baseRepository": "boucadair/secure-tacacs-yang",
+      "baseRefName": "opsdir-review",
+      "baseRefOid": "e20986869915abb8dda5e93c19d8462b2988716d",
+      "headRepository": "boucadair/secure-tacacs-yang",
+      "headRefName": "main",
+      "headRefOid": "0876ceaa44682d006ac91aba904e8b99b057bf1e",
+      "closedAt": "2025-04-18T09:12:12Z",
+      "mergedAt": "2025-04-18T09:12:11Z",
+      "mergedBy": "boucadair",
+      "mergeCommit": {
+        "oid": "8be0c3a2f1e3c94c2d153092a088bbe4d2f5f47c"
       },
       "comments": [],
       "reviews": []
