@@ -2208,8 +2208,8 @@ module ietf-system-tacacs-plus {
         if-feature "credential-reference";
         key "id";
         description
-          "Identity credentials that a TLS client may present
-           when establishing a connection to a TLS server.";
+          "Identity credentials that a TLS client may use
+           to authenticate a TLS server.";
         nacm:default-deny-write;
         leaf id {
           type string;
