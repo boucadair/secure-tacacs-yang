@@ -449,7 +449,7 @@ Table of Contents
         Author:   Guangying Zheng
                   <zhengguangying@huawei.com>";
      description
-       "This module provides configuration of TACACS+ clients.
+       "This module provides management of TACACS+ clients.
 
         The key words 'MUST', 'MUST NOT', 'REQUIRED', 'SHALL', 'SHALL
         NOT', 'SHOULD', 'SHOULD NOT', 'RECOMMENDED', 'NOT RECOMMENDED',
