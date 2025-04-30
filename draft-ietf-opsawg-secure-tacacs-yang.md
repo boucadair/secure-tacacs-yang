@@ -336,6 +336,8 @@ Thanks to Joe Clarke and Tom Petch for the review and comments.
 Thanks to Reshad Rahman for the yangdoctors review and Tina Tsou for
 the opsdir review.
 
+Thanks Mahesh Jethanandani for the AD review.
+
 Authors of RFC 9105:
 : Bo Wu
 : Guangying Zheng
