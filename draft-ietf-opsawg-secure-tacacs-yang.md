@@ -179,7 +179,7 @@ The following new data nodes are supported compared to {{?RFC9105}}:
 : Specifies how a client authenticates servers. Server credentials can be configured at the top level and then referenced for specific server instances. Alternatively, client identities can be configured explicitly under each server instance.
 
 'hello-params':
-: Controls TLS versions and cipher suites.
+: Controls TLS versions and cipher suites to be used when establishing TLS sessions.
 
 'discontinuity-time':
 : The time on the most recent occasion at which the client suffered a discontinuity
@@ -335,6 +335,8 @@ Thanks to Joe Clarke and Tom Petch for the review and comments.
 
 Thanks to Reshad Rahman for the yangdoctors review and Tina Tsou for
 the opsdir review.
+
+Thanks Mahesh Jethanandani for the AD review.
 
 Authors of RFC 9105:
 : Bo Wu

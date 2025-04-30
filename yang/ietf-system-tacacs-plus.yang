@@ -72,7 +72,7 @@ module ietf-system-tacacs-plus {
      Author:   Guangying Zheng
                <zhengguangying@huawei.com>";
   description
-    "This module provides configuration of TACACS+ clients.
+    "This module provides management of TACACS+ clients.
 
      The key words 'MUST', 'MUST NOT', 'REQUIRED', 'SHALL', 'SHALL
      NOT', 'SHOULD', 'SHOULD NOT', 'RECOMMENDED', 'NOT RECOMMENDED',
@@ -552,7 +552,7 @@ module ietf-system-tacacs-plus {
       }
       case explicit {
         description
-          "Explicit configuration of a server credentials.";
+          "Explicit configuration of credentials of a server.";
         uses server-authentication;
       }
     }
@@ -652,8 +652,8 @@ module ietf-system-tacacs-plus {
         if-feature "credential-reference";
         key "id";
         description
-          "Identity credentials that a TLS client may present
-           when establishing a connection to a TLS server.";
+          "Identity credentials that a TLS client may use
+           to authenticate a TLS server.";
         nacm:default-deny-write;
         leaf id {
           type string;
