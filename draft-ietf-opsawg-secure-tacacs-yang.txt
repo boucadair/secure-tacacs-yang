@@ -6,7 +6,7 @@ Operations and Management Area Working Group           M. Boucadair, Ed.
 Internet-Draft                                                    Orange
 Obsoletes: 9105 (if approved)                                      B. Wu
 Intended status: Standards Track                     Huawei Technologies
-Expires: 20 October 2025                                   18 April 2025
+Expires: 1 November 2025                                   30 April 2025
 
 
  A YANG Data Model for Terminal Access Controller Access-Control System
@@ -39,7 +39,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 20 October 2025.
+   This Internet-Draft will expire on 1 November 2025.
 
 Copyright Notice
 
@@ -352,7 +352,8 @@ Table of Contents
       client identities can be configured explicitly under each server
       instance.
 
-   'hello-params':  Controls TLS versions and cipher suites.
+   'hello-params':  Controls TLS versions and cipher suites to be used
+      when establishing TLS sessions.
 
    'discontinuity-time':  The time on the most recent occasion at which
       the client suffered a discontinuity (a configuration action to
@@ -448,7 +449,7 @@ Table of Contents
         Author:   Guangying Zheng
                   <zhengguangying@huawei.com>";
      description
-       "This module provides configuration of TACACS+ clients.
+       "This module provides management of TACACS+ clients.
 
         The key words 'MUST', 'MUST NOT', 'REQUIRED', 'SHALL', 'SHALL
         NOT', 'SHOULD', 'SHOULD NOT', 'RECOMMENDED', 'NOT RECOMMENDED',
@@ -928,7 +929,7 @@ Table of Contents
          }
          case explicit {
            description
-             "Explicit configuration of a server credentials.";
+             "Explicit configuration of credentials of a server.";
            uses server-authentication;
          }
        }
@@ -1028,8 +1029,8 @@ Table of Contents
            if-feature "credential-reference";
            key "id";
            description
-             "Identity credentials that a TLS client may present
-              when establishing a connection to a TLS server.";
+             "Identity credentials that a TLS client may use
+              to authenticate a TLS server.";
            nacm:default-deny-write;
            leaf id {
              type string;
@@ -1388,9 +1389,9 @@ Table of Contents
               Bierman, A., Boucadair, M., and Q. Wu, "Guidelines for
               Authors and Reviewers of Documents Containing YANG Data
               Models", Work in Progress, Internet-Draft, draft-ietf-
-              netmod-rfc8407bis-23, 15 April 2025,
+              netmod-rfc8407bis-24, 18 April 2025,
               <https://datatracker.ietf.org/doc/html/draft-ietf-netmod-
-              rfc8407bis-23>.
+              rfc8407bis-24>.
 
    [RFC2865]  Rigney, C., Willens, S., Rubens, A., and W. Simpson,
               "Remote Authentication Dial In User Service (RADIUS)",
@@ -2185,6 +2186,8 @@ Acknowledgments
 
    Thanks to Reshad Rahman for the yangdoctors review and Tina Tsou for
    the opsdir review.
+
+   Thanks Mahesh Jethanandani for the AD review.
 
    Authors of RFC 9105:  Bo Wu
 
