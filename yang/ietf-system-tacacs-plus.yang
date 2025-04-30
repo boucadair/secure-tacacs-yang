@@ -552,7 +552,7 @@ module ietf-system-tacacs-plus {
       }
       case explicit {
         description
-          "Explicit configuration of a server credentials.";
+          "Explicit configuration of credentials of a server.";
         uses server-authentication;
       }
     }
