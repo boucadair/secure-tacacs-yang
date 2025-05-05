@@ -6,7 +6,7 @@ Operations and Management Area Working Group           M. Boucadair, Ed.
 Internet-Draft                                                    Orange
 Obsoletes: 9105 (if approved)                                      B. Wu
 Intended status: Standards Track                     Huawei Technologies
-Expires: 1 November 2025                                   30 April 2025
+Expires: 6 November 2025                                      5 May 2025
 
 
  A YANG Data Model for Terminal Access Controller Access-Control System
@@ -39,7 +39,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 1 November 2025.
+   This Internet-Draft will expire on 6 November 2025.
 
 Copyright Notice
 
@@ -1128,9 +1128,13 @@ Table of Contents
                     punctuation.  Note that this security mechanism is
                     best described as 'obfuscation' and not 'encryption'
                     as it does not provide any meaningful integrity,
-                    privacy, or replay protection.";
+                    privacy, or replay protection.
+
+                    Obfuscation is obsoleted in favor of TLS support.";
                  reference
-                   "RFC 8907: The TACACS+ Protocol";
+                   "RFC 8907: The TACACS+ Protocol
+                    RFC SSSS: Terminal Access Controller Access-Control
+                               System Plus (TACACS+) over TLS 1.3";
                  nacm:default-deny-all;
                }
              }
