@@ -280,7 +280,7 @@ This YANG module uses groupings from other YANG modules that define nodes that m
 
 # Example TACACS+ Authentication Configuration with Shared Secret
 
-{{ex9105}} shows an example where a TACACS+ authentication server instance is configured using shared secret for authentication.
+{{ex9105}} shows an example where a TACACS+ authentication server instance is configured using shared secret for authentication. This mode is not recommended per {{!I-D.ietf-opsawg-tacacs-tls13}}.
 
 ~~~ json
 {::include-fold ./json-example/9105-ex.json}
