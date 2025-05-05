@@ -751,9 +751,13 @@ module ietf-system-tacacs-plus {
                  punctuation.  Note that this security mechanism is
                  best described as 'obfuscation' and not 'encryption'
                  as it does not provide any meaningful integrity,
-                 privacy, or replay protection.";
+                 privacy, or replay protection.
+
+                 Obfuscation is obsoleted in favor of TLS support.";
               reference
-                "RFC 8907: The TACACS+ Protocol";
+                "RFC 8907: The TACACS+ Protocol
+                 RFC SSSS: Terminal Access Controller Access-Control
+                            System Plus (TACACS+) over TLS 1.3";
               nacm:default-deny-all;
             }
           }
