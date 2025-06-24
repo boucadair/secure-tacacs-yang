@@ -6,7 +6,7 @@ Operations and Management Area Working Group           M. Boucadair, Ed.
 Internet-Draft                                                    Orange
 Obsoletes: 9105 (if approved)                                      B. Wu
 Intended status: Standards Track                     Huawei Technologies
-Expires: 1 November 2025                                   30 April 2025
+Expires: 26 December 2025                                   24 June 2025
 
 
  A YANG Data Model for Terminal Access Controller Access-Control System
@@ -39,7 +39,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 1 November 2025.
+   This Internet-Draft will expire on 26 December 2025.
 
 Copyright Notice
 
@@ -64,11 +64,12 @@ Table of Contents
      2.1.  Tree Diagrams
    3.  Design of the TACACS+ Data Model
    4.  TACACS+ Client Module
-   5.  Security Considerations
-   6.  IANA Considerations
-   7.  References
-     7.1.  Normative References
-     7.2.  Informative References
+   5.  Operational Considerations
+   6.  Security Considerations
+   7.  IANA Considerations
+   8.  References
+     8.1.  Normative References
+     8.2.  Informative References
    Appendix A.  Example TACACS+ Authentication Configuration with
            Shared Secret
    Appendix B.  TACACS+TLS Examples
@@ -1094,6 +1095,7 @@ Table of Contents
            }
            leaf port {
              type inet:port-number;
+             mandatory true;
              description
                "The port number of TACACS+ server.
                 Default port number for legacy TACACS+ is 49,
@@ -1128,9 +1130,17 @@ Table of Contents
                     punctuation.  Note that this security mechanism is
                     best described as 'obfuscation' and not 'encryption'
                     as it does not provide any meaningful integrity,
-                    privacy, or replay protection.";
+                    privacy, or replay protection.
+
+                    The use of obfuscation is deprecated in favor
+                    of TLS.
+
+                    This choice is provided in the model to accommodate
+                    installed base.";
                  reference
-                   "RFC 8907: The TACACS+ Protocol";
+                   "RFC 8907: The TACACS+ Protocol
+                    RFC SSSS: Terminal Access Controller Access-Control
+                               System Plus (TACACS+) over TLS 1.3";
                  nacm:default-deny-all;
                }
              }
@@ -1210,7 +1220,12 @@ Table of Contents
    }
    <CODE ENDS>
 
-5.  Security Considerations
+5.  Operational Considerations
+
+   The same operational considerations discussed in Section 6 of
+   [I-D.ietf-opsawg-tacacs-tls13] apply for this document.
+
+6.  Security Considerations
 
    This section is modeled after the template described in Section 3.7
    of [I-D.ietf-netmod-rfc8407bis].
@@ -1262,7 +1277,7 @@ Table of Contents
    [RFC9645] for information as to which nodes may be considered
    sensitive or vulnerable in network environments.
 
-6.  IANA Considerations
+7.  IANA Considerations
 
    IANA is requested to update the following URI in the "ns" subregistry
    within the "IETF XML Registry" [RFC3688]:
@@ -1281,17 +1296,17 @@ Table of Contents
       Maintained by IANA?  N
       Reference:  RFC XXXX
 
-7.  References
+8.  References
 
-7.1.  Normative References
+8.1.  Normative References
 
    [I-D.ietf-opsawg-tacacs-tls13]
               Dahm, T., Heasley, J., dcmgash@cisco.com, and A. Ota,
               "Terminal Access Controller Access-Control System Plus
               over TLS 1.3 (TACACS+ over TLS)", Work in Progress,
-              Internet-Draft, draft-ietf-opsawg-tacacs-tls13-20, 13
-              April 2025, <https://datatracker.ietf.org/doc/html/draft-
-              ietf-opsawg-tacacs-tls13-20>.
+              Internet-Draft, draft-ietf-opsawg-tacacs-tls13-23, 21 June
+              2025, <https://datatracker.ietf.org/doc/html/draft-ietf-
+              opsawg-tacacs-tls13-23>.
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
@@ -1383,15 +1398,15 @@ Table of Contents
               Servers", RFC 9645, DOI 10.17487/RFC9645, October 2024,
               <https://www.rfc-editor.org/rfc/rfc9645>.
 
-7.2.  Informative References
+8.2.  Informative References
 
    [I-D.ietf-netmod-rfc8407bis]
               Bierman, A., Boucadair, M., and Q. Wu, "Guidelines for
               Authors and Reviewers of Documents Containing YANG Data
               Models", Work in Progress, Internet-Draft, draft-ietf-
-              netmod-rfc8407bis-24, 18 April 2025,
+              netmod-rfc8407bis-28, 5 June 2025,
               <https://datatracker.ietf.org/doc/html/draft-ietf-netmod-
-              rfc8407bis-24>.
+              rfc8407bis-28>.
 
    [RFC2865]  Rigney, C., Willens, S., Rubens, A., and W. Simpson,
               "Remote Authentication Dial In User Service (RADIUS)",
@@ -1435,7 +1450,8 @@ Appendix A.  Example TACACS+ Authentication Configuration with Shared
              Secret
 
    Figure 2 shows an example where a TACACS+ authentication server
-   instance is configured using shared secret for authentication.
+   instance is configured using shared secret for authentication.  This
+   mode is not recommended per [I-D.ietf-opsawg-tacacs-tls13].
 
    {
      "ietf-system:system": {
@@ -2184,8 +2200,8 @@ Acknowledgments
 
    Thanks to Joe Clarke and Tom Petch for the review and comments.
 
-   Thanks to Reshad Rahman for the yangdoctors review and Tina Tsou for
-   the opsdir review.
+   Thanks to Reshad Rahman for the yangdoctors review, Tina Tsou for the
+   opsdir review, and Ines Robles for the genart review.
 
    Thanks Mahesh Jethanandani for the AD review.
 
