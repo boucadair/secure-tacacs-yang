@@ -15,7 +15,7 @@
    and Accounting (AAA). Specifically, this document defines a YANG module for TACACS+ over TLS 1.3. 
        This document obsoletes RFC 9105. 
     " name="description">
-<meta content="xml2rfc 3.28.1" name="generator">
+<meta content="xml2rfc 3.29.0" name="generator">
 <meta content="TLS" name="keyword">
 <meta content="device management" name="keyword">
 <meta content="network operator" name="keyword">
@@ -23,20 +23,21 @@
 <meta content="AAA" name="keyword">
 <meta content="authentication" name="keyword">
 <meta content="authorization" name="keyword">
+<meta content="accounting" name="keyword">
 <meta content="draft-ietf-opsawg-secure-tacacs-yang-latest" name="ietf.draft">
 <!-- Generator version information:
-  xml2rfc 3.28.1
-    Python 3.12.10
+  xml2rfc 3.29.0
+    Python 3.12.11
     ConfigArgParse 1.7
     google-i18n-address 3.1.1
     intervaltree 3.1.0
     Jinja2 3.1.6
-    lxml 5.3.0
-    platformdirs 4.3.7
+    lxml 5.3.1
+    platformdirs 4.3.8
     pycountry 24.6.1
     PyYAML 6.0.2
-    requests 2.32.3
-    setuptools 70.3.0
+    requests 2.32.4
+    setuptools 80.9.0
     wcwidth 0.2.13
 -->
 <link href="draft-ietf-opsawg-secure-tacacs-yang.xml" rel="alternate" type="application/rfc+xml">
@@ -1056,11 +1057,11 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <thead><tr>
 <td class="left">Internet-Draft</td>
 <td class="center">YANG for TACACS+ over TLS</td>
-<td class="right">May 2025</td>
+<td class="right">June 2025</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">Boucadair &amp; Wu</td>
-<td class="center">Expires 6 November 2025</td>
+<td class="center">Expires 26 December 2025</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1076,12 +1077,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <a href="https://www.rfc-editor.org/rfc/rfc9105" class="eref">9105</a> (if approved)</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2025-05-05" class="published">5 May 2025</time>
+<time datetime="2025-06-24" class="published">24 June 2025</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2025-11-06">6 November 2025</time></dd>
+<dd class="expires"><time datetime="2025-12-26">26 December 2025</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1125,7 +1126,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 6 November 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 26 December 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1180,44 +1181,47 @@ svg :is([fill="white"], [fill^="#fff"]) {
             <p id="section-toc.1-1.4.1"><a href="#section-4" class="auto internal xref">4</a>.  <a href="#name-tacacs-client-module" class="internal xref">TACACS+ Client Module</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5">
-            <p id="section-toc.1-1.5.1"><a href="#section-5" class="auto internal xref">5</a>.  <a href="#name-security-considerations" class="internal xref">Security Considerations</a></p>
+            <p id="section-toc.1-1.5.1"><a href="#section-5" class="auto internal xref">5</a>.  <a href="#name-operational-considerations" class="internal xref">Operational Considerations</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6">
-            <p id="section-toc.1-1.6.1"><a href="#section-6" class="auto internal xref">6</a>.  <a href="#name-iana-considerations" class="internal xref">IANA Considerations</a></p>
+            <p id="section-toc.1-1.6.1"><a href="#section-6" class="auto internal xref">6</a>.  <a href="#name-security-considerations" class="internal xref">Security Considerations</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7">
-            <p id="section-toc.1-1.7.1"><a href="#section-7" class="auto internal xref">7</a>.  <a href="#name-references" class="internal xref">References</a></p>
-<ul class="compact toc ulBare ulEmpty">
-<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7.2.1">
-                <p id="section-toc.1-1.7.2.1.1"><a href="#section-7.1" class="auto internal xref">7.1</a>.  <a href="#name-normative-references" class="internal xref">Normative References</a></p>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7.2.2">
-                <p id="section-toc.1-1.7.2.2.1"><a href="#section-7.2" class="auto internal xref">7.2</a>.  <a href="#name-informative-references" class="internal xref">Informative References</a></p>
-</li>
-            </ul>
+            <p id="section-toc.1-1.7.1"><a href="#section-7" class="auto internal xref">7</a>.  <a href="#name-iana-considerations" class="internal xref">IANA Considerations</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8">
-            <p id="section-toc.1-1.8.1"><a href="#appendix-A" class="auto internal xref">Appendix A</a>.  <a href="#name-example-tacacs-authenticati" class="internal xref">Example TACACS+ Authentication Configuration with Shared Secret</a></p>
-</li>
-          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9">
-            <p id="section-toc.1-1.9.1"><a href="#appendix-B" class="auto internal xref">Appendix B</a>.  <a href="#name-tacacstls-examples" class="internal xref">TACACS+TLS Examples</a></p>
+            <p id="section-toc.1-1.8.1"><a href="#section-8" class="auto internal xref">8</a>.  <a href="#name-references" class="internal xref">References</a></p>
 <ul class="compact toc ulBare ulEmpty">
-<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9.2.1">
-                <p id="section-toc.1-1.9.2.1.1"><a href="#appendix-B.1" class="auto internal xref">B.1</a>.  <a href="#name-example-tacacs-authenticatio" class="internal xref">Example TACACS+ Authentication Configuration with Explicit Certificate Definitions</a></p>
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8.2.1">
+                <p id="section-toc.1-1.8.2.1.1"><a href="#section-8.1" class="auto internal xref">8.1</a>.  <a href="#name-normative-references" class="internal xref">Normative References</a></p>
 </li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9.2.2">
-                <p id="section-toc.1-1.9.2.2.1"><a href="#appendix-B.2" class="auto internal xref">B.2</a>.  <a href="#name-example-tacacs-authentication" class="internal xref">Example TACACS+ Authentication Configuration with Certificate References</a></p>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8.2.2">
+                <p id="section-toc.1-1.8.2.2.1"><a href="#section-8.2" class="auto internal xref">8.2</a>.  <a href="#name-informative-references" class="internal xref">Informative References</a></p>
 </li>
             </ul>
 </li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9">
+            <p id="section-toc.1-1.9.1"><a href="#appendix-A" class="auto internal xref">Appendix A</a>.  <a href="#name-example-tacacs-authenticati" class="internal xref">Example TACACS+ Authentication Configuration with Shared Secret</a></p>
+</li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10">
-            <p id="section-toc.1-1.10.1"><a href="#appendix-C" class="auto internal xref">Appendix C</a>.  <a href="#name-full-tree" class="internal xref">Full Tree</a></p>
+            <p id="section-toc.1-1.10.1"><a href="#appendix-B" class="auto internal xref">Appendix B</a>.  <a href="#name-tacacstls-examples" class="internal xref">TACACS+TLS Examples</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10.2.1">
+                <p id="section-toc.1-1.10.2.1.1"><a href="#appendix-B.1" class="auto internal xref">B.1</a>.  <a href="#name-example-tacacs-authenticatio" class="internal xref">Example TACACS+ Authentication Configuration with Explicit Certificate Definitions</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10.2.2">
+                <p id="section-toc.1-1.10.2.2.1"><a href="#appendix-B.2" class="auto internal xref">B.2</a>.  <a href="#name-example-tacacs-authentication" class="internal xref">Example TACACS+ Authentication Configuration with Certificate References</a></p>
+</li>
+            </ul>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.11">
-            <p id="section-toc.1-1.11.1"><a href="#appendix-D" class="auto internal xref"></a><a href="#name-acknowledgments" class="internal xref">Acknowledgments</a></p>
+            <p id="section-toc.1-1.11.1"><a href="#appendix-C" class="auto internal xref">Appendix C</a>.  <a href="#name-full-tree" class="internal xref">Full Tree</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.12">
-            <p id="section-toc.1-1.12.1"><a href="#appendix-E" class="auto internal xref"></a><a href="#name-authors-addresses" class="internal xref">Authors' Addresses</a></p>
+            <p id="section-toc.1-1.12.1"><a href="#appendix-D" class="auto internal xref"></a><a href="#name-acknowledgments" class="internal xref">Acknowledgments</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.13">
+            <p id="section-toc.1-1.13.1"><a href="#appendix-E" class="auto internal xref"></a><a href="#name-authors-addresses" class="internal xref">Authors' Addresses</a></p>
 </li>
         </ul>
 </nav>
@@ -1300,7 +1304,7 @@ in which local or RADIUS authentication is used.<a href="#section-1-2.2.1" class
             <p id="section-1.2-4.2.1">SSSS --&gt; the assigned RFC number for <span>[<a href="#I-D.ietf-opsawg-tacacs-tls13" class="cite xref">I-D.ietf-opsawg-tacacs-tls13</a>]</span><a href="#section-1.2-4.2.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-1.2-4.3">
-            <p id="section-1.2-4.3.1">TBD  --&gt; the assigned port number in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-opsawg-tacacs-tls13-20#section-7" class="relref">Section 7</a> of [<a href="#I-D.ietf-opsawg-tacacs-tls13" class="cite xref">I-D.ietf-opsawg-tacacs-tls13</a>]</span><a href="#section-1.2-4.3.1" class="pilcrow">¶</a></p>
+            <p id="section-1.2-4.3.1">TBD  --&gt; the assigned port number in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-opsawg-tacacs-tls13-23#section-7" class="relref">Section 7</a> of [<a href="#I-D.ietf-opsawg-tacacs-tls13" class="cite xref">I-D.ietf-opsawg-tacacs-tls13</a>]</span><a href="#section-1.2-4.3.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-1.2-4.4">
             <p id="section-1.2-4.4.1">2024-12-11 --&gt; the actual date of the publication of this document<a href="#section-1.2-4.4.1" class="pilcrow">¶</a></p>
@@ -1321,7 +1325,7 @@ described in BCP 14 <span>[<a href="#RFC2119" class="cite xref">RFC2119</a>]</s
 appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶</a></p>
 <p id="section-2-2">The terminology for describing YANG data models is defined in
    <span>[<a href="#RFC7950" class="cite xref">RFC7950</a>]</span>.<a href="#section-2-2" class="pilcrow">¶</a></p>
-<p id="section-2-3">The document uses the terms defined in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-opsawg-tacacs-tls13-20#section-2" class="relref">Section 2</a> of [<a href="#I-D.ietf-opsawg-tacacs-tls13" class="cite xref">I-D.ietf-opsawg-tacacs-tls13</a>]</span> and <span><a href="https://rfc-editor.org/rfc/rfc8907#section-3" class="relref">Section 3</a> of [<a href="#RFC8907" class="cite xref">RFC8907</a>]</span>.<a href="#section-2-3" class="pilcrow">¶</a></p>
+<p id="section-2-3">The document uses the terms defined in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-opsawg-tacacs-tls13-23#section-2" class="relref">Section 2</a> of [<a href="#I-D.ietf-opsawg-tacacs-tls13" class="cite xref">I-D.ietf-opsawg-tacacs-tls13</a>]</span> and <span><a href="https://rfc-editor.org/rfc/rfc8907#section-3" class="relref">Section 3</a> of [<a href="#RFC8907" class="cite xref">RFC8907</a>]</span>.<a href="#section-2-3" class="pilcrow">¶</a></p>
 <p id="section-2-4">'client' refers to TACACS+ client, while 'server' refers to TACACS+ server.<a href="#section-2-4" class="pilcrow">¶</a></p>
 <div id="tree-diagrams">
 <section id="section-2.1">
@@ -1499,7 +1503,7 @@ augment /sys:system:
         <dd class="break"></dd>
 <dt id="section-3-11.3">'domain-name':</dt>
         <dd style="margin-left: 1.5em" id="section-3-11.4">
-          <p id="section-3-11.4.1">Provides a domain name of the server per <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-opsawg-tacacs-tls13-20#section-3.3" class="relref">Section 3.3</a> of [<a href="#I-D.ietf-opsawg-tacacs-tls13" class="cite xref">I-D.ietf-opsawg-tacacs-tls13</a>]</span>. This is the TLS TACACS+ server's domain name that is  included in the SNI extension. This domain name is distinct from the IP address/hostname used for the underlying transport connection.<a href="#section-3-11.4.1" class="pilcrow">¶</a></p>
+          <p id="section-3-11.4.1">Provides a domain name of the server per <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-opsawg-tacacs-tls13-23#section-3.3" class="relref">Section 3.3</a> of [<a href="#I-D.ietf-opsawg-tacacs-tls13" class="cite xref">I-D.ietf-opsawg-tacacs-tls13</a>]</span>. This is the TLS TACACS+ server's domain name that is  included in the SNI extension. This domain name is distinct from the IP address/hostname used for the underlying transport connection.<a href="#section-3-11.4.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
 <dt id="section-3-11.5">'sni-enabled':</dt>
@@ -2273,6 +2277,7 @@ module ietf-system-tacacs-plus {
         }
         leaf port {
           type inet:port-number;
+          mandatory true;
           description
             "The port number of TACACS+ server.
              Default port number for legacy TACACS+ is 49,
@@ -2309,7 +2314,11 @@ module ietf-system-tacacs-plus {
                  as it does not provide any meaningful integrity,
                  privacy, or replay protection.
 
-                 Obfuscation is obsoleted in favor of TLS support.";
+                 The use of obfuscation is deprecated in favor
+                 of TLS.
+
+                 This choice is provided in the model to accommodate
+                 installed base.";
               reference
                 "RFC 8907: The TACACS+ Protocol
                  RFC SSSS: Terminal Access Controller Access-Control
@@ -2396,102 +2405,110 @@ module ietf-system-tacacs-plus {
 </div>
 </section>
 </div>
-<div id="security-considerations">
+<div id="operational-considerations">
 <section id="section-5">
-      <h2 id="name-security-considerations">
-<a href="#section-5" class="section-number selfRef">5. </a><a href="#name-security-considerations" class="section-name selfRef">Security Considerations</a>
+      <h2 id="name-operational-considerations">
+<a href="#section-5" class="section-number selfRef">5. </a><a href="#name-operational-considerations" class="section-name selfRef">Operational Considerations</a>
       </h2>
-<p id="section-5-1">This section is modeled after the template described in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-netmod-rfc8407bis-24#section-3.7" class="relref">Section 3.7</a> of [<a href="#I-D.ietf-netmod-rfc8407bis" class="cite xref">I-D.ietf-netmod-rfc8407bis</a>]</span>.<a href="#section-5-1" class="pilcrow">¶</a></p>
-<p id="section-5-2">The "ietf-ac-common" YANG module defines a data model that is
+<p id="section-5-1">The same operational considerations discussed in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-opsawg-tacacs-tls13-23#section-6" class="relref">Section 6</a> of [<a href="#I-D.ietf-opsawg-tacacs-tls13" class="cite xref">I-D.ietf-opsawg-tacacs-tls13</a>]</span> apply for this document.<a href="#section-5-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="security-considerations">
+<section id="section-6">
+      <h2 id="name-security-considerations">
+<a href="#section-6" class="section-number selfRef">6. </a><a href="#name-security-considerations" class="section-name selfRef">Security Considerations</a>
+      </h2>
+<p id="section-6-1">This section is modeled after the template described in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-netmod-rfc8407bis-28#section-3.7" class="relref">Section 3.7</a> of [<a href="#I-D.ietf-netmod-rfc8407bis" class="cite xref">I-D.ietf-netmod-rfc8407bis</a>]</span>.<a href="#section-6-1" class="pilcrow">¶</a></p>
+<p id="section-6-2">The "ietf-ac-common" YANG module defines a data model that is
 designed to be accessed via YANG-based management protocols, such as
 NETCONF <span>[<a href="#RFC6241" class="cite xref">RFC6241</a>]</span> and RESTCONF <span>[<a href="#RFC8040" class="cite xref">RFC8040</a>]</span>. These YANG-based management protocols (1) have to
 use a secure transport layer (e.g., SSH <span>[<a href="#RFC4252" class="cite xref">RFC4252</a>]</span>, TLS <span>[<a href="#RFC8446" class="cite xref">RFC8446</a>]</span>, and
-QUIC <span>[<a href="#RFC9000" class="cite xref">RFC9000</a>]</span>) and (2) have to use mutual authentication.<a href="#section-5-2" class="pilcrow">¶</a></p>
-<p id="section-5-3">The Network Configuration Access Control Model (NACM) <span>[<a href="#RFC8341" class="cite xref">RFC8341</a>]</span>
+QUIC <span>[<a href="#RFC9000" class="cite xref">RFC9000</a>]</span>) and (2) have to use mutual authentication.<a href="#section-6-2" class="pilcrow">¶</a></p>
+<p id="section-6-3">The Network Configuration Access Control Model (NACM) <span>[<a href="#RFC8341" class="cite xref">RFC8341</a>]</span>
    provides the means to restrict access for particular NETCONF or
    RESTCONF users to a preconfigured subset of all available NETCONF or
-   RESTCONF protocol operations and content.<a href="#section-5-3" class="pilcrow">¶</a></p>
-<p id="section-5-4">There are a number of data nodes defined in this YANG module that are
+   RESTCONF protocol operations and content.<a href="#section-6-3" class="pilcrow">¶</a></p>
+<p id="section-6-4">There are a number of data nodes defined in this YANG module that are
 writable/creatable/deletable (i.e., "config true", which is the
 default).  All writable data nodes are likely to be
 sensitive or vulnerable in some network environments.  Write
 operations (e.g., edit-config) and delete operations to these data
 nodes without proper protection or authentication can have a negative
 effect on network operations.  The following subtrees and data nodes
-have particular sensitivities/vulnerabilities:<a href="#section-5-4" class="pilcrow">¶</a></p>
-<span class="break"></span><dl class="dlParallel" id="section-5-5">
-        <dt id="section-5-5.1">'server':</dt>
-        <dd style="margin-left: 1.5em" id="section-5-5.2">
-          <p id="section-5-5.2.1">This list contains the data nodes used
+have particular sensitivities/vulnerabilities:<a href="#section-6-4" class="pilcrow">¶</a></p>
+<span class="break"></span><dl class="dlParallel" id="section-6-5">
+        <dt id="section-6-5.1">'server':</dt>
+        <dd style="margin-left: 1.5em" id="section-6-5.2">
+          <p id="section-6-5.2.1">This list contains the data nodes used
 to control the TACACS+ servers used by the device. Unauthorized
 access to this list could enable an attacker to assume complete
 control over the device by pointing to a compromised TACACS+
 server, or to modify the counters to hide attacks against the
-device.<a href="#section-5-5.2.1" class="pilcrow">¶</a></p>
+device.<a href="#section-6-5.2.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
-<dt id="section-5-5.3">'shared-secret':</dt>
-        <dd style="margin-left: 1.5em" id="section-5-5.4">
-          <p id="section-5-5.4.1">This leaf controls the key
+<dt id="section-6-5.3">'shared-secret':</dt>
+        <dd style="margin-left: 1.5em" id="section-6-5.4">
+          <p id="section-6-5.4.1">This leaf controls the key
 known to both the TACACS+ client and server. Unauthorized access
 to this leaf could make the device vulnerable to attacks;
 therefore, it has been restricted using the "default-deny-all"
 access control defined in <span>[<a href="#RFC8341" class="cite xref">RFC8341</a>]</span>.  When setting, it is highly
 recommended that the leaf is at least 32 characters long and
 sufficiently complex with a mix of different character types,
-i.e., upper case, lower case, numeric, and punctuation.<a href="#section-5-5.4.1" class="pilcrow">¶</a></p>
+i.e., upper case, lower case, numeric, and punctuation.<a href="#section-6-5.4.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
-<dt id="section-5-5.5">'client-identity' and 'server-authentication':</dt>
-        <dd style="margin-left: 1.5em" id="section-5-5.6">
-          <p id="section-5-5.6.1">Any modification to a key or reference to a key may dramatically alter the implemented security policy. For this reason, the NACM extension "default-deny-write" has been set.<a href="#section-5-5.6.1" class="pilcrow">¶</a></p>
+<dt id="section-6-5.5">'client-identity' and 'server-authentication':</dt>
+        <dd style="margin-left: 1.5em" id="section-6-5.6">
+          <p id="section-6-5.6.1">Any modification to a key or reference to a key may dramatically alter the implemented security policy. For this reason, the NACM extension "default-deny-write" has been set.<a href="#section-6-5.6.1" class="pilcrow">¶</a></p>
 </dd>
       <dd class="break"></dd>
 </dl>
-<p id="section-5-6">This YANG module uses groupings from other YANG modules that define nodes that may be considered sensitive or vulnerable in network environments. Refer to <span><a href="https://rfc-editor.org/rfc/rfc9642#section-5.3" class="relref">Section 5.3</a> of [<a href="#RFC9642" class="cite xref">RFC9642</a>]</span> and <span><a href="https://rfc-editor.org/rfc/rfc9645#section-5.3" class="relref">Section 5.3</a> of [<a href="#RFC9645" class="cite xref">RFC9645</a>]</span> for information as to which nodes may be considered sensitive or vulnerable in network environments.<a href="#section-5-6" class="pilcrow">¶</a></p>
+<p id="section-6-6">This YANG module uses groupings from other YANG modules that define nodes that may be considered sensitive or vulnerable in network environments. Refer to <span><a href="https://rfc-editor.org/rfc/rfc9642#section-5.3" class="relref">Section 5.3</a> of [<a href="#RFC9642" class="cite xref">RFC9642</a>]</span> and <span><a href="https://rfc-editor.org/rfc/rfc9645#section-5.3" class="relref">Section 5.3</a> of [<a href="#RFC9645" class="cite xref">RFC9645</a>]</span> for information as to which nodes may be considered sensitive or vulnerable in network environments.<a href="#section-6-6" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="iana-considerations">
-<section id="section-6">
+<section id="section-7">
       <h2 id="name-iana-considerations">
-<a href="#section-6" class="section-number selfRef">6. </a><a href="#name-iana-considerations" class="section-name selfRef">IANA Considerations</a>
+<a href="#section-7" class="section-number selfRef">7. </a><a href="#name-iana-considerations" class="section-name selfRef">IANA Considerations</a>
       </h2>
-<p id="section-6-1">IANA is requested to update the following URI in the "ns" subregistry within
-   the "IETF XML Registry" <span>[<a href="#RFC3688" class="cite xref">RFC3688</a>]</span>:<a href="#section-6-1" class="pilcrow">¶</a></p>
-<div class="alignLeft art-text artwork" id="section-6-2">
+<p id="section-7-1">IANA is requested to update the following URI in the "ns" subregistry within
+   the "IETF XML Registry" <span>[<a href="#RFC3688" class="cite xref">RFC3688</a>]</span>:<a href="#section-7-1" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="section-7-2">
 <pre>
    URI:  urn:ietf:params:xml:ns:yang:ietf-system-tacacs-plus
    Registrant Contact:  The IESG.
    XML:  N/A; the requested URI is an XML namespace.
-</pre><a href="#section-6-2" class="pilcrow">¶</a>
+</pre><a href="#section-7-2" class="pilcrow">¶</a>
 </div>
-<p id="section-6-3">IANA is requested to register the following YANG module in the "YANG Module
-   Names" registry <span>[<a href="#RFC6020" class="cite xref">RFC6020</a>]</span> within the "YANG Parameters" registry group:<a href="#section-6-3" class="pilcrow">¶</a></p>
-<div class="alignLeft art-text artwork" id="section-6-4">
+<p id="section-7-3">IANA is requested to register the following YANG module in the "YANG Module
+   Names" registry <span>[<a href="#RFC6020" class="cite xref">RFC6020</a>]</span> within the "YANG Parameters" registry group:<a href="#section-7-3" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="section-7-4">
 <pre>
    Name:  ietf-system-tacacs-plus
    Namespace:  urn:ietf:params:xml:ns:yang:ietf-system-tacacs-plus
    Prefix:  sys-tcs-plus
    Maintained by IANA?  N
    Reference:  RFC XXXX
-</pre><a href="#section-6-4" class="pilcrow">¶</a>
+</pre><a href="#section-7-4" class="pilcrow">¶</a>
 </div>
 </section>
 </div>
 <div id="sec-combined-references">
-<section id="section-7">
+<section id="section-8">
       <h2 id="name-references">
-<a href="#section-7" class="section-number selfRef">7. </a><a href="#name-references" class="section-name selfRef">References</a>
+<a href="#section-8" class="section-number selfRef">8. </a><a href="#name-references" class="section-name selfRef">References</a>
       </h2>
 <div id="sec-normative-references">
-<section id="section-7.1">
+<section id="section-8.1">
         <h3 id="name-normative-references">
-<a href="#section-7.1" class="section-number selfRef">7.1. </a><a href="#name-normative-references" class="section-name selfRef">Normative References</a>
+<a href="#section-8.1" class="section-number selfRef">8.1. </a><a href="#name-normative-references" class="section-name selfRef">Normative References</a>
         </h3>
 <dl class="references">
 <dt id="I-D.ietf-opsawg-tacacs-tls13">[I-D.ietf-opsawg-tacacs-tls13]</dt>
         <dd>
-<span class="refAuthor">Dahm, T.</span>, <span class="refAuthor">Heasley, J.</span>, <span class="refAuthor">dcmgash@cisco.com</span>, and <span class="refAuthor">A. Ota</span>, <span class="refTitle">"Terminal Access Controller Access-Control System Plus over TLS 1.3 (TACACS+ over TLS)"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-opsawg-tacacs-tls13-20</span>, <time datetime="2025-04-13" class="refDate">13 April 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-opsawg-tacacs-tls13-20">https://datatracker.ietf.org/doc/html/draft-ietf-opsawg-tacacs-tls13-20</a>&gt;</span>. </dd>
+<span class="refAuthor">Dahm, T.</span>, <span class="refAuthor">Heasley, J.</span>, <span class="refAuthor">dcmgash@cisco.com</span>, and <span class="refAuthor">A. Ota</span>, <span class="refTitle">"Terminal Access Controller Access-Control System Plus over TLS 1.3 (TACACS+ over TLS)"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-opsawg-tacacs-tls13-23</span>, <time datetime="2025-06-21" class="refDate">21 June 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-opsawg-tacacs-tls13-23">https://datatracker.ietf.org/doc/html/draft-ietf-opsawg-tacacs-tls13-23</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC2119">[RFC2119]</dt>
         <dd>
@@ -2577,14 +2594,14 @@ i.e., upper case, lower case, numeric, and punctuation.<a href="#section-5-5.4.1
 </section>
 </div>
 <div id="sec-informative-references">
-<section id="section-7.2">
+<section id="section-8.2">
         <h3 id="name-informative-references">
-<a href="#section-7.2" class="section-number selfRef">7.2. </a><a href="#name-informative-references" class="section-name selfRef">Informative References</a>
+<a href="#section-8.2" class="section-number selfRef">8.2. </a><a href="#name-informative-references" class="section-name selfRef">Informative References</a>
         </h3>
 <dl class="references">
 <dt id="I-D.ietf-netmod-rfc8407bis">[I-D.ietf-netmod-rfc8407bis]</dt>
         <dd>
-<span class="refAuthor">Bierman, A.</span>, <span class="refAuthor">Boucadair, M.</span>, and <span class="refAuthor">Q. Wu</span>, <span class="refTitle">"Guidelines for Authors and Reviewers of Documents Containing YANG Data Models"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-netmod-rfc8407bis-24</span>, <time datetime="2025-04-18" class="refDate">18 April 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-netmod-rfc8407bis-24">https://datatracker.ietf.org/doc/html/draft-ietf-netmod-rfc8407bis-24</a>&gt;</span>. </dd>
+<span class="refAuthor">Bierman, A.</span>, <span class="refAuthor">Boucadair, M.</span>, and <span class="refAuthor">Q. Wu</span>, <span class="refTitle">"Guidelines for Authors and Reviewers of Documents Containing YANG Data Models"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-netmod-rfc8407bis-28</span>, <time datetime="2025-06-05" class="refDate">5 June 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-netmod-rfc8407bis-28">https://datatracker.ietf.org/doc/html/draft-ietf-netmod-rfc8407bis-28</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC2865">[RFC2865]</dt>
         <dd>
@@ -3415,8 +3432,8 @@ module: ietf-system-tacacs-plus
       </h2>
 <p id="appendix-D-1">The document leverages data structures defined in <span>[<a href="#RFC9645" class="cite xref">RFC9645</a>]</span>.<a href="#appendix-D-1" class="pilcrow">¶</a></p>
 <p id="appendix-D-2">Thanks to Joe Clarke and Tom Petch for the review and comments.<a href="#appendix-D-2" class="pilcrow">¶</a></p>
-<p id="appendix-D-3">Thanks to Reshad Rahman for the yangdoctors review and Tina Tsou for
-the opsdir review.<a href="#appendix-D-3" class="pilcrow">¶</a></p>
+<p id="appendix-D-3">Thanks to Reshad Rahman for the yangdoctors review, Tina Tsou for
+the opsdir review, and Ines Robles for the genart review.<a href="#appendix-D-3" class="pilcrow">¶</a></p>
 <p id="appendix-D-4">Thanks Mahesh Jethanandani for the AD review.<a href="#appendix-D-4" class="pilcrow">¶</a></p>
 <span class="break"></span><dl class="dlParallel" id="appendix-D-5">
         <dt id="appendix-D-5.1">Authors of RFC 9105:</dt>
