@@ -717,10 +717,9 @@ module ietf-system-tacacs-plus {
         }
         leaf port {
           type inet:port-number;
+          default "TBD";
           description
-            "The port number of TACACS+ server.
-             Default port number for legacy TACACS+ is 49,
-             while it is TBD for TACACS+TLS.";
+            "The port number of TACACS+ server.";
         }
         choice security {
           mandatory true;
@@ -753,7 +752,11 @@ module ietf-system-tacacs-plus {
                  as it does not provide any meaningful integrity,
                  privacy, or replay protection.
 
-                 Obfuscation is obsoleted in favor of TLS support.";
+                 The use of obfuscation is deprecated in favor
+                 of TLS.
+
+                 This choice is provided in the model to accommodate
+                 installed base.";
               reference
                 "RFC 8907: The TACACS+ Protocol
                  RFC SSSS: Terminal Access Controller Access-Control
