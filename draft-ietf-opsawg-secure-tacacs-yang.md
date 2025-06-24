@@ -206,6 +206,10 @@ The module also cites {{!RFC6520}}, {{!RFC9257}}, and {{!RFC9258}}.
 <CODE ENDS>
 ~~~
 
+# Operational Considerations
+
+The same operational considerations discussed in {{Section 6 of !I-D.ietf-opsawg-tacacs-tls13}} apply for this document.
+
 # Security Considerations
 
 This section is modeled after the template described in {{Section 3.7 of ?I-D.ietf-netmod-rfc8407bis}}.
