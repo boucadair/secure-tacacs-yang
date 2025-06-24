@@ -717,9 +717,11 @@ module ietf-system-tacacs-plus {
         }
         leaf port {
           type inet:port-number;
-          default "1234";   //RFC Editor: Please replace 1234 with TBD
+          mandatory true;
           description
-            "The port number of TACACS+ server.";
+            "The port number of TACACS+ server.
+             Default port number for legacy TACACS+ is 49,
+             while it is TBD for TACACS+TLS.";
         }
         choice security {
           mandatory true;
