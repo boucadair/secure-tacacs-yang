@@ -717,7 +717,7 @@ module ietf-system-tacacs-plus {
         }
         leaf port {
           type inet:port-number;
-          default "TBD";
+          default "1234";   //RFC Editor: Please replace 1234 with TBD
           description
             "The port number of TACACS+ server.";
         }
