@@ -337,8 +337,8 @@ The document leverages data structures defined in {{!RFC9645}}.
 
 Thanks to Joe Clarke and Tom Petch for the review and comments.
 
-Thanks to Reshad Rahman for the yangdoctors review and Tina Tsou for
-the opsdir review.
+Thanks to Reshad Rahman for the yangdoctors review, Tina Tsou for
+the opsdir review, and Ines Robles for the genart review.
 
 Thanks Mahesh Jethanandani for the AD review.
 
