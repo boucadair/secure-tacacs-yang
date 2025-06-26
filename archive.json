@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-05-01T00:59:34.884465+00:00",
+  "timestamp": "2025-06-26T00:57:15.282539+00:00",
   "repo": "boucadair/secure-tacacs-yang",
   "labels": [
     {
@@ -596,6 +596,34 @@
       "mergedBy": "boucadair",
       "mergeCommit": {
         "oid": "6ee87b1bfa0e1793dab3ff284be9cb41d0bc3ce6"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 20,
+      "id": "PR_kwDOL_fxvc6bzk1e",
+      "title": "genart-review",
+      "url": "https://github.com/boucadair/secure-tacacs-yang/pull/20",
+      "state": "MERGED",
+      "author": "boucadair",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2025-06-24T07:53:35Z",
+      "updatedAt": "2025-06-24T16:36:01Z",
+      "baseRepository": "boucadair/secure-tacacs-yang",
+      "baseRefName": "main",
+      "baseRefOid": "b742a2e9f39aed9a8a0f807598549eb129a6f92b",
+      "headRepository": "boucadair/secure-tacacs-yang",
+      "headRefName": "genart-review",
+      "headRefOid": "9ff04979e01c87b0a955b545d02947e3f03a120d",
+      "closedAt": "2025-06-24T16:36:01Z",
+      "mergedAt": "2025-06-24T16:36:01Z",
+      "mergedBy": "boucadair",
+      "mergeCommit": {
+        "oid": "60c6ecad321c29929b2464e228691f916a1dad4e"
       },
       "comments": [],
       "reviews": []
