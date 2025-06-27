@@ -6,7 +6,7 @@ Operations and Management Area Working Group           M. Boucadair, Ed.
 Internet-Draft                                                    Orange
 Obsoletes: 9105 (if approved)                                      B. Wu
 Intended status: Standards Track                     Huawei Technologies
-Expires: 26 December 2025                                   24 June 2025
+Expires: 29 December 2025                                   27 June 2025
 
 
  A YANG Data Model for Terminal Access Controller Access-Control System
@@ -39,7 +39,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 26 December 2025.
+   This Internet-Draft will expire on 29 December 2025.
 
 Copyright Notice
 
@@ -1890,7 +1890,7 @@ Appendix C.  Full Tree
              +--rw domain-name?                   inet:domain-name
              +--rw sni-enabled?                   boolean
              +--rw address                        inet:host
-             +--rw port?                          inet:port-number
+             +--rw port                           inet:port-number
              +--rw (security)
              |  +--:(tls)
              |  |  +--rw client-identity!
