@@ -173,7 +173,7 @@ module: ietf-system-tacacs-plus
           +--rw domain-name?                   inet:domain-name
           +--rw sni-enabled?                   boolean
           +--rw address                        inet:host
-          +--rw port?                          inet:port-number
+          +--rw port                           inet:port-number
           +--rw (security)
           |  +--:(tls)
           |  |  +--rw client-identity!
