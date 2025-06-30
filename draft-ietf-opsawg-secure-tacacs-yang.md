@@ -183,7 +183,7 @@ The following new data nodes are supported compared to {{?RFC9105}}:
 : Controls TLS versions and cipher suites to be used when establishing TLS sessions.
 
 'discontinuity-time':
-: The time on the most recent occasion at which the client suffered a discontinuity
+: The time of the most recent occasion at which the client suffered a discontinuity
 (a configuration action to reset all counters, re-initialization, etc.).
 
 'cert-errors':
@@ -342,6 +342,8 @@ Thanks to Reshad Rahman for the yangdoctors review, Tina Tsou for
 the opsdir review, and Ines Robles for the genart review.
 
 Thanks Mahesh Jethanandani for the AD review.
+
+Thanks Erik Kline for the IESG review.
 
 Authors of RFC 9105:
 : Bo Wu
