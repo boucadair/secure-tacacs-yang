@@ -6,7 +6,7 @@ Operations and Management Area Working Group           M. Boucadair, Ed.
 Internet-Draft                                                    Orange
 Obsoletes: 9105 (if approved)                                      B. Wu
 Intended status: Standards Track                     Huawei Technologies
-Expires: 29 December 2025                                   27 June 2025
+Expires: 1 January 2026                                     30 June 2025
 
 
  A YANG Data Model for Terminal Access Controller Access-Control System
@@ -39,7 +39,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 29 December 2025.
+   This Internet-Draft will expire on 1 January 2026.
 
 Copyright Notice
 
@@ -356,7 +356,7 @@ Table of Contents
    'hello-params':  Controls TLS versions and cipher suites to be used
       when establishing TLS sessions.
 
-   'discontinuity-time':  The time on the most recent occasion at which
+   'discontinuity-time':  The time of the most recent occasion at which
       the client suffered a discontinuity (a configuration action to
       reset all counters, re-initialization, etc.).
 
@@ -2204,6 +2204,8 @@ Acknowledgments
    opsdir review, and Ines Robles for the genart review.
 
    Thanks Mahesh Jethanandani for the AD review.
+
+   Thanks Erik Kline for the IESG review.
 
    Authors of RFC 9105:  Bo Wu
 
