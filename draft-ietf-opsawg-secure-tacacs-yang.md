@@ -343,7 +343,7 @@ the opsdir review, Ines Robles for the genart review, and Robert Sparks for the 
 
 Thanks Mahesh Jethanandani for the AD review.
 
-Thanks Erik Kline for the IESG review.
+Thanks Erik Kline and Éric Vuncke for the IESG review.
 
 Authors of RFC 9105:
 : Bo Wu
