@@ -155,7 +155,7 @@ The document uses the terms defined in {{Section 2 of !I-D.ietf-opsawg-tacacs-tl
 
 Specifically, the module is designed to cover the following key requirements specified in {{!I-D.ietf-opsawg-tacacs-tls13}}:
 
-* TLS 1.3 {{!RFC8446}} MUST be used for transport.
+* Minimum TLS 1.3 {{!RFC8446}} MUST be used for transport.
 * Earlier TLS versions MUST NOT be used.
 * The cipher suites offered or accepted SHOULD be configurable.
 * Implementations MAY support Raw Public Keys (RPKs) and Pre-Shared Keys (PSKs).
