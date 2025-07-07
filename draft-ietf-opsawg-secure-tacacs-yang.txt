@@ -6,7 +6,7 @@ Operations and Management Area Working Group           M. Boucadair, Ed.
 Internet-Draft                                                    Orange
 Obsoletes: 9105 (if approved)                                      B. Wu
 Intended status: Standards Track                     Huawei Technologies
-Expires: 5 January 2026                                      4 July 2025
+Expires: 8 January 2026                                      7 July 2025
 
 
  A YANG Data Model for Terminal Access Controller Access-Control System
@@ -39,7 +39,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 5 January 2026.
+   This Internet-Draft will expire on 8 January 2026.
 
 Copyright Notice
 
@@ -311,7 +311,7 @@ Table of Contents
    Specifically, the module is designed to cover the following key
    requirements specified in [I-D.ietf-opsawg-tacacs-tls13]:
 
-   *  TLS 1.3 [RFC8446] MUST be used for transport.
+   *  Minimum TLS 1.3 [RFC8446] MUST be used for transport.
 
    *  Earlier TLS versions MUST NOT be used.
 
